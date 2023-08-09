@@ -1,9 +1,8 @@
-function App() {
-  return (
-    <div className="App">
-      <div>Pet shop project</div>
-    </div>
-  );
-}
+import React from 'react';
+import AppRouter from './components/AppRouter';
+
+const App = () => {
+  return <AppRouter />;
+};
 
 export default App;
