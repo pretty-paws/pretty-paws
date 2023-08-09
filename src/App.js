@@ -1,13 +1,10 @@
-import sprite from './img/svg-sprite/sprite.svg';
 
-function App() {
-  return (
-    <div className="App">
-      <svg>
-        <use href={sprite + '#logo'} />
-      </svg>
-    </div>
-  );
-}
+import React from 'react';
+import AppRouter from './components/AppRouter';
+
+const App = () => {
+  return <AppRouter />;
+};
+
 
 export default App;

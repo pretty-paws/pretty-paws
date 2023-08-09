@@ -1,4 +1,5 @@
 import React from 'react';
+import { BrowserRouter } from 'react-router-dom';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import { GlobalStyles } from './global/GlobalStyles';
@@ -9,7 +10,9 @@ root.render(
   <React.StrictMode>
     <GlobalStyles />
     <GlobalContainer>
-      <App />
+      <BrowserRouter basename="/pretty-paws">
+        <App />
+      </BrowserRouter>
     </GlobalContainer>
   </React.StrictMode>
 );
