@@ -1,7 +1,11 @@
+import sprite from './img/svg-sprite/sprite.svg';
+
 function App() {
   return (
     <div className="App">
-      <div>Pet shop project</div>
+      <svg>
+        <use href={sprite + '#logo'} />
+      </svg>
     </div>
   );
 }
