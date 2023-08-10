@@ -28,5 +28,5 @@ export default ToolTip;
 
 ToolTip.propTypes = {
   children: PropTypes.node.isRequired,
-  text: PropTypes.string.isRequired,
+  text: PropTypes.string,
 };
