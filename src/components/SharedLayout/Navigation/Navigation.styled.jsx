@@ -17,8 +17,19 @@ export const StyledNavigation = styled.div`
   }
 
   & .navigation-list li {
+    position: relative;
     flex: 1;
     text-align: center;
     cursor: pointer;
+  }
+
+  & .active-link::after {
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    content: '';
+    width: 100%;
+    height: 3px;
+    background-color: var(--accent-color-blue);
   }
 `;
