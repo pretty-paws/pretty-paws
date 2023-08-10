@@ -1,14 +1,20 @@
 import Main from './components/Main/Main';
-import News from './components/News/News';
+import New from './components/New/New';
 import Blog from './components/Blog/Blog';
-import Aid from './components/Aid/Aid';
+import Help from './components/Help/Help';
+import Catalog from './components/Catalog/Catalog';
 import Promotions from './components/Promotions/Promotions';
+import Contact from './components/Contact/Contact';
+import Delivery from './components/Delivery/Delivery';
 import {
-  AID_ROUTE,
+  HELP_ROUTE,
   BLOG_ROUTE,
-  NEWS_ROUTE,
+  NEW_ROUTE,
   PROMOTIONS_ROUTE,
   SHOP_ROUTE,
+  CATALOG_ROUTE,
+  CONTACT_ROUTE,
+  DELIVERY_ROUTE,
 } from './utils/consts';
 
 // Описує  усі маршрути(роути) нашого додатку
@@ -19,19 +25,31 @@ export const publicRoutes = [
     Component: Main,
   },
   {
+    path: CATALOG_ROUTE,
+    Component: Catalog,
+  },
+  {
     path: PROMOTIONS_ROUTE,
     Component: Promotions,
   },
   {
-    path: NEWS_ROUTE,
-    Component: News,
+    path: NEW_ROUTE,
+    Component: New,
+  },
+  {
+    path: CONTACT_ROUTE,
+    Component: Contact,
+  },
+  {
+    path: DELIVERY_ROUTE,
+    Component: Delivery,
   },
   {
     path: BLOG_ROUTE,
     Component: Blog,
   },
   {
-    path: AID_ROUTE,
-    Component: Aid,
+    path: HELP_ROUTE,
+    Component: Help,
   },
 ];
