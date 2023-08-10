@@ -1,7 +1,9 @@
 export const SHOP_ROUTE = '/';
+export const CATALOG_ROUTE = '/catalog';
 export const PROMOTIONS_ROUTE = '/promotions';
 
-export const NEWS_ROUTE = '/news';
+export const NEW_ROUTE = '/new';
 export const CONTACT_ROUTE = '/contact';
-export const AID_ROUTE = '/aid';
+export const DELIVERY_ROUTE = '/delivery';
+export const HELP_ROUTE = '/help';
 export const BLOG_ROUTE = '/blog';
