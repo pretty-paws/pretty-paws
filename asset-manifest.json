@@ -1,10 +1,11 @@
 {
   "files": {
-    "main.js": "/pretty-paws/static/js/main.7022c53e.js",
+    "main.js": "/pretty-paws/static/js/main.cbebe63d.js",
+    "static/media/sprite.svg": "/pretty-paws/static/media/sprite.cf33539801213a1b82cf0ae5366ecd7d.svg",
     "index.html": "/pretty-paws/index.html",
-    "main.7022c53e.js.map": "/pretty-paws/static/js/main.7022c53e.js.map"
+    "main.cbebe63d.js.map": "/pretty-paws/static/js/main.cbebe63d.js.map"
   },
   "entrypoints": [
-    "static/js/main.7022c53e.js"
+    "static/js/main.cbebe63d.js"
   ]
 }
