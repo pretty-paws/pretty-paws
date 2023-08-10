@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const StyledSignUp = styled.div`
+export const StyledSignUp = styled.section`
   background-color: var(--accent-color-blue);
   padding: 29px 120px;
 
