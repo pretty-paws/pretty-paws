@@ -1,11 +1,19 @@
 import React from 'react';
 import SignUp from './SignUp';
 
+import { StyledFooter } from './Footer.styled';
+import FooterMenuItems from './FooterMenuItems';
+import SocialNetsBar from './SocialNetsBar';
+
 const Footer = () => {
   return (
-    <div>
+    <>
       <SignUp />
-    </div>
+      <StyledFooter>
+        <FooterMenuItems />
+        <SocialNetsBar />
+      </StyledFooter>
+    </>
   );
 };
 

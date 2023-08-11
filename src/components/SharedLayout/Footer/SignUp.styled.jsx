@@ -2,9 +2,9 @@ import styled from 'styled-components';
 
 export const StyledSignUp = styled.section`
   background-color: var(--accent-color-blue);
-  padding: 29px 120px;
 
   & .sign-up__container {
+    padding: 29px 120px;
     margin-left: auto;
     margin-right: auto;
     display: flex;
