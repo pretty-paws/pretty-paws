@@ -10,6 +10,7 @@ ${normalize}
   --accent-color-orange: #F64B15;
 
   --font-color-black: #111;
+  --font-color-gray: #9e9e9e;
   --font-color-white: #FFF;
   
 }
