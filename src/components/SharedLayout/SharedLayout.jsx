@@ -4,7 +4,7 @@ import { GlobalContainer } from '../../global/GlobalContainer';
 import Footer from './Footer/Footer';
 import Header from './Header/Header';
 import Navigation from './Navigation/Navigation';
-
+import Hero from '../Main/hero/Hero';
 const SharedLayout = () => {
   return (
     <>
@@ -14,7 +14,7 @@ const SharedLayout = () => {
       </GlobalContainer>
 
       {/* тут має бути компонент Hero (той що зі слайдером) бо там фон має розтягуватись на всю ширину, і його не можна огортати глобальним контейнером */}
-
+      <Hero></Hero>
       <GlobalContainer>
         <Outlet />
       </GlobalContainer>
