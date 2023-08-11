@@ -6,6 +6,11 @@ export const StyledHeader = styled.header`
   align-items: center;
   gap: 37px;
 
+  & .header-language-uk-icon {
+    border-radius: 100%;
+    cursor: pointer;
+  }
+
   & .header__language-ua {
     cursor: pointer;
     position: relative;

@@ -1,4 +1,4 @@
-import Main from './components/Main/Main';
+// import Main from './components/Main/Main';
 import New from './components/New/New';
 import Blog from './components/Blog/Blog';
 import Help from './components/Help/Help';
@@ -11,7 +11,7 @@ import {
   BLOG_ROUTE,
   NEW_ROUTE,
   PROMOTIONS_ROUTE,
-  SHOP_ROUTE,
+  // SHOP_ROUTE,
   CATALOG_ROUTE,
   CONTACT_ROUTE,
   DELIVERY_ROUTE,
@@ -20,36 +20,44 @@ import {
 // Описує  усі маршрути(роути) нашого додатку
 export const authRoutes = [];
 export const publicRoutes = [
+  // Він нам наче не потрібний =>
+  // {
+  //   path: SHOP_ROUTE,
+  //   Component: Main,
+  // },
   {
-    path: SHOP_ROUTE,
-    Component: Main,
-  },
-  {
+    name: 'Каталог товарів',
     path: CATALOG_ROUTE,
     Component: Catalog,
   },
   {
+    name: 'Акції',
     path: PROMOTIONS_ROUTE,
     Component: Promotions,
   },
   {
+    name: 'Новинки',
     path: NEW_ROUTE,
     Component: New,
   },
   {
+    name: 'Контакти',
     path: CONTACT_ROUTE,
     Component: Contact,
   },
   {
+    name: 'Доставка і оплата',
     path: DELIVERY_ROUTE,
     Component: Delivery,
   },
   {
-    path: BLOG_ROUTE,
-    Component: Blog,
-  },
-  {
+    name: 'Допомога тваринкам',
     path: HELP_ROUTE,
     Component: Help,
+  },
+  {
+    name: 'Блог',
+    path: BLOG_ROUTE,
+    Component: Blog,
   },
 ];
