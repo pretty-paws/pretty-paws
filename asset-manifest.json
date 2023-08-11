@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.js": "/pretty-paws/static/js/main.8220ef04.js",
-    "static/media/sprite.svg": "/pretty-paws/static/media/sprite.1d8b213a1a29e7e1a60f6072611fcef0.svg",
+    "main.js": "/pretty-paws/static/js/main.f028ecb5.js",
+    "static/media/sprite.svg": "/pretty-paws/static/media/sprite.68ea33f5ac639e32b78103c5cb18ff16.svg",
     "static/media/instagram.svg": "/pretty-paws/static/media/instagram.adca580c3089ebf91460d74facd41a90.svg",
     "static/media/telegram.svg": "/pretty-paws/static/media/telegram.2bd796c57b02f50c03c7a17ab9709619.svg",
     "index.html": "/pretty-paws/index.html",
-    "main.8220ef04.js.map": "/pretty-paws/static/js/main.8220ef04.js.map"
+    "main.f028ecb5.js.map": "/pretty-paws/static/js/main.f028ecb5.js.map"
   },
   "entrypoints": [
-    "static/js/main.8220ef04.js"
+    "static/js/main.f028ecb5.js"
   ]
 }
