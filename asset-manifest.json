@@ -1,11 +1,11 @@
 {
   "files": {
-    "main.js": "/pretty-paws/static/js/main.50fee5fe.js",
-    "static/media/sprite.svg": "/pretty-paws/static/media/sprite.cf33539801213a1b82cf0ae5366ecd7d.svg",
+    "main.js": "/pretty-paws/static/js/main.6902d554.js",
+    "static/media/sprite.svg": "/pretty-paws/static/media/sprite.33e0096d5fd559e4f0b989fa53c42ffe.svg",
     "index.html": "/pretty-paws/index.html",
-    "main.50fee5fe.js.map": "/pretty-paws/static/js/main.50fee5fe.js.map"
+    "main.6902d554.js.map": "/pretty-paws/static/js/main.6902d554.js.map"
   },
   "entrypoints": [
-    "static/js/main.50fee5fe.js"
+    "static/js/main.6902d554.js"
   ]
 }
