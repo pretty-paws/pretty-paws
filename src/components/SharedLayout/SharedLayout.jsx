@@ -19,9 +19,9 @@ const SharedLayout = () => {
         <Outlet />
       </GlobalContainer>
       {/* тут має бути компонент FooterBackground бо там фон має розтягуватись на всю ширину, і його не можна огортати глобальним контейнером */}
-      <GlobalContainer>
-        <Footer />
-      </GlobalContainer>
+      {/* <GlobalContainer> */}
+      <Footer />
+      {/* </GlobalContainer> */}
     </>
   );
 };

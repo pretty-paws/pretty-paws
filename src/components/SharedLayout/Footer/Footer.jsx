@@ -1,7 +1,12 @@
 import React from 'react';
+import SignUp from './SignUp';
 
 const Footer = () => {
-  return <div>Footer</div>;
+  return (
+    <div>
+      <SignUp />
+    </div>
+  );
 };
 
 export default Footer;
