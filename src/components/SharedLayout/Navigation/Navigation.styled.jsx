@@ -21,6 +21,16 @@ export const StyledNavigation = styled.div`
     flex: 1;
     text-align: center;
     cursor: pointer;
+
+    &:hover::after {
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      content: '';
+      width: 100%;
+      height: 3px;
+      background-color: var(--accent-color-blue);
+    }
   }
 
   & .active-link::after {

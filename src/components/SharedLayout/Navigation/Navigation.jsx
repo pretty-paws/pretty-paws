@@ -2,6 +2,7 @@ import React from 'react';
 import sprite from '../../../img/svg-sprite/sprite.svg';
 import { StyledNavigation } from './Navigation.styled';
 import { NavLink } from 'react-router-dom';
+import { publicRoutes } from '../../../routes';
 
 const Navigation = () => {
   return (
@@ -12,62 +13,19 @@ const Navigation = () => {
         </svg>
       </NavLink>
       <ul className="navigation-list">
-        <li>
-          <NavLink
-            to="/catalog"
-            className={({ isActive }) => (isActive ? 'active-link' : '')}
-          >
-            Каталог товарів
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to="/promotions"
-            className={({ isActive }) => (isActive ? 'active-link' : '')}
-          >
-            Акції
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to="/new"
-            className={({ isActive }) => (isActive ? 'active-link' : '')}
-          >
-            Новинки
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to="/contact"
-            className={({ isActive }) => (isActive ? 'active-link' : '')}
-          >
-            Контакти
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to="/delivery"
-            className={({ isActive }) => (isActive ? 'active-link' : '')}
-          >
-            Доставка &#1110; оплата
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to="/help"
-            className={({ isActive }) => (isActive ? 'active-link' : '')}
-          >
-            Допомога тваринкам
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to="/blog"
-            className={({ isActive }) => (isActive ? 'active-link' : '')}
-          >
-            Блог
-          </NavLink>
-        </li>
+        {publicRoutes &&
+          publicRoutes.map(({ name, path }) => {
+            return (
+              <li key="name">
+                <NavLink
+                  to={path}
+                  className={({ isActive }) => (isActive ? 'active-link' : '')}
+                >
+                  {name}
+                </NavLink>
+              </li>
+            );
+          })}
       </ul>
     </StyledNavigation>
   );
