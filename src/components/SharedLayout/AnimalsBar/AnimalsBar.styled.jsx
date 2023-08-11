@@ -7,6 +7,14 @@ export const StyledAnimalsBar = styled.div`
 
   & .animals-bar-icon-box {
     position: relative;
+
+    &:hover {
+      fill: #fff;
+    }
+
+    &:hover::after {
+      background-color: var(--accent-color-beige);
+    }
   }
 
   & .animals-bar-icon {

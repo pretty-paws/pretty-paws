@@ -1,5 +1,6 @@
 import React from 'react';
-import { MENU } from '../../../utils/footerMenuItems';
+import { Link } from 'react-router-dom';
+import { clients, useful, catalog } from '../../../utils/footerMenuItems';
 import FooterContacts from './FooterContacts';
 import { StyledFooterBox } from './FooterMenuItems.styled';
 
@@ -9,11 +10,11 @@ const FooterMenuItems = () => {
       <StyledFooterBox>
         <h3 className="footer-menu-title">Каталог товарів</h3>
         <ul>
-          {MENU[0].catalog.map(item => {
+          {catalog.map(({ name, path }) => {
             return (
-              <li className="footer-menu-item" key={item}>
-                {item}
-              </li>
+              <Link key={name} to={path}>
+                <li className="footer-menu-item">{name}</li>
+              </Link>
             );
           })}
         </ul>
@@ -21,11 +22,11 @@ const FooterMenuItems = () => {
       <StyledFooterBox>
         <h3 className="footer-menu-title">Клієнтам</h3>
         <ul>
-          {MENU[1].clients.map(item => {
+          {clients.map(({ name, path }) => {
             return (
-              <li className="footer-menu-item" key={item}>
-                {item}
-              </li>
+              <Link key={name} to={path}>
+                <li className="footer-menu-item">{name}</li>
+              </Link>
             );
           })}
         </ul>
@@ -33,11 +34,11 @@ const FooterMenuItems = () => {
       <StyledFooterBox>
         <h3 className="footer-menu-title">Корисне</h3>
         <ul>
-          {MENU[2].useful.map(item => {
+          {useful.map(({ name, path }) => {
             return (
-              <li className="footer-menu-item" key={item}>
-                {item}
-              </li>
+              <Link key={name} to={path}>
+                <li className="footer-menu-item">{name}</li>
+              </Link>
             );
           })}
         </ul>
