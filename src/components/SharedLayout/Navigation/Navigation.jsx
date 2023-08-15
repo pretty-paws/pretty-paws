@@ -16,7 +16,7 @@ const Navigation = () => {
         {publicRoutes &&
           publicRoutes.map(({ name, path }) => {
             return (
-              <li key="name">
+              <li key={path}>
                 <NavLink
                   to={path}
                   className={({ isActive }) => (isActive ? 'active-link' : '')}
