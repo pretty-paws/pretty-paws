@@ -6,6 +6,9 @@ import Catalog from './components/Catalog/Catalog';
 import Promotions from './components/Promotions/Promotions';
 import Contact from './components/Contact/Contact';
 import Delivery from './components/Delivery/Delivery';
+import RegisterPage from './components/Register/RegisterPage';
+import LogInPage from './components/LogIn/LogInPage';
+
 import {
   HELP_ROUTE,
   BLOG_ROUTE,
@@ -15,10 +18,23 @@ import {
   CATALOG_ROUTE,
   CONTACT_ROUTE,
   DELIVERY_ROUTE,
+  REGISTER_ROUTE,
+  LOGIN_ROUTE,
 } from './utils/consts';
 
 // Описує  усі маршрути(роути) нашого додатку
-export const authRoutes = [];
+export const authRoutes = [
+  {
+    name: 'Реєстрація',
+    path: REGISTER_ROUTE,
+    Component: RegisterPage,
+  },
+  {
+    name: 'Увійти',
+    path: LOGIN_ROUTE,
+    Component: LogInPage,
+  },
+];
 export const publicRoutes = [
   // Він нам наче не потрібний =>
   // {

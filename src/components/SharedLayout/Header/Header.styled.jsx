@@ -66,6 +66,8 @@ export const StyledHeader = styled.header`
   }
 
   & .header__login-button {
+    position: relative;
+    z-index: 1001;
     padding: 14px 24px;
     border-radius: 99px;
     border: 2.5px solid var(--accent-color-blue);
@@ -75,5 +77,10 @@ export const StyledHeader = styled.header`
     color: var(--accent-color-blue);
     background-color: #fff;
     white-space: nowrap;
+
+    &:focus-within {
+      border-color: var(--accent-color-beige);
+      color: var(--accent-color-beige);
+    }
   }
 `;

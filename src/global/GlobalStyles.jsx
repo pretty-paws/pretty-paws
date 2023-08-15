@@ -23,6 +23,7 @@ ${normalize}
 body {
   font-family: 'IBM Plex Sans', sans-serif;
   color: var(--font-color-black);
+  
  
 }
 
