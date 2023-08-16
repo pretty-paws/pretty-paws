@@ -24,7 +24,7 @@ const NavigationAnimals = () => {
   //   };
   return (
     <AnimalsBarContainer>
-      <div className="animals-bar__container">
+      <div className="animals-bar__block">
         <StyleAnimalsBar>
           <div className="animals-bar-icon-box">
             <svg className="animals-bar-icon" width="24px" height="24px">

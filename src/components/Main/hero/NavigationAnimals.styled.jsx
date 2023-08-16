@@ -2,7 +2,7 @@ import styled from 'styled-components';
 export const AnimalsBarContainer = styled.div`
   display: flex;
 
-  & .animals-bar__container {
+  & .animals-bar__block {
     display: flex;
     gap: 25px;
     align-items: flex-start;
