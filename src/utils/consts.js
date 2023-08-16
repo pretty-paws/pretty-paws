@@ -1,3 +1,6 @@
+export const REGISTER_ROUTE = '/register';
+export const LOGIN_ROUTE = '/login';
+
 export const SHOP_ROUTE = '/';
 export const CATALOG_ROUTE = '/catalog';
 export const PROMOTIONS_ROUTE = '/promotions';

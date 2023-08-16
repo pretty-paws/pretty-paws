@@ -1,6 +1,7 @@
 import React from 'react';
 import ToolTip from '../../../hooks/useTooltip';
 import sprite from '../../../img/svg-sprite/sprite.svg';
+
 import { StyledUserBar } from './UserBar.styled';
 
 const UserBar = () => {
