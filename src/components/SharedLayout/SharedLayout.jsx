@@ -15,9 +15,9 @@ const SharedLayout = () => {
 
       {/* тут має бути компонент Hero (той що зі слайдером) бо там фон має розтягуватись на всю ширину, і його не можна огортати глобальним контейнером */}
       {/* <Hero></Hero> */}
-      <GlobalContainer>
-        <Outlet />
-      </GlobalContainer>
+      {/* <GlobalContainer> */}
+      <Outlet />
+      {/* </GlobalContainer> */}
       {/* тут має бути компонент FooterBackground бо там фон має розтягуватись на всю ширину, і його не можна огортати глобальним контейнером */}
       {/* <GlobalContainer> */}
       <Footer />

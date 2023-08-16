@@ -67,7 +67,7 @@ export const publicRoutes = [
     Component: Delivery,
   },
   {
-    name: 'Допомога тваринкам',
+    name: 'Волонтерство',
     path: HELP_ROUTE,
     Component: Help,
   },

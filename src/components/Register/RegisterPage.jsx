@@ -1,13 +1,14 @@
 import React from 'react';
 import AlreadyRegistered from './AlreadyRegistered';
 import RegisterBox from './RegisterBox';
+import { StyledRegisterContainer } from './RegisterPage.styled';
 
 const RegisterPage = () => {
   return (
-    <div>
+    <StyledRegisterContainer>
       <RegisterBox />
       <AlreadyRegistered />
-    </div>
+    </StyledRegisterContainer>
   );
 };
 
