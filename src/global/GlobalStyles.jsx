@@ -11,6 +11,7 @@ ${normalize}
 
   --font-color-black: #111;
   --font-color-gray: #9e9e9e;
+  --font-color-darkgray: #6C6C6C;
   --font-color-white: #FFF;
   
 }

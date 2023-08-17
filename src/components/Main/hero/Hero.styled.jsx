@@ -3,6 +3,10 @@ export const StyledHero = styled.section`
   width: 100%;
   margin-top: 24px;
   margin-bottom: 162px;
+
+  & .swiper {
+    z-index: 0;
+  }
   & .hero__img {
     width: 100%;
     max-height: 598px;
