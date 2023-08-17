@@ -55,6 +55,15 @@ export const StyledRegisterBox = styled.div`
     font-weight: 400;
     line-height: 1, 50;
 
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    &[type='number'] {
+      -moz-appearance: textfield;
+    }
+
     &::placeholder {
       color: var(--font-color-darkgray);
       font-size: 13px;
@@ -99,6 +108,10 @@ export const StyledRegisterBox = styled.div`
     font-size: 14px;
     font-weight: 400;
     line-height: 1.8;
+    &:disabled {
+      background: var(--font-color-darkgray);
+      /* color: black; */
+    }
   }
 
   & .register-checkbox {
