@@ -3,6 +3,7 @@ import sprite from '../../img/svg-sprite/sprite.svg';
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
 import { StyledRegisterBox } from './RegisterBox.styled';
+import { registerUser } from '../../services/authAPI';
 
 const RegisterBox = () => {
   const [passwordVisibility, setPasswordVisibility] = useState('false');
@@ -10,7 +11,7 @@ const RegisterBox = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isValid },
     watch,
     reset,
   } = useForm({
@@ -26,10 +27,12 @@ const RegisterBox = () => {
   });
 
   const password = watch('password', '');
+  console.log(!errors);
 
   const onSubmit = data => {
+    registerUser(data);
     reset();
-    console.log(data);
+    // console.log(data);
   };
 
   return (
@@ -83,7 +86,7 @@ const RegisterBox = () => {
           Телефон
           <input
             className="register-input"
-            type="tel"
+            type="number"
             placeholder="+380__ ___ __ __"
             {...register('phone_number', {
               pattern: {
@@ -92,9 +95,9 @@ const RegisterBox = () => {
                   'Введіть коректний номер телефону у форматі +380 __ ___ __ __',
               },
               required: `Будь ласка, введіть ваш номер телефону`,
-              maxLength: { value: 13, message: `Не більше 12 символів` },
+              maxLength: { value: 12, message: `Не більше 12 символів` },
               minLength: {
-                value: 13,
+                value: 12,
                 message: `Введіть номер телефону у форматі +380 __ ___ __ __`,
               },
             })}
@@ -118,6 +121,7 @@ const RegisterBox = () => {
                   'Введіть електронну адресу за зразком email@address.com',
               },
               required: `Будь ласка, введіть ваш email`,
+              maxLength: { value: 50, message: `Не більше 50 символів` },
             })}
             aria-invalid={errors.email ? 'true' : 'false'}
           />
@@ -143,6 +147,7 @@ const RegisterBox = () => {
                 value: 6,
                 message: `Введений пароль має бути довший за 6 символів`,
               },
+              maxLength: { value: 50, message: `Не більше 50 символів` },
             })}
             aria-invalid={errors.password ? 'true' : 'false'}
           />
@@ -187,7 +192,7 @@ const RegisterBox = () => {
           </p>
         )}
         <div className="button-checkbox-container">
-          <button type="submit" className="register-button">
+          <button type="submit" className="register-button" disabled={!isValid}>
             Зареєструватися
           </button>
           <div className="checkbox-container">
@@ -195,7 +200,9 @@ const RegisterBox = () => {
               className="register-checkbox"
               type="checkbox"
               placeholder="agree"
-              {...register('agree', {})}
+              {...register('agree', {
+                required: 'Ви маєте дати дозвіл на обробку даних',
+              })}
             />
             <p className="register-agree">
               Я згоден з обробкою
@@ -206,6 +213,9 @@ const RegisterBox = () => {
             </p>
           </div>
         </div>
+        <p role="alert" className="register-error">
+          {errors.agree?.message}
+        </p>
       </form>
     </StyledRegisterBox>
   );
