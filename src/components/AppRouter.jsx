@@ -4,19 +4,27 @@ import { authRoutes, publicRoutes } from '../routes';
 import Main from './Main/Main';
 // import { SHOP_ROUTE } from '../utils/consts';
 import SharedLayout from './SharedLayout/SharedLayout';
+import { RestrictedRoute } from './RestrictedRoute';
+import { observer } from 'mobx-react-lite';
 
-const AppRouter = () => {
+const AppRouter = observer(() => {
   // Flag for user
-  const isAuth = true;
+
   return (
     <Routes>
       <Route path="/" element={<SharedLayout />}>
         <Route index element={<Main />} />
         {/* users routes */}
-        {isAuth &&
-          authRoutes.map(({ path, Component }) => (
-            <Route key={path} path={path} element={<Component />} exact />
-          ))}
+        {authRoutes.map(({ path, Component }) => (
+          <Route
+            key={path}
+            path={path}
+            element={
+              <RestrictedRoute redirectTo="/" component={<Component />} />
+            }
+            exact
+          />
+        ))}
         {/* public routes */}
         {publicRoutes.map(({ path, Component }) => (
           <Route key={path} path={path} element={<Component />} exact />
@@ -26,6 +34,6 @@ const AppRouter = () => {
       </Route>
     </Routes>
   );
-};
+});
 
 export default AppRouter;

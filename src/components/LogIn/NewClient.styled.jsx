@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const StyledAlreadyRegisteredBox = styled.div`
+export const StyledNewClient = styled.div`
   width: 364px;
   height: 466px;
   display: flex;
@@ -16,7 +16,7 @@ export const StyledAlreadyRegisteredBox = styled.div`
       rgba(0, 0, 0, 0.25);
   }
 
-  & .already-registered-header {
+  & .new-client__header {
     color: #000;
     font-size: 30px;
     font-weight: 700;
@@ -24,47 +24,33 @@ export const StyledAlreadyRegisteredBox = styled.div`
     margin-bottom: 35px;
   }
 
-  & .already-registered-button-container {
-    position: relative;
-  }
-
-  & .already-registered-icon {
-    position: absolute;
-    top: 5px;
-    left: 75px;
-    cursor: pointer;
-  }
-
-  & .already-registered-button {
-    margin-bottom: 30px;
-    padding-left: 24px;
-    width: 136px;
-    height: 45px;
-    border-radius: 99px;
-    border: 1px solid var(--accent-color-blue);
-    background: var(--accent-color-blue);
-    color: #fff;
-    text-align: left;
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 1.8;
-  }
-
-  & .already-registered-text {
-    margin-top: 62px;
+  & .new-client__text {
+    padding-bottom: 24px;
     color: #111;
     font-size: 18px;
     font-weight: 400;
   }
 
-  & .already-registered-agree {
+  & .new-client__button {
+    width: 284px;
+    height: 45px;
+    border-radius: 99px;
+    border: 1px solid var(--accent-color-blue);
+    background: var(--accent-color-blue);
+    color: #fff;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.8;
+  }
+
+  & .new-client__agree {
     color: #111;
     font-size: 11px;
     font-weight: 400;
     line-height: 1.77;
   }
 
-  & .already-registered-agreement {
+  & .new-client__agreement {
     text-decoration-line: underline;
   }
 `;

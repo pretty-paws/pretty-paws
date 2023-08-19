@@ -3,9 +3,12 @@ import sprite from '../../img/svg-sprite/sprite.svg';
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
 import { StyledRegisterBox } from './RegisterBox.styled';
-import { registerUser } from '../../services/authAPI';
+import store from '../../store';
+import { redirect } from 'react-router-dom';
 
 const RegisterBox = () => {
+  const { signUp, setEmail } = store.auth;
+
   const [passwordVisibility, setPasswordVisibility] = useState('false');
   const [verificationVisibility, setVerificationVisibility] = useState('false');
   const {
@@ -27,12 +30,12 @@ const RegisterBox = () => {
   });
 
   const password = watch('password', '');
-  console.log(!errors);
 
   const onSubmit = data => {
-    registerUser(data);
+    setEmail(data.email);
+    signUp(data);
+    redirect('/');
     reset();
-    // console.log(data);
   };
 
   return (
