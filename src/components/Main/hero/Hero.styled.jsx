@@ -7,9 +7,16 @@ export const StyledHero = styled.section`
   & .swiper {
     z-index: 0;
   }
+
   & .hero__img {
+    /* max-height: 622px; */
+  }
+  & .hero__img img {
+    height: 100%;
     width: 100%;
-    max-height: 598px;
+    object-fit: cover;
+  }
+  .swiper-slide {
     border-top: 7px solid #e7a973;
     border-bottom: 7px solid #e7a973;
   }
@@ -95,7 +102,7 @@ export const StyleAnimalsBar = styled.div`
     width: 50.5px;
     height: 60px;
     /* background-color: #9b9898aa; */
-    background-color: #fff;
+    background-color: #efefef;
     border-radius: 50%;
   }
 
@@ -121,7 +128,7 @@ export const StyleAnimalsBar = styled.div`
     clip-path: ellipse(25% 40% at 50% 50%);
     width: 50.5px;
     height: 60px;
-    background-color: #fff;
+    background-color: #efefef;
     border-radius: 50%;
   }
   & .animals-bar-icon-box {
