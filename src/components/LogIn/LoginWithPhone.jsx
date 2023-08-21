@@ -12,7 +12,7 @@ const LoginWithPhone = () => {
   } = useForm({
     mode: 'onChange',
     defaultValues: {
-      phone_number: '+380',
+      phone_number: '',
     },
   });
 
@@ -26,21 +26,19 @@ const LoginWithPhone = () => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <label className="login-label">
           Телефон
+          <div className="login__country-code">+38</div>
           <input
-            onInput={e => {
-              e.target.value = e.target.value.replace(/[^0-9+]/g, '');
-            }}
-            className="login-input"
-            type="text"
+            className="login-input phone-input"
+            type="number"
             {...register('phone_number', {
               pattern: {
-                value: /^\+[0-9]{1,12}$/,
+                value: /^[0-9]{10}$/,
                 message: 'Введіть номер телефону у форматі +380 __ ___ __ __',
               },
               required: `Будь ласка, введіть ваш номер телефону`,
-              maxLength: { value: 13, message: `Не більше 13 символів` },
+              maxLength: { value: 10, message: `Не більше 13 символів` },
               minLength: {
-                value: 13,
+                value: 10,
                 message: `Введіть номер у форматі +380 __ ___ __ __`,
               },
             })}

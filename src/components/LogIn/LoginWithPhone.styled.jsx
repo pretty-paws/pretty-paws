@@ -12,6 +12,16 @@ export const StyledLoginWithPhone = styled.div`
     line-height: 1, 5;
   }
 
+  & .login__country-code {
+    position: absolute;
+    z-index: 2;
+    top: 34px;
+    left: 15px;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.5;
+  }
+
   & .login-input {
     width: 317px;
     display: block;
@@ -26,7 +36,7 @@ export const StyledLoginWithPhone = styled.div`
     color: #111;
     font-size: 13px;
     font-weight: 400;
-    line-height: 1, 50;
+    line-height: 1.5;
 
     &::-webkit-outer-spin-button,
     &::-webkit-inner-spin-button {
@@ -43,6 +53,9 @@ export const StyledLoginWithPhone = styled.div`
       font-weight: 400;
       line-height: 1.5;
     }
+  }
+  & .phone-input {
+    padding-left: 45px;
   }
 
   & .login-error {

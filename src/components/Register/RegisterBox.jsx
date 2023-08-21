@@ -51,7 +51,7 @@ const RegisterBox = observer(() => {
             type="text"
             {...register('name', {
               pattern: {
-                value: /^[A-Za-zА-Яа-яІіЇїЄє'-]+$/,
+                value: /^[A-Za-zА-Яа-яІіЇїЄє' -]+$/,
                 message: 'Використовуйте лише літери',
               },
               required: `Будь ласка, введіть ваше ім'я`,
@@ -76,7 +76,7 @@ const RegisterBox = observer(() => {
             type="text"
             {...register('surname', {
               pattern: {
-                value: /^[A-Za-zА-Яа-яІіЇїЄє'-]+$/,
+                value: /^[A-Za-zА-Яа-яІіЇїЄє' -]+$/,
                 message: 'Використовуйте лише літери',
               },
               required: `Будь ласка, введіть ваше прізвище`,
