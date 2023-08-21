@@ -80,6 +80,7 @@ export const StyledRegisterBox = styled.div`
   }
 
   & .register-error {
+    position: absolute;
     color: var(--accent-color-orange);
     font-size: 13px;
     font-weight: 400;
