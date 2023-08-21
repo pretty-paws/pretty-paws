@@ -6,9 +6,8 @@ import { observer } from 'mobx-react-lite';
 export const RestrictedRoute = observer(
   ({ redirectTo = '/', component: Component }) => {
     const { authorised } = useAuthStore();
-    console.log(authorised);
 
-    return authorised === true ? <Navigate to={redirectTo} /> : Component;
+    return !!authorised === true ? <Navigate to={redirectTo} /> : Component;
   }
 );
 

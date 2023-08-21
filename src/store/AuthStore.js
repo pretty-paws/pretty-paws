@@ -49,6 +49,7 @@ export class AuthStore {
       this.user = data.data.user;
       this.token = data.data.token;
       this.authorised = true;
+      localStorage.setItem('token', data.data.token);
       localStorage.setItem('authorised', true);
     } catch (error) {
       this.error = true;
@@ -62,6 +63,7 @@ export class AuthStore {
       this.token = data.data.token;
       this.authorised = true;
       localStorage.setItem('authorised', true);
+      localStorage.setItem('token', data.data.token);
       this.rememberMe === true
         ? localStorage.setItem('email', data.data.user.email)
         : null;

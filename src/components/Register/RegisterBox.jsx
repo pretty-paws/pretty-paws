@@ -3,11 +3,12 @@ import sprite from '../../img/svg-sprite/sprite.svg';
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
 import { StyledRegisterBox } from './RegisterBox.styled';
-import store from '../../store';
 import { redirect } from 'react-router-dom';
+import { observer } from 'mobx-react-lite';
+import { useAuthStore } from '../../store/AuthProvider';
 
-const RegisterBox = () => {
-  const { signUp, setEmail } = store.auth;
+const RegisterBox = observer(() => {
+  const { signUp, setEmail } = useAuthStore();
 
   const [passwordVisibility, setPasswordVisibility] = useState('false');
   const [verificationVisibility, setVerificationVisibility] = useState('false');
@@ -22,7 +23,7 @@ const RegisterBox = () => {
     defaultValues: {
       name: '',
       surname: '',
-      phone_number: '',
+      phone_number: `+380`,
       email: '',
       password: '',
       password_confirmation: '',
@@ -88,9 +89,12 @@ const RegisterBox = () => {
         <label className="register-label">
           Телефон
           <input
+            onInput={e => {
+              e.target.value = e.target.value.replace(/[^0-9+]/g, '');
+            }}
             className="register-input"
-            type="number"
-            placeholder="+380__ ___ __ __"
+            type="text"
+            // placeholder="+380__ ___ __ __"
             {...register('phone_number', {
               pattern: {
                 value: /^[+0-9]+$/,
@@ -98,9 +102,9 @@ const RegisterBox = () => {
                   'Введіть коректний номер телефону у форматі +380 __ ___ __ __',
               },
               required: `Будь ласка, введіть ваш номер телефону`,
-              maxLength: { value: 12, message: `Не більше 12 символів` },
+              maxLength: { value: 13, message: `Не більше 13 символів` },
               minLength: {
-                value: 12,
+                value: 13,
                 message: `Введіть номер телефону у форматі +380 __ ___ __ __`,
               },
             })}
@@ -222,6 +226,6 @@ const RegisterBox = () => {
       </form>
     </StyledRegisterBox>
   );
-};
+});
 
 export default RegisterBox;
