@@ -18,7 +18,7 @@ const AlreadyRegistered = () => {
           </svg>
         </Link>
       </div>
-      <SocialNetsAuth title="Або реєстрація через" />
+      <SocialNetsAuth title="Або увійти через" />
 
       <p className="already-registered-agree">
         Продовжуючи, ви погоджуєтесь з
