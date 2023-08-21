@@ -14,7 +14,6 @@ export const StyledModalBox = styled.div`
   top: 21%;
   right: 15%;
   z-index: 1002;
-  padding: 16px 22px 44px;
   border-radius: 8.6px;
   background-color: #fff;
   border: 2px solid var(--accent-color-beige);
@@ -22,6 +21,41 @@ export const StyledModalBox = styled.div`
   font-size: 18.246px;
   font-weight: 400;
   line-height: 1.5;
+
+  & .modal__authorised {
+    padding: 15px 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 29px;
+
+    color: #111;
+    font-size: 18.246px;
+    font-weight: 400;
+    line-height: 1.5;
+
+    & p:hover {
+      text-decoration: underline;
+      color: var(--accent-color-orange);
+    }
+  }
+
+  & .user-modal__logout-box {
+    position: relative;
+  }
+
+  & .user-modal__logout-icon {
+    position: absolute;
+    top: -5px;
+    right: 50px;
+    cursor: pointer;
+  }
+
+  & .modal__unauthorised {
+    padding: 15px 25px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+  }
 
   & p {
     cursor: pointer;
@@ -52,11 +86,16 @@ export const StyledModalBox = styled.div`
     text-decoration-line: underline;
   }
 
-  & .user-modal__cabinet {
-    padding-top: 30px;
-  }
+  & .user-modal__login,
+  .user-modal__register {
+    color: #111;
+    font-size: 18.246px;
+    font-weight: 400;
+    line-height: 1.5;
 
-  & .user-modal__history {
-    padding-top: 17px;
+    &:hover {
+      text-decoration: underline;
+      color: var(--accent-color-orange);
+    }
   }
 `;

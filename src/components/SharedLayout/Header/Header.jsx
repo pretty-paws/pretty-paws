@@ -3,12 +3,17 @@ import { createPortal } from 'react-dom';
 import { StyledHeader } from './Header.styled';
 import sprite from '../../../img/svg-sprite/sprite.svg';
 
+import { useAuthStore } from '../../../store/AuthProvider';
+
 import Logo from './Logo';
 import Search from './Search';
 import UserBar from './UserBar';
 import UserModal from './UserModal/UserModal';
+import { observer } from 'mobx-react-lite';
 
-const Header = () => {
+const Header = observer(() => {
+  const { authorised, email } = useAuthStore();
+
   const [showModal, setShowModal] = useState(false);
   return (
     <StyledHeader>
@@ -18,21 +23,38 @@ const Header = () => {
       <svg className="header-language-uk-icon" width="32px" height="32px">
         <use href={sprite + '#uk'} />
       </svg>
-      {/* <div className="header__language-ua">UA</div> */}
-      <button
-        className="header__login-button"
-        type="button"
-        onClick={() => setShowModal(true)}
-      >
-        Вхід для своїх
-      </button>
+
+      {authorised ? (
+        <div className="header__registered-user">
+          <p className="header__registered-user-email">{email}</p>
+          <button
+            className="header__logout-button"
+            type="button"
+            onClick={() => setShowModal(true)}
+          >
+            Вхід для своїх
+          </button>
+        </div>
+      ) : (
+        <button
+          className="header__login-button"
+          type="button"
+          onClick={() => setShowModal(true)}
+        >
+          Вхід для своїх
+        </button>
+      )}
+
       {showModal &&
         createPortal(
-          <UserModal onClose={() => setShowModal(false)} />,
+          <UserModal
+            isRegistered={authorised}
+            onClose={() => setShowModal(false)}
+          />,
           document.body
         )}
     </StyledHeader>
   );
-};
+});
 
 export default Header;

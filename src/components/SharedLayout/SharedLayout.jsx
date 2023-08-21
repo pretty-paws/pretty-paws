@@ -4,8 +4,11 @@ import { GlobalContainer } from '../../global/GlobalContainer';
 import Footer from './Footer/Footer';
 import Header from './Header/Header';
 import Navigation from './Navigation/Navigation';
-import Hero from '../Main/hero/Hero';
-const SharedLayout = () => {
+
+import { observer } from 'mobx-react-lite';
+// import Hero from '../Main/hero/Hero';
+const SharedLayout = observer(() => {
+
   return (
     <>
       <GlobalContainer>
@@ -24,6 +27,6 @@ const SharedLayout = () => {
       {/* </GlobalContainer> */}
     </>
   );
-};
+});
 
 export default SharedLayout;
