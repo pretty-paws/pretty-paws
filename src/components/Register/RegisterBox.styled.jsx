@@ -74,6 +74,7 @@ export const StyledRegisterBox = styled.div`
 
   & .register-icon-eye {
     position: absolute;
+    background-color: #fff;
     top: 30px;
     right: 30px;
     cursor: pointer;

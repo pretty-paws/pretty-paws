@@ -78,6 +78,7 @@ export const StyledLoginBox = styled.div`
     top: 30px;
     right: 30px;
     cursor: pointer;
+    background-color: #fff;
   }
 
   & .login-error {

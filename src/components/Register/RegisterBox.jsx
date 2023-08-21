@@ -51,11 +51,15 @@ const RegisterBox = observer(() => {
             type="text"
             {...register('name', {
               pattern: {
-                value: /^[A-Za-zА-Яа-я']+$/,
+                value: /^[A-Za-zА-Яа-яІіЇїЄє'-]+$/,
                 message: 'Використовуйте лише літери',
               },
               required: `Будь ласка, введіть ваше ім'я`,
               maxLength: { value: 20, message: `Оберіть коротше ім'я` },
+              minLength: {
+                value: 2,
+                message: `Вкажіть ім'я більше 2 символів`,
+              },
             })}
             aria-invalid={errors.name ? 'true' : 'false'}
           />
@@ -72,11 +76,15 @@ const RegisterBox = observer(() => {
             type="text"
             {...register('surname', {
               pattern: {
-                value: /^[A-Za-zА-Яа-я']+$/,
+                value: /^[A-Za-zА-Яа-яІіЇїЄє'-]+$/,
                 message: 'Використовуйте лише літери',
               },
               required: `Будь ласка, введіть ваше прізвище`,
               maxLength: { value: 20, message: `Оберіть коротше прізвище` },
+              minLength: {
+                value: 2,
+                message: `Вкажіть прізвище більше 2 символів`,
+              },
             })}
             aria-invalid={errors.surname ? 'true' : 'false'}
           />
@@ -94,18 +102,16 @@ const RegisterBox = observer(() => {
             }}
             className="register-input"
             type="text"
-            // placeholder="+380__ ___ __ __"
             {...register('phone_number', {
               pattern: {
-                value: /^[+0-9]+$/,
-                message:
-                  'Введіть коректний номер телефону у форматі +380 __ ___ __ __',
+                value: /^\+[0-9]{1,12}$/,
+                message: 'Введіть номер у форматі +380 __ ___ __ __',
               },
               required: `Будь ласка, введіть ваш номер телефону`,
               maxLength: { value: 13, message: `Не більше 13 символів` },
               minLength: {
                 value: 13,
-                message: `Введіть номер телефону у форматі +380 __ ___ __ __`,
+                message: `Введіть номер у форматі +380 __ ___ __ __`,
               },
             })}
             aria-invalid={errors.phone_number ? 'true' : 'false'}
