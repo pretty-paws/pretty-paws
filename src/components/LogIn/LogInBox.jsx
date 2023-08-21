@@ -53,7 +53,7 @@ const LogInBox = observer(() => {
             type="email"
             {...register('email', {
               pattern: {
-                value: /^\S+@\S+$/i,
+                value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
                 message: 'Введіть адресу за зразком email@address.com',
               },
               required: `Будь ласка, введіть ваш email`,

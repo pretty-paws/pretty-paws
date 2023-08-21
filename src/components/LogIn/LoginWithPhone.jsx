@@ -2,9 +2,6 @@ import React from 'react';
 import sprite from '../../img/svg-sprite/sprite.svg';
 import { useForm } from 'react-hook-form';
 import { StyledLoginWithPhone } from './LoginWithPhone.styled';
-// import { useState } from 'react';
-
-// import store from '../../store';
 
 const LoginWithPhone = () => {
   const {
@@ -15,7 +12,7 @@ const LoginWithPhone = () => {
   } = useForm({
     mode: 'onChange',
     defaultValues: {
-      phone_number: '',
+      phone_number: '+380',
     },
   });
 
@@ -30,20 +27,21 @@ const LoginWithPhone = () => {
         <label className="login-label">
           Телефон
           <input
+            onInput={e => {
+              e.target.value = e.target.value.replace(/[^0-9+]/g, '');
+            }}
             className="login-input"
-            type="number"
-            placeholder="+380__ ___ __ __"
+            type="text"
             {...register('phone_number', {
               pattern: {
-                value: /^[+0-9]+$/,
-                message:
-                  'Введіть коректний номер телефону у форматі +380 __ ___ __ __',
+                value: /^\+[0-9]{1,12}$/,
+                message: 'Введіть номер телефону у форматі +380 __ ___ __ __',
               },
               required: `Будь ласка, введіть ваш номер телефону`,
-              maxLength: { value: 12, message: `Не більше 12 символів` },
+              maxLength: { value: 13, message: `Не більше 13 символів` },
               minLength: {
-                value: 12,
-                message: `Введіть номер телефону у форматі +380 __ ___ __ __`,
+                value: 13,
+                message: `Введіть номер у форматі +380 __ ___ __ __`,
               },
             })}
             aria-invalid={errors.phone_number ? 'true' : 'false'}
