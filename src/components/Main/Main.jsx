@@ -1,14 +1,16 @@
 import React from 'react';
-// import Hero from './hero/Hero';
+import Hero from './hero/Hero';
 import Promotions from './PromotionsWithDiscount/Promotions';
-import { GlobalContainer } from '../../global/GlobalContainer';
+// import { GlobalContainer } from '../../global/GlobalContainer';
 
 const Main = () => {
   return (
-    <GlobalContainer>
-      {/* <Hero /> */}
+    // <GlobalContainer>
+    <>
+      <Hero />
       <Promotions />
-    </GlobalContainer>
+    </>
+    // </GlobalContainer>
   );
 };
 

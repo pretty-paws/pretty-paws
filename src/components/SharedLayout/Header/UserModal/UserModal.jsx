@@ -6,8 +6,8 @@ import sprite from '../../../../img/svg-sprite/sprite.svg';
 import { useAuthStore } from '../../../../store/AuthProvider';
 import { observer } from 'mobx-react-lite';
 
-const UserModal = observer(({ onClose, isRegistered }) => {
-  const { logOut } = useAuthStore();
+const UserModal = observer(({ onClose }) => {
+  const { logOut, authorised } = useAuthStore();
 
   const handleBackdropClick = event => {
     if (event.target === event.currentTarget) {
@@ -18,7 +18,7 @@ const UserModal = observer(({ onClose, isRegistered }) => {
     <StyledBackdrop onClick={handleBackdropClick}>
       <div className="user-modal__new-box">
         <StyledModalBox>
-          {isRegistered ? (
+          {authorised ? (
             <div className="modal__authorised">
               <Link>
                 <p className="user-modal__cabinet">Мій кабінет</p>
@@ -58,5 +58,4 @@ export default UserModal;
 
 UserModal.propTypes = {
   onClose: PropTypes.func.isRequired,
-  isRegistered: PropTypes.string.isRequired,
 };

@@ -75,17 +75,19 @@ export class AuthStore {
   async logOut() {
     try {
       const res = await logOut();
-      // this.token = '';
+      this.token = '';
       console.log(res);
       localStorage.setItem('authorised', false);
+      localStorage.removeItem('token');
     } catch (error) {
-      // this.error = true;
-      // console.error('Error:', error);
+      this.error = true;
+      console.error('Error:', error);
     } finally {
-      // this.token = '';
-      // this.authorised = false;
-      // if (this.rememberMe !== true) {
-      // localStorage.removeItem('email');
+      this.token = '';
+      this.authorised = false;
+      if (this.rememberMe !== true) {
+        localStorage.removeItem('email');
+      }
     }
   }
 }
