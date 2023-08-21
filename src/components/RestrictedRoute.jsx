@@ -7,7 +7,11 @@ export const RestrictedRoute = observer(
   ({ redirectTo = '/', component: Component }) => {
     const { authorised } = useAuthStore();
 
-    return !!authorised === true ? <Navigate to={redirectTo} /> : Component;
+    return authorised.toString() === 'true' ? (
+      <Navigate to={redirectTo} />
+    ) : (
+      Component
+    );
   }
 );
 

@@ -23,7 +23,7 @@ const UserModal = observer(({ onClose }) => {
     <StyledBackdrop onClick={handleBackdropClick}>
       <div className="user-modal__new-box">
         <StyledModalBox>
-          {!!authorised === true ? (
+          {authorised.toString() === 'true' ? (
             <div className="modal__authorised">
               <Link>
                 <p className="user-modal__cabinet">Мій кабінет</p>

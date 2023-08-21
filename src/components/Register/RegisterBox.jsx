@@ -10,8 +10,8 @@ import { useAuthStore } from '../../store/AuthProvider';
 const RegisterBox = observer(() => {
   const { signUp, setEmail } = useAuthStore();
 
-  const [passwordVisibility, setPasswordVisibility] = useState('false');
-  const [verificationVisibility, setVerificationVisibility] = useState('false');
+  const [passwordVisibility, setPasswordVisibility] = useState(false);
+  const [verificationVisibility, setVerificationVisibility] = useState(false);
   const {
     register,
     handleSubmit,
@@ -164,7 +164,9 @@ const RegisterBox = observer(() => {
             className="register-icon-eye"
             onClick={() => setPasswordVisibility(!passwordVisibility)}
           >
-            <use href={sprite + '#eye-off'} />
+            <use
+              href={passwordVisibility ? sprite + '#eye' : sprite + '#eye-off'}
+            />
           </svg>
         </label>
         {errors.password && (
@@ -190,7 +192,11 @@ const RegisterBox = observer(() => {
             className="register-icon-eye"
             onClick={() => setVerificationVisibility(!verificationVisibility)}
           >
-            <use href={sprite + '#eye-off'} />
+            <use
+              href={
+                verificationVisibility ? sprite + '#eye' : sprite + '#eye-off'
+              }
+            />
           </svg>
         </label>
         {errors.password_confirmation && (

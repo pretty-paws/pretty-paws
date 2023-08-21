@@ -99,6 +99,7 @@ export const StyledLoginBox = styled.div`
     position: absolute;
     top: 5px;
     left: 80px;
+    cursor: pointer;
   }
 
   & .checkbox-container {

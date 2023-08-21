@@ -12,7 +12,7 @@ import { observer } from 'mobx-react-lite';
 const LogInBox = observer(() => {
   const { logIn, setRememberMe } = useAuthStore();
 
-  const [passwordVisibility, setPasswordVisibility] = useState('false');
+  const [passwordVisibility, setPasswordVisibility] = useState(false);
 
   const {
     register,
@@ -90,9 +90,11 @@ const LogInBox = observer(() => {
             width="24px"
             height="24px"
             className="login-icon-eye"
-            onChange={() => setPasswordVisibility(!passwordVisibility)}
+            onClick={() => setPasswordVisibility(!passwordVisibility)}
           >
-            <use href={sprite + '#eye-off'} />
+            <use
+              href={passwordVisibility ? sprite + '#eye' : sprite + '#eye-off'}
+            />
           </svg>
         </label>
         {errors.password && (
