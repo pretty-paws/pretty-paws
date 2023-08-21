@@ -9,6 +9,8 @@ import { observer } from 'mobx-react-lite';
 const UserModal = observer(({ onClose }) => {
   const { logOut, authorised } = useAuthStore();
 
+  // const authorised = localStorage.getItem('authorised');
+
   const handleBackdropClick = event => {
     if (event.target === event.currentTarget) {
       onClose();
@@ -18,7 +20,7 @@ const UserModal = observer(({ onClose }) => {
     <StyledBackdrop onClick={handleBackdropClick}>
       <div className="user-modal__new-box">
         <StyledModalBox>
-          {authorised ? (
+          {authorised === true ? (
             <div className="modal__authorised">
               <Link>
                 <p className="user-modal__cabinet">Мій кабінет</p>
