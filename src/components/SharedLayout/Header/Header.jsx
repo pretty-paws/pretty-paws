@@ -3,7 +3,7 @@ import { createPortal } from 'react-dom';
 import { StyledHeader } from './Header.styled';
 import sprite from '../../../img/svg-sprite/sprite.svg';
 
-// import { useAuthStore } from '../../../store/AuthProvider';
+import { useAuthStore } from '../../../store/AuthProvider';
 
 import Logo from './Logo';
 import Search from './Search';
@@ -12,7 +12,7 @@ import UserModal from './UserModal/UserModal';
 import { observer } from 'mobx-react-lite';
 
 const Header = observer(() => {
-  // const { authorised, email } = useAuthStore();
+  const { email, authorised } = useAuthStore();
 
   const [showModal, setShowModal] = useState(false);
   return (
@@ -23,7 +23,7 @@ const Header = observer(() => {
       <svg className="header-language-uk-icon" width="32px" height="32px">
         <use href={sprite + '#uk'} />
       </svg>
-      {/* {authorised ? (
+      {authorised ? (
         <div className="header__registered-user">
           <p className="header__registered-user-email">{email}</p>
           <button
@@ -31,18 +31,18 @@ const Header = observer(() => {
             type="button"
             onClick={() => setShowModal(true)}
           >
-            Вхід для своїх
+            Кабінет
           </button>
-        </div> */}
-      {/* // ) : ( */}
-      <button
-        className="header__login-button"
-        type="button"
-        onClick={() => setShowModal(true)}
-      >
-        Вхід для своїх
-      </button>
-      {/* // )} */}
+        </div>
+      ) : (
+        <button
+          className="header__login-button"
+          type="button"
+          onClick={() => setShowModal(true)}
+        >
+          Вхід для своїх
+        </button>
+      )}
       {showModal &&
         createPortal(
           <UserModal onClose={() => setShowModal(false)} />,

@@ -11,12 +11,12 @@ export const StyledBackdrop = styled.div`
 
 export const StyledModalBox = styled.div`
   position: absolute;
-  top: 21%;
+  top: 11%;
   right: 15%;
   z-index: 1002;
   border-radius: 8.6px;
   background-color: #fff;
-  border: 2px solid var(--accent-color-beige);
+  border: 2.5px solid var(--accent-color-beige);
   color: #111;
   font-size: 18.246px;
   font-weight: 400;
@@ -45,18 +45,28 @@ export const StyledModalBox = styled.div`
 
   & .user-modal__logout-icon {
     position: absolute;
-    top: -5px;
-    right: 50px;
+    top: 0;
+    right: 60px;
     cursor: pointer;
   }
 
   & .modal__unauthorised {
     padding: 15px 25px;
     display: flex;
+    flex-direction: column;
     gap: 20px;
-    align-items: center;
+    align-items: left;
+
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.2;
   }
 
+  & .user-modal__login-icon {
+    position: absolute;
+    top: 15px;
+    right: 40px;
+  }
   & p {
     cursor: pointer;
   }

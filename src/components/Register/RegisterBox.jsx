@@ -96,21 +96,22 @@ const RegisterBox = observer(() => {
         )}
         <label className="register-label">
           Телефон
+          <div className="register__country-code">+38</div>
           <input
             onInput={e => {
               e.target.value = e.target.value.replace(/[^0-9+]/g, '');
             }}
-            className="register-input"
-            type="text"
+            className="register-input phone-input "
+            type="number"
             {...register('phone_number', {
               pattern: {
-                value: /^\+[0-9]{1,12}$/,
-                message: 'Введіть номер у форматі +380 __ ___ __ __',
+                value: /^[0-9]{10}$/,
+                message: 'Введіть номер телефону у форматі +380 __ ___ __ __',
               },
               required: `Будь ласка, введіть ваш номер телефону`,
-              maxLength: { value: 13, message: `Не більше 13 символів` },
+              maxLength: { value: 10, message: `Не більше 13 символів` },
               minLength: {
-                value: 13,
+                value: 10,
                 message: `Введіть номер у форматі +380 __ ___ __ __`,
               },
             })}
@@ -151,7 +152,7 @@ const RegisterBox = observer(() => {
             type={passwordVisibility ? 'text' : 'password'}
             {...register('password', {
               pattern: {
-                value: /^(?=.*[a-zA-Zа-яА-Я])(?=.*[0-9])[a-zA-Zа-яА-Я0-9]+$/,
+                value: /^(?=.*[a-zа-я0-9])(?=.*[A-ZА-Я])[a-zA-Zа-яА-Я0-9]+$/,
                 message:
                   'Пароль повинен мати хоча б одну велику літеру та число',
               },

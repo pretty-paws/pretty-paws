@@ -22,14 +22,15 @@ const LogInBox = observer(() => {
   } = useForm({
     mode: 'onChange',
     defaultValues: {
-      email: '',
+      email: localStorage.getItem('email') || '',
       password: '',
-      rememberMe: false,
+      rememberMe: localStorage.getItem('rememberMe') || false,
     },
   });
 
   const onRememberMeChange = e => {
     const isChecked = e.target.checked;
+    localStorage.setItem('rememberMe', isChecked);
     setRememberMe(isChecked);
   };
 
