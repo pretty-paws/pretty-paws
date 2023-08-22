@@ -50,6 +50,13 @@ const UserModal = observer(({ onClose }) => {
             <div className="modal__unauthorised">
               <Link to="/login" replace="true" onClick={onClose}>
                 <p className="user-modal__login">Вхід</p>
+                <svg
+                  className="user-modal__login-icon"
+                  width="27px"
+                  height="27px"
+                >
+                  <use href={sprite + '#login'} />
+                </svg>
               </Link>
               <Link to="/register" replace="true" onClick={onClose}>
                 <p className="user-modal__register">Реєстрація</p>

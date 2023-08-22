@@ -52,5 +52,10 @@ export const StyledHeader = styled.header`
     color: var(--accent-color-blue);
     background-color: #fff;
     white-space: nowrap;
+
+    &:focus-within {
+      border-color: var(--accent-color-beige);
+      color: var(--accent-color-beige);
+    }
   }
 `;

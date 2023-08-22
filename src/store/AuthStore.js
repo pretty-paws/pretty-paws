@@ -1,4 +1,4 @@
-import { makeAutoObservable } from 'mobx';
+import { makeAutoObservable, runInAction } from 'mobx';
 import {
   loginUser,
   logOut,
@@ -32,45 +32,57 @@ export class AuthStore {
   async signUp(userData) {
     try {
       const { data } = await registerUser(userData);
-      this.confirmation_code = data.data.code;
-      this.verifyCode({
-        email: this.email,
-        confirmation_code: this.confirmation_code,
+      runInAction(() => {
+        this.confirmation_code = data.data.code;
+        this.verifyCode({
+          email: this.email,
+          confirmation_code: this.confirmation_code,
+        });
       });
     } catch (error) {
-      this.error = true;
-      console.error('Error:', error);
+      runInAction(() => {
+        this.error = true;
+        console.error('Error:', error);
+      });
     }
   }
 
   async verifyCode(email, confirmation_code) {
     try {
       const { data } = await registerVerify(email, confirmation_code);
-      this.user = data.data.user;
-      this.token = data.data.token;
-      this.authorised = true;
-      localStorage.setItem('token', data.data.token);
-      localStorage.setItem('authorised', true);
+
+      runInAction(() => {
+        this.user = data.data.user;
+        this.token = data.data.token;
+        this.authorised = true;
+        localStorage.setItem('token', data.data.token);
+        localStorage.setItem('authorised', true);
+      });
     } catch (error) {
-      this.error = true;
-      console.error('Error:', error);
+      runInAction(() => {
+        this.error = true;
+        console.error('Error:', error);
+      });
     }
   }
 
   async logIn(userData) {
     try {
       const { data } = await loginUser(userData);
-      this.token = data.data.token;
-      this.authorised = true;
-      localStorage.setItem('authorised', true);
-      localStorage.setItem('token', data.data.token);
-      this.rememberMe === true
-        ? localStorage.setItem('email', data.data.user.email)
-        : null;
-      console.log(data);
+      runInAction(() => {
+        this.token = data.data.token;
+        this.authorised = true;
+        localStorage.setItem('authorised', true);
+        localStorage.setItem('token', data.data.token);
+        this.rememberMe === true
+          ? localStorage.setItem('email', data.data.user.email)
+          : null;
+      });
     } catch (error) {
-      this.error = true;
-      console.error('Error:', error);
+      runInAction(() => {
+        this.error = true;
+        console.error('Error:', error);
+      });
     }
   }
 
@@ -78,16 +90,22 @@ export class AuthStore {
     try {
       const res = await logOut();
       console.log(res);
-      this.token = '';
-      this.authorised = false;
-      localStorage.setItem('authorised', false);
-      localStorage.removeItem('token');
+
+      runInAction(() => {
+        this.token = '';
+        this.authorised = false;
+        localStorage.setItem('authorised', false);
+        localStorage.removeItem('token');
+      });
     } catch (error) {
-      this.error = true;
-      console.error('Error:', error);
+      runInAction(() => {
+        this.error = true;
+        console.error('Error:', error);
+      });
     } finally {
       if (this.rememberMe !== true) {
         localStorage.removeItem('email');
+        localStorage.removeItem('rememberMe');
       }
     }
   }
