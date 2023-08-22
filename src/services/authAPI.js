@@ -1,7 +1,6 @@
 import axios from 'axios';
 
-axios.defaults.baseURL =
-  'http://ec2-35-159-10-27.eu-central-1.compute.amazonaws.com/api';
+axios.defaults.baseURL = 'https://zoo-shop-api.online';
 
 axios.defaults.headers.common.Authorization = `Bearer ${
   localStorage.getItem('token') || ''
