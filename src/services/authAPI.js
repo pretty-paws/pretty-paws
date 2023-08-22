@@ -1,10 +1,15 @@
 import axios from 'axios';
 
-axios.defaults.baseURL = 'https://zoo-shop-api.online';
+axios.defaults.baseURL = 'https://zoo-shop-api.online/api';
 
-axios.defaults.headers.common.Authorization = `Bearer ${
-  localStorage.getItem('token') || ''
-}`;
+axios.defaults.headers.common = {
+  Authorization: `Bearer ${localStorage.getItem('token') || ''}`,
+  'Access-Control-Allow-Origin': '*', // This header is set in an attempt to address the CORS issue
+};
+
+// axios.defaults.headers.common.Authorization = `Bearer ${
+//   localStorage.getItem('token') || ''
+// }`;
 
 export const registerUser = async data => {
   const result = await axios.post(`/auth/sign-up`, data);
