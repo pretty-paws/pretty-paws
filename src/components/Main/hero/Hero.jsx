@@ -41,11 +41,9 @@ const Hero = () => {
                 <use href={`${sprite}#${animal.icon}`} />
               </svg>
             </div>
-            {current === animal.index ? (
-              <span className="animals-bar-text">{animal.text}</span>
-            ) : (
-              <span></span>
-            )}
+            <span className="animals-bar-text">
+              {current === animal.index ? animal.text : ''}
+            </span>
           </StyleAnimalsBar>
         </div>
       ))
@@ -57,7 +55,7 @@ const Hero = () => {
       <Swiper
         slidesPerView={1}
         autoplay={{
-          delay: 4500,
+          delay: 15000,
           disableOnInteraction: false,
         }}
         speed={1500}

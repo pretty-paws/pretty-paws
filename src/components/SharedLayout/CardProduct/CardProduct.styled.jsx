@@ -55,6 +55,8 @@ export const StyledCardProduct = styled.div`
     flex-direction: column;
     align-items: flex-end;
     gap: 3.67px;
+    /* max-height: 75px;
+	overflow-y:hidden; */
   }
   & .card-info {
     padding: 0 31px;

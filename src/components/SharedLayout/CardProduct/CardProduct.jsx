@@ -5,6 +5,7 @@ import imgNextGard from '../../../img/card-discount/nexgard_spectra.jpg';
 const CardProduct = () => {
   return (
     <StyledCardProduct>
+      {/* header card */}
       <div className="card-header">
         <div className="card-img">
           <img src={imgNextGard} alt="imgNextGard" />
@@ -12,6 +13,7 @@ const CardProduct = () => {
         <div className="card-type">
           <p className="card-type__text">Акція</p>
         </div>
+        {/* variant type card */}
         <div className="card-variant">
           <StyledCardVariant>
             <p className="variant-text">2-3.5 кг</p>
@@ -29,7 +31,7 @@ const CardProduct = () => {
           </div>
         </div>
       </div>
-
+      {/* general info of card product */}
       <div className="card-info">
         <p className="card-info__name">
           <b>Nexgard Spectra</b> (Нексгард Спектра) - Пігулки проти бліх, кліщів
@@ -53,7 +55,7 @@ const CardProduct = () => {
           </div>
         </div>
       </div>
-
+      {/* button panel card */}
       <div className="card-button-panel button-panel">
         <button className="button-panel__buy">До кошика</button>
         {/* Іконка улюблене */}
