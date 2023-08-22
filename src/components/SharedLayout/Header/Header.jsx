@@ -13,6 +13,8 @@ import { observer } from 'mobx-react-lite';
 
 const Header = observer(() => {
   const { email, authorised } = useAuthStore();
+  // console.log(authorised);
+  // console.log(localStorage.getItem('authorised'));
 
   const [showModal, setShowModal] = useState(false);
   return (
@@ -23,7 +25,7 @@ const Header = observer(() => {
       <svg className="header-language-uk-icon" width="32px" height="32px">
         <use href={sprite + '#uk'} />
       </svg>
-      {authorised ? (
+      {authorised === 'true' ? (
         <div className="header__registered-user">
           <p className="header__registered-user-email">{email}</p>
           <button

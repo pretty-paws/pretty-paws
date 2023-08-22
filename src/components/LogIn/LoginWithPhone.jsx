@@ -28,8 +28,14 @@ const LoginWithPhone = () => {
           Телефон
           <div className="login__country-code">+38</div>
           <input
+            onInput={e => {
+              if (e.target.value.includes('+38')) {
+                e.target.value = e.target.value.replace(/[+38]/g, '');
+              }
+              e.target.value = e.target.value.replace(/[^0-9+]/g, '');
+            }}
             className="login-input phone-input"
-            type="number"
+            type="text"
             {...register('phone_number', {
               pattern: {
                 value: /^[0-9]{10}$/,

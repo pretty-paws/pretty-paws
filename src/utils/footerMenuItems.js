@@ -35,11 +35,11 @@ export const catalog = [
 
 export const clients = [
   {
-    name: 'Доставка',
+    name: 'Оплата та доставка',
     path: '/delivery',
   },
   {
-    name: 'Повернення і обмін',
+    name: 'Повернення товарів',
     path: '/return',
   },
   {
@@ -74,7 +74,19 @@ export const useful = [
     name: 'Політика безпеки',
     path: '/',
   },
+  {
+    name: 'Умови використання',
+    path: '/',
+  },
 
+  {
+    name: 'Представлені бренди',
+    path: '/',
+  },
+  {
+    name: 'Мапа сайту',
+    path: '/',
+  },
   {
     name: 'Відгуки',
     path: '/',

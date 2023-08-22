@@ -8,6 +8,7 @@ import { observer } from 'mobx-react-lite';
 
 const UserModal = observer(({ onClose }) => {
   const { logOut, authorised } = useAuthStore();
+
   console.log(authorised);
 
   const handleBackdropClick = event => {

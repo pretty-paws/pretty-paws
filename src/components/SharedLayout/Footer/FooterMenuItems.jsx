@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { clients, useful, catalog } from '../../../utils/footerMenuItems';
-import FooterContacts from './FooterContacts';
 import { StyledFooterBox } from './FooterMenuItems.styled';
 
 const FooterMenuItems = () => {
@@ -43,7 +42,6 @@ const FooterMenuItems = () => {
           })}
         </ul>
       </StyledFooterBox>
-      <FooterContacts />
     </>
   );
 };
