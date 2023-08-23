@@ -6,9 +6,7 @@ import Footer from './Footer/Footer';
 import Header from './Header/Header';
 import Navigation from './Navigation/Navigation';
 
-import { observer } from 'mobx-react-lite';
-
-const SharedLayout = observer(() => {
+const SharedLayout = () => {
   return (
     <StyledWrapper>
       <GlobalContainer>
@@ -19,6 +17,6 @@ const SharedLayout = observer(() => {
       <Footer />
     </StyledWrapper>
   );
-});
+};
 
 export default SharedLayout;

@@ -9,14 +9,12 @@ import {
 export class AuthStore {
   confirmation_code = 0;
   token = 0;
-  email = '';
-  authorised = false;
-  error = false;
-  rememberMe = false;
+  email = localStorage.getItem('email') || '';
+  authorised = localStorage.getItem('authorised') || false;
+  state = 'pending';
+  rememberMe = localStorage.getItem('rememberMe') || false;
 
   constructor() {
-    this.authorised = localStorage.getItem('authorised') || false;
-    this.email = localStorage.getItem('email') || '';
     makeAutoObservable(this, {}, { autoBind: true });
   }
 
@@ -27,9 +25,11 @@ export class AuthStore {
 
   setRememberMe(bool) {
     this.rememberMe = bool;
+    localStorage.setItem('rememberMe', bool);
   }
 
   async signUp(userData) {
+    this.state = 'pending';
     try {
       const { data } = await registerUser(userData);
       runInAction(() => {
@@ -38,75 +38,77 @@ export class AuthStore {
           email: this.email,
           confirmation_code: this.confirmation_code,
         });
+        this.state = 'done';
       });
     } catch (error) {
       runInAction(() => {
-        this.error = true;
-        console.error('Error:', error);
+        this.state = 'error';
       });
     }
   }
 
   async verifyCode(email, confirmation_code) {
+    this.state = 'pending';
     try {
       const { data } = await registerVerify(email, confirmation_code);
-      localStorage.setItem('token', data.data.token);
-      localStorage.setItem('authorised', true);
-
       runInAction(() => {
+        localStorage.setItem('token', data.data.token);
+        localStorage.setItem('authorised', true);
         this.user = data.data.user;
         this.token = data.data.token;
         this.authorised = true;
+        this.state = 'done';
       });
     } catch (error) {
       runInAction(() => {
-        this.error = true;
-        console.error('Error:', error);
+        this.state = 'error';
       });
     }
   }
 
   async logIn(userData) {
+    this.state = 'pending';
     try {
       const { data } = await loginUser(userData);
       localStorage.setItem('authorised', true);
       localStorage.setItem('token', data.data.token);
+
       runInAction(() => {
         this.token = data.data.token;
         this.authorised = true;
+        this.email = data.data.user.email;
         this.rememberMe === true
           ? localStorage.setItem('email', data.data.user.email)
           : null;
+        this.state = 'done';
       });
     } catch (error) {
       runInAction(() => {
-        this.error = true;
-        console.error('Error:', error);
+        this.state = 'error';
       });
     }
   }
 
   async logOut() {
+    this.state = 'pending';
     try {
-      const res = await logOut();
-      console.log(res);
-      localStorage.setItem('authorised', false);
-      localStorage.removeItem('token');
+      await logOut();
 
       runInAction(() => {
         this.token = '';
         this.authorised = false;
+        localStorage.setItem('authorised', false);
+        localStorage.removeItem('token');
+
+        if (localStorage.getItem('rememberMe') !== 'true') {
+          localStorage.removeItem('email');
+        }
+        this.state = 'done';
       });
     } catch (error) {
       runInAction(() => {
-        this.error = true;
-        console.error('Error:', error);
+        this.state = 'error';
       });
-    } finally {
-      if (localStorage.getItem('rememberMe') !== 'true') {
-        localStorage.removeItem('email');
-        // localStorage.removeItem('rememberMe');
-      }
     }
   }
 }
