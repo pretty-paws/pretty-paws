@@ -5,9 +5,9 @@ import Main from './Main/Main';
 // import { SHOP_ROUTE } from '../utils/consts';
 import SharedLayout from './SharedLayout/SharedLayout';
 import { RestrictedRoute } from './RestrictedRoute';
-import { observer } from 'mobx-react-lite';
+// import { observer } from 'mobx-react-lite';
 
-const AppRouter = observer(() => {
+const AppRouter = () => {
   // Flag for user
 
   return (
@@ -34,6 +34,6 @@ const AppRouter = observer(() => {
       </Route>
     </Routes>
   );
-});
+};
 
 export default AppRouter;
