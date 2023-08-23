@@ -3,20 +3,23 @@ import SignUp from './SignUp';
 
 import { StyledFooter } from './Footer.styled';
 import FooterMenuItems from './FooterMenuItems';
-import SocialNetsBar from './SocialNetsBar';
+import PaymentBox from './PaymentBox';
 import FooterLogo from './FooterLogo';
 import FooterContacts from './FooterContacts';
+import { GlobalContainer } from '../../../global/GlobalContainer';
 
 const Footer = () => {
   return (
     <>
       <SignUp />
-      <StyledFooter>
-        <FooterLogo />
-        <FooterContacts />
-        <FooterMenuItems />
-        <SocialNetsBar />
-      </StyledFooter>
+      <GlobalContainer>
+        <StyledFooter>
+          <FooterLogo />
+          <FooterContacts />
+          <FooterMenuItems />
+          <PaymentBox />
+        </StyledFooter>
+      </GlobalContainer>
     </>
   );
 };

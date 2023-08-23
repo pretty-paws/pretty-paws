@@ -1,70 +1,4 @@
-export const catalog = [
-  {
-    name: 'Товари для собак',
-    path: '/',
-  },
-  {
-    name: 'Товари для котів',
-    path: '/',
-  },
-  {
-    name: 'Товари для гризунів',
-    path: '/',
-  },
-  {
-    name: 'Товари для птахів',
-    path: '/',
-  },
-  {
-    name: 'Товари для рибок',
-    path: '/',
-  },
-  {
-    name: 'Товари для рептилій',
-    path: '/',
-  },
-  {
-    name: 'Акції',
-    path: '/',
-  },
-  {
-    name: 'Новинки',
-    path: '/',
-  },
-];
-
-export const clients = [
-  {
-    name: 'Оплата та доставка',
-    path: '/delivery',
-  },
-  {
-    name: 'Повернення товарів',
-    path: '/return',
-  },
-  {
-    name: 'Блог',
-    path: '/blog',
-  },
-  {
-    name: 'Про компанію',
-    path: '/about',
-  },
-  {
-    name: 'Бонусна програма',
-    path: '/bonuses',
-  },
-  {
-    name: 'Акції',
-    path: '/promotions',
-  },
-  {
-    name: 'Контакти',
-    path: '/contats',
-  },
-];
-
-export const useful = [
+export const info = [
   {
     name: 'Політика конфіденційності',
     path: '/',
@@ -90,5 +24,36 @@ export const useful = [
   {
     name: 'Відгуки',
     path: '/',
+  },
+];
+
+export const clients = [
+  {
+    name: 'Оплата та доставка',
+    path: '/delivery',
+  },
+  {
+    name: 'Повернення і обмін',
+    path: '/return',
+  },
+  {
+    name: 'Наші магазини',
+    path: '/shops',
+  },
+  {
+    name: 'Блог',
+    path: '/blog',
+  },
+  {
+    name: 'Про компанію',
+    path: '/about',
+  },
+  {
+    name: 'Бонусна програма',
+    path: '/bonuses',
+  },
+  {
+    name: 'Контакти',
+    path: '/contats',
   },
 ];

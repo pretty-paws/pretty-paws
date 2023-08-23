@@ -17,7 +17,7 @@ const FooterContacts = () => {
         <li className="footer-menu-time">СБ: 09:00 - 18:00</li>
         <li className="footer-menu-time">НД: 09:00 - 18:00</li>
       </ul>
-      <div>
+      <div className="footer-contacts__social-bar">
         <Link to="/">
           <svg className="animals-bar-icon" width="36px" height="36px">
             <use href={sprite + '#facebook'} />
@@ -34,14 +34,6 @@ const FooterContacts = () => {
         <Link to="/">
           <Telegram />
         </Link>
-
-        <svg className="animals-bar-icon" width="55px" height="18px">
-          <use href={sprite + '#visa'} />
-        </svg>
-
-        <svg className="animals-bar-icon" width="56px" height="56px">
-          <use href={sprite + '#mastercard'} />
-        </svg>
       </div>
     </StyledFooterContacts>
   );
