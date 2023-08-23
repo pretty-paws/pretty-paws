@@ -18,12 +18,13 @@ const RegisterBox = observer(() => {
     formState: { errors, isValid },
     watch,
     reset,
+    setError,
   } = useForm({
     mode: 'onChange',
     defaultValues: {
       name: '',
       surname: '',
-      phone_number: `+380`,
+      phone_number: ``,
       email: '',
       password: '',
       password_confirmation: '',
@@ -31,6 +32,7 @@ const RegisterBox = observer(() => {
   });
 
   const password = watch('password', '');
+  const password_confirmation = watch('password_confirmation', '');
 
   const onSubmit = data => {
     setEmail(data.email);
@@ -99,10 +101,13 @@ const RegisterBox = observer(() => {
           <div className="register__country-code">+38</div>
           <input
             onInput={e => {
+              if (e.target.value.includes('+38')) {
+                e.target.value = e.target.value.replace(/[+38]/g, '');
+              }
               e.target.value = e.target.value.replace(/[^0-9+]/g, '');
             }}
             className="register-input phone-input "
-            type="number"
+            type="text"
             {...register('phone_number', {
               pattern: {
                 value: /^[0-9]{10}$/,
@@ -148,11 +153,22 @@ const RegisterBox = observer(() => {
         <label className="register-label">
           Пароль
           <input
+            onInput={e => {
+              if (
+                e.currentTarget.value !== password_confirmation &&
+                password_confirmation !== ''
+              )
+                setError('password_confirmation', {
+                  type: 'manual',
+                  message: 'Паролі не збігаються',
+                });
+              console.log(e.currentTarget.value);
+            }}
             className="register-input"
             type={passwordVisibility ? 'text' : 'password'}
             {...register('password', {
               pattern: {
-                value: /^(?=.*[a-zа-я0-9])(?=.*[A-ZА-Я])[a-zA-Zа-яА-Я0-9]+$/,
+                value: /^(?=.*[a-zA-Zа-яА-Я])(?=.*[0-9])[a-zA-Zа-яА-Я0-9]+$/,
                 message:
                   'Пароль повинен мати хоча б одну велику літеру та число',
               },

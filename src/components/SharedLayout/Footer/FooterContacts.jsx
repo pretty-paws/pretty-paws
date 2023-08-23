@@ -1,5 +1,9 @@
 import React from 'react';
 import { StyledFooterContacts } from './FooterContacts.styled';
+import sprite from '../../../img/svg-sprite/sprite.svg';
+import { ReactComponent as Telegram } from '../../../img/svg-sprite/telegram.svg';
+import { ReactComponent as Instagram } from '../../../img/svg-sprite/instagram.svg';
+import { Link } from 'react-router-dom';
 
 const FooterContacts = () => {
   return (
@@ -13,6 +17,32 @@ const FooterContacts = () => {
         <li className="footer-menu-time">СБ: 09:00 - 18:00</li>
         <li className="footer-menu-time">НД: 09:00 - 18:00</li>
       </ul>
+      <div>
+        <Link to="/">
+          <svg className="animals-bar-icon" width="36px" height="36px">
+            <use href={sprite + '#facebook'} />
+          </svg>
+        </Link>
+        <Link to="/">
+          <Instagram />
+        </Link>
+        <Link to="/">
+          <svg className="animals-bar-icon" width="36px" height="36px">
+            <use href={sprite + '#viber'} />
+          </svg>
+        </Link>
+        <Link to="/">
+          <Telegram />
+        </Link>
+
+        <svg className="animals-bar-icon" width="55px" height="18px">
+          <use href={sprite + '#visa'} />
+        </svg>
+
+        <svg className="animals-bar-icon" width="56px" height="56px">
+          <use href={sprite + '#mastercard'} />
+        </svg>
+      </div>
     </StyledFooterContacts>
   );
 };

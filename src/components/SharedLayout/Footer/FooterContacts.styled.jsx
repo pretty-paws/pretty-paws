@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 
 export const StyledFooterContacts = styled.div`
+  flex: 1;
   & .footer-menu-title {
-    color: var(--font-color-gray);
+    color: var(--accent-color-blue);
     margin-bottom: 25px;
     font-size: 18px;
     font-weight: 500;
@@ -33,5 +34,11 @@ export const StyledFooterContacts = styled.div`
     font-size: 16px;
     font-weight: 500;
     line-height: 1.5;
+  }
+
+  & .footer-contacts__social-bar {
+    display: flex;
+    gap: 12px;
+    margin-top: 27px;
   }
 `;

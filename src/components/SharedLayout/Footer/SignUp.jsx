@@ -7,7 +7,7 @@ const SignUp = () => {
   return (
     <StyledSignUp>
       <div className="sign-up__container">
-        <p className="sign-up__title">Підписатися на спецпропозиції для</p>
+        <p className="sign-up__title">Підписатися на акції для</p>
         <AnimalsBar />
         <div className="sign-up-input__box">
           <input className="sign-up-input" type="email" placeholder="E-mail" />

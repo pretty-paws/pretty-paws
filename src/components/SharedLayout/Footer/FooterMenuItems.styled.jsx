@@ -1,9 +1,10 @@
 import styled from 'styled-components';
 
 export const StyledFooterBox = styled.div`
+  flex: 1;
   & .footer-menu-title {
     margin-bottom: 25px;
-    color: #9e9e9e;
+    color: var(--accent-color-blue);
     font-size: 18px;
     font-weight: 500;
     line-height: 1.2;
