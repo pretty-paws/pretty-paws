@@ -50,13 +50,13 @@ export class AuthStore {
   async verifyCode(email, confirmation_code) {
     try {
       const { data } = await registerVerify(email, confirmation_code);
+      localStorage.setItem('token', data.data.token);
+      localStorage.setItem('authorised', true);
 
       runInAction(() => {
         this.user = data.data.user;
         this.token = data.data.token;
         this.authorised = true;
-        localStorage.setItem('token', data.data.token);
-        localStorage.setItem('authorised', true);
       });
     } catch (error) {
       runInAction(() => {
@@ -69,11 +69,11 @@ export class AuthStore {
   async logIn(userData) {
     try {
       const { data } = await loginUser(userData);
+      localStorage.setItem('authorised', true);
+      localStorage.setItem('token', data.data.token);
       runInAction(() => {
         this.token = data.data.token;
         this.authorised = true;
-        localStorage.setItem('authorised', true);
-        localStorage.setItem('token', data.data.token);
         this.rememberMe === true
           ? localStorage.setItem('email', data.data.user.email)
           : null;
@@ -90,12 +90,12 @@ export class AuthStore {
     try {
       const res = await logOut();
       console.log(res);
+      localStorage.setItem('authorised', false);
+      localStorage.removeItem('token');
 
       runInAction(() => {
         this.token = '';
         this.authorised = false;
-        localStorage.setItem('authorised', false);
-        localStorage.removeItem('token');
       });
     } catch (error) {
       runInAction(() => {
@@ -103,9 +103,9 @@ export class AuthStore {
         console.error('Error:', error);
       });
     } finally {
-      if (this.rememberMe !== true) {
+      if (localStorage.getItem('rememberMe') !== 'true') {
         localStorage.removeItem('email');
-        localStorage.removeItem('rememberMe');
+        // localStorage.removeItem('rememberMe');
       }
     }
   }

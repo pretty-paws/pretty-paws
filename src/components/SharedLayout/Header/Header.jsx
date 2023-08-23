@@ -25,7 +25,7 @@ const Header = observer(() => {
       <svg className="header-language-uk-icon" width="32px" height="32px">
         <use href={sprite + '#uk'} />
       </svg>
-      {authorised === 'true' ? (
+      {authorised.toString() === 'true' ? (
         <div className="header__registered-user">
           <p className="header__registered-user-email">{email}</p>
           <button
