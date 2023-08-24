@@ -3,25 +3,30 @@ import { createPortal } from 'react-dom';
 import { StyledHeader } from './Header.styled';
 import sprite from '../../../img/svg-sprite/sprite.svg';
 
+import { observer } from 'mobx-react-lite';
 import { useAuthStore } from '../../../store/AuthProvider';
 
-import Logo from './Logo';
-import Search from './Search';
+import Logo from './Logo/Logo';
+import Search from './SearchBar/Search';
 import UserBar from './UserBar';
 import UserModal from './UserModal/UserModal';
-import { observer } from 'mobx-react-lite';
+import useWindowSize from '../../../hooks/useWindowSize';
 
 const Header = observer(() => {
+  const { screen } = useWindowSize();
   const { email, authorised } = useAuthStore();
-  // console.log(authorised);
-  // console.log(localStorage.getItem('authorised'));
-
   const [showModal, setShowModal] = useState(false);
+
   return (
     <StyledHeader>
       <Logo />
       <Search />
       <UserBar />
+      {screen === 'mobile' && (
+        <svg width="20px" height="16px">
+          <use href={sprite + '#menu'} />
+        </svg>
+      )}
       <svg className="header-language-uk-icon" width="32px" height="32px">
         <use href={sprite + '#uk'} />
       </svg>
@@ -42,9 +47,10 @@ const Header = observer(() => {
           type="button"
           onClick={() => setShowModal(true)}
         >
-          Вхід для своїх
+          {screen === 'mobile' ? 'Вхід' : 'Вхід для своїх'}
         </button>
       )}
+
       {showModal &&
         createPortal(
           <UserModal onClose={() => setShowModal(false)} />,
