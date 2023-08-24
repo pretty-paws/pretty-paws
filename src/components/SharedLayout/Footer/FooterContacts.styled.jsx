@@ -1,17 +1,23 @@
 import styled from 'styled-components';
 
 export const StyledFooterContacts = styled.div`
-  flex: 1;
   & .footer-menu-title {
     color: var(--accent-color-blue);
-    margin-bottom: 25px;
+    margin-bottom: 8px;
     font-size: 18px;
     font-weight: 500;
-    line-height: 1.2;
+    line-height: 23.76px;
+
+    @media screen and (min-width: 834px) {
+      margin-bottom: 16px;
+    }
+
+    @media screen and (min-width: 1440px) {
+      margin-bottom: 25px;
+    }
   }
 
   & .footer-menu-phone {
-    margin-top: 27px;
     color: var(--font-color-black);
     font-size: 20px;
     font-style: normal;
@@ -38,7 +44,15 @@ export const StyledFooterContacts = styled.div`
 
   & .footer-contacts__social-bar {
     display: flex;
-    gap: 12px;
+    gap: 8px;
     margin-top: 27px;
+
+    @media screen and (min-width: 834px) {
+      gap: 8px;
+    }
+
+    @media screen and (min-width: 1440px) {
+      gap: 12px;
+    }
   }
 `;

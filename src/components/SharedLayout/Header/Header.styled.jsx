@@ -4,11 +4,24 @@ export const StyledHeader = styled.header`
   margin-top: 16px;
   display: flex;
   align-items: center;
-  gap: 37px;
+  justify-content: center;
+  gap: 30px;
+
+  @media screen and (min-width: 834px) {
+    gap: 37px;
+  }
 
   & .header-language-uk-icon {
-    border-radius: 100%;
-    cursor: pointer;
+    display: none;
+
+    @media screen and (min-width: 834px) {
+      display: block;
+      border-radius: 100%;
+      cursor: pointer;
+    }
+
+    @media screen and (min-width: 1440px) {
+    }
   }
 
   & .header__login-button {

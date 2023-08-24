@@ -1,5 +1,5 @@
 import React from 'react';
-import sprite from '../../../img/svg-sprite/sprite.svg';
+import sprite from '../../../../img/svg-sprite/sprite.svg';
 import { SearchBox } from './SearchStyled';
 
 const Search = () => {
