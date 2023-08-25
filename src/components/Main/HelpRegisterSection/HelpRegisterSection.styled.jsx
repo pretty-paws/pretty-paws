@@ -69,6 +69,7 @@ export const BackgroundContainer = styled.section`
       border-radius: 99px;
       width: 244px;
       padding: 12px 24px;
+      font-size: 16px;
     }
   }
 
