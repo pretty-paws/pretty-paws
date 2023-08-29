@@ -3,6 +3,7 @@ import sprite from '../../img/svg-sprite/sprite.svg';
 import { useForm } from 'react-hook-form';
 import { StyledLoginWithPhone } from './LoginWithPhone.styled';
 import { phoneRegExp } from '../../validation/regexp';
+import { phoneMessage } from '../../validation/messages';
 
 const LoginWithPhone = () => {
   const {
@@ -40,13 +41,13 @@ const LoginWithPhone = () => {
             {...register('phone_number', {
               pattern: {
                 value: phoneRegExp,
-                message: 'Введіть номер телефону у форматі +380 __ ___ __ __',
+                message: phoneMessage.pattern,
               },
-              required: `Будь ласка, введіть ваш номер телефону`,
-              maxLength: { value: 10, message: `Не більше 13 символів` },
+              required: phoneMessage.required,
+              maxLength: { value: 10, message: phoneMessage.maxLength },
               minLength: {
                 value: 10,
-                message: `Введіть номер у форматі +380 __ ___ __ __`,
+                message: phoneMessage.minLength,
               },
             })}
             aria-invalid={errors.phone_number ? 'true' : 'false'}
