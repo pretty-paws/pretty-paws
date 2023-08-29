@@ -8,6 +8,8 @@ import LoginWithPhone from './LoginWithPhone';
 import { SocialNetsAuth } from './SocialNetsAuth';
 import { useAuthStore } from '../../store/AuthProvider';
 import { observer } from 'mobx-react-lite';
+import { emailRegExp, passwordRegExp } from '../../validation/regexp';
+import { emailMessage, passwordMessage } from '../../validation/messages';
 
 const LogInBox = observer(() => {
   const { logIn, setRememberMe } = useAuthStore();
@@ -54,11 +56,11 @@ const LogInBox = observer(() => {
             type="email"
             {...register('email', {
               pattern: {
-                value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
-                message: 'Введіть адресу за зразком email@address.com',
+                value: emailRegExp,
+                message: emailMessage.pattern,
               },
-              required: `Будь ласка, введіть ваш email`,
-              maxLength: { value: 50, message: `Не більше 50 символів` },
+              required: emailMessage.required,
+              maxLength: { value: 50, message: emailMessage.maxLength },
             })}
             aria-invalid={errors.email ? 'true' : 'false'}
           />
@@ -75,15 +77,15 @@ const LogInBox = observer(() => {
             type={passwordVisibility ? 'text' : 'password'}
             {...register('password', {
               pattern: {
-                value: /^(?=.*[a-zA-Zа-яА-Я])(?=.*[0-9])[a-zA-Zа-яА-Я0-9]+$/,
-                message: 'Використайте хоча б одну велику літеру та число',
+                value: passwordRegExp,
+                message: passwordMessage.pattern,
               },
-              required: `Будь ласка, введіть ваш пароль`,
+              required: passwordMessage.required,
               minLength: {
                 value: 6,
-                message: `Введений пароль має бути довший за 6 символів`,
+                message: passwordMessage.minLength,
               },
-              maxLength: { value: 50, message: `Не більше 50 символів` },
+              maxLength: { value: 50, message: passwordMessage.maxLength },
             })}
             aria-invalid={errors.password ? 'true' : 'false'}
           />

@@ -30,6 +30,14 @@ export const loginUser = async data => {
   return result;
 };
 
+export const refreshUser = async () => {
+  const result = await axios.get(`/profile/me`);
+  axios.defaults.headers.common.Authorization = `Bearer ${
+    localStorage.getItem('token') || ''
+  }`;
+  return result;
+};
+
 export const logOut = async () => {
   axios.defaults.headers.common.Authorization = `Bearer ${
     localStorage.getItem('token') || ''

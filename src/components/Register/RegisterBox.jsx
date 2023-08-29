@@ -6,6 +6,21 @@ import { StyledRegisterBox } from './RegisterBox.styled';
 import { redirect } from 'react-router-dom';
 import { observer } from 'mobx-react-lite';
 import { useAuthStore } from '../../store/AuthProvider';
+import {
+  emailRegExp,
+  nameRegExp,
+  passwordRegExp,
+  phoneRegExp,
+} from '../../validation/regexp';
+import {
+  agreementMessage,
+  emailMessage,
+  nameMessage,
+  passwordConfirmMessage,
+  passwordMessage,
+  phoneMessage,
+  surNameMessage,
+} from '../../validation/messages';
 
 const RegisterBox = observer(() => {
   const { signUp, setEmail } = useAuthStore();
@@ -53,14 +68,14 @@ const RegisterBox = observer(() => {
             type="text"
             {...register('name', {
               pattern: {
-                value: /^[A-Za-zА-Яа-яІіЇїЄє' -]+$/,
-                message: 'Використовуйте лише літери',
+                value: nameRegExp,
+                message: nameMessage.pattern,
               },
-              required: `Будь ласка, введіть ваше ім'я`,
-              maxLength: { value: 20, message: `Оберіть коротше ім'я` },
+              required: nameMessage.required,
+              maxLength: { value: 20, message: nameMessage.maxLength },
               minLength: {
                 value: 2,
-                message: `Вкажіть ім'я більше 2 символів`,
+                message: nameMessage.minLength,
               },
             })}
             aria-invalid={errors.name ? 'true' : 'false'}
@@ -78,14 +93,14 @@ const RegisterBox = observer(() => {
             type="text"
             {...register('surname', {
               pattern: {
-                value: /^[A-Za-zА-Яа-яІіЇїЄє' -]+$/,
-                message: 'Використовуйте лише літери',
+                value: nameRegExp,
+                message: surNameMessage.pattern,
               },
-              required: `Будь ласка, введіть ваше прізвище`,
-              maxLength: { value: 20, message: `Оберіть коротше прізвище` },
+              required: surNameMessage.required,
+              maxLength: { value: 20, message: surNameMessage.maxLength },
               minLength: {
                 value: 2,
-                message: `Вкажіть прізвище більше 2 символів`,
+                message: surNameMessage.minLength,
               },
             })}
             aria-invalid={errors.surname ? 'true' : 'false'}
@@ -110,14 +125,14 @@ const RegisterBox = observer(() => {
             type="text"
             {...register('phone_number', {
               pattern: {
-                value: /^[0-9]{10}$/,
-                message: 'Введіть номер телефону у форматі +380 __ ___ __ __',
+                value: phoneRegExp,
+                message: phoneMessage.pattern,
               },
-              required: `Будь ласка, введіть ваш номер телефону`,
-              maxLength: { value: 10, message: `Не більше 13 символів` },
+              required: phoneMessage.required,
+              maxLength: { value: 10, message: phoneMessage.maxLength },
               minLength: {
                 value: 10,
-                message: `Введіть номер у форматі +380 __ ___ __ __`,
+                message: phoneMessage.minLength,
               },
             })}
             aria-invalid={errors.phone_number ? 'true' : 'false'}
@@ -135,12 +150,11 @@ const RegisterBox = observer(() => {
             type="email"
             {...register('email', {
               pattern: {
-                value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
-                message:
-                  'Введіть електронну адресу за зразком email@address.com',
+                value: emailRegExp,
+                message: emailMessage.pattern,
               },
-              required: `Будь ласка, введіть ваш email`,
-              maxLength: { value: 50, message: `Не більше 50 символів` },
+              required: emailMessage.required,
+              maxLength: { value: 50, message: emailMessage.maxLength },
             })}
             aria-invalid={errors.email ? 'true' : 'false'}
           />
@@ -160,7 +174,7 @@ const RegisterBox = observer(() => {
               )
                 setError('password_confirmation', {
                   type: 'manual',
-                  message: 'Паролі не збігаються',
+                  message: passwordMessage.notMatch,
                 });
               console.log(e.currentTarget.value);
             }}
@@ -168,16 +182,15 @@ const RegisterBox = observer(() => {
             type={passwordVisibility ? 'text' : 'password'}
             {...register('password', {
               pattern: {
-                value: /^(?=.*[a-zA-Zа-яА-Я])(?=.*[0-9])[a-zA-Zа-яА-Я0-9]+$/,
-                message:
-                  'Пароль повинен мати хоча б одну велику літеру та число',
+                value: passwordRegExp,
+                message: passwordMessage.pattern,
               },
-              required: `Будь ласка, введіть ваш пароль`,
+              required: passwordMessage.required,
               minLength: {
                 value: 6,
-                message: `Введений пароль має бути довший за 6 символів`,
+                message: passwordMessage.minLength,
               },
-              maxLength: { value: 50, message: `Не більше 50 символів` },
+              maxLength: { value: 50, message: passwordMessage.maxLength },
             })}
             aria-invalid={errors.password ? 'true' : 'false'}
           />
@@ -203,9 +216,9 @@ const RegisterBox = observer(() => {
             className="register-input"
             type={verificationVisibility ? 'text' : 'password'}
             {...register('password_confirmation', {
-              required: 'Будь ласка, підтвердіть пароль',
+              required: passwordConfirmMessage.required,
               validate: value =>
-                value === password || 'Введені паролі не збігаються.',
+                value === password || passwordConfirmMessage.notMatch,
             })}
             aria-invalid={errors.password_confirmation ? 'true' : 'false'}
           />
@@ -237,7 +250,7 @@ const RegisterBox = observer(() => {
               type="checkbox"
               placeholder="agree"
               {...register('agree', {
-                required: 'Ви маєте дати дозвіл на обробку даних',
+                required: agreementMessage.required,
               })}
             />
             <p className="register-agree">
