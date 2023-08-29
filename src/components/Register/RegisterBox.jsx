@@ -168,6 +168,9 @@ const RegisterBox = observer(() => {
           Пароль
           <input
             onInput={e => {
+              if (e.target.value.includes(' ')) {
+                e.target.value = e.target.value.replace(' ', '');
+              }
               if (
                 e.currentTarget.value !== password_confirmation &&
                 password_confirmation !== ''
@@ -213,6 +216,11 @@ const RegisterBox = observer(() => {
         <label className="register-label">
           Підтвердження пароля
           <input
+            onInput={e => {
+              if (e.target.value.includes(' ')) {
+                e.target.value = e.target.value.replace(' ', '');
+              }
+            }}
             className="register-input"
             type={verificationVisibility ? 'text' : 'password'}
             {...register('password_confirmation', {
