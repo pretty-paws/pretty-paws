@@ -32,6 +32,7 @@ export const loginUser = async data => {
 
 export const refreshUser = async () => {
   const result = await axios.get(`/profile/me`);
+  console.log(result);
   axios.defaults.headers.common.Authorization = `Bearer ${
     localStorage.getItem('token') || ''
   }`;

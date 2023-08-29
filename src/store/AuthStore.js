@@ -94,21 +94,18 @@ export class AuthStore {
     this.state = 'pending';
     try {
       const res = await refreshUser();
-      console.log(res);
-      if (res.data.success === false) {
-        localStorage.setItem('authorised', false);
-        localStorage.setItem('token', '');
-      }
-
-      runInAction(() => {
-        this.authorised === false;
-        this.rememberMe === false ? localStorage.removeItem('email') : null;
-        this.token === '';
-        this.state = 'done';
-      });
+      return res;
     } catch (error) {
       runInAction(() => {
         this.state = 'error';
+        if (error.response.status === 401) {
+          localStorage.setItem('authorised', false);
+          localStorage.setItem('token', '');
+          this.authorised === false;
+          this.rememberMe === false ? localStorage.removeItem('email') : null;
+          this.token === '';
+          this.state = 'done';
+        }
       });
     }
   }
