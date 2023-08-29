@@ -2,6 +2,7 @@ import { makeAutoObservable, runInAction } from 'mobx';
 import {
   loginUser,
   logOut,
+  refreshUser,
   registerUser,
   registerVerify,
 } from '../services/authAPI';
@@ -80,6 +81,29 @@ export class AuthStore {
         this.rememberMe === true
           ? localStorage.setItem('email', data.data.user.email)
           : null;
+        this.state = 'done';
+      });
+    } catch (error) {
+      runInAction(() => {
+        this.state = 'error';
+      });
+    }
+  }
+
+  async refresh() {
+    this.state = 'pending';
+    try {
+      const res = await refreshUser();
+      console.log(res);
+      if (res.data.success === false) {
+        localStorage.setItem('authorised', false);
+        localStorage.setItem('token', '');
+      }
+
+      runInAction(() => {
+        this.authorised === false;
+        this.rememberMe === false ? localStorage.removeItem('email') : null;
+        this.token === '';
         this.state = 'done';
       });
     } catch (error) {

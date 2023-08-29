@@ -2,6 +2,7 @@ import React from 'react';
 import sprite from '../../img/svg-sprite/sprite.svg';
 import { useForm } from 'react-hook-form';
 import { StyledLoginWithPhone } from './LoginWithPhone.styled';
+import { phoneRegExp } from '../../validation/regexp';
 
 const LoginWithPhone = () => {
   const {
@@ -38,7 +39,7 @@ const LoginWithPhone = () => {
             type="text"
             {...register('phone_number', {
               pattern: {
-                value: /^[0-9]{10}$/,
+                value: phoneRegExp,
                 message: 'Введіть номер телефону у форматі +380 __ ___ __ __',
               },
               required: `Будь ласка, введіть ваш номер телефону`,
