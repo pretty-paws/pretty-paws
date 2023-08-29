@@ -73,6 +73,11 @@ const LogInBox = observer(() => {
         <label className="login-label">
           Пароль
           <input
+            onInput={e => {
+              if (e.target.value.includes(' ')) {
+                e.target.value = e.target.value.replace(' ', '');
+              }
+            }}
             className="login-input"
             type={passwordVisibility ? 'text' : 'password'}
             {...register('password', {

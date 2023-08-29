@@ -3,10 +3,10 @@ import AppRouter from './components/AppRouter';
 import { useAuthStore } from './store/AuthProvider';
 
 const App = () => {
-  const { refresh } = useAuthStore();
+  const { refresh, authorised } = useAuthStore();
 
   useEffect(() => {
-    refresh();
+    authorised === 'true' && refresh();
   });
 
   return <AppRouter />;
