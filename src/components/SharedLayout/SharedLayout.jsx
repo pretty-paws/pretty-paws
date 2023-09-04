@@ -5,13 +5,15 @@ import { StyledWrapper } from '../../global/Wrapper';
 import Footer from './Footer/Footer';
 import Header from './Header/Header';
 import Navigation from './Navigation/Navigation';
+import useWindowSize from '../../hooks/useWindowSize';
 
 const SharedLayout = () => {
+  const { screen } = useWindowSize();
   return (
     <StyledWrapper>
       <GlobalContainer>
         <Header />
-        <Navigation />
+        {screen === 'desktop' && <Navigation />}
       </GlobalContainer>
       <Outlet />
       <Footer />

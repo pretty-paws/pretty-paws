@@ -1,8 +1,12 @@
 import styled from 'styled-components';
 export const GlobalContainer = styled.div`
   padding: 0 16px;
-  margin-left: auto;
-  margin-right: auto;
+
+  @media screen and (min-width: 375px) {
+    width: 375px;
+    margin-left: auto;
+    margin-right: auto;
+  }
 
   @media screen and (min-width: 834px) {
     padding: 0 40px;

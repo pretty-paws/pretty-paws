@@ -1,24 +1,24 @@
 import styled from 'styled-components';
 
 export const StyledNavigation = styled.div`
-  margin-top: 39px;
-  display: flex;
-  align-items: center;
+  position: relative;
+  margin: 35px 0 20px;
 
-  gap: 19.5px;
+  & .navigation-icon {
+    position: absolute;
+  }
 
   & .navigation-list {
     display: flex;
-    font-size: 18px;
+    font-size: 16px;
     color: var(--font-color-black);
     justify-content: space-between;
     align-items: center;
-    width: 100%;
+    padding-left: 30px;
   }
 
   & .navigation-list li {
     position: relative;
-    flex: 1;
     text-align: center;
     cursor: pointer;
 

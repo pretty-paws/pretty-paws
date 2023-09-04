@@ -10,9 +10,6 @@ const Logo = () => {
         <svg className="logo">
           <use href={sprite + '#logo'} />
         </svg>
-        <svg className="logo-mob" height="32px" width="76px">
-          <use href={sprite + '#logo-mob'} />
-        </svg>
       </Link>
     </StyledLogoContainer>
   );

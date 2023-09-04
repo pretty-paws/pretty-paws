@@ -57,12 +57,7 @@ export const publicRoutes = [
     Component: New,
   },
   {
-    name: 'Контакти',
-    path: CONTACT_ROUTE,
-    Component: Contact,
-  },
-  {
-    name: 'Доставка і оплата',
+    name: 'Доставка та оплата',
     path: DELIVERY_ROUTE,
     Component: Delivery,
   },
@@ -75,5 +70,10 @@ export const publicRoutes = [
     name: 'Блог',
     path: BLOG_ROUTE,
     Component: Blog,
+  },
+  {
+    name: 'Контакти',
+    path: CONTACT_ROUTE,
+    Component: Contact,
   },
 ];
