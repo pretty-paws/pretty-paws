@@ -6,15 +6,21 @@ import Footer from './Footer/Footer';
 import Header from './Header/Header';
 import Navigation from './Navigation/Navigation';
 import useWindowSize from '../../hooks/useWindowSize';
+import { useScrollDirection } from '../../hooks/useScrollDirection';
 
 const SharedLayout = () => {
   const { screen } = useWindowSize();
+  const scrollDirection = useScrollDirection();
   return (
     <StyledWrapper>
-      <GlobalContainer>
-        <Header />
-        {screen === 'desktop' && <Navigation />}
-      </GlobalContainer>
+      <header
+        className={`header ${scrollDirection === 'down' ? 'hide' : 'show'}`}
+      >
+        <GlobalContainer>
+          <Header />
+          {screen === 'desktop' && <Navigation />}
+        </GlobalContainer>
+      </header>
       <Outlet />
       <Footer />
     </StyledWrapper>

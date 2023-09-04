@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
-export const StyledHeader = styled.header`
-  margin-top: 16px;
+export const StyledHeader = styled.div`
+  margin-top: 20px;
   display: flex;
   flex-direction: column;
   gap: 24px;

@@ -9,6 +9,8 @@ ${normalize}
   --accent-color-beige: #E7A973;
   --accent-color-orange: #F64B15;
 
+  --background-color: #EFEFEF;
+
   --font-color-black: #111;
   --font-color-gray: #9e9e9e;
   --font-color-darkgray: #6C6C6C;
@@ -25,9 +27,56 @@ body {
   font-family: 'IBM Plex Sans', sans-serif;
   color: var(--font-color-black);
   background-color: #EFEFEF;
-  
- 
+    
 }
+
+.header {
+  position: sticky;
+  z-index: 100000;
+  top: 0px;
+  height: 150px;
+  background-color: var(--background-color);
+  transition-property: all; 
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 500ms;
+
+    @media screen and (min-width: 834px) {
+       height: 88px;
+  }
+
+  @media screen and (min-width: 1440px) {
+    height: 160px;
+  }
+}
+
+.header.show {
+  top: 0;
+}
+
+.header.hide {
+  top: -150px;
+
+    @media screen and (min-width: 834px) {
+      height: 88px;
+  }
+
+  @media screen and (min-width: 1440px) {
+    height: 160px;
+  }
+}
+
+.header .down {
+  top: -150px;
+
+    @media screen and (min-width: 834px) {
+      height: 88px;
+  }
+
+  @media screen and (min-width: 1440px) {
+    top: -160px;
+  }
+}
+
 
 li {
   list-style: none;
