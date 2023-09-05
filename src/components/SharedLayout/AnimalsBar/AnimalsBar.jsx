@@ -26,5 +26,5 @@ const AnimalsBar = ({ type }) => {
 export default AnimalsBar;
 
 AnimalsBar.propTypes = {
-  type: PropTypes.string.isRequired,
+  type: PropTypes.string,
 };
