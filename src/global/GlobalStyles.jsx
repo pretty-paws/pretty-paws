@@ -61,7 +61,7 @@ body {
 }
 
 .header.hide {
-  top: -150px;
+  top: -160px;
 
     @media screen and (min-width: 834px) {
       height: 88px;
