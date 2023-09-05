@@ -8,8 +8,8 @@ const Navigation = () => {
   return (
     <StyledNavigation>
       <NavLink to="/catalog">
-        <svg className="navigation-icon" width="15px" height="12px">
-          <use href={sprite + '#menu'} />
+        <svg className="navigation-icon" width="24px" height="24px">
+          <use href={sprite + '#arrow-down'} />
         </svg>
       </NavLink>
       <ul className="navigation-list">

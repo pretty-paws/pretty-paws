@@ -5,51 +5,42 @@ export const SearchBox = styled.div`
 
   & .search-box__search-icon {
     position: absolute;
-    width: 18px;
-    height: 18px;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    width: 24px;
+    height: 24px;
+    top: 13px;
+    left: 12px;
 
     @media screen and (min-width: 834px) {
-      top: 50%;
-      left: 20px;
+      top: 13px;
+      left: 14px;
     }
 
     @media screen and (min-width: 1440px) {
-      transform: none;
       top: 12px;
-      left: 24px;
-      width: 20px;
-      height: 20px;
+      left: 15px;
     }
   }
 
   & .search-box__input::placeholder {
-    font-size: 13px;
-    color: var(--accent-color-blue);
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--font-color-darkgray);
   }
 
   & .search-box__input {
-    width: 32px;
-    height: 32px;
+    width: 100%;
+    height: 48px;
     border-radius: 99px;
-    border: 1px solid #53c5bd;
+    border: none;
     outline: none;
-
-    &.search-box__input::placeholder {
-      color: transparent;
-    }
+    padding-left: 55px;
 
     @media screen and (min-width: 834px) {
-      width: 86px;
-      height: 34px;
+      width: 369px;
     }
 
     @media screen and (min-width: 1440px) {
-      padding: 12px 24px 12px 54px;
-      width: 413px;
-      height: 44px;
+      width: 460px;
     }
   }
 `;

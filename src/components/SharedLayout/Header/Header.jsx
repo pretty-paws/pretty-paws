@@ -19,36 +19,61 @@ const Header = observer(() => {
 
   return (
     <StyledHeader>
-      <Logo />
-      <Search />
-      <UserBar />
-      {screen === 'mobile' && (
-        <svg width="20px" height="16px">
-          <use href={sprite + '#menu'} />
-        </svg>
+      {screen !== 'desktop' && (
+        <>
+          <div className="header-menu-box">
+            <svg width="20px" height="16px">
+              <use href={sprite + '#menu'} />
+            </svg>
+            <Logo />
+            {screen === 'tablet' && <Search />}
+            <div className="header__basket">
+              <svg className="header__basket-icon" width="24px" height="24px">
+                <use href={sprite + '#basket'} />
+              </svg>
+              <span className="header__basket-badge">0</span>
+            </div>
+            <button
+              className="header__login-button"
+              type="button"
+              onClick={() => setShowModal(true)}
+            >
+              <svg className="header__profile-icon" width="24px" height="24px">
+                <use href={sprite + '#profile'} />
+              </svg>
+            </button>
+          </div>
+          {screen === 'mobile' && <Search />}
+        </>
       )}
-      <svg className="header-language-uk-icon" width="32px" height="32px">
-        <use href={sprite + '#uk'} />
-      </svg>
-      {authorised.toString() === 'true' ? (
-        <div className="header__registered-user">
-          <p className="header__registered-user-email">{email}</p>
-          <button
-            className="header__logout-button"
-            type="button"
-            onClick={() => setShowModal(true)}
-          >
-            Кабінет
-          </button>
+
+      {screen === 'desktop' && (
+        <div className="header-menu-box">
+          <Logo />
+          <Search />
+          <UserBar />
+
+          {authorised.toString() === 'true' ? (
+            <div className="header__registered-user">
+              <p className="header__registered-user-email">{email}</p>
+              <button
+                className="header__logout-button"
+                type="button"
+                onClick={() => setShowModal(true)}
+              >
+                Кабінет
+              </button>
+            </div>
+          ) : (
+            <button
+              className="header__login-button"
+              type="button"
+              onClick={() => setShowModal(true)}
+            >
+              Вхід для своїх
+            </button>
+          )}
         </div>
-      ) : (
-        <button
-          className="header__login-button"
-          type="button"
-          onClick={() => setShowModal(true)}
-        >
-          {screen === 'mobile' ? 'Вхід' : 'Вхід для своїх'}
-        </button>
       )}
 
       {showModal &&

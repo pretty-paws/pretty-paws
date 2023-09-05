@@ -2,14 +2,7 @@ import styled from 'styled-components';
 
 export const StyledUserBar = styled.div`
   display: flex;
-  gap: 15px;
-  @media screen and (min-width: 834px) {
-    gap: 32px;
-  }
-
-  @media screen and (min-width: 1440px) {
-    gap: 24px;
-  }
+  gap: 32px;
 
   & .user-bar__icon {
     width: 24px;
@@ -24,5 +17,30 @@ export const StyledUserBar = styled.div`
       width: 24px;
       height: 24px;
     }
+  }
+
+  & .user-bar-language-uk-icon {
+    border-radius: 100%;
+  }
+
+  & .user-bar__container {
+    position: relative;
+  }
+
+  & .user-bar__basket-badge {
+    position: absolute;
+    top: -17px;
+    right: -9px;
+
+    color: #0e2423;
+    font-size: 14px;
+    font-weight: 700;
+    text-align: center;
+    line-height: 1.2;
+
+    width: 18px;
+    height: 18px;
+    border-radius: 100px;
+    background-color: var(--accent-color-beige);
   }
 `;
