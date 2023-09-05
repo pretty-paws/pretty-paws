@@ -1,6 +1,6 @@
 import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
-import { authRoutes, publicRoutes } from '../routes';
+import { authRoutes, publicRoutes, routes } from '../routes';
 import Main from './Main/Main';
 // import { SHOP_ROUTE } from '../utils/consts';
 import SharedLayout from './SharedLayout/SharedLayout';
@@ -27,6 +27,9 @@ const AppRouter = () => {
         ))}
         {/* public routes */}
         {publicRoutes.map(({ path, Component }) => (
+          <Route key={path} path={path} element={<Component />} exact />
+        ))}
+        {routes.map(({ path, Component }) => (
           <Route key={path} path={path} element={<Component />} exact />
         ))}
         {/* Base navigate to home */}

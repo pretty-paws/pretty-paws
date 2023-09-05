@@ -19,8 +19,14 @@ import {
   CONTACT_ROUTE,
   DELIVERY_ROUTE,
   REGISTER_ROUTE,
+  FAVORITE_ROUTE,
+  COMPARISON_ROUTE,
+  CART_ROUTE,
   LOGIN_ROUTE,
 } from './utils/consts';
+import Favorite from './components/Favorite/Favorite';
+import Comparison from './components/Comparison/Comparison';
+import Cart from './components/Cart/Cart';
 
 // Описує  усі маршрути(роути) нашого додатку
 export const authRoutes = [
@@ -33,6 +39,24 @@ export const authRoutes = [
     name: 'Увійти',
     path: LOGIN_ROUTE,
     Component: LogInPage,
+  },
+];
+
+export const routes = [
+  {
+    name: 'Улюблені товари',
+    path: FAVORITE_ROUTE,
+    Component: Favorite,
+  },
+  {
+    name: 'Порівняння',
+    path: COMPARISON_ROUTE,
+    Component: Comparison,
+  },
+  {
+    name: 'Кошик',
+    path: CART_ROUTE,
+    Component: Cart,
   },
 ];
 export const publicRoutes = [

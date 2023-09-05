@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 export const StyledHero = styled.section`
   width: 100%;
-  /* margin-top: 24px; закоментувала непотрібний відступ*/
+  /* margin-top: 24px; */
   margin-bottom: 162px;
 
   & .swiper {

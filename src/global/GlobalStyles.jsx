@@ -15,6 +15,8 @@ ${normalize}
   --font-color-gray: #9e9e9e;
   --font-color-darkgray: #6C6C6C;
   --font-color-white: #FFF;
+
+  --transition: 250ms cubic-bezier(0.4, 0, 0.2, 1)
   
 }
 
@@ -27,6 +29,11 @@ body {
   font-family: 'IBM Plex Sans', sans-serif;
   color: var(--font-color-black);
   background-color: #EFEFEF;
+
+  &.menu-opened {
+  height: 100vh;
+  overflow-y: hidden;
+}
     
 }
 
@@ -34,7 +41,7 @@ body {
   position: sticky;
   z-index: 100000;
   top: 0px;
-  height: 150px;
+  height: 160px;
   background-color: var(--background-color);
   transition-property: all; 
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
