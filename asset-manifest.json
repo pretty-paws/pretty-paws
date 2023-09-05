@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/pretty-paws/static/css/main.969f830a.css",
-    "main.js": "/pretty-paws/static/js/main.ecb66d8a.js",
+    "main.js": "/pretty-paws/static/js/main.8b5e614a.js",
     "static/media/dog_desk_2x.webp": "/pretty-paws/static/media/dog_desk_2x.c00b5737802098274484.webp",
     "static/media/cat.png": "/pretty-paws/static/media/cat.ebd93b334839bf39fb6e.png",
     "static/media/cat_desk_2x.webp": "/pretty-paws/static/media/cat_desk_2x.ad48f413484df45ac23d.webp",
@@ -11,7 +11,7 @@
     "static/media/fish.jpg": "/pretty-paws/static/media/fish.4ab155c0665b989d5c25.jpg",
     "static/media/dog_desk_1x.webp": "/pretty-paws/static/media/dog_desk_1x.05134acb96d9b24777d1.webp",
     "static/media/cat_desk_1x.webp": "/pretty-paws/static/media/cat_desk_1x.eb8ff9f26edf0154d3ab.webp",
-    "static/media/sprite.svg": "/pretty-paws/static/media/sprite.19fb6b2a90f50df264ac3164ae1cdca0.svg",
+    "static/media/sprite.svg": "/pretty-paws/static/media/sprite.fe63a524bc68089455b4ad3d53936f8d.svg",
     "static/media/bird.jpg": "/pretty-paws/static/media/bird.b43d3c37adb4925f4502.jpg",
     "static/media/cat_mob_2x.webp": "/pretty-paws/static/media/cat_mob_2x.ee38d8ffa1458dcb4df1.webp",
     "static/media/cat_tab_1x.webp": "/pretty-paws/static/media/cat_tab_1x.bb3eae4a1ee98bcbefeb.webp",
@@ -26,10 +26,10 @@
     "static/media/telegram.svg": "/pretty-paws/static/media/telegram.2bd796c57b02f50c03c7a17ab9709619.svg",
     "index.html": "/pretty-paws/index.html",
     "main.969f830a.css.map": "/pretty-paws/static/css/main.969f830a.css.map",
-    "main.ecb66d8a.js.map": "/pretty-paws/static/js/main.ecb66d8a.js.map"
+    "main.8b5e614a.js.map": "/pretty-paws/static/js/main.8b5e614a.js.map"
   },
   "entrypoints": [
     "static/css/main.969f830a.css",
-    "static/js/main.ecb66d8a.js"
+    "static/js/main.8b5e614a.js"
   ]
 }
