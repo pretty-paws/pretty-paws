@@ -61,5 +61,5 @@ const UserBar = ({ setActive }) => {
 export default UserBar;
 
 UserBar.propTypes = {
-  setActive: PropTypes.func.isRequired,
+  setActive: PropTypes.func,
 };
