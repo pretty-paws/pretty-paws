@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { createPortal } from 'react-dom';
 import { StyledHeader } from './Header.styled';
 import sprite from '../../../img/svg-sprite/sprite.svg';
@@ -11,18 +12,37 @@ import Search from './SearchBar/Search';
 import UserBar from './UserBar';
 import UserModal from './UserModal/UserModal';
 import useWindowSize from '../../../hooks/useWindowSize';
+import BurgerMenu from '../BurgerMenu/BurgerMenu';
 
 const Header = observer(() => {
+  const [menuActive, setMenuActive] = useState(false);
   const { screen } = useWindowSize();
   const { email, authorised } = useAuthStore();
   const [showModal, setShowModal] = useState(false);
 
+  if (menuActive) {
+    document.body.classList.add('menu-opened');
+  } else {
+    document.body.classList.remove('menu-opened');
+  }
+
   return (
     <StyledHeader>
       {screen !== 'desktop' && (
+        <BurgerMenu
+          active={menuActive}
+          setActive={setMenuActive}
+          showModal={setShowModal}
+        />
+      )}
+      {screen !== 'desktop' && (
         <>
           <div className="header-menu-box">
-            <svg width="20px" height="16px">
+            <svg
+              width="20px"
+              height="16px"
+              onClick={() => setMenuActive(!menuActive)}
+            >
               <use href={sprite + '#menu'} />
             </svg>
             <Logo />
@@ -33,15 +53,21 @@ const Header = observer(() => {
               </svg>
               <span className="header__basket-badge">0</span>
             </div>
-            <button
-              className="header__login-button"
-              type="button"
-              onClick={() => setShowModal(true)}
-            >
-              <svg className="header__profile-icon" width="24px" height="24px">
-                <use href={sprite + '#profile'} />
-              </svg>
-            </button>
+            <Link to="/login">
+              <button
+                className="header__login-button"
+                type="button"
+                // onClick={() => setShowModal(true)}
+              >
+                <svg
+                  className="header__profile-icon"
+                  width="24px"
+                  height="24px"
+                >
+                  <use href={sprite + '#profile'} />
+                </svg>
+              </button>
+            </Link>
           </div>
           {screen === 'mobile' && <Search />}
         </>

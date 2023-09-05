@@ -2,10 +2,12 @@ import React from 'react';
 import { StyledAnimalsBar } from './AnimalsBar.styled';
 import { animalsSvg } from '../../../utils/animalBarSvgLinks';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
-const AnimalsBar = () => {
+const AnimalsBar = ({ type }) => {
+  console.log(type);
   return (
-    <StyledAnimalsBar>
+    <StyledAnimalsBar type={type}>
       {animalsSvg.map(item => {
         return (
           <Link to="/" key={item}>
@@ -22,3 +24,7 @@ const AnimalsBar = () => {
 };
 
 export default AnimalsBar;
+
+AnimalsBar.propTypes = {
+  type: PropTypes.string.isRequired,
+};

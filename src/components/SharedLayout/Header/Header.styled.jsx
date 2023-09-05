@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const StyledHeader = styled.div`
-  margin-top: 20px;
+  /* margin-top: 20px; */
   display: flex;
   flex-direction: column;
   gap: 24px;
@@ -12,6 +12,7 @@ export const StyledHeader = styled.div`
     justify-content: space-around;
 
     @media screen and (min-width: 834px) {
+      margin-top: 20px;
       justify-content: space-between;
     }
 

@@ -10,3 +10,7 @@ export const CONTACT_ROUTE = '/contact';
 export const DELIVERY_ROUTE = '/delivery';
 export const HELP_ROUTE = '/help';
 export const BLOG_ROUTE = '/blog';
+
+export const FAVORITE_ROUTE = '/favorite';
+export const COMPARISON_ROUTE = '/comparison';
+export const CART_ROUTE = '/cart';
