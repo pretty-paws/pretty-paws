@@ -14,7 +14,7 @@ const UserBar = ({ setActive }) => {
       <ToolTip text="Улюблені товари">
         <NavLink
           to="/favorite"
-          onClick={() => setActive(false)}
+          onClick={() => screen !== 'desktop' && setActive(false)}
           className={({ isActive }) => (isActive ? 'active-link' : '')}
         >
           <div className="user-bar__container">
@@ -30,7 +30,7 @@ const UserBar = ({ setActive }) => {
       <ToolTip text="Порівняти">
         <NavLink
           to="/comparison"
-          onClick={() => setActive(false)}
+          onClick={() => screen !== 'desktop' && setActive(false)}
           className={({ isActive }) => (isActive ? 'active-link' : '')}
         >
           <div className="user-bar__container">
@@ -47,7 +47,7 @@ const UserBar = ({ setActive }) => {
       <ToolTip className="user-bar__container" text="Корзина">
         <NavLink
           to="/cart"
-          onClick={() => setActive(false)}
+          onClick={() => screen !== 'desktop' && setActive(false)}
           className={({ isActive }) => (isActive ? 'active-link' : '')}
         >
           <div className="user-bar__container">
