@@ -1,15 +1,16 @@
 import React from 'react';
-import sprite from '../../img/svg-sprite/sprite.svg';
+// import sprite from '../../img/svg-sprite/sprite.svg';
 import { useForm } from 'react-hook-form';
 import { StyledLoginWithPhone } from './LoginWithPhone.styled';
 import { phoneRegExp } from '../../validation/regexp';
 import { phoneMessage } from '../../validation/messages';
+import sprite from '../../img/svg-sprite/sprite.svg';
 
 const LoginWithPhone = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isValid },
     reset,
   } = useForm({
     mode: 'onChange',
@@ -36,7 +37,11 @@ const LoginWithPhone = () => {
               }
               e.target.value = e.target.value.replace(/[^0-9+]/g, '');
             }}
-            className="login-input phone-input"
+            className={
+              errors.phone_number
+                ? 'login-input phone-input error'
+                : 'login-input phone-input'
+            }
             type="text"
             {...register('phone_number', {
               pattern: {
@@ -52,20 +57,22 @@ const LoginWithPhone = () => {
             })}
             aria-invalid={errors.phone_number ? 'true' : 'false'}
           />
+          {errors.phone_number && (
+            <svg className="error-icon" width="24px" height="24px">
+              <use href={sprite + '#error'} />
+            </svg>
+          )}
+          {errors.phone_number && (
+            <p role="alert" className="login-error">
+              {errors.phone_number.message}
+            </p>
+          )}
         </label>
-        {errors.phone_number && (
-          <p role="alert" className="login-error">
-            {errors.phone_number.message}
-          </p>
-        )}
 
         <div className="button-checkbox-container">
-          <button type="submit" className="login-button">
+          <button type="submit" className="login-button" disabled={!isValid}>
             Надіслати код підтвердження
           </button>
-          <svg className="login-arrow" width="36px" height="36px">
-            <use href={sprite + '#arrow'} />
-          </svg>
         </div>
       </form>
     </StyledLoginWithPhone>

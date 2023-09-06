@@ -1,6 +1,7 @@
 import React from 'react';
 import sprite from '../../img/svg-sprite/sprite.svg';
 import { useForm } from 'react-hook-form';
+import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { StyledLoginBox } from './LogInBox.styled';
 
@@ -10,9 +11,18 @@ import { useAuthStore } from '../../store/AuthProvider';
 import { observer } from 'mobx-react-lite';
 import { emailRegExp, passwordRegExp } from '../../validation/regexp';
 import { emailMessage, passwordMessage } from '../../validation/messages';
+import useWindowSize from '../../hooks/useWindowSize';
 
 const LogInBox = observer(() => {
+  const { screen } = useWindowSize();
   const { logIn, setRememberMe } = useAuthStore();
+
+  const getValueFromStorage = () => {
+    const value = localStorage.getItem('rememberMe');
+    if (value === 'true') return true;
+    if (value === 'false') return false;
+    return false;
+  };
 
   const [passwordVisibility, setPasswordVisibility] = useState(false);
 
@@ -26,12 +36,13 @@ const LogInBox = observer(() => {
     defaultValues: {
       email: localStorage.getItem('email') || '',
       password: '',
-      rememberMe: localStorage.getItem('rememberMe') || false,
+      rememberMe: getValueFromStorage(),
     },
   });
 
   const onRememberMeChange = e => {
     const isChecked = e.target.checked;
+
     localStorage.setItem('rememberMe', isChecked);
     setRememberMe(isChecked);
   };
@@ -45,6 +56,15 @@ const LogInBox = observer(() => {
   return (
     <StyledLoginBox>
       <h2 className="login-header">Вхід для своїх</h2>
+      {screen === 'mobile' && (
+        <p className="register-text">
+          Ще не маєш акаунту?{' '}
+          <Link to="/register">
+            <span className="register-phrase">Зареєструйся </span>
+          </Link>{' '}
+          та отримай 5% знижки на всі покупки
+        </p>
+      )}
       <p className="login-text">Увійти за номером телефону</p>
       <LoginWithPhone />
       <p className="login-text">Або увійти за ел. адресою</p>
@@ -52,8 +72,9 @@ const LogInBox = observer(() => {
         <label className="login-label">
           Електронна пошта
           <input
-            className="login-input"
+            className={errors.email ? 'login-input error' : 'login-input '}
             type="email"
+            placeholder="Електронна адреса"
             {...register('email', {
               pattern: {
                 value: emailRegExp,
@@ -64,12 +85,17 @@ const LogInBox = observer(() => {
             })}
             aria-invalid={errors.email ? 'true' : 'false'}
           />
+          {errors.email && (
+            <svg className="error-icon" width="24px" height="24px">
+              <use href={sprite + '#error'} />
+            </svg>
+          )}
+          {errors.email && (
+            <p role="alert" className="login-error">
+              {errors.email.message}
+            </p>
+          )}
         </label>
-        {errors.email && (
-          <p role="alert" className="login-error">
-            {errors.email.message}
-          </p>
-        )}
         <label className="login-label">
           Пароль
           <input
@@ -78,7 +104,8 @@ const LogInBox = observer(() => {
                 e.target.value = e.target.value.replace(' ', '');
               }
             }}
-            className="login-input"
+            placeholder="Пароль"
+            className={errors.password ? 'login-input error' : 'login-input '}
             type={passwordVisibility ? 'text' : 'password'}
             {...register('password', {
               pattern: {
@@ -104,19 +131,13 @@ const LogInBox = observer(() => {
               href={passwordVisibility ? sprite + '#eye' : sprite + '#eye-off'}
             />
           </svg>
+          {errors.password && (
+            <p role="alert" className="login-error">
+              {errors.password.message}
+            </p>
+          )}
         </label>
-        {errors.password && (
-          <p role="alert" className="login-error">
-            {errors.password.message}
-          </p>
-        )}
         <div className="button-checkbox-container">
-          <button type="submit" className="login-button" disabled={!isValid}>
-            Увійти
-          </button>
-          <svg className="login-button__icon" width="36px" height="36px">
-            <use href={sprite + '#arrow'} />
-          </svg>
           <div className="checkbox-container">
             <input
               className="login-checkbox"
@@ -127,10 +148,11 @@ const LogInBox = observer(() => {
             />
             <p className="login-agree">Запам’ятати мене</p>
           </div>
+          <p className="login-agree">Забули пароль?</p>
         </div>
-        <p role="alert" className="login-error">
-          {errors.agree?.message}
-        </p>
+        <button type="submit" className="login-button" disabled={!isValid}>
+          Увійти
+        </button>
       </form>
       <SocialNetsAuth title="Або увійти через" />
     </StyledLoginBox>

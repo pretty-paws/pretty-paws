@@ -21,6 +21,12 @@ export const StyledHeader = styled.div`
     }
   }
 
+  & .active-link .header__profile-icon,
+  .active-link .header__basket-icon {
+    fill: #53c5bd;
+    stroke: #53c5bd;
+  }
+
   & .header__login-button {
     padding: 6px;
     border-radius: 100px;
@@ -29,10 +35,27 @@ export const StyledHeader = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: all var(--transition);
 
-    &:focus-within {
+    &:hover .header__profile-icon {
+      fill: black;
+    }
+
+    /* &:focus-within {
       border-color: var(--accent-color-beige);
       color: var(--accent-color-beige);
+    } */
+
+    @media screen and (max-width: 1440px) {
+      &:hover::after {
+        content: '';
+        z-index: -2;
+        position: absolute;
+        width: 40px;
+        height: 40px;
+        border-radius: 100px;
+        background-color: #17d6c8;
+      }
     }
 
     @media screen and (min-width: 834px) {
@@ -52,11 +75,34 @@ export const StyledHeader = styled.div`
       color: #0e2423;
       background-color: #fff;
       white-space: nowrap;
+      transition: background-color var(--transition);
+
+      &:hover {
+        background: #17d6c8;
+        border-color: #17d6c8;
+      }
     }
   }
 
   & .header__basket {
     position: relative;
+
+    &:hover::after {
+      content: '';
+      z-index: -2;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      border-radius: 100px;
+      background: #17d6c8;
+    }
+  }
+
+  & .header__basket:hover .header__basket-icon {
+    fill: black;
   }
 
   & .header__basket-badge {

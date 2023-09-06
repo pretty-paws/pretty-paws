@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 // import { createPortal } from 'react-dom';
 import { StyledHeader } from './Header.styled';
 import sprite from '../../../img/svg-sprite/sprite.svg';
@@ -47,13 +47,21 @@ const Header = observer(() => {
             </svg>
             <Logo />
             {screen === 'tablet' && <Search />}
-            <div className="header__basket">
-              <svg className="header__basket-icon" width="24px" height="24px">
-                <use href={sprite + '#basket'} />
-              </svg>
-              <span className="header__basket-badge">0</span>
-            </div>
-            <Link to="/login">
+            <NavLink
+              to="/cart"
+              className={({ isActive }) => (isActive ? 'active-link' : '')}
+            >
+              <div className="header__basket">
+                <svg className="header__basket-icon" width="24px" height="24px">
+                  <use href={sprite + '#basket'} />
+                </svg>
+                <span className="header__basket-badge">0</span>
+              </div>
+            </NavLink>
+            <NavLink
+              to="/login"
+              className={({ isActive }) => (isActive ? 'active-link' : '')}
+            >
               <button
                 className="header__login-button"
                 type="button"
@@ -67,7 +75,7 @@ const Header = observer(() => {
                   <use href={sprite + '#profile'} />
                 </svg>
               </button>
-            </Link>
+            </NavLink>
           </div>
           {screen === 'mobile' && <Search />}
         </>
@@ -82,7 +90,7 @@ const Header = observer(() => {
           {authorised.toString() === 'true' ? (
             <div className="header__registered-user">
               <p className="header__registered-user-email">{email}</p>
-              <Link to="/login">
+              <NavLink to="/login">
                 <button
                   className="header__logout-button"
                   type="button"
@@ -90,10 +98,10 @@ const Header = observer(() => {
                 >
                   Кабінет
                 </button>
-              </Link>
+              </NavLink>
             </div>
           ) : (
-            <Link to="/login">
+            <NavLink to="/login">
               <button
                 className="header__login-button"
                 type="button"
@@ -101,7 +109,7 @@ const Header = observer(() => {
               >
                 Вхід для своїх
               </button>
-            </Link>
+            </NavLink>
           )}
         </div>
       )}
