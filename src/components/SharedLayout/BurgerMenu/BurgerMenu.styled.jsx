@@ -47,6 +47,10 @@ export const StyledBurger = styled.div`
     justify-content: space-between;
     align-items: center;
 
+    @media screen and (min-width: 834px) {
+      justify-content: space-around;
+    }
+
     &::after {
       content: '';
       position: absolute;

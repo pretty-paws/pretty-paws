@@ -12,7 +12,7 @@ const NewClient = () => {
       </p>
       <Link to="/register">
         <button type="button" className="new-client__button">
-          Реєстрація
+          Увійти
         </button>
       </Link>
       <SocialNetsAuth title="Або реєстрація через" />

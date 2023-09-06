@@ -1,53 +1,75 @@
 import styled from 'styled-components';
 
 export const StyledLoginBox = styled.div`
-  width: 534px;
+  width: 100%;
   display: flex;
   flex-direction: column;
-  margin: 45px 0 123px;
-  padding: 48px 98px 25px 98px;
-  border-radius: 14.573px;
-  border: 1.214px solid #cac4d0;
+  padding: 24px 16px 0;
   background: #fff;
 
-  &:hover {
-    box-shadow: 0px 6.622589588165283px 6.622589588165283px 0px
-      rgba(0, 0, 0, 0.25);
+  @media screen and (min-width: 834px) {
+    width: 50%;
+    border-radius: 8px;
+    padding: 48px 24px;
+  }
+
+  @media screen and (min-width: 1440px) {
+    padding: 48px 97px;
+  }
+
+  & .register-text {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
+    margin-bottom: 32px;
+  }
+
+  & .register-phrase {
+    color: var(--accent-color-darkblue);
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 20px;
+    text-decoration-line: underline;
   }
 
   & .login-header {
-    color: #000;
-    font-size: 30px;
-    font-weight: 700;
+    color: var(--font-color-black);
+    font-size: 24px;
+    font-weight: 500;
     line-height: 1.2;
-    margin-bottom: 24px;
+    margin-bottom: 32px;
+
+    @media screen and (min-width: 834px) {
+      font-size: 32px;
+      font-weight: 700;
+      line-height: 40px;
+    }
   }
 
   & .login-text {
-    color: #111;
-    font-size: 18px;
-    font-weight: 400;
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 24px;
   }
 
   & .login-label {
     position: relative;
     display: block;
-    margin-top: 24px;
-    color: var(--font-color-darkgray);
-    font-size: 13px;
+    margin-bottom: 40px;
+    color: var(--font-color-black);
+    font-size: 14px;
     font-weight: 400;
-    line-height: 1, 5;
+    line-height: 18px;
   }
 
   & .login-input {
     position: relative;
-    width: 317px;
     display: block;
-    margin-top: 6px;
-    padding: 10px 13px;
-    width: 317px;
-    height: 45px;
-    border-radius: 8.6px;
+    margin-top: 4px;
+    padding: 8px 8px;
+    width: 100%;
+    height: 40px;
+    border-radius: 8px;
     border: 1px solid var(--accent-color-blue);
     outline: none;
 
@@ -55,6 +77,10 @@ export const StyledLoginBox = styled.div`
     font-size: 13px;
     font-weight: 400;
     line-height: 1, 50;
+
+    @media screen and (min-width: 834px) {
+      padding: 4px 8px;
+    }
 
     &::-webkit-outer-spin-button,
     &::-webkit-inner-spin-button {
@@ -67,7 +93,7 @@ export const StyledLoginBox = styled.div`
 
     &::placeholder {
       color: var(--font-color-darkgray);
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 400;
       line-height: 1.5;
     }
@@ -79,21 +105,46 @@ export const StyledLoginBox = styled.div`
     right: 30px;
     cursor: pointer;
     background-color: #fff;
+
+    @media screen and (min-width: 834px) {
+      right: 10px;
+    }
   }
 
   & .login-error {
     position: absolute;
+    bottom: -18px;
+    left: 4px;
     color: var(--accent-color-orange);
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 400;
-    line-height: 1.5;
+    line-height: 16px;
+  }
+
+  & .login-input.error {
+    border: 2px solid var(--accent-color-orange);
+  }
+
+  & .error-icon {
+    position: absolute;
+    top: 30px;
+    right: 5px;
   }
 
   & .button-checkbox-container {
     position: relative;
-    margin-top: 23px;
+    margin: 40px 0 25px;
     display: flex;
-    gap: 41px;
+
+    align-items: center;
+    justify-content: space-between;
+
+    @media screen and (min-width: 834px) {
+      margin: 0 0 32px;
+    }
+
+    @media screen and (min-width: 1440px) {
+    }
   }
 
   & .login-button__icon {
@@ -105,25 +156,32 @@ export const StyledLoginBox = styled.div`
 
   & .checkbox-container {
     display: flex;
-    gap: 10px;
     align-items: center;
+    gap: 10px;
   }
 
   & .login-button {
-    padding-left: 24px;
-    text-align: left;
-    width: 136px;
-    height: 45px;
-    border-radius: 99px;
-    border: 1px solid var(--accent-color-blue);
+    padding: 16px 32px;
+    width: 100%;
+    height: 52px;
+    border-radius: 100px;
+    border: none;
     background: var(--accent-color-blue);
-    color: #fff;
-    font-size: 14px;
+    color: var(--font-color-black);
+    font-size: 16px;
     font-weight: 400;
-    line-height: 1.8;
+    line-height: 20px;
+    transition: background-color var(--transition);
+
+    &:hover {
+      background-color: var(--hover-blue);
+    }
+
     &:disabled {
+      border: 0;
+      opacity: 0.5;
       background: var(--font-color-darkgray);
-      /* color: black; */
+      color: var(--font-color-black);
     }
   }
 
@@ -134,10 +192,10 @@ export const StyledLoginBox = styled.div`
   }
 
   & .login-agree {
-    color: #17181a;
-    font-size: 11px;
+    color: var(--font-color-black);
+    font-size: 16px;
     font-weight: 400;
-    line-height: 1.77;
+    line-height: 20px;
   }
 
   & .login-personal-data {

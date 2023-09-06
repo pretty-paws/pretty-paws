@@ -2,16 +2,20 @@ import styled from 'styled-components';
 
 export const StyledSocialNetsAuthBox = styled.div`
   & .auth-text {
-    margin-top: 32px;
-    color: #111;
-    font-size: 18px;
-    font-weight: 400;
+    margin-top: 24px;
+    color: var(--font-color-black);
+    font-size: 20px;
+    font-weight: 500;
   }
 
   & .auth-icons-box {
-    margin: 25px 0 36px;
+    margin: 32px 0 24px;
     display: flex;
     gap: 32px;
+
+    @media screen and (min-width: 834px) {
+      margin: 32px 0 0;
+    }
   }
 
   & .auth-icons {

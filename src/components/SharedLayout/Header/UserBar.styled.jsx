@@ -22,6 +22,11 @@ export const StyledUserBar = styled.div`
     }
   }
 
+  & .active-link .user-bar__icon {
+    fill: #53c5bd;
+    stroke: #53c5bd;
+  }
+
   @media screen and (min-width: 834px) {
   }
 
@@ -40,8 +45,24 @@ export const StyledUserBar = styled.div`
     position: relative;
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 16px;
     cursor: pointer;
+
+    &:hover::after {
+      content: '';
+      z-index: -2;
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      border-radius: 100px;
+      background: #17d6c8;
+    }
+
+    &:hover .user-bar__icon {
+      fill: black;
+      /* stroke: black; */
+    }
   }
 
   & .menu__item {

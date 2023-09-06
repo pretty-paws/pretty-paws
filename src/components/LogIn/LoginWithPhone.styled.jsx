@@ -1,35 +1,40 @@
 import styled from 'styled-components';
 
 export const StyledLoginWithPhone = styled.div`
-  padding-bottom: 49px;
-  & .login-label {
-    position: relative;
-    display: block;
-    margin-top: 24px;
-    color: var(--font-color-darkgray);
-    font-size: 13px;
-    font-weight: 400;
-    line-height: 1, 5;
+  padding-bottom: 64px;
+  @media screen and (min-width: 834px) {
+    padding-bottom: 0;
   }
 
-  & .login__country-code {
-    position: absolute;
-    z-index: 2;
-    top: 34px;
-    left: 15px;
-    font-size: 13px;
+  @media screen and (min-width: 1440px) {
+  }
+
+  & .login-label {
+    color: var(--font-color-darkgray);
+    position: relative;
+    display: block;
+    font-size: 14px;
     font-weight: 400;
-    line-height: 1.5;
+    line-height: 18px;
+
+    @media screen and (min-width: 834px) {
+      font-size: 16px;
+      font-weight: 500;
+    }
+
+    @media screen and (min-width: 1440px) {
+      font-size: 14px;
+      font-weight: 400;
+    }
   }
 
   & .login-input {
-    width: 317px;
     display: block;
-    margin-top: 6px;
-    padding: 10px 13px;
-    width: 317px;
-    height: 45px;
-    border-radius: 8.6px;
+    margin-top: 4px;
+    padding: 8px 8px 8px 15px;
+    width: 100%;
+    height: 40px;
+    border-radius: 8px;
     border: 1px solid var(--accent-color-blue);
     outline: none;
 
@@ -37,6 +42,10 @@ export const StyledLoginWithPhone = styled.div`
     font-size: 13px;
     font-weight: 400;
     line-height: 1.5;
+
+    @media screen and (min-width: 834px) {
+      padding: 4px 8px 8px 15px;
+    }
 
     &::-webkit-outer-spin-button,
     &::-webkit-inner-spin-button {
@@ -54,53 +63,86 @@ export const StyledLoginWithPhone = styled.div`
       line-height: 1.5;
     }
   }
-  & .phone-input {
-    padding-left: 45px;
+
+  & .login__country-code {
+    position: absolute;
+    z-index: 2;
+    top: 36px;
+    left: 15px;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1;
+
+    @media screen and (min-width: 834px) {
+      top: 28px;
+      line-height: 2;
+    }
+
+    @media screen and (min-width: 1440px) {
+    }
+  }
+
+  & .login-input.phone-input {
+    padding-left: 40px;
+  }
+
+  & .login-input.phone-input.error {
+    border: 2px solid var(--accent-color-orange);
   }
 
   & .login-error {
+    position: absolute;
+    bottom: -20px;
     color: var(--accent-color-orange);
     font-size: 13px;
     font-weight: 400;
     line-height: 1.5;
   }
 
+  & .error-icon {
+    position: absolute;
+    top: 30px;
+    right: 5px;
+  }
+
   & .login-button {
-    padding-left: 30px;
-    width: 317px;
-    height: 45px;
-    border-radius: 99px;
+    padding: 16px 32px;
+    width: 100%;
+    height: 52px;
+    border-radius: 100px;
     border: 1px solid var(--accent-color-blue);
     background: var(--accent-color-blue);
-    color: #fff;
-    font-size: 14px;
+
+    text-align: center;
+    color: var(--font-color-black);
+    font-size: 16px;
     font-weight: 400;
-    line-height: 1.8;
-    text-align: left;
-    /* &:disabled {
+    line-height: 20px;
+    transition: background-color var(--transition);
+
+    &:disabled {
+      border: 0;
+      opacity: 0.5;
       background: var(--font-color-darkgray);
-      /* color: black; */
-    /* }  */
+      color: var(--font-color-black);
+    }
+
+    &:hover {
+      background-color: var(--hover-blue);
+    }
+
+    @media screen and (min-width: 834px) {
+      margin-bottom: 32px;
+    }
   }
 
   & .login-button::after {
     position: absolute;
-    bottom: -24px;
+    bottom: 0;
     left: 0;
     content: '';
-    width: 317px;
+    width: 100%;
     height: 1px;
-    background-color: #000;
-  }
-
-  & .button-checkbox-container {
-    position: relative;
-  }
-
-  & .login-arrow {
-    position: absolute;
-    top: 5px;
-    right: 60px;
-    cursor: pointer;
+    background-color: var(--font-color-darkgray);
   }
 `;
