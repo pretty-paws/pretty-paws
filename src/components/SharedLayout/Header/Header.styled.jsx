@@ -10,6 +10,7 @@ export const StyledHeader = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-around;
+    cursor: pointer;
 
     @media screen and (min-width: 834px) {
       margin-top: 20px;
@@ -21,10 +22,25 @@ export const StyledHeader = styled.div`
     }
   }
 
+  & .header-menu-icon:hover {
+    transition: fill var(--transition);
+  }
+  & .header-menu-icon:focus {
+    fill: var(--hover-blue);
+  }
+
   & .active-link .header__profile-icon,
   .active-link .header__basket-icon {
-    fill: #53c5bd;
-    stroke: #53c5bd;
+    fill: var(--hover-blue);
+    /* stroke: var(--hover-blue); */
+    transition: all var(--transition);
+  }
+
+  & .active-link .header__profile-icon:hover,
+  .active-link .header__basket-icon:hover {
+    fill: var(--font-color-black);
+    /* stroke: var(--font-color-black); */
+    transition: all var(--transition);
   }
 
   & .header__login-button {
@@ -37,14 +53,15 @@ export const StyledHeader = styled.div`
     align-items: center;
     transition: all var(--transition);
 
-    &:hover .header__profile-icon {
-      fill: black;
+    &:hover {
+      background: #17d6c8;
+      border-color: #17d6c8;
     }
 
-    /* &:focus-within {
-      border-color: var(--accent-color-beige);
-      color: var(--accent-color-beige);
-    } */
+    &:hover .header__profile-icon {
+      fill: var(--font-color-black);
+      /* stroke: var(--font-color-black); */
+    }
 
     @media screen and (max-width: 1440px) {
       &:hover::after {
@@ -76,11 +93,6 @@ export const StyledHeader = styled.div`
       background-color: #fff;
       white-space: nowrap;
       transition: background-color var(--transition);
-
-      &:hover {
-        background: #17d6c8;
-        border-color: #17d6c8;
-      }
     }
   }
 

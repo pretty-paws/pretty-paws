@@ -11,7 +11,6 @@ ${normalize}
   --accent-color-orange: #F64B15;
 
   --hover-blue: #17D6C8;
-
   --background-color: #EFEFEF;
 
   --font-color-black: #0E2423;

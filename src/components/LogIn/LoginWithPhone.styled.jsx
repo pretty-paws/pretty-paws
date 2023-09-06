@@ -138,11 +138,15 @@ export const StyledLoginWithPhone = styled.div`
 
   & .login-button::after {
     position: absolute;
-    bottom: 0;
+    bottom: -45px;
     left: 0;
     content: '';
     width: 100%;
     height: 1px;
     background-color: var(--font-color-darkgray);
+
+    @media screen and (min-width: 834px) {
+      bottom: 0;
+    }
   }
 `;

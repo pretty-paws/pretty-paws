@@ -45,7 +45,7 @@ export const StyledUserBar = styled.div`
     position: relative;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: left;
     gap: 16px;
     cursor: pointer;
 
@@ -53,10 +53,19 @@ export const StyledUserBar = styled.div`
       content: '';
       z-index: -2;
       position: absolute;
+      left: -8px;
       width: 40px;
       height: 40px;
       border-radius: 100px;
       background: #17d6c8;
+
+      @media screen and (min-width: 834px) {
+        left: -5px;
+      }
+
+      @media screen and (min-width: 1440px) {
+        left: -8px;
+      }
     }
 
     &:hover .user-bar__icon {
@@ -84,9 +93,6 @@ export const StyledUserBar = styled.div`
     height: 18px;
     border-radius: 100px;
     background-color: var(--accent-color-beige);
-
-    @media screen and (min-width: 834px) {
-    }
 
     @media screen and (min-width: 1440px) {
       top: -17px;

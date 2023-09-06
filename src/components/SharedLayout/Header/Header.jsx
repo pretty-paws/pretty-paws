@@ -39,12 +39,14 @@ const Header = observer(() => {
         <>
           <div className="header-menu-box">
             <svg
+              className="header-menu-icon"
               width="20px"
               height="16px"
               onClick={() => setMenuActive(!menuActive)}
             >
               <use href={sprite + '#menu'} />
             </svg>
+
             <Logo />
             {screen === 'tablet' && <Search />}
             <NavLink
