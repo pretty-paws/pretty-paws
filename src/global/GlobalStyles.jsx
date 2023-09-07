@@ -6,12 +6,14 @@ ${normalize}
 
 :root {
   --accent-color-blue: #53C5BD;
+  --accent-color-darkblue: #005A9A;
   --accent-color-beige: #E7A973;
   --accent-color-orange: #F64B15;
 
+  --hover-blue: #17D6C8;
   --background-color: #EFEFEF;
 
-  --font-color-black: #111;
+  --font-color-black: #0E2423;
   --font-color-gray: #9e9e9e;
   --font-color-darkgray: #6C6C6C;
   --font-color-white: #FFF;

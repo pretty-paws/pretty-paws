@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 const AnimalsBar = ({ type }) => {
-  console.log(type);
+  // console.log(type);
   return (
     <StyledAnimalsBar type={type}>
       {animalsSvg.map(item => {

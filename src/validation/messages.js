@@ -18,12 +18,12 @@ const VALIDATION_MESSAGES = {
     minLength: `Введіть номер у форматі +380 __ ___ __ __`,
   },
   emailMessage: {
-    pattern: 'Введіть електронну адресу за зразком email@address.com',
+    pattern: 'Введіть email за зразком email@address.com',
     required: `Будь ласка, введіть ваш email`,
     maxLength: `Не більше 50 символів`,
   },
   passwordMessage: {
-    pattern: 'Пароль повинен мати хоча б одну велику літеру та число',
+    pattern: 'Пароль повинен мати одну велику літеру та число',
     required: `Будь ласка, введіть ваш пароль`,
     minLength: `Введений пароль має бути довший за 6 символів`,
     maxLength: `Не більше 50 символів`,

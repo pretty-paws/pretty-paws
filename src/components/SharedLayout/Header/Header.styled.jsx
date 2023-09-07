@@ -10,6 +10,7 @@ export const StyledHeader = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-around;
+    cursor: pointer;
 
     @media screen and (min-width: 834px) {
       margin-top: 20px;
@@ -21,6 +22,27 @@ export const StyledHeader = styled.div`
     }
   }
 
+  & .header-menu-icon:hover {
+    transition: fill var(--transition);
+  }
+  & .header-menu-icon:focus {
+    fill: var(--hover-blue);
+  }
+
+  & .active-link .header__profile-icon,
+  .active-link .header__basket-icon {
+    fill: var(--hover-blue);
+    /* stroke: var(--hover-blue); */
+    transition: all var(--transition);
+  }
+
+  & .active-link .header__profile-icon:hover,
+  .active-link .header__basket-icon:hover {
+    fill: var(--font-color-black);
+    /* stroke: var(--font-color-black); */
+    transition: all var(--transition);
+  }
+
   & .header__login-button {
     padding: 6px;
     border-radius: 100px;
@@ -29,10 +51,28 @@ export const StyledHeader = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: all var(--transition);
 
-    &:focus-within {
-      border-color: var(--accent-color-beige);
-      color: var(--accent-color-beige);
+    &:hover {
+      background: #17d6c8;
+      border-color: #17d6c8;
+    }
+
+    &:hover .header__profile-icon {
+      fill: var(--font-color-black);
+      /* stroke: var(--font-color-black); */
+    }
+
+    @media screen and (max-width: 1440px) {
+      &:hover::after {
+        content: '';
+        z-index: -2;
+        position: absolute;
+        width: 40px;
+        height: 40px;
+        border-radius: 100px;
+        background-color: #17d6c8;
+      }
     }
 
     @media screen and (min-width: 834px) {
@@ -52,11 +92,29 @@ export const StyledHeader = styled.div`
       color: #0e2423;
       background-color: #fff;
       white-space: nowrap;
+      transition: background-color var(--transition);
     }
   }
 
   & .header__basket {
     position: relative;
+
+    &:hover::after {
+      content: '';
+      z-index: -2;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      border-radius: 100px;
+      background: #17d6c8;
+    }
+  }
+
+  & .header__basket:hover .header__basket-icon {
+    fill: black;
   }
 
   & .header__basket-badge {

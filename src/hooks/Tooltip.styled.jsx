@@ -5,7 +5,7 @@ export const StyledTooltip = styled.div`
 
   & .tooltip {
     position: absolute;
-    top: 30px;
+    top: 35px;
     left: -100%;
     padding: 4px 12px;
     justify-content: center;

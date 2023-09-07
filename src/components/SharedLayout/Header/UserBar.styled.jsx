@@ -22,6 +22,11 @@ export const StyledUserBar = styled.div`
     }
   }
 
+  & .active-link .user-bar__icon {
+    fill: #53c5bd;
+    stroke: #53c5bd;
+  }
+
   @media screen and (min-width: 834px) {
   }
 
@@ -40,8 +45,33 @@ export const StyledUserBar = styled.div`
     position: relative;
     display: flex;
     align-items: center;
+    justify-content: left;
     gap: 16px;
     cursor: pointer;
+
+    &:hover::after {
+      content: '';
+      z-index: -2;
+      position: absolute;
+      left: -8px;
+      width: 40px;
+      height: 40px;
+      border-radius: 100px;
+      background: #17d6c8;
+
+      @media screen and (min-width: 834px) {
+        left: -5px;
+      }
+
+      @media screen and (min-width: 1440px) {
+        left: -8px;
+      }
+    }
+
+    &:hover .user-bar__icon {
+      fill: black;
+      /* stroke: black; */
+    }
   }
 
   & .menu__item {
@@ -63,9 +93,6 @@ export const StyledUserBar = styled.div`
     height: 18px;
     border-radius: 100px;
     background-color: var(--accent-color-beige);
-
-    @media screen and (min-width: 834px) {
-    }
 
     @media screen and (min-width: 1440px) {
       top: -17px;

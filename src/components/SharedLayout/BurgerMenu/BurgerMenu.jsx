@@ -48,7 +48,10 @@ const BurgerMenu = ({ active, setActive }) => {
           </div>
 
           <div className="burger__main">
-            <div className="burger__catalogue">
+            <div
+              className="burger__catalogue"
+              onClick={() => setOpenedCatalogue(!openedCatalogue)}
+            >
               <svg
                 className={
                   openedCatalogue ? 'burger__arrow opened' : 'burger__arrow'
@@ -58,9 +61,7 @@ const BurgerMenu = ({ active, setActive }) => {
               >
                 <use href={sprite + '#arrow-down'} />
               </svg>
-              <p onClick={() => setOpenedCatalogue(!openedCatalogue)}>
-                Каталог товарів
-              </p>
+              <p>Каталог товарів</p>
             </div>
             {openedCatalogue && <AnimalsBar type="burger" />}
             {publicRoutes.slice(1).map(({ name, path }) => {

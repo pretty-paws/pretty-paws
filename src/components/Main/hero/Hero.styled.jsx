@@ -109,8 +109,8 @@ export const StyleAnimalsBar = styled.div`
     align-items: center;
     justify-content: center;
     border-radius: 100%;
-    background-color: #fff;
     pointer-events: none;
+    background-color: #fff;
   }
   & .animals-bar-text {
     color: #fff;

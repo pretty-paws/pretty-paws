@@ -1,42 +1,68 @@
 import styled from 'styled-components';
 
 export const StyledRegisterBox = styled.div`
-  width: 534px;
-  display: flex;
-  flex-direction: column;
-  margin: 45px 0 123px;
-  padding: 48px 98px 25px 98px;
-  border-radius: 14.573px;
-  border: 1.214px solid #cac4d0;
+  width: 100%;
   background: #fff;
+  padding: 24px 16px;
 
-  &:hover {
-    box-shadow: 0px 6.622589588165283px 6.622589588165283px 0px
-      rgba(0, 0, 0, 0.25);
+  @media screen and (min-width: 834px) {
+    width: 50%;
+    padding: 48px 24px;
+    margin-top: 24px;
+    border-radius: 8px;
+  }
+
+  @media screen and (min-width: 1440px) {
+    margin-top: 28px;
+    padding: 48px 97px;
+    border-radius: 8px;
+    background: #fff;
   }
 
   & .register-header {
     color: #000;
     font-size: 30px;
     font-weight: 700;
-    line-height: 1.2;
+    line-height: 40px;
     margin-bottom: 24px;
+
+    @media screen and (min-width: 834px) {
+      font-size: 32px;
+    }
+
+    @media screen and (min-width: 1440px) {
+      margin-bottom: 32px;
+    }
   }
 
   & .register-text {
-    color: #111;
-    font-size: 18px;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 20px;
+  }
+
+  & .login-text {
+    font-size: 16px;
     font-weight: 400;
+    line-height: 20px;
+    margin-bottom: 32px;
+  }
+
+  & .login-phrase {
+    color: var(--accent-color-darkblue);
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 20px;
+    text-decoration-line: underline;
   }
 
   & .register-label {
     position: relative;
     display: block;
-    margin-top: 24px;
-    color: var(--font-color-darkgray);
-    font-size: 13px;
+    margin-top: 28px;
+    font-size: 14px;
     font-weight: 400;
-    line-height: 1, 5;
+    line-height: 18px;
   }
 
   & .register__country-code {
@@ -50,13 +76,12 @@ export const StyledRegisterBox = styled.div`
   }
 
   & .register-input {
-    width: 317px;
+    width: 100%;
     display: block;
-    margin-top: 6px;
-    padding: 10px 13px;
-    width: 317px;
-    height: 45px;
-    border-radius: 8.6px;
+    margin-top: 4px;
+    padding: 4px 8px;
+    height: 40px;
+    border-radius: 8px;
     border: 1px solid var(--accent-color-blue);
     outline: none;
 
@@ -76,58 +101,96 @@ export const StyledRegisterBox = styled.div`
 
     &::placeholder {
       color: var(--font-color-darkgray);
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 400;
-      line-height: 1.5;
+      line-height: 19.5px;
     }
   }
 
-  & .phone-input {
+  /* & .phone-input {
     padding-left: 45px;
-  }
+  } */
 
   & .register-icon-eye {
     position: absolute;
     background-color: #fff;
     top: 30px;
-    right: 30px;
+    right: 6px;
     cursor: pointer;
   }
 
   & .register-error {
     position: absolute;
+    bottom: -18px;
+    left: 4px;
     color: var(--accent-color-orange);
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 400;
-    line-height: 1.5;
+    line-height: 16px;
+  }
+
+  & .register-input.error {
+    border: 2px solid var(--accent-color-orange);
+  }
+
+  & .error-icon {
+    position: absolute;
+    top: 30px;
+    right: 5px;
   }
 
   & .button-checkbox-container {
-    margin-top: 23px;
+    margin-top: 24px;
+    margin-bottom: 52px;
     display: flex;
+    flex-direction: column;
     gap: 41px;
   }
 
   & .checkbox-container {
+    position: relative;
     display: flex;
     gap: 10px;
     align-items: center;
+    margin-top: 32px;
   }
 
   & .register-button {
-    width: 136px;
-    height: 45px;
+    position: relative;
+    width: 100%;
+    padding: 16px 32px;
+    height: 52px;
     border-radius: 99px;
     border: 1px solid var(--accent-color-blue);
     background: var(--accent-color-blue);
-    color: #fff;
-    font-size: 14px;
+
+    font-size: 16px;
     font-weight: 400;
-    line-height: 1.8;
-    &:disabled {
-      background: var(--font-color-darkgray);
-      /* color: black; */
+    line-height: 20px;
+    transition: background-color var(--transition);
+
+    &:hover {
+      background-color: var(--hover-blue);
     }
+    &:disabled,
+    &:disabled:hover,
+    &:disabled:focus,
+    &:disabled:focus-within {
+      border: 0;
+      opacity: 0.5;
+      background: var(--font-color-darkgray);
+      color: var(--font-color-black);
+    }
+  }
+
+  & .register-button::after {
+    position: absolute;
+    bottom: -30px;
+    left: 0;
+    content: '';
+    width: 100%;
+    height: 1px;
+    background-color: var(--font-color-darkgray);
   }
 
   & .register-checkbox {
@@ -137,13 +200,13 @@ export const StyledRegisterBox = styled.div`
   }
 
   & .register-agree {
-    color: #17181a;
-    font-size: 11px;
+    font-size: 14px;
     font-weight: 400;
-    line-height: 1.77;
+    line-height: 21px;
   }
 
   & .register-personal-data {
     text-decoration-line: underline;
+    cursor: pointer;
   }
 `;

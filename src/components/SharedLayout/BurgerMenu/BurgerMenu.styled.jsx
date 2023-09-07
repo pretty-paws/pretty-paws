@@ -46,6 +46,12 @@ export const StyledBurger = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 0 8px;
+
+    @media screen and (min-width: 834px) {
+      justify-content: space-around;
+      padding: 0;
+    }
 
     &::after {
       content: '';
@@ -60,6 +66,7 @@ export const StyledBurger = styled.div`
 
   & .burger-language-uk-icon {
     border-radius: 100%;
+    cursor: pointer;
   }
   & .burger__login-button {
     padding: 16px 32px;
@@ -78,9 +85,13 @@ export const StyledBurger = styled.div`
     }
 
     &:focus-within {
-      border-color: var(--accent-color-beige);
-      color: var(--accent-color-beige);
+      border-color: var(--hover-blue);
+      background-color: var(--hover-blue);
     }
+  }
+
+  & .burger-close-icon {
+    cursor: pointer;
   }
 
   & .burger__user-bar {
@@ -102,6 +113,7 @@ export const StyledBurger = styled.div`
     display: flex;
     align-items: center;
     gap: 8px;
+    cursor: pointer;
   }
 
   & .burger__arrow {

@@ -1,53 +1,69 @@
 import styled from 'styled-components';
 
 export const StyledNewClient = styled.div`
-  width: 364px;
-  height: 466px;
+  width: 50%;
+  height: fit-content;
   display: flex;
   flex-direction: column;
-  margin: 45px 0 123px;
-  padding: 45px 40px 32px;
-  border-radius: 14.573px;
-  border: 1.214px solid #cac4d0;
+  margin: 0;
+  padding: 48px 24px;
+  border-radius: 8px;
+  border: none;
   background: #fff;
 
-  &:hover {
-    box-shadow: 0px 6.622589588165283px 6.622589588165283px 0px
-      rgba(0, 0, 0, 0.25);
+  @media screen and (min-width: 1440px) {
+    padding: 48px 97px;
   }
 
   & .new-client__header {
-    color: #000;
-    font-size: 30px;
+    color: var(--font-color-black);
+    font-size: 32px;
     font-weight: 700;
-    line-height: 1.2;
-    margin-bottom: 35px;
+    line-height: 40px;
+    margin-bottom: 32px;
   }
 
   & .new-client__text {
-    padding-bottom: 24px;
-    color: #111;
-    font-size: 18px;
+    margin-bottom: 32px;
+    color: var(--font-color-black);
+    font-size: 16px;
     font-weight: 400;
   }
 
   & .new-client__button {
-    width: 284px;
-    height: 45px;
-    border-radius: 99px;
+    position: relative;
+    width: 100%;
+    height: 52px;
+    margin-bottom: 42px;
+    padding: 16px 32px;
+    border-radius: 100px;
     border: 1px solid var(--accent-color-blue);
     background: var(--accent-color-blue);
-    color: #fff;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 400;
-    line-height: 1.8;
+    line-height: 20px;
+    transition: background-color var(--transition);
+
+    &:hover {
+      background-color: var(--hover-blue);
+    }
+  }
+
+  & .new-client__button::after {
+    position: absolute;
+    bottom: -32px;
+    left: 0;
+    content: '';
+    width: 100%;
+    height: 1px;
+    background-color: var(--font-color-darkgray);
   }
 
   & .new-client__agree {
-    color: #111;
-    font-size: 11px;
+    margin: 50px 0 0;
+    font-size: 12px;
     font-weight: 400;
-    line-height: 1.77;
+    line-height: 16px;
   }
 
   & .new-client__agreement {
