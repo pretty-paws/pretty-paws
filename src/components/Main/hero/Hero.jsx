@@ -21,6 +21,9 @@ import 'swiper/css/pagination';
 import { StyledHero, StyleAnimalsBar } from './Hero.styled';
 import { GlobalContainer } from '../../../global/GlobalContainer';
 
+import useWindowSize from '../../../hooks/useWindowSize';
+import HeroMobile from './HeroMobile';
+
 const animalsData = [
   { index: 1, icon: 'cat', text: 'Коти', img: imgCat },
   { index: 2, icon: 'dog', text: 'Собаки', img: imgDog },
@@ -33,7 +36,7 @@ const animalsData = [
 const Hero = () => {
   const [swiper, setSwiper] = useState(null);
   const paginationRef = useRef(null);
-
+  const { screen } = useWindowSize();
   const renderCustom = (swiper, current) => {
     return ReactDOMServer.renderToStaticMarkup(
       animalsData.map(animal => (
@@ -55,7 +58,6 @@ const Hero = () => {
       ))
     );
   };
-  console.log(swiper);
   const handlePaginationItemClick = event => {
     const clickedElement = event.target;
     const paginationItems = paginationRef.current.querySelectorAll(
@@ -68,7 +70,7 @@ const Hero = () => {
       }
     });
   };
-
+  console.log(screen === 'mobile');
   useEffect(() => {
     if (paginationRef.current && swiper) {
       paginationRef.current.addEventListener(
@@ -76,8 +78,6 @@ const Hero = () => {
         handlePaginationItemClick
       );
     }
-    console.log(swiper);
-    console.log('ff');
 
     return () => {
       if (paginationRef.current && swiper) {
@@ -89,41 +89,47 @@ const Hero = () => {
     };
   }, [swiper]);
   return (
-    <StyledHero>
-      <Swiper
-        onSwiper={swiper => setSwiper(swiper)}
-        allowTouchMove={false}
-        pagination={{
-          el: paginationRef.current,
-          clickable: true,
-          type: 'custom',
-          renderCustom,
-        }}
-        // autoplay={{
-        //   delay: 10000,
-        //   disableOnInteraction: false,
-        // }}
-        speed={1500}
-        modules={[Pagination, Autoplay]}
-        className="mySwiper"
-      >
-        {animalsData.map(animal => (
-          <SwiperSlide key={animal.index}>
-            <div className="hero-content">
-              <img src={animal.img} alt={animal.text} />
-              <CategoryType />
-            </div>
-          </SwiperSlide>
-        ))}
-        <GlobalContainer>
-          <div
-            onClick={handlePaginationItemClick}
-            ref={paginationRef}
-            className="pagination-container"
-          ></div>
-        </GlobalContainer>
-      </Swiper>
-    </StyledHero>
+    <>
+      {screen !== 'mobile' && (
+        <StyledHero>
+          <Swiper
+            onSwiper={swiper => setSwiper(swiper)}
+            allowTouchMove={false}
+            pagination={{
+              el: paginationRef.current,
+              clickable: true,
+              type: 'custom',
+              renderCustom,
+            }}
+            autoplay={{
+              delay: 10000,
+              disableOnInteraction: false,
+            }}
+            speed={1500}
+            modules={[Pagination, Autoplay]}
+            className="mySwiper"
+          >
+            {animalsData.map(animal => (
+              <SwiperSlide key={animal.index}>
+                <div className="hero-content">
+                  <img src={animal.img} alt={animal.text} />
+                  <CategoryType />
+                </div>
+              </SwiperSlide>
+            ))}
+            <GlobalContainer>
+              <div
+                onClick={handlePaginationItemClick}
+                ref={paginationRef}
+                className="pagination-container"
+              ></div>
+            </GlobalContainer>
+          </Swiper>
+        </StyledHero>
+      )}
+
+      {screen === 'mobile' && <HeroMobile />}
+    </>
   );
 };
 

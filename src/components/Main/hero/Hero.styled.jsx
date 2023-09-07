@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 export const StyledHero = styled.section`
   width: 100%;
-  /* margin-top: 24px; */
   margin-bottom: 162px;
 
   & .swiper {
@@ -20,7 +19,11 @@ export const StyledHero = styled.section`
     width: 100%;
     object-fit: cover;
     object-position: 50% 50%;
-    max-height: 450px;
+    max-height: 380px;
+
+    @media screen and (min-width: 834px) {
+      max-height: 450px;
+    }
   }
 
   & .pagination-container {

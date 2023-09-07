@@ -1,10 +1,15 @@
 import styled from 'styled-components';
 export const StyledCategoryType = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  display: none;
+
+  @media screen and (min-width: 834px) {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: block;
+  }
 `;
 export const StyledCategoryTypeContainer = styled.div`
   display: flex;
