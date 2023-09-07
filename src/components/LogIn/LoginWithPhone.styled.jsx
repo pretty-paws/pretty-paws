@@ -64,7 +64,7 @@ export const StyledLoginWithPhone = styled.div`
     }
   }
 
-  & .login__country-code {
+  /* & .login__country-code {
     position: absolute;
     z-index: 2;
     top: 36px;
@@ -80,11 +80,11 @@ export const StyledLoginWithPhone = styled.div`
 
     @media screen and (min-width: 1440px) {
     }
-  }
+  } */
 
-  & .login-input.phone-input {
+  /* & .login-input.phone-input {
     padding-left: 40px;
-  }
+  } */
 
   & .login-input.phone-input.error {
     border: 2px solid var(--accent-color-orange);

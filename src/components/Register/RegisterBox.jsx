@@ -1,11 +1,13 @@
 import React from 'react';
 import sprite from '../../img/svg-sprite/sprite.svg';
+import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
 import { StyledRegisterBox } from './RegisterBox.styled';
 import { redirect } from 'react-router-dom';
 import { observer } from 'mobx-react-lite';
 import { useAuthStore } from '../../store/AuthProvider';
+import useWindowSize from '../../hooks/useWindowSize';
 import {
   emailRegExp,
   nameRegExp,
@@ -21,10 +23,12 @@ import {
   phoneMessage,
   surNameMessage,
 } from '../../validation/messages';
+import { SocialNetsAuth } from '../LogIn/SocialNetsAuth';
 
 const RegisterBox = observer(() => {
   const { signUp, setEmail } = useAuthStore();
-
+  const { screen } = useWindowSize();
+  const [phoneFocused, setPhoneFocused] = useState(false);
   const [passwordVisibility, setPasswordVisibility] = useState(false);
   const [verificationVisibility, setVerificationVisibility] = useState(false);
   const {
@@ -39,13 +43,14 @@ const RegisterBox = observer(() => {
     defaultValues: {
       name: '',
       surname: '',
-      phone_number: ``,
+      phone_number: `+380`,
       email: '',
       password: '',
       password_confirmation: '',
     },
   });
 
+  const phone_number = watch('phone_number', '');
   const password = watch('password', '');
   const password_confirmation = watch('password_confirmation', '');
 
@@ -59,12 +64,23 @@ const RegisterBox = observer(() => {
   return (
     <StyledRegisterBox>
       <h2 className="register-header">Реєстрація</h2>
+      {screen === 'mobile' && (
+        <p className="login-text">
+          Уже маєш акаунт?
+          <Link to="/login">
+            {' '}
+            <span className="login-phrase">Увійти</span>
+          </Link>{' '}
+          та користуйся усіма доступними перевагами.
+        </p>
+      )}
       <p className="register-text">Введіть свої дані:</p>
       <form onSubmit={handleSubmit(onSubmit)}>
         <label className="register-label">
           Ім’я
           <input
-            className="register-input"
+            className={errors.name ? 'register-input error' : 'register-input'}
+            placeholder="Ім’я"
             type="text"
             {...register('name', {
               pattern: {
@@ -80,17 +96,25 @@ const RegisterBox = observer(() => {
             })}
             aria-invalid={errors.name ? 'true' : 'false'}
           />
+          {errors.name && (
+            <svg className="error-icon" width="24px" height="24px">
+              <use href={sprite + '#error'} />
+            </svg>
+          )}
+          {errors.name && (
+            <p role="alert" className="register-error">
+              {errors.name.message}
+            </p>
+          )}
         </label>
-        {errors.name && (
-          <p role="alert" className="register-error">
-            {errors.name.message}
-          </p>
-        )}
         <label className="register-label">
           Прізвище
           <input
-            className="register-input"
+            className={
+              errors.surname ? 'register-input error' : 'register-input '
+            }
             type="text"
+            placeholder="Прізвище"
             {...register('surname', {
               pattern: {
                 value: nameRegExp,
@@ -105,49 +129,69 @@ const RegisterBox = observer(() => {
             })}
             aria-invalid={errors.surname ? 'true' : 'false'}
           />
+          {errors.surname && (
+            <svg className="error-icon" width="24px" height="24px">
+              <use href={sprite + '#error'} />
+            </svg>
+          )}
+          {errors.surname && (
+            <p role="alert" className="register-error">
+              {errors.surname.message}
+            </p>
+          )}
         </label>
-        {errors.surname && (
-          <p role="alert" className="register-error">
-            {errors.surname.message}
-          </p>
-        )}
         <label className="register-label">
           Телефон
-          <div className="register__country-code">+38</div>
           <input
+            onFocus={() => setPhoneFocused(true)}
+            onBlur={() => setPhoneFocused(false)}
             onInput={e => {
-              if (e.target.value.includes('+38')) {
-                e.target.value = e.target.value.replace(/[+38]/g, '');
-              }
+              // if (e.target.value.includes('+38')) {
+              //   e.target.value = e.target.value.replace(/[+38]/g, '');
+              // }
               e.target.value = e.target.value.replace(/[^0-9+]/g, '');
             }}
-            className="register-input phone-input "
+            className={
+              errors.phone_number
+                ? 'register-input phone-input error'
+                : 'register-input phone-input '
+            }
             type="text"
+            placeholder={phoneFocused ? '' : '+380__ ___ ___'}
+            value={phoneFocused ? phone_number : ''}
             {...register('phone_number', {
               pattern: {
                 value: phoneRegExp,
                 message: phoneMessage.pattern,
               },
               required: phoneMessage.required,
-              maxLength: { value: 10, message: phoneMessage.maxLength },
+              maxLength: { value: 13, message: phoneMessage.maxLength },
               minLength: {
-                value: 10,
+                value: 13,
                 message: phoneMessage.minLength,
               },
             })}
             aria-invalid={errors.phone_number ? 'true' : 'false'}
           />
+          {errors.phone_number && (
+            <svg className="error-icon" width="24px" height="24px">
+              <use href={sprite + '#error'} />
+            </svg>
+          )}
+          {errors.phone_number && (
+            <p role="alert" className="register-error">
+              {errors.phone_number.message}
+            </p>
+          )}
         </label>
-        {errors.phone_number && (
-          <p role="alert" className="register-error">
-            {errors.phone_number.message}
-          </p>
-        )}
         <label className="register-label">
           Електронна пошта
           <input
-            className="register-input"
+            className={
+              errors.email ? 'register-input error' : 'register-input  '
+            }
             type="email"
+            placeholder="Електронна адреса"
             {...register('email', {
               pattern: {
                 value: emailRegExp,
@@ -158,12 +202,17 @@ const RegisterBox = observer(() => {
             })}
             aria-invalid={errors.email ? 'true' : 'false'}
           />
+          {errors.email && (
+            <svg className="error-icon" width="24px" height="24px">
+              <use href={sprite + '#error'} />
+            </svg>
+          )}
+          {errors.email && (
+            <p role="alert" className="register-error">
+              {errors.email.message}
+            </p>
+          )}
         </label>
-        {errors.email && (
-          <p role="alert" className="register-error">
-            {errors.email.message}
-          </p>
-        )}
         <label className="register-label">
           Пароль
           <input
@@ -179,9 +228,12 @@ const RegisterBox = observer(() => {
                   type: 'manual',
                   message: passwordMessage.notMatch,
                 });
-              console.log(e.currentTarget.value);
+              // console.log(e.currentTarget.value);
             }}
-            className="register-input"
+            className={
+              errors.password ? 'register-input error' : 'register-input  '
+            }
+            placeholder="Пароль"
             type={passwordVisibility ? 'text' : 'password'}
             {...register('password', {
               pattern: {
@@ -207,12 +259,12 @@ const RegisterBox = observer(() => {
               href={passwordVisibility ? sprite + '#eye' : sprite + '#eye-off'}
             />
           </svg>
+          {errors.password && (
+            <p role="alert" className="register-error ">
+              {errors.password.message}
+            </p>
+          )}
         </label>
-        {errors.password && (
-          <p role="alert" className="register-error">
-            {errors.password.message}
-          </p>
-        )}
         <label className="register-label">
           Підтвердження пароля
           <input
@@ -221,7 +273,12 @@ const RegisterBox = observer(() => {
                 e.target.value = e.target.value.replace(' ', '');
               }
             }}
-            className="register-input"
+            className={
+              errors.password_confirmation
+                ? 'register-input error'
+                : 'register-input  '
+            }
+            placeholder="Пароль"
             type={verificationVisibility ? 'text' : 'password'}
             {...register('password_confirmation', {
               required: passwordConfirmMessage.required,
@@ -242,38 +299,37 @@ const RegisterBox = observer(() => {
               }
             />
           </svg>
+          {errors.password_confirmation && (
+            <p role="alert" className="register-error">
+              {errors.password_confirmation.message}
+            </p>
+          )}
         </label>
-        {errors.password_confirmation && (
-          <p role="alert" className="register-error">
-            {errors.password_confirmation.message}
+        <div className="checkbox-container">
+          <input
+            className="register-checkbox"
+            type="checkbox"
+            placeholder="agree"
+            {...register('agree', {
+              required: agreementMessage.required,
+            })}
+          />
+          <p className="register-agree">
+            Я згоден з обробкою
+            <span className="register-personal-data"> персональних данних</span>
           </p>
-        )}
+          <p role="alert" className="register-error">
+            {errors.agree?.message}
+          </p>
+        </div>
         <div className="button-checkbox-container">
           <button type="submit" className="register-button" disabled={!isValid}>
             Зареєструватися
           </button>
-          <div className="checkbox-container">
-            <input
-              className="register-checkbox"
-              type="checkbox"
-              placeholder="agree"
-              {...register('agree', {
-                required: agreementMessage.required,
-              })}
-            />
-            <p className="register-agree">
-              Я згоден з обробкою
-              <span className="register-personal-data">
-                {' '}
-                персональних данних
-              </span>
-            </p>
-          </div>
         </div>
-        <p role="alert" className="register-error">
-          {errors.agree?.message}
-        </p>
       </form>
+
+      <SocialNetsAuth title="Або реєстрація через" />
     </StyledRegisterBox>
   );
 });
