@@ -1,53 +1,56 @@
 import styled from 'styled-components';
 
 export const StyledAlreadyRegisteredBox = styled.div`
-  width: 364px;
-  height: 466px;
+  width: 50%;
+  padding: 48px 24px;
+  margin-top: 24px;
+  border-radius: 8px;
   display: flex;
   flex-direction: column;
-  margin: 45px 0 123px;
-  padding: 45px 40px 32px;
-  border-radius: 14.573px;
-  border: 1.214px solid #cac4d0;
   background: #fff;
+  height: fit-content;
 
-  &:hover {
-    box-shadow: 0px 6.622589588165283px 6.622589588165283px 0px
-      rgba(0, 0, 0, 0.25);
+  @media screen and (min-width: 1440px) {
+    margin-top: 28px;
+    padding: 48px 97px;
   }
 
   & .already-registered-header {
     color: #000;
-    font-size: 30px;
+    font-size: 32px;
     font-weight: 700;
-    line-height: 1.2;
-    margin-bottom: 35px;
-  }
-
-  & .already-registered-button-container {
-    position: relative;
-  }
-
-  & .already-registered-icon {
-    position: absolute;
-    top: 5px;
-    left: 75px;
-    cursor: pointer;
+    line-height: 40px;
+    margin-bottom: 32px;
   }
 
   & .already-registered-button {
-    margin-bottom: 30px;
-    padding-left: 24px;
-    width: 136px;
-    height: 45px;
+    position: relative;
+    margin-bottom: 40px;
+    width: 100%;
+    padding: 16px 32px;
+    height: 52px;
     border-radius: 99px;
     border: 1px solid var(--accent-color-blue);
     background: var(--accent-color-blue);
-    color: #fff;
-    text-align: left;
-    font-size: 14px;
+    text-align: center;
+    font-size: 16px;
     font-weight: 400;
-    line-height: 1.8;
+    line-height: 20px;
+    transition: background-color var(--transition);
+
+    &:hover {
+      background-color: var(--hover-blue);
+    }
+  }
+
+  & .already-registered-button::after {
+    position: absolute;
+    bottom: -32px;
+    left: 0;
+    content: '';
+    width: 100%;
+    height: 1px;
+    background-color: var(--font-color-darkgray);
   }
 
   & .already-registered-text {
@@ -58,10 +61,15 @@ export const StyledAlreadyRegisteredBox = styled.div`
   }
 
   & .already-registered-agree {
+    margin-top: 50px;
     color: #111;
     font-size: 11px;
     font-weight: 400;
     line-height: 1.77;
+
+    @media screen and (min-width: 1440px) {
+      font-size: 12px;
+    }
   }
 
   & .already-registered-agreement {

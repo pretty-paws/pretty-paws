@@ -173,15 +173,18 @@ export const StyledLoginBox = styled.div`
     line-height: 20px;
     transition: background-color var(--transition);
 
-    &:hover {
-      background-color: var(--hover-blue);
-    }
-
-    &:disabled {
+    &:disabled,
+    &:disabled:hover,
+    &:disabled:focus,
+    &:disabled:focus-within {
       border: 0;
       opacity: 0.5;
       background: var(--font-color-darkgray);
       color: var(--font-color-black);
+    }
+
+    &:hover {
+      background-color: var(--hover-blue);
     }
   }
 

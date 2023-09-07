@@ -13,13 +13,13 @@ axios.defaults.headers.common.Authorization = `Bearer ${
 
 export const registerUser = async data => {
   const result = await axios.post(`/auth/sign-up`, data);
-  console.log(result);
+  // console.log(result);
   return result;
 };
 
 export const registerVerify = async code => {
   const result = await axios.post(`/auth/sign-up/verify`, code);
-  console.log(result);
+  // console.log(result);
   return result;
 };
 
@@ -32,7 +32,7 @@ export const loginUser = async data => {
 
 export const refreshUser = async () => {
   const result = await axios.get(`/profile/me`);
-  console.log(result);
+  // console.log(result);
   axios.defaults.headers.common.Authorization = `Bearer ${
     localStorage.getItem('token') || ''
   }`;
@@ -44,5 +44,6 @@ export const logOut = async () => {
     localStorage.getItem('token') || ''
   }`;
   const result = await axios.post(`/auth/sign-out`);
-  console.log(result);
+  return result;
+  // console.log(result);
 };

@@ -55,7 +55,7 @@ const Hero = () => {
       ))
     );
   };
-  console.log(swiper);
+  // console.log(swiper);
   const handlePaginationItemClick = event => {
     const clickedElement = event.target;
     const paginationItems = paginationRef.current.querySelectorAll(
@@ -76,8 +76,8 @@ const Hero = () => {
         handlePaginationItemClick
       );
     }
-    console.log(swiper);
-    console.log('ff');
+    // console.log(swiper);
+    // console.log('ff');
 
     return () => {
       if (paginationRef.current && swiper) {
