@@ -1,4 +1,5 @@
 import { makeAutoObservable, runInAction } from 'mobx';
+import toast from 'react-hot-toast';
 import {
   loginUser,
   logOut,
@@ -42,6 +43,17 @@ export class AuthStore {
         this.state = 'done';
       });
     } catch (error) {
+      toast.error(error.message, {
+        style: {
+          border: '1px solid #713200',
+          padding: '16px',
+          color: '#713200',
+        },
+        iconTheme: {
+          primary: '#713200',
+          secondary: '#FFFAEE',
+        },
+      });
       runInAction(() => {
         this.state = 'error';
       });
@@ -61,6 +73,7 @@ export class AuthStore {
         this.state = 'done';
       });
     } catch (error) {
+      toast.error(error.message);
       runInAction(() => {
         this.state = 'error';
       });
@@ -84,6 +97,18 @@ export class AuthStore {
         this.state = 'done';
       });
     } catch (error) {
+      // console.log(error.response.data.error.password[0]);
+      toast.error(error.response.data.error.email, {
+        style: {
+          border: '1px solid #713200',
+          padding: '16px',
+          color: '#713200',
+        },
+        iconTheme: {
+          primary: '#713200',
+          secondary: '#FFFAEE',
+        },
+      });
       runInAction(() => {
         this.state = 'error';
       });
@@ -96,6 +121,7 @@ export class AuthStore {
       const res = await refreshUser();
       return res;
     } catch (error) {
+      toast.error(error.message);
       runInAction(() => {
         this.state = 'error';
         if (error.response.status === 401) {
@@ -127,6 +153,17 @@ export class AuthStore {
         this.state = 'done';
       });
     } catch (error) {
+      toast.error(error.message, {
+        style: {
+          border: '1px solid #713200',
+          padding: '16px',
+          color: '#713200',
+        },
+        iconTheme: {
+          primary: '#713200',
+          secondary: '#FFFAEE',
+        },
+      });
       runInAction(() => {
         this.state = 'error';
       });

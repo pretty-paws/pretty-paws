@@ -14,7 +14,7 @@ import cat_mob_1x from '../../../img/help-register-bg/cat_mob_1x.webp';
 import cat_mob_2x from '../../../img/help-register-bg/cat_mob_2x.webp';
 
 export const BackgroundContainer = styled.section`
-  padding: 49px 0;
+  padding-top: 126px;
   text-align: left;
   color: #fff;
 
@@ -26,76 +26,101 @@ export const BackgroundContainer = styled.section`
   }
 
   .container {
-    width: 50%;
+    text-align: left;
+
+    @media screen and (min-width: 834px) {
+      width: 45%;
+    }
+  }
+
+  @media screen and (max-width: 833px) {
+    &::before {
+      content: '';
+      z-index: 0;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(14, 36, 35, 0.5);
+      z-index: 1;
+    }
   }
 
   .title {
-    font-size: 25px;
-    font-weight: 500;
-    line-height: 33px;
+    position: relative;
+    z-index: 1;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 32px;
+    margin-bottom: 24px;
 
     @media screen and (min-width: 834px) {
-      font-size: 30px;
+      font-size: 32px;
       font-weight: 700;
-      line-height: 36px;
+      line-height: 40px;
     }
   }
 
   .text {
-    margin: 16px 0;
-    font-size: 14px;
+    position: relative;
+    z-index: 1;
+    margin-bottom: 40px;
+    font-size: 16px;
     font-weight: 400;
-    line-height: 18.48px;
+    line-height: 20px;
+
     @media screen and (min-width: 834px) {
-      font-size: 16px;
-      font-weight: 500;
-      line-height: 21.12px;
+      font-size: 20px;
+      font-weight: 400;
+      line-height: 24px;
     }
   }
 
   .button {
-    width: 164px;
-    padding: 8px 16px;
+    position: relative;
+    z-index: 1;
+    margin-bottom: 126px;
+    width: 240px;
+    height: 52px;
+    padding: 16px 32px;
     border: 0;
-    border-radius: 66px;
+    border-radius: 100px;
     background: var(--accent-color-blue);
 
-    color: #fff;
-    font-size: 10px;
+    font-size: 16px;
     font-weight: 500;
-    line-height: 14.195px;
+    line-height: 20px;
 
     @media screen and (min-width: 834px) {
-      border-radius: 99px;
-      width: 244px;
-      padding: 12px 24px;
+      width: 240px;
+      padding: 16px 32px;
       font-size: 16px;
     }
   }
 
-  height: 262px;
-  background-size: cover;
-  background-position: center;
-  background-image: ${props =>
+  height: 420px;
+  position: relative;
+
+  background: ${props =>
     props.type === 'dog'
-      ? `url(${dog_mob_1x})`
+      ? ` url(${dog_mob_1x}) center/cover no-repeat`
       : props.type === 'cat'
-      ? `url(${cat_mob_1x})`
+      ? `url(${cat_mob_1x}) center/cover no-repeat`
       : 'none'};
 
-  background-repeat: no-repeat;
   @media (min-device-pixel-ratio: 2),
     (min-resolution: 192dpi),
     (min-resolution: 2dppx) {
-    background-image: ${props =>
+    background: ${props =>
       props.type === 'dog'
-        ? `url(${dog_mob_2x})`
+        ? ` url(${dog_mob_2x}) center/cover no-repeat`
         : props.type === 'cat'
-        ? `url(${cat_mob_2x})`
+        ? ` url(${cat_mob_2x}) center/cover no-repeat`
         : 'none'};
   }
   @media (min-width: 834px) {
-    height: 352px;
+    height: 430px;
     background-size: cover;
     background-position: center;
     background-image: ${props =>
@@ -116,7 +141,7 @@ export const BackgroundContainer = styled.section`
           : 'none'};
     }
     @media (min-width: 1440px) {
-      height: 352px;
+      height: 429px;
       background-size: cover;
       background-position: center;
       background-image: ${props =>

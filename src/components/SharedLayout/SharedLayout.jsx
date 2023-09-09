@@ -7,6 +7,7 @@ import Header from './Header/Header';
 import Navigation from './Navigation/Navigation';
 import useWindowSize from '../../hooks/useWindowSize';
 import { useScrollDirection } from '../../hooks/useScrollDirection';
+import { Toaster } from 'react-hot-toast';
 
 const SharedLayout = () => {
   const { screen } = useWindowSize();
@@ -22,6 +23,7 @@ const SharedLayout = () => {
         </GlobalContainer>
       </header>
       <Outlet />
+      <Toaster position="top-right" reverseOrder={true} />
       <Footer />
     </StyledWrapper>
   );

@@ -11,9 +11,14 @@ export const StyleTitle = styled.div`
 
   /* H_2 */
   h2 {
-    color: #111;
-    font-size: 28px;
+    font-size: 24px;
     font-weight: 700;
-    line-height: 132%; /* 36.96px */
+    line-height: 32px;
+    margin-bottom: 60px;
+
+    @media screen and (min-width: 834px) {
+      font-size: 32px;
+      line-height: 40px;
+    }
   }
 `;
