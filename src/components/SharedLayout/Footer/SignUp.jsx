@@ -14,14 +14,21 @@ const SignUp = observer(() => {
         <div className="sign-up__container">
           <p className="sign-up__title">Підписатися на акції для</p>
           <AnimalsBar />
-          <div className="sign-up-input__box">
+          <div
+            className={
+              authorised === true
+                ? 'sign-up-input__box active'
+                : 'sign-up-input__box'
+            }
+          >
             <input
               className="sign-up-input"
               type="email"
               placeholder="E-mail"
               defaultValue={authorised === true ? email : ''}
             />
-            <svg className="sign-up-icon" width="20px" height="17px">
+
+            <svg className="sign-up-icon" width="24px" height="24px">
               <use href={sprite + '#subscribe'} />
             </svg>
           </div>

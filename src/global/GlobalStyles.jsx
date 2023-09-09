@@ -41,7 +41,7 @@ body {
 
 .header {
   position: sticky;
-  z-index: 100000;
+  z-index: 1000;
   top: 0px;
   height: 160px;
   background-color: var(--background-color);

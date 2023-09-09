@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-// import { createPortal } from 'react-dom';
+import { createPortal } from 'react-dom';
 import { StyledHeader } from './Header.styled';
 import sprite from '../../../img/svg-sprite/sprite.svg';
 
@@ -10,7 +10,7 @@ import { useAuthStore } from '../../../store/AuthProvider';
 import Logo from './Logo/Logo';
 import Search from './SearchBar/Search';
 import UserBar from './UserBar';
-// import UserModal from './UserModal/UserModal';
+import UserModal from './UserModal/UserModal';
 import useWindowSize from '../../../hooks/useWindowSize';
 import BurgerMenu from '../BurgerMenu/BurgerMenu';
 
@@ -18,7 +18,7 @@ const Header = observer(() => {
   const [menuActive, setMenuActive] = useState(false);
   const { screen } = useWindowSize();
   const { email, authorised } = useAuthStore();
-  // const [showModal, setShowModal] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   if (menuActive) {
     document.body.classList.add('menu-opened');
@@ -32,7 +32,7 @@ const Header = observer(() => {
         <BurgerMenu
           active={menuActive}
           setActive={setMenuActive}
-          // showModal={setShowModal}
+          showModal={setShowModal}
         />
       )}
       {screen !== 'desktop' && (
@@ -61,13 +61,12 @@ const Header = observer(() => {
               </div>
             </NavLink>
             <NavLink
-              to="/login"
               className={({ isActive }) => (isActive ? 'active-link' : '')}
             >
               <button
                 className="header__login-button"
                 type="button"
-                // onClick={() => setShowModal(true)}
+                onClick={() => setShowModal(true)}
               >
                 <svg
                   className="header__profile-icon"
@@ -92,22 +91,22 @@ const Header = observer(() => {
           {authorised.toString() === 'true' ? (
             <div className="header__registered-user">
               <p className="header__registered-user-email">{email}</p>
-              <NavLink to="/login">
+              <NavLink>
                 <button
                   className="header__logout-button"
                   type="button"
-                  // onClick={() => setShowModal(true)}
+                  onClick={() => setShowModal(true)}
                 >
                   Кабінет
                 </button>
               </NavLink>
             </div>
           ) : (
-            <NavLink to="/login">
+            <NavLink>
               <button
                 className="header__login-button"
                 type="button"
-                // onClick={() => setShowModal(true)}
+                onClick={() => setShowModal(true)}
               >
                 Вхід для своїх
               </button>
@@ -116,11 +115,11 @@ const Header = observer(() => {
         </div>
       )}
 
-      {/* {showModal &&
+      {showModal &&
         createPortal(
           <UserModal onClose={() => setShowModal(false)} />,
           document.body
-        )} */}
+        )}
     </StyledHeader>
   );
 });

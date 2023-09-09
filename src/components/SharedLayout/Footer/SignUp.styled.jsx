@@ -4,54 +4,66 @@ export const StyledSignUp = styled.section`
   background-color: var(--accent-color-blue);
 
   & .sign-up__container {
-    height: 129px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 8px;
+    gap: 16px;
 
     @media screen and (min-width: 834px) {
-      flex-direction: row;
       align-items: center;
       justify-content: center;
-      gap: 21px;
+      gap: 24px;
     }
 
     @media screen and (min-width: 1440px) {
-      gap: 23px;
+      flex-direction: row;
+      flex: 1;
+      gap: 45px;
+      justify-content: center;
+      align-items: center;
     }
   }
 
   & .sign-up__title {
-    font-size: 28px;
+    margin-top: 48px;
+    font-size: 24px;
     font-weight: 500;
-    color: var(--font-color-white);
+    line-height: 32px;
 
     @media screen and (min-width: 834px) {
+      margin-top: 40px;
     }
 
     @media screen and (min-width: 1440px) {
-      font-size: 30px;
-      font-weight: 700;
+      margin-top: 0;
     }
   }
 
   & .sign-up-input__box {
     position: relative;
-    width: 343px;
+    width: 100%;
+    /* width: 343px; */
+
+    @media screen and (min-width: 834px) {
+      width: 55%;
+    }
   }
 
   & .sign-up-input {
-    width: 343px;
-    height: 35px;
-    padding-left: 11px;
-    border-radius: 30px;
+    margin-top: 16px;
+    margin-bottom: 48px;
+    width: 100%;
+    height: 60px;
+    padding: 12px 16px;
+    border-radius: 28px;
     border: 0px;
     background: #fff;
     outline: none;
 
     @media screen and (min-width: 834px) {
-      width: 278px;
+      margin-top: 12px;
+      margin-bottom: 36px;
+      /* width: 278px; */
       height: 61px;
       padding-left: 30px;
     }
@@ -63,10 +75,9 @@ export const StyledSignUp = styled.section`
   }
 
   & .sign-up-input::placeholder {
-    font-size: 10px;
+    font-size: 16px;
     font-weight: 500;
-    color: var(--accent-color-blue);
-    line-height: 12.415px;
+    line-height: 20px;
 
     @media screen and (min-width: 834px) {
       font-size: 16px;
@@ -78,19 +89,14 @@ export const StyledSignUp = styled.section`
 
   & .sign-up-icon {
     position: absolute;
-    width: 11.756px;
-    height: 9.993px;
     z-index: 2;
-    right: 17px;
-    top: 13px;
-
+    right: 18px;
+    top: 33px;
     cursor: pointer;
 
     @media screen and (min-width: 834px) {
-      width: 20px;
-      height: 17px;
-      right: 28px;
-      top: 22px;
+      right: 20px;
+      top: 30px;
     }
 
     @media screen and (min-width: 1440px) {
@@ -102,20 +108,24 @@ export const StyledSignUp = styled.section`
 
   & .sign-up-input__box::after {
     position: absolute;
-    right: 0;
-    top: 50%;
-    transform: translate(-50%, -50%);
+    right: 10px;
+    top: 25px;
     z-index: 1;
     content: '';
-    width: 23.5px;
-    height: 23.5px;
-    background-color: var(--accent-color-orange);
+    width: 40px;
+    height: 40px;
+    background-color: var(--accent-color-beige);
     border-radius: 100%;
     cursor: pointer;
+    transition: background-color var(--transition);
+
+    &:hover {
+      background-color: var(--hover-blue);
+    }
 
     @media screen and (min-width: 834px) {
-      width: 40px;
-      height: 40px;
+      right: 13px;
+      top: 22px;
     }
 
     @media screen and (min-width: 1440px) {
