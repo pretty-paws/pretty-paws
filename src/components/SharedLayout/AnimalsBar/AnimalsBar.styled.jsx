@@ -17,7 +17,7 @@ export const StyledAnimalsBar = styled.div`
 
   @media screen and (min-width: 1440px) {
     /* flex: 1; */
-    /* width: 345px; */
+    /* width: max-content; */
     gap: 16px;
   }
 
