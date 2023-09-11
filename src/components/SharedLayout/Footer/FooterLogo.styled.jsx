@@ -1,33 +1,35 @@
 import styled from 'styled-components';
 
 export const StyledFooterLogo = styled.div`
+  text-align: center;
+
+  @media screen and (min-width: 834px) {
+    text-align: left;
+  }
+
+  @media screen and (min-width: 1440px) {
+    flex: 1;
+  }
+
   .footer__logo {
-    width: 176px;
-    height: 32px;
-    @media screen and (min-width: 834px) {
-    }
+    width: 177px;
+    height: 30px;
 
     @media screen and (min-width: 1440px) {
-      width: 255px;
-      height: 46px;
+      width: 170px;
+      height: 32px;
     }
   }
 
   .footer__logo-text {
-    margin-top: 9px;
-    margin-bottom: 19px;
-    color: #111;
-    font-size: 16px;
-    font-weight: 500;
-    line-height: 21.12px;
-
-    @media screen and (min-width: 834px) {
-      max-width: 172px;
-      margin-top: 11px;
-      margin-bottom: 0;
-    }
+    margin-top: 12px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 18px;
 
     @media screen and (min-width: 1440px) {
+      font-size: 16px;
+      line-height: 20px;
     }
   }
 `;

@@ -7,8 +7,11 @@ import PaymentBox from './PaymentBox';
 import FooterLogo from './FooterLogo';
 import FooterContacts from './FooterContacts';
 import { GlobalContainer } from '../../../global/GlobalContainer';
+import FooterSocialBar from './FooterSocialBar';
+import useWidnowSize from '../../../hooks/useWindowSize';
 
 const Footer = () => {
+  const { screen } = useWidnowSize();
   return (
     <>
       <SignUp />
@@ -16,6 +19,7 @@ const Footer = () => {
         <StyledFooter>
           <FooterLogo />
           <FooterContacts />
+          {screen === 'mobile' && <FooterSocialBar />}
           <FooterMenuItems />
           <PaymentBox />
         </StyledFooter>

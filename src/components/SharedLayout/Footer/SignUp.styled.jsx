@@ -16,8 +16,9 @@ export const StyledSignUp = styled.section`
     }
 
     @media screen and (min-width: 1440px) {
+      margin: 40px 0;
       flex-direction: row;
-      flex: 1;
+      flex-basis: content;
       gap: 45px;
       justify-content: center;
       align-items: center;
@@ -29,6 +30,7 @@ export const StyledSignUp = styled.section`
     font-size: 24px;
     font-weight: 500;
     line-height: 32px;
+    white-space: nowrap;
 
     @media screen and (min-width: 834px) {
       margin-top: 40px;
@@ -42,10 +44,12 @@ export const StyledSignUp = styled.section`
   & .sign-up-input__box {
     position: relative;
     width: 100%;
-    /* width: 343px; */
 
     @media screen and (min-width: 834px) {
       width: 55%;
+    }
+    @media screen and (min-width: 1440px) {
+      width: 413px;
     }
   }
 
@@ -63,14 +67,14 @@ export const StyledSignUp = styled.section`
     @media screen and (min-width: 834px) {
       margin-top: 12px;
       margin-bottom: 36px;
-      /* width: 278px; */
       height: 61px;
       padding-left: 30px;
     }
 
     @media screen and (min-width: 1440px) {
-      width: 340px;
-      padding: 20px 0 20px 30px;
+      margin-top: 0;
+      margin-bottom: 0;
+      width: 413px;
     }
   }
 
@@ -100,8 +104,8 @@ export const StyledSignUp = styled.section`
     }
 
     @media screen and (min-width: 1440px) {
-      right: 18px;
-      top: 50%;
+      right: 8px;
+      top: 30px;
       transform: translate(-50%, -50%);
     }
   }
@@ -129,8 +133,8 @@ export const StyledSignUp = styled.section`
     }
 
     @media screen and (min-width: 1440px) {
-      width: 40px;
-      height: 40px;
+      right: 13px;
+      top: 10px;
     }
   }
 `;

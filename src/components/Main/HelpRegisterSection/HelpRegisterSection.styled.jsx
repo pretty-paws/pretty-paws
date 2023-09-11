@@ -91,6 +91,11 @@ export const BackgroundContainer = styled.section`
     font-size: 16px;
     font-weight: 500;
     line-height: 20px;
+    transition: background-color var(--transition);
+
+    &:hover {
+      background-color: var(--hover-blue);
+    }
 
     @media screen and (min-width: 834px) {
       width: 240px;
