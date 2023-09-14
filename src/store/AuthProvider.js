@@ -1,19 +1,17 @@
 import { createContext, useContext } from 'react';
 import PropTypes from 'prop-types';
-import { AuthStore } from './AuthStore';
+import { RootStore } from '.';
 
-const AuthContext = createContext();
+const Context = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const authStore = new AuthStore();
+  const store = new RootStore();
 
-  return (
-    <AuthContext.Provider value={authStore}>{children}</AuthContext.Provider>
-  );
+  return <Context.Provider value={store}>{children}</Context.Provider>;
 };
 
-export const useAuthStore = () => {
-  return useContext(AuthContext);
+export const useStore = () => {
+  return useContext(Context);
 };
 
 AuthProvider.propTypes = {

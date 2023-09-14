@@ -6,6 +6,7 @@ import {
   refreshUser,
   registerUser,
   registerVerify,
+  subscribe,
 } from '../services/authAPI';
 
 export class AuthStore {
@@ -164,6 +165,22 @@ export class AuthStore {
           secondary: '#FFFAEE',
         },
       });
+      runInAction(() => {
+        this.state = 'error';
+      });
+    }
+  }
+
+  async subscribe(data) {
+    this.state = 'pending';
+    try {
+      await subscribe(data);
+
+      runInAction(() => {
+        this.state = 'done';
+      });
+    } catch (error) {
+      toast.error(error.message);
       runInAction(() => {
         this.state = 'error';
       });

@@ -6,7 +6,7 @@ import { useState } from 'react';
 import { StyledRegisterBox } from './RegisterBox.styled';
 import { redirect } from 'react-router-dom';
 import { observer } from 'mobx-react-lite';
-import { useAuthStore } from '../../store/AuthProvider';
+import { useStore } from '../../store/AuthProvider';
 import useWindowSize from '../../hooks/useWindowSize';
 import {
   emailRegExp,
@@ -26,7 +26,11 @@ import {
 import { SocialNetsAuth } from '../LogIn/SocialNetsAuth';
 
 const RegisterBox = observer(() => {
-  const { signUp, setEmail } = useAuthStore();
+  const store = useStore();
+  const {
+    auth: { signUp, setEmail },
+  } = store;
+
   const { screen } = useWindowSize();
   const [phoneFocused, setPhoneFocused] = useState(false);
   const [passwordVisibility, setPasswordVisibility] = useState(false);

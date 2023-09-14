@@ -1,11 +1,14 @@
 import { Navigate } from 'react-router-dom';
-import { useAuthStore } from '../store/AuthProvider';
+import { useStore } from '../store/AuthProvider';
 import PropTypes from 'prop-types';
 import { observer } from 'mobx-react-lite';
 
 export const RestrictedRoute = observer(
   ({ redirectTo = '/', component: Component }) => {
-    const { authorised } = useAuthStore();
+    const store = useStore();
+    const {
+      auth: { authorised },
+    } = store;
 
     return authorised.toString() === 'true' ? (
       <Navigate to={redirectTo} />

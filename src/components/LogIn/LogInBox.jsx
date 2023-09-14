@@ -7,7 +7,7 @@ import { StyledLoginBox } from './LogInBox.styled';
 
 import LoginWithPhone from './LoginWithPhone';
 import { SocialNetsAuth } from './SocialNetsAuth';
-import { useAuthStore } from '../../store/AuthProvider';
+import { useStore } from '../../store/AuthProvider';
 import { observer } from 'mobx-react-lite';
 import { emailRegExp, passwordRegExp } from '../../validation/regexp';
 import { emailMessage, passwordMessage } from '../../validation/messages';
@@ -15,7 +15,11 @@ import useWindowSize from '../../hooks/useWindowSize';
 
 const LogInBox = observer(() => {
   const { screen } = useWindowSize();
-  const { logIn, setRememberMe } = useAuthStore();
+
+  const store = useStore();
+  const {
+    auth: { logIn, setRememberMe },
+  } = store;
 
   const getValueFromStorage = () => {
     const value = localStorage.getItem('rememberMe');
