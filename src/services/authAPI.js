@@ -47,3 +47,12 @@ export const logOut = async () => {
   return result;
   // console.log(result);
 };
+
+export const subscribe = async data => {
+  axios.defaults.headers.common.Authorization = `Bearer ${
+    localStorage.getItem('token') || ''
+  }`;
+  const result = await axios.post(`/subscriptions/create`, data);
+  console.log(result);
+  return result;
+};

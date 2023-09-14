@@ -3,11 +3,14 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { StyledBackdrop, StyledModalBox } from './UserModal.styled';
 import sprite from '../../../../img/svg-sprite/sprite.svg';
-import { useAuthStore } from '../../../../store/AuthProvider';
+import { useStore } from '../../../../store/AuthProvider';
 import { observer } from 'mobx-react-lite';
 
 const UserModal = observer(({ onClose }) => {
-  const { logOut, authorised } = useAuthStore();
+  const store = useStore();
+  const {
+    auth: { logOut, authorised },
+  } = store;
 
   console.log(authorised);
 

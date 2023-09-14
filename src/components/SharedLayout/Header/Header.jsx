@@ -5,7 +5,7 @@ import { StyledHeader } from './Header.styled';
 import sprite from '../../../img/svg-sprite/sprite.svg';
 
 import { observer } from 'mobx-react-lite';
-import { useAuthStore } from '../../../store/AuthProvider';
+import { useStore } from '../../../store/AuthProvider';
 
 import Logo from './Logo/Logo';
 import Search from './SearchBar/Search';
@@ -17,8 +17,15 @@ import BurgerMenu from '../BurgerMenu/BurgerMenu';
 const Header = observer(() => {
   const [menuActive, setMenuActive] = useState(false);
   const { screen } = useWindowSize();
-  const { email, authorised } = useAuthStore();
+  // const { authStore } = useStore();
   const [showModal, setShowModal] = useState(false);
+
+  const store = useStore();
+  const {
+    auth: { email, authorised },
+  } = store;
+  // console.log(auth.authorised);
+  console.log();
 
   if (menuActive) {
     document.body.classList.add('menu-opened');
