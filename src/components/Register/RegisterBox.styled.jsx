@@ -21,13 +21,15 @@ export const StyledRegisterBox = styled.div`
 
   & .register-header {
     color: #000;
-    font-size: 30px;
-    font-weight: 700;
-    line-height: 40px;
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 32px;
     margin-bottom: 24px;
 
     @media screen and (min-width: 834px) {
       font-size: 32px;
+      font-weight: 700;
+      line-height: 40px;
     }
 
     @media screen and (min-width: 1440px) {
