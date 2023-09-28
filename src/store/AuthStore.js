@@ -12,10 +12,12 @@ import {
 export class AuthStore {
   confirmation_code = 0;
   token = 0;
+  user = [];
+  userName = localStorage.getItem('userName') || '';
   email = localStorage.getItem('email') || '';
-  authorised = localStorage.getItem('authorised') || false;
+  authorised = JSON.parse(localStorage.getItem('authorised')) || false;
   state = 'pending';
-  rememberMe = localStorage.getItem('rememberMe') || false;
+  rememberMe = JSON.parse(localStorage.getItem('rememberMe')) || false;
 
   constructor() {
     makeAutoObservable(this, {}, { autoBind: true });
@@ -35,6 +37,7 @@ export class AuthStore {
     this.state = 'pending';
     try {
       const { data } = await registerUser(userData);
+      console.log('sign up data', data);
       runInAction(() => {
         this.confirmation_code = data.data.code;
         this.verifyCode({
@@ -65,6 +68,7 @@ export class AuthStore {
     this.state = 'pending';
     try {
       const { data } = await registerVerify(email, confirmation_code);
+      console.log('verifyCode', data);
       runInAction(() => {
         localStorage.setItem('token', data.data.token);
         localStorage.setItem('authorised', true);
@@ -91,6 +95,7 @@ export class AuthStore {
       runInAction(() => {
         this.token = data.data.token;
         this.authorised = true;
+        this.user = data.data.user;
         this.email = data.data.user.email;
         this.rememberMe === true
           ? localStorage.setItem('email', data.data.user.email)
@@ -98,7 +103,6 @@ export class AuthStore {
         this.state = 'done';
       });
     } catch (error) {
-      // console.log(error.response.data.error.password[0]);
       toast.error(error.response.data.error.email, {
         style: {
           border: '1px solid #713200',
@@ -120,19 +124,19 @@ export class AuthStore {
     this.state = 'pending';
     try {
       const res = await refreshUser();
-      return res;
-    } catch (error) {
-      toast.error(error.message);
       runInAction(() => {
+        this.user = res.data.data.user;
+        this.state = 'done';
+      });
+    } catch (error) {
+      runInAction(() => {
+        this.authorised === false;
         this.state = 'error';
-        if (error.response.status === 401) {
-          localStorage.setItem('authorised', false);
-          localStorage.setItem('token', '');
-          this.authorised === false;
-          this.rememberMe === false ? localStorage.removeItem('email') : null;
-          this.token === '';
-          this.state = 'done';
-        }
+        this.rememberMe === false ? localStorage.removeItem('email') : null;
+        this.token === '';
+        this.state = 'done';
+        localStorage.setItem('authorised', false);
+        localStorage.setItem('token', '');
       });
     }
   }
@@ -166,6 +170,7 @@ export class AuthStore {
         },
       });
       runInAction(() => {
+        this.authorised = false;
         this.state = 'error';
       });
     }

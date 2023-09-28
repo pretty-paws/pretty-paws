@@ -1,18 +1,22 @@
 import { Navigate } from 'react-router-dom';
 import { useStore } from '../store/AuthProvider';
+import { observer } from 'mobx-react-lite';
 import PropTypes from 'prop-types';
 
-export const PrivateRoute = ({ component: Component, redirectTo = '/' }) => {
-  const store = useStore();
-  const {
-    auth: { authorised },
-  } = store;
-  const shouldRedirect = !authorised;
+export const PrivateRoute = observer(
+  ({ component: Component, redirectTo = '/' }) => {
+    const store = useStore();
+    const {
+      auth: { authorised },
+    } = store;
 
-  return shouldRedirect ? <Navigate to={redirectTo} /> : Component;
-};
+    const shouldRedirect = authorised === false;
+
+    return shouldRedirect ? <Navigate to={redirectTo} /> : Component;
+  }
+);
 
 PrivateRoute.propTypes = {
   redirectTo: PropTypes.string,
-  component: PropTypes.elementType.isRequired,
+  component: PropTypes.object,
 };

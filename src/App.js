@@ -8,7 +8,7 @@ const App = () => {
     auth: { refresh, authorised },
   } = store;
   useEffect(() => {
-    authorised === 'true' && refresh();
+    authorised && refresh();
   });
 
   return <AppRouter />;

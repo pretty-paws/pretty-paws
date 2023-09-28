@@ -1,0 +1,334 @@
+import React, { useState } from 'react';
+import sprite from '../../../img/svg-sprite/sprite.svg';
+import { useForm } from 'react-hook-form';
+import {
+  emailRegExp,
+  nameRegExp,
+  passwordRegExp,
+  phoneRegExp,
+} from '../../../validation/regexp';
+import {
+  emailMessage,
+  nameMessage,
+  passwordConfirmMessage,
+  passwordMessage,
+  phoneMessage,
+  surNameMessage,
+} from '../../../validation/messages';
+import { useStore } from '../../../store/AuthProvider';
+import { observer } from 'mobx-react-lite';
+import { StyledEditForm } from './PersonalDataEdit.styled';
+import { useNavigate } from 'react-router-dom';
+import useWindowSize from '../../../hooks/useWindowSize';
+
+const PersonalData = observer(() => {
+  const navigate = useNavigate();
+  const store = useStore();
+  const {
+    auth: { user, state },
+  } = store;
+  const values = user;
+  const { screen } = useWindowSize();
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isValid },
+    reset,
+    watch,
+    setError,
+  } = useForm({
+    mode: 'onChange',
+    defaultValues: {
+      name: user.name,
+      surname: user.surname,
+      phone_number: '+38' + `${user.phone_number}`,
+      email: user.email,
+      password: '',
+      password_confirmation: '',
+    },
+    values,
+  });
+
+  const [passwordVisibility, setPasswordVisibility] = useState(false);
+  const [verificationVisibility, setVerificationVisibility] = useState(false);
+
+  //   const phone_number = watch('phone_number', '');
+  const password = watch('password', '');
+  const password_confirmation = watch('password_confirmation', '');
+
+  const dynamicLabelWidth = () => {
+    if (screen === 'desktop') {
+      return { width: `calc(200px + ${user.email?.length * 9}px)` };
+    }
+    if (screen === 'mobile') {
+      return { width: `calc(159px + ${user.email?.length * 9}px)` };
+    }
+  };
+
+  const onSubmit = data => {
+    console.log(data);
+    navigate('/cabinet/personal_data');
+    reset();
+  };
+  return (
+    <StyledEditForm>
+      {state === 'pending' ? null : (
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <label
+            style={dynamicLabelWidth()}
+            className={errors.name ? 'edit-label error' : 'edit-label'}
+          >
+            <div className="edit-label-text">Ім’я</div>
+            <input
+              className="edit-input"
+              placeholder="Ім’я"
+              type="text"
+              {...register('name', {
+                pattern: {
+                  value: nameRegExp,
+                  message: nameMessage.pattern,
+                },
+                required: nameMessage.required,
+                maxLength: { value: 20, message: nameMessage.maxLength },
+                minLength: {
+                  value: 2,
+                  message: nameMessage.minLength,
+                },
+              })}
+              aria-invalid={errors.name ? 'true' : 'false'}
+            />
+            {errors.name && (
+              <svg className="error-icon" width="24px" height="24px">
+                <use href={sprite + '#error'} />
+              </svg>
+            )}
+            {errors.name && (
+              <p role="alert" className="edit-error">
+                {errors.name.message}
+              </p>
+            )}
+          </label>
+          <label
+            style={dynamicLabelWidth()}
+            className={errors.surname ? 'edit-label error' : 'edit-label'}
+          >
+            <div className="edit-label-text">Прізвище</div>
+            <input
+              className={errors.surname ? 'edit-input error' : 'edit-input '}
+              type="text"
+              placeholder="Прізвище"
+              {...register('surname', {
+                pattern: {
+                  value: nameRegExp,
+                  message: surNameMessage.pattern,
+                },
+                required: surNameMessage.required,
+                maxLength: { value: 20, message: surNameMessage.maxLength },
+                minLength: {
+                  value: 2,
+                  message: surNameMessage.minLength,
+                },
+              })}
+              aria-invalid={errors.surname ? 'true' : 'false'}
+            />
+            {errors.surname && (
+              <svg className="error-icon" width="24px" height="24px">
+                <use href={sprite + '#error'} />
+              </svg>
+            )}
+            {errors.surname && (
+              <p role="alert" className="edit-error">
+                {errors.surname.message}
+              </p>
+            )}
+          </label>
+          <label
+            className={errors.phone_number ? 'edit-label error' : 'edit-label'}
+            style={dynamicLabelWidth()}
+          >
+            <div className="edit-label-text">Телефон</div>
+            <input
+              // onFocus={() => setPhoneFocused(true)}
+              // onBlur={() => setPhoneFocused(false)}
+              onInput={e => {
+                e.target.value = e.target.value.replace(/[^0-9+]/g, '');
+              }}
+              className={
+                errors.phone_number
+                  ? 'edit-input phone-input error'
+                  : 'edit-input phone-input '
+              }
+              type="text"
+              // placeholder={phoneFocused ? '' : '+380__ ___ ___'}
+              // value={phoneFocused ? phone_number : ''}
+              {...register('phone_number', {
+                pattern: {
+                  value: phoneRegExp,
+                  message: phoneMessage.pattern,
+                },
+                required: phoneMessage.required,
+                maxLength: { value: 13, message: phoneMessage.maxLength },
+                minLength: {
+                  value: 13,
+                  message: phoneMessage.minLength,
+                },
+              })}
+              aria-invalid={errors.phone_number ? 'true' : 'false'}
+            />
+            {errors.phone_number && (
+              <svg className="error-icon" width="24px" height="24px">
+                <use href={sprite + '#error'} />
+              </svg>
+            )}
+            {errors.phone_number && (
+              <p role="alert" className="edit-error">
+                {errors.phone_number.message}
+              </p>
+            )}
+          </label>
+          <label
+            className={errors.email ? 'edit-label error' : 'edit-label'}
+            style={dynamicLabelWidth()}
+          >
+            <div className="edit-label-text">
+              {screen === 'mobile' ? 'Ел. пошта' : 'Електронна пошта'}
+            </div>
+            <input
+              className={errors.email ? 'edit-input error' : 'edit-input  '}
+              type="email"
+              placeholder="Електронна адреса"
+              {...register('email', {
+                pattern: {
+                  value: emailRegExp,
+                  message: emailMessage.pattern,
+                },
+                required: emailMessage.required,
+                maxLength: { value: 50, message: emailMessage.maxLength },
+              })}
+              aria-invalid={errors.email ? 'true' : 'false'}
+            />
+            {errors.email && (
+              <svg className="error-icon" width="24px" height="24px">
+                <use href={sprite + '#error'} />
+              </svg>
+            )}
+            {errors.email && (
+              <p role="alert" className="edit-error">
+                {errors.email.message}
+              </p>
+            )}
+          </label>
+          <label
+            className={errors.password ? 'edit-label error' : 'edit-label'}
+            style={dynamicLabelWidth()}
+          >
+            <div className="edit-label-text">Змінити пароль</div>
+            <input
+              onInput={e => {
+                if (e.target.value.includes(' ')) {
+                  e.target.value = e.target.value.replace(' ', '');
+                }
+                if (
+                  e.currentTarget.value !== password_confirmation &&
+                  password_confirmation !== ''
+                )
+                  setError('password_confirmation', {
+                    type: 'manual',
+                    message: passwordMessage.notMatch,
+                  });
+                // console.log(e.currentTarget.value);
+              }}
+              className={errors.password ? 'edit-input error' : 'edit-input  '}
+              placeholder="********"
+              type={passwordVisibility ? 'text' : 'password'}
+              {...register('password', {
+                pattern: {
+                  value: passwordRegExp,
+                  message: passwordMessage.pattern,
+                },
+                required: passwordMessage.required,
+                minLength: {
+                  value: 6,
+                  message: passwordMessage.minLength,
+                },
+                maxLength: { value: 50, message: passwordMessage.maxLength },
+              })}
+              aria-invalid={errors.password ? 'true' : 'false'}
+            />
+            <svg
+              width="24px"
+              height="24px"
+              className="edit-icon-eye"
+              onClick={() => setPasswordVisibility(!passwordVisibility)}
+            >
+              <use
+                href={
+                  passwordVisibility ? sprite + '#eye' : sprite + '#eye-off'
+                }
+              />
+            </svg>
+            {errors.password && (
+              <p role="alert" className="edit-error ">
+                {errors.password.message}
+              </p>
+            )}
+          </label>
+          <label
+            className={
+              errors.password_confirmation ? 'edit-label error' : 'edit-label'
+            }
+            style={dynamicLabelWidth()}
+          >
+            <div className="edit-label-text">
+              {screen === 'mobile' ? 'Ще раз пароль' : 'Ще раз новий пароль'}
+            </div>
+            <input
+              onInput={e => {
+                if (e.target.value.includes(' ')) {
+                  e.target.value = e.target.value.replace(' ', '');
+                }
+              }}
+              className={
+                errors.password_confirmation
+                  ? 'edit-input error'
+                  : 'edit-input  '
+              }
+              placeholder="********"
+              type={verificationVisibility ? 'text' : 'password'}
+              {...register('password_confirmation', {
+                required: passwordConfirmMessage.required,
+                validate: value =>
+                  value === password || passwordConfirmMessage.notMatch,
+              })}
+              aria-invalid={errors.password_confirmation ? 'true' : 'false'}
+            />
+            <svg
+              width="24px"
+              height="24px"
+              className="edit-icon-eye"
+              onClick={() => setVerificationVisibility(!verificationVisibility)}
+            >
+              <use
+                href={
+                  verificationVisibility ? sprite + '#eye' : sprite + '#eye-off'
+                }
+              />
+            </svg>
+            {errors.password_confirmation && (
+              <p role="alert" className="edit-error">
+                {errors.password_confirmation.message}
+              </p>
+            )}
+          </label>
+
+          <button type="submit" className="edit-button" disabled={!isValid}>
+            Зберегти зміни
+          </button>
+        </form>
+      )}
+    </StyledEditForm>
+  );
+});
+
+export default PersonalData;

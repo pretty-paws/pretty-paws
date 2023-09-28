@@ -12,8 +12,6 @@ const UserModal = observer(({ onClose }) => {
     auth: { logOut, authorised },
   } = store;
 
-  console.log(authorised);
-
   const handleBackdropClick = event => {
     if (event.target === event.currentTarget) {
       onClose();

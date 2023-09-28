@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 export const StyledHeader = styled.div`
-  /* margin-top: 20px; */
   display: flex;
   flex-direction: column;
   gap: 24px;
@@ -32,14 +31,13 @@ export const StyledHeader = styled.div`
   & .active-link .header__profile-icon,
   .active-link .header__basket-icon {
     fill: var(--hover-blue);
-    /* stroke: var(--hover-blue); */
+
     transition: all var(--transition);
   }
 
   & .active-link .header__profile-icon:hover,
   .active-link .header__basket-icon:hover {
     fill: var(--font-color-black);
-    /* stroke: var(--font-color-black); */
     transition: all var(--transition);
   }
 
@@ -146,7 +144,7 @@ export const StyledHeader = styled.div`
     font-size: 16px;
   }
 
-  & .header__logout-button {
+  & .header__cabinet-button {
     border-radius: 100px;
     border: 2px solid var(--accent-color-blue);
     background-color: #fff;
@@ -160,13 +158,13 @@ export const StyledHeader = styled.div`
     }
 
     @media screen and (min-width: 1440px) {
-      padding: 5px 15px;
-      border-radius: 99px;
-      border: 2.5px solid var(--accent-color-blue);
+      padding: 16px 32px;
+      border-radius: 100px;
+      border: 2px solid var(--accent-color-blue);
 
       font-size: 16px;
       font-weight: 400;
-      color: #0e2423;
+      line-height: 20px;
       background-color: #fff;
       white-space: nowrap;
     }
