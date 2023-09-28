@@ -57,18 +57,6 @@ const PersonalData = observer(() => {
   const password = watch('password', '');
   const password_confirmation = watch('password_confirmation', '');
 
-  const dynamicLabelWidth = () => {
-    if (screen === 'desktop') {
-      return { width: `calc(210px + ${user.email?.length * 9}px)` };
-    }
-    if (screen === 'tablet') {
-      return { width: `calc(165px + ${user.email?.length * 9}px)` };
-    }
-    if (screen === 'mobile') {
-      return { width: `calc(159px + ${user.email?.length * 9}px)` };
-    }
-  };
-
   const onSubmit = data => {
     console.log(data);
     navigate('/cabinet/personal_data');
@@ -78,10 +66,7 @@ const PersonalData = observer(() => {
     <StyledEditForm>
       {state === 'pending' ? null : (
         <form onSubmit={handleSubmit(onSubmit)}>
-          <label
-            style={dynamicLabelWidth()}
-            className={errors.name ? 'edit-label error' : 'edit-label'}
-          >
+          <label className={errors.name ? 'edit-label error' : 'edit-label'}>
             <div className="edit-label-text">Ім’я</div>
             <input
               className="edit-input"
@@ -112,10 +97,7 @@ const PersonalData = observer(() => {
               </p>
             )}
           </label>
-          <label
-            style={dynamicLabelWidth()}
-            className={errors.surname ? 'edit-label error' : 'edit-label'}
-          >
+          <label className={errors.surname ? 'edit-label error' : 'edit-label'}>
             <div className="edit-label-text">Прізвище</div>
             <input
               className={errors.surname ? 'edit-input error' : 'edit-input '}
@@ -148,10 +130,10 @@ const PersonalData = observer(() => {
           </label>
           <label
             className={errors.phone_number ? 'edit-label error' : 'edit-label'}
-            style={dynamicLabelWidth()}
           >
             <div className="edit-label-text">Телефон</div>
             <input
+              //   style={dynamicLabelWidth()}
               // onFocus={() => setPhoneFocused(true)}
               // onBlur={() => setPhoneFocused(false)}
               onInput={e => {
@@ -190,10 +172,7 @@ const PersonalData = observer(() => {
               </p>
             )}
           </label>
-          <label
-            className={errors.email ? 'edit-label error' : 'edit-label'}
-            style={dynamicLabelWidth()}
-          >
+          <label className={errors.email ? 'edit-label error' : 'edit-label'}>
             <div className="edit-label-text">
               {screen !== 'desktop' ? 'Ел. пошта' : 'Електронна пошта'}
             </div>
@@ -224,7 +203,6 @@ const PersonalData = observer(() => {
           </label>
           <label
             className={errors.password ? 'edit-label error' : 'edit-label'}
-            style={dynamicLabelWidth()}
           >
             <div className="edit-label-text">Змінити пароль</div>
             <input
@@ -240,7 +218,6 @@ const PersonalData = observer(() => {
                     type: 'manual',
                     message: passwordMessage.notMatch,
                   });
-                // console.log(e.currentTarget.value);
               }}
               className={errors.password ? 'edit-input error' : 'edit-input  '}
               placeholder="********"
@@ -281,7 +258,6 @@ const PersonalData = observer(() => {
             className={
               errors.password_confirmation ? 'edit-label error' : 'edit-label'
             }
-            style={dynamicLabelWidth()}
           >
             <div className="edit-label-text">
               {screen !== 'desktop' ? 'Ще раз пароль' : 'Ще раз новий пароль'}

@@ -65,7 +65,7 @@ const Header = observer(() => {
               </div>
             </NavLink>
             <NavLink
-              to={authorised === true && '/cabinet'}
+              to={authorised === true ? '/cabinet' : '/login'}
               className={({ isActive }) => (isActive ? 'active-link' : '')}
             >
               <button

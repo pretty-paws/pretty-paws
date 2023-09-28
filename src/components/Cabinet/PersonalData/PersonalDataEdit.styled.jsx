@@ -13,8 +13,8 @@ export const StyledEditForm = styled.div`
     display: flex;
     flex-direction: column;
     gap: 16px;
-    align-items: center;
     @media screen and (min-width: 834px) {
+      align-items: center;
       align-items: flex-start;
     }
 
@@ -26,27 +26,20 @@ export const StyledEditForm = styled.div`
 
   .edit-label {
     display: flex;
-    gap: 24px;
+    gap: 15px;
     position: relative;
     border-bottom: 1px solid #000;
     padding: 10px 0 10px 10px;
 
     @media screen and (min-width: 834px) {
+      gap: 24px;
     }
 
     @media screen and (min-width: 1440px) {
     }
-
-    /* :after {
-      content: '';
-      height: 1px;
-      background-color: #000;
-      position: absolute;
-      bottom: 0;
-    } */
   }
   .edit-label-text {
-    width: 170px;
+    width: 118px;
     font-size: 16px;
     font-weight: 400;
     line-height: 20px;
@@ -59,7 +52,6 @@ export const StyledEditForm = styled.div`
   }
   .edit-input {
     outline: none;
-    flex: 1;
     border: 0;
     font-size: 16px;
     font-weight: 500;
@@ -87,11 +79,6 @@ export const StyledEditForm = styled.div`
     font-size: 12px;
     font-weight: 400;
     line-height: 16px;
-
-    /* @media screen and (min-width: 1440px) {
-      left: 195px;
-      bottom: -20px;
-    }  */
   }
 
   .edit-label.error {
