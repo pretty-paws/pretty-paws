@@ -5,6 +5,8 @@ export const StyledAnimalsBar = styled.div`
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
+  /* gap: ${props => (props.type === 'burger__lg' ? '40px' : '24px')}; */
+
   gap: ${props => (props.type === 'burger' ? '24px' : '0')};
   width: ${props => (props.type === 'burger' ? 'calc(100vw / 2)' : '100%')};
 
