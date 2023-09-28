@@ -30,13 +30,12 @@ export const StyledPersonalData = styled.div`
     @media screen and (min-width: 1440px) {
       gap: 24px;
       align-items: flex-end;
-      /* justify-content: space-between; */
       margin: 0 0 40px;
     }
   }
 
   .personal-data__arrow {
-    margin-left: 10px;
+    margin: 0 10px;
     transform: rotate(90deg);
   }
 
@@ -47,11 +46,11 @@ export const StyledPersonalData = styled.div`
     margin: 0 120px 0 30px;
 
     @media screen and (min-width: 834px) {
-      /* margin: 40px 24px 10px; */
+      margin: 0;
+      font-size: 24px;
     }
 
     @media screen and (min-width: 1440px) {
-      margin: 0 10px 0;
       font-size: 24px;
       font-weight: 500;
       line-height: 32px;
