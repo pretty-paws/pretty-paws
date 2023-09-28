@@ -18,6 +18,97 @@ export const StyledBackdrop = styled.div`
   }
 `;
 
+export const StyledAnimalCatalog = styled.div`
+  position: fixed;
+  z-index: 1000000000;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: var(--background-color);
+  /* transform: translateX(-100%); */
+  /* transition: all var(--transition); */
+
+  display: flex;
+  flex-direction: column;
+
+  /* & .active {
+    transform: translateX(0);
+  } */
+
+  @media screen and (min-width: 834px) {
+    width: 50%;
+  }
+  & .subburger__content {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 40px 0px;
+  }
+  & .subburger__head {
+    height: 46px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--accent-color-blue);
+  }
+  & .subburger__arrow {
+    transform: rotate(90deg);
+    margin: 8px;
+  }
+  & .subburger__title {
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 130%; /* 26px */
+  }
+  & .subburger__animal {
+    display: flex;
+    padding: 0px 40px 16px 40px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    align-self: stretch;
+    position: relative;
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0px;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background-color: var(--grey_light, #d6d6d6);
+    }
+  }
+  & .animal__title {
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 130%; /* 26px */
+    color: var(--black, #0e2423);
+  }
+  & .animal__list {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    align-self: stretch;
+  }
+  & .animal__list-item {
+    color: var(--black, #0e2423);
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px; /* 125% */
+    cursor: pointer;
+  }
+  & .subburger__footer {
+    /* display: flex;
+    flex-direction: column;
+    align-items: center; */
+    padding: 0px 40px;
+  }
+`;
+
 export const StyledBurger = styled.div`
   overflow: scroll;
   position: fixed;

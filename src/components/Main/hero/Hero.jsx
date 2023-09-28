@@ -80,7 +80,6 @@ const Hero = () => {
       );
     }
 
-
     return () => {
       if (paginationRef.current && swiper) {
         paginationRef.current.removeEventListener(
