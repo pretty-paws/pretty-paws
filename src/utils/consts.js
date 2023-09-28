@@ -14,3 +14,4 @@ export const BLOG_ROUTE = '/blog';
 export const FAVORITE_ROUTE = '/favorite';
 export const COMPARISON_ROUTE = '/comparison';
 export const CART_ROUTE = '/cart';
+// export const CABINET = '/cabinet';

@@ -23,10 +23,12 @@ import {
   COMPARISON_ROUTE,
   CART_ROUTE,
   LOGIN_ROUTE,
+  // CABINET,
 } from './utils/consts';
 import Favorite from './components/Favorite/Favorite';
 import Comparison from './components/Comparison/Comparison';
 import Cart from './components/Cart/Cart';
+// import Cabinet from './components/Cabinet/Cabinet';
 
 // Описує  усі маршрути(роути) нашого додатку
 export const authRoutes = [
@@ -58,6 +60,11 @@ export const routes = [
     path: CART_ROUTE,
     Component: Cart,
   },
+  // {
+  //   name: 'Кабінет',
+  //   path: CABINET,
+  //   Component: Cabinet,
+  // },
 ];
 export const publicRoutes = [
   // Він нам наче не потрібний =>

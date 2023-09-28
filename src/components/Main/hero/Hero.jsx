@@ -71,7 +71,7 @@ const Hero = () => {
       }
     });
   };
-  console.log(screen === 'mobile');
+  // console.log(screen === 'mobile');
   useEffect(() => {
     if (paginationRef.current && swiper) {
       paginationRef.current.addEventListener(
