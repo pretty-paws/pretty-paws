@@ -81,10 +81,6 @@ export const StyledCabinet = styled.div`
       font-weight: 400;
       line-height: 20px;
     }
-
-    @media screen and (min-width: 1440px) {
-      padding: 16px 32px;
-    }
   }
 
   & .cabinet__line-box {
@@ -98,6 +94,12 @@ export const StyledCabinet = styled.div`
     margin-top: 107px;
     padding: 16px;
     cursor: pointer;
+
+    transition: background-color var(--transition);
+
+    &:hover {
+      background-color: var(--hover-blue);
+    }
   }
 
   & .cabinet-logout-btn {
