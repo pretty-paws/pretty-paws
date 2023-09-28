@@ -22,13 +22,16 @@ export const StyledPersonalData = styled.div`
     background-color: var(--accent-color-beige);
 
     @media screen and (min-width: 834px) {
+      margin: 40px 24px;
       background-color: transparent;
       padding: 0;
     }
 
     @media screen and (min-width: 1440px) {
-      justify-content: space-between;
-      margin-bottom: 40px;
+      gap: 24px;
+      align-items: flex-end;
+      /* justify-content: space-between; */
+      margin: 0 0 40px;
     }
   }
 
@@ -44,10 +47,11 @@ export const StyledPersonalData = styled.div`
     margin: 0 120px 0 30px;
 
     @media screen and (min-width: 834px) {
-      margin: 0;
+      /* margin: 40px 24px 10px; */
     }
 
     @media screen and (min-width: 1440px) {
+      margin: 0 10px 0;
       font-size: 24px;
       font-weight: 500;
       line-height: 32px;
@@ -60,6 +64,15 @@ export const StyledPersonalData = styled.div`
     top: 10px;
     right: 31px;
     z-index: 2;
+
+    @media screen and (min-width: 834px) {
+      top: 0;
+      right: 32px;
+    }
+    @media screen and (min-width: 1440px) {
+      top: 5px;
+      right: 33px;
+    }
   }
 
   .active-edit::after {
@@ -72,13 +85,20 @@ export const StyledPersonalData = styled.div`
     height: 40px;
     border-radius: 100px;
     background-color: var(--hover-blue);
-    /* display: flex; */
-    /* justify-content: center; */
-    /* align-items: center; */
+
+    @media screen and (min-width: 834px) {
+      top: -7px;
+      right: 24px;
+    }
+    @media screen and (min-width: 1440px) {
+      top: -3px;
+      right: 25px;
+    }
   }
 
   @media screen and (max-width: 834px) {
     .personal-data__body {
+      padding: 0 26px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -86,7 +106,10 @@ export const StyledPersonalData = styled.div`
   }
 
   table {
-    margin: 0 16px;
+    /* margin: 0 26px; */
+    @media screen and (min-width: 834px) {
+      margin: 0 16px;
+    }
   }
 
   table td {

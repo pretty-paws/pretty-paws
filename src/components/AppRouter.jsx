@@ -10,8 +10,9 @@ import PersonalData from './Cabinet/PersonalData/PersonalData';
 import PersonalDataEdit from './Cabinet/PersonalData/PersonalDataEdit';
 import Orders from './Cabinet/Orders/Orders';
 import WishList from './Cabinet/WishList/WishList';
+import { observer } from 'mobx-react-lite';
 
-const AppRouter = () => {
+const AppRouter = observer(() => {
   return (
     <Routes>
       <Route path="/" element={<SharedLayout />}>
@@ -31,12 +32,28 @@ const AppRouter = () => {
           element={<PrivateRoute redirectTo="/" component={<Cabinet />} />}
           exact
         >
-          <Route path="personal_data" element={<PersonalData />}>
-            <Route path="edit" element={<PersonalDataEdit />} />
+          <Route
+            path="personal_data"
+            element={
+              <PrivateRoute redirectTo="/" component={<PersonalData />} />
+            }
+          >
+            <Route
+              path="edit"
+              element={
+                <PrivateRoute redirectTo="/" component={<PersonalDataEdit />} />
+              }
+            />
           </Route>
 
-          <Route path="orders" element={<Orders />} />
-          <Route path="wish_list" element={<WishList />} />
+          <Route
+            path="orders"
+            element={<PrivateRoute redirectTo="/" component={<Orders />} />}
+          />
+          <Route
+            path="wish_list"
+            element={<PrivateRoute redirectTo="/" component={<WishList />} />}
+          />
         </Route>
         {/* public routes */}
         {publicRoutes.map(({ path, Component }) => (
@@ -55,6 +72,6 @@ const AppRouter = () => {
       </Route>
     </Routes>
   );
-};
+});
 
 export default AppRouter;

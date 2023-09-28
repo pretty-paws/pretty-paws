@@ -104,7 +104,7 @@ export class AuthStore {
         window.scrollTo({ top: 0, behavior: 'smooth' });
       });
     } catch (error) {
-      toast.error(error.response.data.error.email, {
+      toast.error('Неправильні данні', {
         style: {
           border: '1px solid #713200',
           padding: '16px',
@@ -130,12 +130,23 @@ export class AuthStore {
         this.state = 'done';
       });
     } catch (error) {
+      toast.error('Сессія закінчилась. Авторизуйтесь знов', {
+        style: {
+          border: '1px solid #713200',
+          padding: '16px',
+          color: '#713200',
+        },
+        iconTheme: {
+          primary: '#713200',
+          secondary: '#FFFAEE',
+        },
+      });
       runInAction(() => {
         this.authorised === false;
         this.state = 'error';
         this.rememberMe === false ? localStorage.removeItem('email') : null;
         this.token === '';
-        this.state = 'done';
+        // this.state = 'done';
         localStorage.setItem('authorised', false);
         localStorage.setItem('token', '');
       });
@@ -173,6 +184,8 @@ export class AuthStore {
       runInAction(() => {
         this.authorised = false;
         this.state = 'error';
+        localStorage.setItem('authorised', false);
+        localStorage.removeItem('token');
       });
     }
   }

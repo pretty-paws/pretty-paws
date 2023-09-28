@@ -2,9 +2,18 @@ import styled from 'styled-components';
 
 export const CabinetContainer = styled.div`
   @media screen and (min-width: 834px) {
-    margin: 28px 40px;
+    width: 834px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 28px 30px;
     display: flex;
     gap: 16px;
+  }
+
+  @media screen and (min-width: 1440px) {
+    width: 1440px;
+    padding: 30px 150px;
+    /* padding: 0; */
   }
 `;
 
@@ -23,7 +32,6 @@ export const StyledCabinet = styled.div`
 
   @media screen and (min-width: 1440px) {
     gap: 24px;
-    margin: 40px 0;
   }
 
   & .cabinet__menu {

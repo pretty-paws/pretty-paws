@@ -48,12 +48,11 @@ export const refreshUser = async () => {
 };
 
 export const logOut = async () => {
-  // axios.defaults.headers.common.Authorization = `Bearer ${
-  //   localStorage.getItem('token') || ''
-  // }`;
+  axios.defaults.headers.common.Authorization = `Bearer ${
+    localStorage.getItem('token') || ''
+  }`;
   const result = await axios.post(`/auth/sign-out`);
   return result;
-  // console.log(result);
 };
 
 export const subscribe = async data => {

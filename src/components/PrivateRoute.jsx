@@ -10,7 +10,9 @@ export const PrivateRoute = observer(
       auth: { authorised },
     } = store;
 
-    const shouldRedirect = authorised === false;
+    console.log(authorised);
+
+    const shouldRedirect = !authorised;
 
     return shouldRedirect ? <Navigate to={redirectTo} /> : Component;
   }

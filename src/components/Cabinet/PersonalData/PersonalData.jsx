@@ -2,17 +2,18 @@ import React from 'react';
 import sprite from '../../../img/svg-sprite/sprite.svg';
 import { useStore } from '../../../store/AuthProvider';
 import { StyledPersonalData } from './PersonalData.styled';
-import { Link, NavLink, Outlet } from 'react-router-dom';
+import { Link, NavLink, Outlet, useNavigate } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import { observer } from 'mobx-react-lite';
 import useWindowSize from '../../../hooks/useWindowSize';
-import { logOut } from '../../../services/authAPI';
+// import { logOut } from '../../../services/authAPI';
 
 const PersonalData = observer(() => {
+  const navigate = useNavigate();
   const { screen } = useWindowSize();
   const store = useStore();
   const {
-    auth: { user },
+    auth: { user, logOut },
   } = store;
 
   let location = useLocation();
@@ -20,19 +21,19 @@ const PersonalData = observer(() => {
   return (
     <StyledPersonalData>
       <div className="personal-data__header-box">
-        {screen === 'mobile' && (
-          <Link
-            to={
-              location.pathname === '/cabinet/personal_data/edit'
-                ? '/cabinet/personal_data'
-                : '/cabinet'
-            }
-          >
-            <svg width="24px" height="24px" className="personal-data__arrow">
-              <use href={sprite + '#arrow-down'} />
-            </svg>
-          </Link>
-        )}
+        {/* {screen === 'mobile' && ( */}
+        <Link
+          to={
+            location.pathname === '/cabinet/personal_data/edit'
+              ? '/cabinet/personal_data'
+              : '/cabinet'
+          }
+        >
+          <svg width="24px" height="24px" className="personal-data__arrow">
+            <use href={sprite + '#arrow-down'} />
+          </svg>
+        </Link>
+        {/* )} */}
         <h2 className="personal-data__header">Особисті дані</h2>
         <NavLink
           to="/cabinet/personal_data/edit"
@@ -72,7 +73,13 @@ const PersonalData = observer(() => {
               <svg width="24px" height="24px">
                 <use href={sprite + '#logout'} />
               </svg>
-              <button className="cabinet-logout-btn" onClick={() => logOut()}>
+              <button
+                className="cabinet-logout-btn"
+                onClick={() => {
+                  logOut();
+                  navigate('/');
+                }}
+              >
                 Вийти з акаунту
               </button>
             </div>
