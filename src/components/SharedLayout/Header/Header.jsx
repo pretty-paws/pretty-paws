@@ -106,7 +106,7 @@ const Header = observer(() => {
               </NavLink>
             </div>
           ) : (
-            <NavLink>
+            <NavLink to="/login">
               <button
                 className="header__login-button"
                 type="button"
