@@ -55,6 +55,15 @@ export const logOut = async () => {
   return result;
 };
 
+export const getAnimals = async () => {
+  axios.defaults.headers.common.Authorization = `Bearer ${
+    localStorage.getItem('token') || ''
+  }`;
+  const result = await axios.get('/category-animals/');
+  console.log(result);
+  return result;
+};
+
 export const subscribe = async data => {
   // axios.defaults.headers.common.Authorization = `Bearer ${
   //   localStorage.getItem('token') || ''
