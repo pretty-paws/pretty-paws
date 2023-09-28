@@ -1,7 +1,13 @@
 import styled from 'styled-components';
 
 export const StyledWishList = styled.div`
-  .WishList__header-box {
+  @media screen and (min-width: 834px) {
+    border-radius: 8px;
+    background: #fff;
+    height: fit-content;
+    padding: 40px 24px;
+  }
+  .wishlist__header-box {
     position: relative;
     margin-bottom: 24px;
     padding: 10px 16px;
@@ -20,12 +26,12 @@ export const StyledWishList = styled.div`
     }
   }
 
-  .WishList__arrow {
+  .wishlist__arrow {
     margin-left: 10px;
     transform: rotate(90deg);
   }
 
-  .WishList__header {
+  .wishlist__header {
     font-size: 20px;
     font-weight: 500;
     line-height: 130%;
@@ -33,6 +39,7 @@ export const StyledWishList = styled.div`
 
     @media screen and (min-width: 834px) {
       margin: 0;
+      font-size: 24px;
     }
 
     @media screen and (min-width: 1440px) {
@@ -42,17 +49,24 @@ export const StyledWishList = styled.div`
     }
   }
 
-  .WishList__body {
+  .wishlist__body {
     margin: 0 16px;
+
+    @media screen and (min-width: 834px) {
+      margin: 0;
+    }
   }
-  .WishList__text {
+  .wishlist__text {
     margin-top: 24px;
     font-size: 16px;
     font-weight: 500;
     line-height: 20px;
+    @media screen and (min-width: 834px) {
+      font-weight: 400;
+    }
   }
 
-  .WishList__button {
+  .wishlist__button {
     margin: 24px 0;
     width: 100%;
     height: 52px;
@@ -66,7 +80,7 @@ export const StyledWishList = styled.div`
     color: var(--font-color-black);
 
     @media screen and (min-width: 834px) {
-      margin: 0;
+      margin: 40px 0 0;
       width: 235px;
     }
 

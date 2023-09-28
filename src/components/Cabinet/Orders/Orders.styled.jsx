@@ -1,6 +1,13 @@
 import styled from 'styled-components';
 
 export const StyledOrders = styled.div`
+  @media screen and (min-width: 834px) {
+    border-radius: 8px;
+    background: #fff;
+    height: fit-content;
+    padding: 40px 24px;
+  }
+
   .orders__header-box {
     position: relative;
     margin-bottom: 24px;
@@ -33,6 +40,8 @@ export const StyledOrders = styled.div`
 
     @media screen and (min-width: 834px) {
       margin: 0;
+      font-size: 24px;
+      line-height: 32px;
     }
 
     @media screen and (min-width: 1440px) {
@@ -44,12 +53,20 @@ export const StyledOrders = styled.div`
 
   .orders__body {
     margin: 0 16px;
+    @media screen and (min-width: 834px) {
+      margin: 0;
+    }
   }
   .orders__text {
     margin-top: 24px;
     font-size: 16px;
     font-weight: 500;
     line-height: 20px;
+
+    @media screen and (min-width: 834px) {
+      font-weight: 400;
+      margin-bottom: 40px;
+    }
   }
 
   .orders__button {

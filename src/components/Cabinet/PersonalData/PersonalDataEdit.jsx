@@ -59,7 +59,10 @@ const PersonalData = observer(() => {
 
   const dynamicLabelWidth = () => {
     if (screen === 'desktop') {
-      return { width: `calc(200px + ${user.email?.length * 9}px)` };
+      return { width: `calc(210px + ${user.email?.length * 9}px)` };
+    }
+    if (screen === 'tablet') {
+      return { width: `calc(165px + ${user.email?.length * 9}px)` };
     }
     if (screen === 'mobile') {
       return { width: `calc(159px + ${user.email?.length * 9}px)` };
@@ -192,7 +195,7 @@ const PersonalData = observer(() => {
             style={dynamicLabelWidth()}
           >
             <div className="edit-label-text">
-              {screen === 'mobile' ? 'Ел. пошта' : 'Електронна пошта'}
+              {screen !== 'desktop' ? 'Ел. пошта' : 'Електронна пошта'}
             </div>
             <input
               className={errors.email ? 'edit-input error' : 'edit-input  '}
@@ -281,7 +284,7 @@ const PersonalData = observer(() => {
             style={dynamicLabelWidth()}
           >
             <div className="edit-label-text">
-              {screen === 'mobile' ? 'Ще раз пароль' : 'Ще раз новий пароль'}
+              {screen !== 'desktop' ? 'Ще раз пароль' : 'Ще раз новий пароль'}
             </div>
             <input
               onInput={e => {
