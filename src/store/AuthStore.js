@@ -101,6 +101,7 @@ export class AuthStore {
           ? localStorage.setItem('email', data.data.user.email)
           : null;
         this.state = 'done';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
       });
     } catch (error) {
       toast.error(error.response.data.error.email, {
