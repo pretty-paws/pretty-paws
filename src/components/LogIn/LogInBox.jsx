@@ -98,7 +98,7 @@ const LogInBox = observer(() => {
           )}
           {errors.email && (
             <p role="alert" className="login-error">
-              {errors.email.message}
+              {t(`${errors.email.message}`)}
             </p>
           )}
         </label>
@@ -139,7 +139,7 @@ const LogInBox = observer(() => {
           </svg>
           {errors.password && (
             <p role="alert" className="login-error">
-              {errors.password.message}
+              {t(`${errors.password.message}`)}
             </p>
           )}
         </label>
@@ -166,3 +166,4 @@ const LogInBox = observer(() => {
 });
 
 export default LogInBox;
+8;

@@ -20,8 +20,11 @@ import { observer } from 'mobx-react-lite';
 import { StyledEditForm } from './PersonalDataEdit.styled';
 import { useNavigate } from 'react-router-dom';
 import useWindowSize from '../../../hooks/useWindowSize';
+import { useTranslation } from 'react-i18next';
 
 const PersonalData = observer(() => {
+  const { t } = useTranslation();
+
   const navigate = useNavigate();
   const store = useStore();
   const {
@@ -67,10 +70,10 @@ const PersonalData = observer(() => {
       {state === 'pending' ? null : (
         <form onSubmit={handleSubmit(onSubmit)}>
           <label className={errors.name ? 'edit-label error' : 'edit-label'}>
-            <div className="edit-label-text">Ім’я</div>
+            <div className="edit-label-text">{t('Ім’я')}</div>
             <input
               className="edit-input"
-              placeholder="Ім’я"
+              placeholder={t('Ім’я')}
               type="text"
               {...register('name', {
                 pattern: {
@@ -98,11 +101,11 @@ const PersonalData = observer(() => {
             )}
           </label>
           <label className={errors.surname ? 'edit-label error' : 'edit-label'}>
-            <div className="edit-label-text">Прізвище</div>
+            <div className="edit-label-text">{t('Прізвище')}</div>
             <input
               className={errors.surname ? 'edit-input error' : 'edit-input '}
               type="text"
-              placeholder="Прізвище"
+              placeholder={toString('Прізвище')}
               {...register('surname', {
                 pattern: {
                   value: nameRegExp,
@@ -131,11 +134,8 @@ const PersonalData = observer(() => {
           <label
             className={errors.phone_number ? 'edit-label error' : 'edit-label'}
           >
-            <div className="edit-label-text">Телефон</div>
+            <div className="edit-label-text">{t('Телефон')}</div>
             <input
-              //   style={dynamicLabelWidth()}
-              // onFocus={() => setPhoneFocused(true)}
-              // onBlur={() => setPhoneFocused(false)}
               onInput={e => {
                 e.target.value = e.target.value.replace(/[^0-9+]/g, '');
               }}
@@ -145,8 +145,6 @@ const PersonalData = observer(() => {
                   : 'edit-input phone-input '
               }
               type="text"
-              // placeholder={phoneFocused ? '' : '+380__ ___ ___'}
-              // value={phoneFocused ? phone_number : ''}
               {...register('phone_number', {
                 pattern: {
                   value: phoneRegExp,
@@ -174,12 +172,12 @@ const PersonalData = observer(() => {
           </label>
           <label className={errors.email ? 'edit-label error' : 'edit-label'}>
             <div className="edit-label-text">
-              {screen !== 'desktop' ? 'Ел. пошта' : 'Електронна пошта'}
+              {screen !== 'desktop' ? t('Ел. пошта') : t('Електронна пошта')}
             </div>
             <input
               className={errors.email ? 'edit-input error' : 'edit-input  '}
               type="email"
-              placeholder="Електронна адреса"
+              placeholder={t('Електронна адреса')}
               {...register('email', {
                 pattern: {
                   value: emailRegExp,
@@ -204,7 +202,7 @@ const PersonalData = observer(() => {
           <label
             className={errors.password ? 'edit-label error' : 'edit-label'}
           >
-            <div className="edit-label-text">Змінити пароль</div>
+            <div className="edit-label-text">{t('Змінити пароль')}</div>
             <input
               onInput={e => {
                 if (e.target.value.includes(' ')) {
@@ -260,7 +258,9 @@ const PersonalData = observer(() => {
             }
           >
             <div className="edit-label-text">
-              {screen !== 'desktop' ? 'Ще раз пароль' : 'Ще раз новий пароль'}
+              {screen !== 'desktop'
+                ? t('Ще раз пароль')
+                : t('Ще раз новий пароль')}
             </div>
             <input
               onInput={e => {
@@ -302,7 +302,7 @@ const PersonalData = observer(() => {
           </label>
 
           <button type="submit" className="edit-button" disabled={!isValid}>
-            Зберегти зміни
+            {t('Зберегти зміни')}
           </button>
         </form>
       )}

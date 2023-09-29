@@ -4,8 +4,10 @@ import Title from '../../SharedLayout/Title/Title';
 import { brands } from '../../../img/brands';
 import { BrandsContainer } from './BrandsSection.styled';
 import useWindowSize from '../../../hooks/useWindowSize';
+import { useTranslation } from 'react-i18next';
 
 const BrandsSection = () => {
+  const { t } = useTranslation();
   const { screen } = useWindowSize();
   const slicedBrands = brands => {
     if (screen !== 'desktop') return brands.slice(0, brands.length - 4);
@@ -15,7 +17,7 @@ const BrandsSection = () => {
   return (
     <BrandsContainer>
       <Title>
-        <h2 className="brands__title">Бренди</h2>
+        <h2 className="brands__title">{t('Бренди')}</h2>
       </Title>
       <div className="brands__box">
         {slicedBrands(brands).map(brand => {
@@ -36,7 +38,7 @@ const BrandsSection = () => {
       </div>
       <div className="brands__button-container">
         <button type="button" className="brands__button">
-          До каталогу
+          {t('До каталогу')}
         </button>
       </div>
     </BrandsContainer>

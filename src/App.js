@@ -1,7 +1,6 @@
 import { observer } from 'mobx-react-lite';
 import React, { useEffect } from 'react';
 import AppRouter from './components/AppRouter';
-// import { getAnimals } from './services/authAPI';
 import { useStore } from './store/AuthProvider';
 
 const App = observer(() => {
