@@ -45,7 +45,7 @@ const RegisterBox = observer(() => {
     reset,
     setError,
   } = useForm({
-    mode: 'onChange',
+    mode: 'all',
     defaultValues: {
       name: '',
       surname: '',

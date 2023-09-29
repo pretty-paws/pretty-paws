@@ -38,7 +38,7 @@ const LogInBox = observer(() => {
     formState: { errors, isValid },
     reset,
   } = useForm({
-    mode: 'onChange',
+    mode: 'all',
     defaultValues: {
       email: localStorage.getItem('email') || '',
       password: '',
@@ -106,6 +106,7 @@ const LogInBox = observer(() => {
           {t('Пароль')}
           <input
             onInput={e => {
+              console.log(e.target.value);
               if (e.target.value.includes(' ')) {
                 e.target.value = e.target.value.replace(' ', '');
               }
