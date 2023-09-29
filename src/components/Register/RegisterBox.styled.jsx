@@ -136,6 +136,7 @@ export const StyledRegisterBox = styled.div`
   }
 
   & .error-icon {
+    background-color: #fff;
     position: absolute;
     top: 30px;
     right: 5px;

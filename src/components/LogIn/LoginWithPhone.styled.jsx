@@ -103,6 +103,7 @@ export const StyledLoginWithPhone = styled.div`
     position: absolute;
     top: 30px;
     right: 5px;
+    background-color: #fff;
   }
 
   & .login-button {

@@ -129,6 +129,7 @@ export const StyledLoginBox = styled.div`
     position: absolute;
     top: 30px;
     right: 5px;
+    background-color: #fff;
   }
 
   & .button-checkbox-container {
