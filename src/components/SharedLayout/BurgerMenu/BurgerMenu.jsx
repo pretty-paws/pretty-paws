@@ -70,6 +70,18 @@ const BurgerMenu = ({ active, setActive }) => {
       console.log(getAnimalName(selectedAnimal));
     }
   }, [selectedAnimal]);
+
+  useEffect(() => {
+    if (active) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+    return () => {
+      document.body.style.overflow = 'auto';
+    };
+  }, [active]);
+
   return (
     <>
       <StyledBackdrop
