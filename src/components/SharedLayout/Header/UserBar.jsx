@@ -1,14 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ToolTip from '../../../hooks/useTooltip';
 import useWindowSize from '../../../hooks/useWindowSize';
 import sprite from '../../../img/svg-sprite/sprite.svg';
 import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
-
+import { useTranslation } from 'react-i18next';
 import { StyledUserBar } from './UserBar.styled';
 
 const UserBar = ({ setActive }) => {
+  const [language, setLanguage] = useState('ua');
   const { screen } = useWindowSize();
+
+  const { i18n } = useTranslation();
+
+  const handleLanguageChange = lang => {
+    setLanguage(lang);
+    i18n.changeLanguage(language);
+  };
+
   return (
     <StyledUserBar>
       <ToolTip text="Улюблені товари">
@@ -61,9 +70,29 @@ const UserBar = ({ setActive }) => {
       </ToolTip>
       {screen === 'desktop' && (
         <ToolTip text="Змінити мову">
-          <svg className="user-bar-language-uk-icon" width="24px" height="24px">
-            <use href={sprite + '#uk'} />
-          </svg>
+          {language === 'en' && (
+            <div onClick={() => handleLanguageChange('ua')}>
+              <svg
+                className="user-bar-language-uk-icon"
+                width="24px"
+                height="24px"
+              >
+                <use href={sprite + '#uk'} />
+              </svg>
+            </div>
+          )}
+
+          {language === 'ua' && (
+            <div onClick={() => handleLanguageChange('en')}>
+              <svg
+                className="user-bar-language-uk-icon"
+                width="24px"
+                height="24px"
+              >
+                <use href={sprite + '#ua'} />
+              </svg>
+            </div>
+          )}
         </ToolTip>
       )}
     </StyledUserBar>

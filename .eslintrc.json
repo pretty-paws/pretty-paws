@@ -12,8 +12,9 @@
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
-  "plugins": ["react", "prettier"],
+  "plugins": ["react", "prettier", "json-files"],
   "rules": {
+    // "json-files/rule-name": "error",
     "react/react-in-jsx-scope": "off",
     "prettier/prettier": [
       "error",

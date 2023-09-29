@@ -5,8 +5,10 @@ import { phoneRegExp } from '../../validation/regexp';
 import { phoneMessage } from '../../validation/messages';
 import sprite from '../../img/svg-sprite/sprite.svg';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 const LoginWithPhone = () => {
+  const { t } = useTranslation();
   const {
     register,
     handleSubmit,
@@ -32,7 +34,7 @@ const LoginWithPhone = () => {
     <StyledLoginWithPhone>
       <form onSubmit={handleSubmit(onSubmit)}>
         <label className="login-label">
-          Телефон
+          {t('Телефон')}
           <input
             onFocus={() => setPhoneFocused(true)}
             onBlur={() => setPhoneFocused(false)}
@@ -75,7 +77,7 @@ const LoginWithPhone = () => {
 
         <div className="button-checkbox-container">
           <button type="submit" className="login-button" disabled={!isValid}>
-            Надіслати код підтвердження
+            {t('Надіслати код підтвердження')}
           </button>
         </div>
       </form>

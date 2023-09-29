@@ -12,8 +12,10 @@ import { observer } from 'mobx-react-lite';
 import { emailRegExp, passwordRegExp } from '../../validation/regexp';
 import { emailMessage, passwordMessage } from '../../validation/messages';
 import useWindowSize from '../../hooks/useWindowSize';
+import { useTranslation } from 'react-i18next';
 
 const LogInBox = observer(() => {
+  const { t } = useTranslation();
   const { screen } = useWindowSize();
 
   const store = useStore();
@@ -59,26 +61,26 @@ const LogInBox = observer(() => {
 
   return (
     <StyledLoginBox>
-      <h2 className="login-header">Вхід для своїх</h2>
+      <h2 className="login-header">{t('Вхід для своїх')}</h2>
       {screen === 'mobile' && (
         <p className="register-text">
-          Ще не маєш акаунту?{' '}
+          {t('Ще не маєш акаунту?')}{' '}
           <Link to="/register">
-            <span className="register-phrase">Зареєструйся </span>
+            <span className="register-phrase">{t('Зареєструйся')} </span>
           </Link>{' '}
-          та отримай 5% знижки на всі покупки
+          {t('та отримай 5% знижки на всі покупки')}
         </p>
       )}
-      <p className="login-text">Увійти за номером телефону</p>
+      <p className="login-text">{t('Увійти за номером телефону')}</p>
       <LoginWithPhone />
-      <p className="login-text">Або увійти за ел. адресою</p>
+      <p className="login-text">{t('Або увійти за ел. адресою')}</p>
       <form onSubmit={handleSubmit(onSubmit)}>
         <label className="login-label">
-          Електронна пошта
+          {t('Електронна пошта')}
           <input
             className={errors.email ? 'login-input error' : 'login-input '}
             type="email"
-            placeholder="Електронна адреса"
+            placeholder={t('Електронна адреса')}
             {...register('email', {
               pattern: {
                 value: emailRegExp,
@@ -101,14 +103,14 @@ const LogInBox = observer(() => {
           )}
         </label>
         <label className="login-label">
-          Пароль
+          {t('Пароль')}
           <input
             onInput={e => {
               if (e.target.value.includes(' ')) {
                 e.target.value = e.target.value.replace(' ', '');
               }
             }}
-            placeholder="Пароль"
+            placeholder={t('Пароль')}
             className={errors.password ? 'login-input error' : 'login-input '}
             type={passwordVisibility ? 'text' : 'password'}
             {...register('password', {
@@ -150,12 +152,12 @@ const LogInBox = observer(() => {
               onClick={e => onRememberMeChange(e)}
               {...register('rememberMe')}
             />
-            <p className="login-agree">Запам’ятати мене</p>
+            <p className="login-agree">{t('Запам’ятати мене')}</p>
           </div>
-          <p className="login-agree">Забули пароль?</p>
+          <p className="login-agree">{t('Забули пароль?')}</p>
         </div>
         <button type="submit" className="login-button" disabled={!isValid}>
-          Увійти
+          {t('Увійти')}
         </button>
       </form>
       <SocialNetsAuth title="Або увійти через" />
