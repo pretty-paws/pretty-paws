@@ -5,7 +5,11 @@ import { GlobalContainer } from '../../global/GlobalContainer';
 import { StyledMain } from './Main.styled';
 import HelpRegisterSection from './HelpRegisterSection/HelpRegisterSection';
 import BrandsSection from './BrandsSection/BrandsSection';
+import { useTranslation } from 'react-i18next';
+
 const Main = () => {
+  const { t } = useTranslation();
+
   return (
     <StyledMain>
       <Hero />
@@ -14,18 +18,20 @@ const Main = () => {
       </GlobalContainer>
       <HelpRegisterSection
         animal="dog"
-        title="Стань своїм"
-        text="Зареєструйся на сайті і отримай знижку 5% на перше замовлення.  Для своїх у нас безліч переваг"
-        button="Зареєструйся"
+        title={t('Стань своїм')}
+        text={t(
+          'Зареєструйся на сайті і отримай знижку 5% на перше замовлення.  Для своїх у нас безліч переваг'
+        )}
+        button={t('Зареєструйся')}
       />
       <GlobalContainer>
         <BrandsSection />
       </GlobalContainer>
       <HelpRegisterSection
         animal="cat"
-        title="Допомогти тваринам "
-        text="Задонать на корм для пухнастих улюблинців"
-        button="Детальніше"
+        title={t('Допомогти тваринам')}
+        text={t('Задонать на корм для пухнастих улюблинців')}
+        button={t('Детальніше')}
       />
     </StyledMain>
   );

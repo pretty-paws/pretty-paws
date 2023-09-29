@@ -70,7 +70,7 @@ const LoginWithPhone = () => {
           )}
           {errors.phone_number && (
             <p role="alert" className="login-error">
-              {errors.phone_number.message}
+              {t(`${errors.phone_number.message}`)}
             </p>
           )}
         </label>

@@ -10,7 +10,7 @@ import { observer } from 'mobx-react-lite';
 
 const UserBar = observer(({ setActive }) => {
   const [language, setLanguage] = useState(
-    localStorage.getItem('language') || 'en'
+    localStorage.getItem('language') || 'ua'
   );
   const { screen } = useWindowSize();
 
@@ -19,7 +19,7 @@ const UserBar = observer(({ setActive }) => {
   const handleLanguageChange = lang => {
     localStorage.setItem('language', lang);
     setLanguage(lang);
-    i18n.changeLanguage(language);
+    i18n.changeLanguage(lang);
   };
 
   return (
@@ -83,7 +83,7 @@ const UserBar = observer(({ setActive }) => {
                 width="24px"
                 height="24px"
               >
-                <use href={sprite + '#uk'} />
+                <use href={sprite + '#ua'} />
               </svg>
             </div>
           )}
@@ -95,7 +95,7 @@ const UserBar = observer(({ setActive }) => {
                 width="24px"
                 height="24px"
               >
-                <use href={sprite + '#ua'} />
+                <use href={sprite + '#uk'} />
               </svg>
             </div>
           )}

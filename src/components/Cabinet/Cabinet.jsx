@@ -25,8 +25,9 @@ const Cabinet = observer(() => {
         <StyledCabinet>
           <div className="cabinet__menu">
             <h2 className="cabinet__header">
-              {t('Привіт, ')}
-              {`${user.name}`}
+              {t('Привіт,')}
+
+              {user.name}
             </h2>
             <div className="cabinet__line-box">
               <NavLink

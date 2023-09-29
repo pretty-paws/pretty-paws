@@ -27,7 +27,7 @@ const BurgerMenu = ({ active, setActive }) => {
   const handleLanguageChange = lang => {
     localStorage.setItem('language', lang);
     setLanguage(lang);
-    i18n.changeLanguage(language);
+    i18n.changeLanguage(lang);
   };
 
   //  function that get id animal clicked
@@ -126,7 +126,7 @@ const BurgerMenu = ({ active, setActive }) => {
                       width="24px"
                       height="24px"
                     >
-                      <use href={sprite + '#uk'} />
+                      <use href={sprite + '#ua'} />
                     </svg>
                   </div>
                 )}
@@ -138,7 +138,7 @@ const BurgerMenu = ({ active, setActive }) => {
                       width="24px"
                       height="24px"
                     >
-                      <use href={sprite + '#ua'} />
+                      <use href={sprite + '#uk'} />
                     </svg>
                   </div>
                 )}
@@ -186,7 +186,7 @@ const BurgerMenu = ({ active, setActive }) => {
                 {publicRoutes.slice(1).map(({ name, path }) => {
                   return (
                     <Link to={path} key={name} onClick={() => setActive(false)}>
-                      <p>{name}</p>
+                      <p>{t(`${name}`)}</p>
                     </Link>
                   );
                 })}

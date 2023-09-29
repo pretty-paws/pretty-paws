@@ -109,7 +109,7 @@ const RegisterBox = observer(() => {
           )}
           {errors.name && (
             <p role="alert" className="register-error">
-              {errors.name.message}
+              {t(`${errors.name.message}`)}
             </p>
           )}
         </label>
@@ -142,7 +142,7 @@ const RegisterBox = observer(() => {
           )}
           {errors.surname && (
             <p role="alert" className="register-error">
-              {errors.surname.message}
+              {t(`${errors.surname.message}`)}
             </p>
           )}
         </label>
@@ -183,7 +183,7 @@ const RegisterBox = observer(() => {
           )}
           {errors.phone_number && (
             <p role="alert" className="register-error">
-              {errors.phone_number.message}
+              {t(`${errors.phone_number.message}`)}
             </p>
           )}
         </label>
@@ -212,7 +212,7 @@ const RegisterBox = observer(() => {
           )}
           {errors.email && (
             <p role="alert" className="register-error">
-              {errors.email.message}
+              {t(`${errors.email.message}`)}
             </p>
           )}
         </label>
@@ -263,7 +263,7 @@ const RegisterBox = observer(() => {
           </svg>
           {errors.password && (
             <p role="alert" className="register-error ">
-              {errors.password.message}
+              {t(`${errors.password.message}`)}
             </p>
           )}
         </label>
@@ -303,7 +303,7 @@ const RegisterBox = observer(() => {
           </svg>
           {errors.password_confirmation && (
             <p role="alert" className="register-error">
-              {errors.password_confirmation.message}
+              {t(`${errors.password_confirmation.message}`)}
             </p>
           )}
         </label>
@@ -323,9 +323,11 @@ const RegisterBox = observer(() => {
               {t('персональних данних')}
             </span>
           </p>
-          <p role="alert" className="register-error">
-            {errors.agree?.message}
-          </p>
+          {errors.agree?.message !== undefined && (
+            <p role="alert" className="register-error">
+              {t(`${errors.agree?.message}`)}
+            </p>
+          )}
         </div>
         <div className="button-checkbox-container">
           <button type="submit" className="register-button" disabled={!isValid}>

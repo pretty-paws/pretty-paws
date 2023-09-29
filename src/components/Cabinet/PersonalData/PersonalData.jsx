@@ -6,9 +6,11 @@ import { Link, NavLink, Outlet, useNavigate } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import { observer } from 'mobx-react-lite';
 import useWindowSize from '../../../hooks/useWindowSize';
+import { useTranslation } from 'react-i18next';
 // import { logOut } from '../../../services/authAPI';
 
 const PersonalData = observer(() => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const { screen } = useWindowSize();
   const store = useStore();
@@ -29,7 +31,7 @@ const PersonalData = observer(() => {
           </Link>
         )}
 
-        <h2 className="personal-data__header">Особисті дані</h2>
+        <h2 className="personal-data__header">{t('Особисті дані')}</h2>
         <NavLink
           to="/cabinet/personal_data/edit"
           className={({ isActive }) => (isActive ? 'active-edit' : '')}
@@ -44,20 +46,20 @@ const PersonalData = observer(() => {
           <table>
             <tbody>
               <tr>
-                <td>Ім’я</td>
+                <td>{t('Ім’я')}</td>
                 <td>{user.name}</td>
               </tr>
               <tr>
-                <td>Прізвище</td>
+                <td>{t('Прізвище')}</td>
                 <td>{user.surname}</td>
               </tr>
               <tr>
-                <td>Телефон</td>
+                <td>{t('Телефон')}</td>
                 <td>{user.phone_number}</td>
               </tr>
               <tr>
                 <td>
-                  {screen === 'mobile' ? 'Ел. пошта' : 'Електронна пошта'}
+                  {screen === 'mobile' ? t('Ел. пошта') : t('Електронна пошта')}
                 </td>
                 <td>{user.email}</td>
               </tr>
@@ -75,7 +77,7 @@ const PersonalData = observer(() => {
                   navigate('/');
                 }}
               >
-                Вийти з акаунту
+                {t('Вийти з акаунту')}
               </button>
             </div>
           )}

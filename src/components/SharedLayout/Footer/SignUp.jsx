@@ -5,8 +5,10 @@ import { StyledSignUp } from './SignUp.styled';
 import { observer } from 'mobx-react-lite';
 import { useStore } from '../../../store/AuthProvider';
 import { GlobalContainer } from '../../../global/GlobalContainer';
+import { useTranslation } from 'react-i18next';
 
 const SignUp = observer(() => {
+  const { t } = useTranslation();
   const store = useStore();
   const {
     auth: { email, authorised },
@@ -26,7 +28,7 @@ const SignUp = observer(() => {
     <StyledSignUp>
       <GlobalContainer>
         <div className="sign-up__container">
-          <p className="sign-up__title">Підписатися на акції для</p>
+          <p className="sign-up__title">{t('Підписатися на акції для')}</p>
           <AnimalsBar getID={getID} />
           <div
             className={
