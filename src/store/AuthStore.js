@@ -89,10 +89,11 @@ export class AuthStore {
     this.state = 'pending';
     try {
       const { data } = await loginUser(userData);
+      // localStorage.setItem('token', data.data.token);
       localStorage.setItem('authorised', true);
-      localStorage.setItem('token', data.data.token);
 
       runInAction(() => {
+        console.log(data.data.token);
         this.token = data.data.token;
         this.authorised = true;
         this.user = data.data.user;

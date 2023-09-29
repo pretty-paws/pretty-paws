@@ -12,7 +12,7 @@ const App = observer(() => {
   useEffect(() => {
     // getAnimals();
     authorised && refresh();
-  });
+  }, [authorised]);
 
   return <AppRouter />;
 });

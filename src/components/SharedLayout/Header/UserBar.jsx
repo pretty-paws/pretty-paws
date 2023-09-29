@@ -6,21 +6,25 @@ import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import { StyledUserBar } from './UserBar.styled';
+import { observer } from 'mobx-react-lite';
 
-const UserBar = ({ setActive }) => {
-  const [language, setLanguage] = useState('ua');
+const UserBar = observer(({ setActive }) => {
+  const [language, setLanguage] = useState(
+    localStorage.getItem('language') || 'en'
+  );
   const { screen } = useWindowSize();
 
-  const { i18n } = useTranslation();
+  const { i18n, t } = useTranslation();
 
   const handleLanguageChange = lang => {
+    localStorage.setItem('language', lang);
     setLanguage(lang);
     i18n.changeLanguage(language);
   };
 
   return (
     <StyledUserBar>
-      <ToolTip text="Улюблені товари">
+      <ToolTip text={t('Улюблені товари')}>
         <NavLink
           to="/favorite"
           onClick={() => screen !== 'desktop' && setActive(false)}
@@ -31,12 +35,12 @@ const UserBar = ({ setActive }) => {
               <use href={sprite + '#favourite'} />
             </svg>
             {screen !== 'desktop' && (
-              <span className="menu__item">Улюблені товари</span>
+              <span className="menu__item">{t('Улюблені товари')}</span>
             )}
           </div>
         </NavLink>
       </ToolTip>
-      <ToolTip text="Порівняти">
+      <ToolTip text={t('Порівняти')}>
         <NavLink
           to="/comparison"
           onClick={() => screen !== 'desktop' && setActive(false)}
@@ -48,12 +52,12 @@ const UserBar = ({ setActive }) => {
             </svg>
             <span className="user-bar__basket-badge">0</span>
             {screen !== 'desktop' && (
-              <span className="menu__item">Порівняння</span>
+              <span className="menu__item">{t('Порівняння')}</span>
             )}
           </div>
         </NavLink>
       </ToolTip>
-      <ToolTip className="user-bar__container" text="Корзина">
+      <ToolTip className="user-bar__container" text={t('Корзина')}>
         <NavLink
           to="/cart"
           onClick={() => screen !== 'desktop' && setActive(false)}
@@ -64,12 +68,14 @@ const UserBar = ({ setActive }) => {
               <use href={sprite + '#basket'} />
             </svg>
             <span className="user-bar__basket-badge">0</span>
-            {screen !== 'desktop' && <span className="menu__item">Кошик</span>}
+            {screen !== 'desktop' && (
+              <span className="menu__item">{t('Кошик')}</span>
+            )}
           </div>
         </NavLink>
       </ToolTip>
       {screen === 'desktop' && (
-        <ToolTip text="Змінити мову">
+        <ToolTip text={t('Змінити мову')}>
           {language === 'en' && (
             <div onClick={() => handleLanguageChange('ua')}>
               <svg
@@ -97,7 +103,7 @@ const UserBar = ({ setActive }) => {
       )}
     </StyledUserBar>
   );
-};
+});
 
 export default UserBar;
 
