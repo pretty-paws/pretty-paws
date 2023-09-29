@@ -12,12 +12,23 @@ import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { publicRoutes } from '../../../routes';
 import { animalsSvg } from '../../../utils/animalBarSvgLinks';
+import { useTranslation } from 'react-i18next';
 
 const BurgerMenu = ({ active, setActive }) => {
   const [openedCatalogue, setOpenedCatalogue] = useState(false);
   const [showAnimalCatalog, setShowAnimalCatalog] = useState(false);
-
   const [selectedAnimal, setSelectedAnimal] = useState();
+  const [language, setLanguage] = useState(
+    localStorage.getItem('language') || 'en'
+  );
+
+  const { i18n, t } = useTranslation();
+
+  const handleLanguageChange = lang => {
+    localStorage.setItem('language', lang);
+    setLanguage(lang);
+    i18n.changeLanguage(language);
+  };
 
   //  function that get id animal clicked
   const handleAnimalClick = animalid => {
@@ -108,20 +119,36 @@ const BurgerMenu = ({ active, setActive }) => {
           >
             <div onClick={e => e.stopPropagation()}>
               <div className="burger__head">
-                <svg
-                  className="burger-language-uk-icon"
-                  width="24px"
-                  height="24px"
-                >
-                  <use href={sprite + '#uk'} />
-                </svg>
+                {language === 'en' && (
+                  <div onClick={() => handleLanguageChange('ua')}>
+                    <svg
+                      className="burger-language-icon"
+                      width="24px"
+                      height="24px"
+                    >
+                      <use href={sprite + '#uk'} />
+                    </svg>
+                  </div>
+                )}
+
+                {language === 'ua' && (
+                  <div onClick={() => handleLanguageChange('en')}>
+                    <svg
+                      className="burger-language-icon"
+                      width="24px"
+                      height="24px"
+                    >
+                      <use href={sprite + '#ua'} />
+                    </svg>
+                  </div>
+                )}
                 <Link to="/login" onClick={() => setActive(false)}>
                   <button
                     className="burger__login-button"
                     type="button"
                     //   onClick={() => showModal(true)}
                   >
-                    Вхід для своїх
+                    {t('Вхід для своїх')}
                   </button>
                 </Link>
                 <svg
@@ -151,7 +178,7 @@ const BurgerMenu = ({ active, setActive }) => {
                   >
                     <use href={sprite + '#arrow-down'} />
                   </svg>
-                  <p>Каталог товарів</p>
+                  <p>{t('Каталог товарів')}</p>
                 </div>
                 {openedCatalogue && (
                   <AnimalsBar type="burger" getID={handleAnimalClick} />

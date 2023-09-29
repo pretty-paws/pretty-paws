@@ -155,7 +155,7 @@ export const StyledBurger = styled.div`
     }
   }
 
-  & .burger-language-uk-icon {
+  & .burger-language-icon {
     border-radius: 100%;
     cursor: pointer;
   }

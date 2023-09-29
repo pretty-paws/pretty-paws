@@ -15,9 +15,9 @@ axios.defaults.baseURL = 'https://zoo-shop-api.online/api';
 //   },
 // };
 
-axios.defaults.headers.common.Authorization = `Bearer ${
-  localStorage.getItem('token') || ''
-}`;
+// axios.defaults.headers.common.Authorization = `Bearer ${
+//   localStorage.getItem('token') || ''
+// }`;
 
 export const registerUser = async data => {
   const result = await axios.post(`/auth/sign-up`, data);
@@ -33,17 +33,19 @@ export const registerVerify = async code => {
 export const loginUser = async data => {
   const result = await axios.post(`/auth/sign-in`, data);
   // token.set(result.data.data.token);
-  // localStorage.setItem('token', result.data.data.token);
+  localStorage.setItem('token', result.data.data.token);
 
   return result;
 };
 
 export const refreshUser = async () => {
+  axios.defaults.headers.common.Authorization = `Bearer ${
+    localStorage.getItem('token') || ''
+  }`;
   const result = await axios.get(`/profile/me`);
   // console.log(result);
-  // axios.defaults.headers.common.Authorization = `Bearer ${
-  //   localStorage.getItem('token') || ''
-  // }`;
+  // console.log(localStorage.getItem('token'));
+
   return result;
 };
 

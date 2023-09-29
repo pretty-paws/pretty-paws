@@ -24,8 +24,10 @@ import {
   surNameMessage,
 } from '../../validation/messages';
 import { SocialNetsAuth } from '../LogIn/SocialNetsAuth';
+import { useTranslation } from 'react-i18next';
 
 const RegisterBox = observer(() => {
+  const { t } = useTranslation();
   const store = useStore();
   const {
     auth: { signUp, setEmail },
@@ -67,24 +69,24 @@ const RegisterBox = observer(() => {
 
   return (
     <StyledRegisterBox>
-      <h2 className="register-header">Реєстрація</h2>
+      <h2 className="register-header">{t('Реєстрація')}</h2>
       {screen === 'mobile' && (
         <p className="login-text">
-          Уже маєш акаунт?
+          {t('Уже маєш акаунт?')}
           <Link to="/login">
             {' '}
-            <span className="login-phrase">Увійти</span>
+            <span className="login-phrase">{t('Увійти')}</span>
           </Link>{' '}
-          та користуйся усіма доступними перевагами.
+          {t('та користуйся усіма доступними перевагами.')}
         </p>
       )}
-      <p className="register-text">Введіть свої дані:</p>
+      <p className="register-text">{t('Введіть свої дані:')}</p>
       <form onSubmit={handleSubmit(onSubmit)}>
         <label className="register-label">
-          Ім’я
+          {t('Ім’я')}
           <input
             className={errors.name ? 'register-input error' : 'register-input'}
-            placeholder="Ім’я"
+            placeholder={t('Ім’я')}
             type="text"
             {...register('name', {
               pattern: {
@@ -112,13 +114,13 @@ const RegisterBox = observer(() => {
           )}
         </label>
         <label className="register-label">
-          Прізвище
+          {t('Прізвище')}
           <input
             className={
               errors.surname ? 'register-input error' : 'register-input '
             }
             type="text"
-            placeholder="Прізвище"
+            placeholder={t('Прізвище')}
             {...register('surname', {
               pattern: {
                 value: nameRegExp,
@@ -145,14 +147,11 @@ const RegisterBox = observer(() => {
           )}
         </label>
         <label className="register-label">
-          Телефон
+          {t('Телефон')}
           <input
             onFocus={() => setPhoneFocused(true)}
             onBlur={() => setPhoneFocused(false)}
             onInput={e => {
-              // if (e.target.value.includes('+38')) {
-              //   e.target.value = e.target.value.replace(/[+38]/g, '');
-              // }
               e.target.value = e.target.value.replace(/[^0-9+]/g, '');
             }}
             className={
@@ -189,13 +188,13 @@ const RegisterBox = observer(() => {
           )}
         </label>
         <label className="register-label">
-          Електронна пошта
+          {t('Електронна пошта')}
           <input
             className={
               errors.email ? 'register-input error' : 'register-input  '
             }
             type="email"
-            placeholder="Електронна адреса"
+            placeholder={t('Електронна адреса')}
             {...register('email', {
               pattern: {
                 value: emailRegExp,
@@ -218,7 +217,7 @@ const RegisterBox = observer(() => {
           )}
         </label>
         <label className="register-label">
-          Пароль
+          {t('Пароль')}
           <input
             onInput={e => {
               if (e.target.value.includes(' ')) {
@@ -232,12 +231,11 @@ const RegisterBox = observer(() => {
                   type: 'manual',
                   message: passwordMessage.notMatch,
                 });
-              // console.log(e.currentTarget.value);
             }}
             className={
               errors.password ? 'register-input error' : 'register-input  '
             }
-            placeholder="Пароль"
+            placeholder={t('Пароль')}
             type={passwordVisibility ? 'text' : 'password'}
             {...register('password', {
               pattern: {
@@ -270,7 +268,7 @@ const RegisterBox = observer(() => {
           )}
         </label>
         <label className="register-label">
-          Підтвердження пароля
+          {t('Підтвердження пароля')}
           <input
             onInput={e => {
               if (e.target.value.includes(' ')) {
@@ -282,7 +280,7 @@ const RegisterBox = observer(() => {
                 ? 'register-input error'
                 : 'register-input  '
             }
-            placeholder="Пароль"
+            placeholder={t('Пароль')}
             type={verificationVisibility ? 'text' : 'password'}
             {...register('password_confirmation', {
               required: passwordConfirmMessage.required,
@@ -319,8 +317,11 @@ const RegisterBox = observer(() => {
             })}
           />
           <p className="register-agree">
-            Я згоден з обробкою
-            <span className="register-personal-data"> персональних данних</span>
+            {t('Я згоден з обробкою')}
+            <span className="register-personal-data">
+              {' '}
+              {t('персональних данних')}
+            </span>
           </p>
           <p role="alert" className="register-error">
             {errors.agree?.message}
@@ -328,12 +329,12 @@ const RegisterBox = observer(() => {
         </div>
         <div className="button-checkbox-container">
           <button type="submit" className="register-button" disabled={!isValid}>
-            Зареєструватися
+            {t('Зареєструватися')}
           </button>
         </div>
       </form>
 
-      <SocialNetsAuth title="Або реєстрація через" />
+      <SocialNetsAuth title={t('Або реєстрація через')} />
     </StyledRegisterBox>
   );
 });
