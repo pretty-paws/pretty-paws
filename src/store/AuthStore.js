@@ -107,16 +107,16 @@ export class AuthStore {
         window.scrollTo({ top: 0, behavior: 'smooth' });
       });
     } catch (error) {
-      console.log(error.response);
+      // console.log(error.response);
       runInAction(() => {
         this.state = 'error';
         const errorData = error.response.data.error;
-        console.log(errorData);
+        // console.log(errorData);
 
         if ('email' in errorData) {
           this.errorType = 'email';
           this.error = errorData.email[0];
-          console.log(this.errorType, this.error);
+          // console.log(this.errorType, this.error);
         }
         if ('password' in errorData) {
           this.errorType = 'password';

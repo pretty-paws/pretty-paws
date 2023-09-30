@@ -193,7 +193,9 @@ const RegisterBox = observer(() => {
               {t(`${errors.phone_number.message}`)}
             </p>
           )}
-          {state === 'error' && errorType === 'phone_number' ? (
+          {state === 'error' &&
+          errorType === 'phone_number' &&
+          !errors.phone_number ? (
             <p role="alert" className="register-error">
               {t(`${error}`)}
             </p>
@@ -229,7 +231,7 @@ const RegisterBox = observer(() => {
               {t(`${errors.email.message}`)}
             </p>
           )}
-          {state === 'error' && errorType === 'email' ? (
+          {state === 'error' && errorType === 'email' && !errors.email ? (
             <p role="alert" className="register-error">
               {t(`${error}`)}
             </p>

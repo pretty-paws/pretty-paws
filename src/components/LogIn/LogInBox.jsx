@@ -105,7 +105,7 @@ const LogInBox = observer(() => {
               {t(`${errors.email.message}`)}
             </p>
           )}
-          {state === 'error' && errorType === 'email' ? (
+          {state === 'error' && errorType === 'email' && !errors.email ? (
             <p role="alert" className="login-error">
               {t(`${error}`)}
             </p>
@@ -156,7 +156,7 @@ const LogInBox = observer(() => {
               {t(`${errors.password.message}`)}
             </p>
           )}
-          {state === 'error' && errorType === 'password' ? (
+          {state === 'error' && errorType === 'password' && !errors.password ? (
             <p role="alert" className="login-error">
               {t(`${error}`)}
             </p>
