@@ -25,6 +25,7 @@ export const StyledEditForm = styled.div`
   }
 
   .edit-label {
+    position: relative;
     display: flex;
     gap: 15px;
     position: relative;

@@ -64,27 +64,20 @@ export const StyledLoginWithPhone = styled.div`
     }
   }
 
-  /* & .login__country-code {
+  & .login__country-code {
+    color: var(--font-color-black);
     position: absolute;
     z-index: 2;
-    top: 36px;
+    top: 31px;
     left: 15px;
     font-size: 13px;
     font-weight: 400;
-    line-height: 1;
+    line-height: 1.5;
+  }
 
-    @media screen and (min-width: 834px) {
-      top: 28px;
-      line-height: 2;
-    }
-
-    @media screen and (min-width: 1440px) {
-    }
-  } */
-
-  /* & .login-input.phone-input {
-    padding-left: 40px;
-  } */
+  & .phone-input {
+    padding-left: 46px;
+  }
 
   & .login-input.phone-input.error {
     border: 2px solid var(--accent-color-orange);

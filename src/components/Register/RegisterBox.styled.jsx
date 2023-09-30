@@ -70,7 +70,7 @@ export const StyledRegisterBox = styled.div`
   & .register__country-code {
     position: absolute;
     z-index: 2;
-    top: 34px;
+    top: 33px;
     left: 15px;
     font-size: 13px;
     font-weight: 400;
@@ -90,7 +90,7 @@ export const StyledRegisterBox = styled.div`
     color: #111;
     font-size: 13px;
     font-weight: 400;
-    line-height: 1, 50;
+    line-height: 1.5;
 
     &::-webkit-outer-spin-button,
     &::-webkit-inner-spin-button {
@@ -109,9 +109,9 @@ export const StyledRegisterBox = styled.div`
     }
   }
 
-  /* & .phone-input {
-    padding-left: 45px;
-  } */
+  & .phone-input {
+    padding-left: 46px;
+  }
 
   & .register-icon-eye {
     position: absolute;

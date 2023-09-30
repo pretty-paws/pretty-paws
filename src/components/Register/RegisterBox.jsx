@@ -29,12 +29,13 @@ import { useTranslation } from 'react-i18next';
 const RegisterBox = observer(() => {
   const { t } = useTranslation();
   const store = useStore();
+
   const {
     auth: { signUp, setEmail },
   } = store;
 
   const { screen } = useWindowSize();
-  const [phoneFocused, setPhoneFocused] = useState(false);
+  // const [phoneFocused, setPhoneFocused] = useState(false);
   const [passwordVisibility, setPasswordVisibility] = useState(false);
   const [verificationVisibility, setVerificationVisibility] = useState(false);
   const {
@@ -49,20 +50,24 @@ const RegisterBox = observer(() => {
     defaultValues: {
       name: '',
       surname: '',
-      phone_number: `+380`,
+      phone_number: ``,
       email: '',
       password: '',
       password_confirmation: '',
     },
   });
 
-  const phone_number = watch('phone_number', '');
+  // const phone_number = watch('phone_number', '');
   const password = watch('password', '');
   const password_confirmation = watch('password_confirmation', '');
 
   const onSubmit = data => {
+    const number = { phone_number: '+380' + data.phone_number };
+    const userData = { ...data, ...number };
+    // console.log(userData);
     setEmail(data.email);
-    signUp(data);
+    // console.log(data);
+    signUp(userData);
     redirect('/');
     reset();
   };
@@ -148,29 +153,31 @@ const RegisterBox = observer(() => {
         </label>
         <label className="register-label">
           {t('Телефон')}
+          <p className="register__country-code">+380</p>
           <input
-            onFocus={() => setPhoneFocused(true)}
-            onBlur={() => setPhoneFocused(false)}
-            onInput={e => {
-              e.target.value = e.target.value.replace(/[^0-9+]/g, '');
-            }}
+            // onFocus={() => setPhoneFocused(true)}
+            // onBlur={() => setPhoneFocused(false)}
+            // onInput={e => {
+            // e.target.value = e.target.value.replace(/[^0-9+]/g, '');
+            // }}
             className={
               errors.phone_number
                 ? 'register-input phone-input error'
                 : 'register-input phone-input '
             }
             type="text"
-            placeholder={phoneFocused ? '' : '+380__ ___ ___'}
-            value={phoneFocused ? phone_number : ''}
+            // placeholder={phoneFocused ? '' : '+380__ ___ ___'}
+            // value={phoneFocused ? phone_number : ''}
+            // {...register('phone_number')}
             {...register('phone_number', {
               pattern: {
                 value: phoneRegExp,
                 message: phoneMessage.pattern,
               },
               required: phoneMessage.required,
-              maxLength: { value: 13, message: phoneMessage.maxLength },
+              maxLength: { value: 9, message: phoneMessage.maxLength },
               minLength: {
-                value: 13,
+                value: 9,
                 message: phoneMessage.minLength,
               },
             })}

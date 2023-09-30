@@ -5,7 +5,7 @@ import {
   emailRegExp,
   nameRegExp,
   passwordRegExp,
-  phoneRegExp,
+  phoneEditRegExp,
 } from '../../../validation/regexp';
 import {
   emailMessage,
@@ -45,7 +45,7 @@ const PersonalData = observer(() => {
     defaultValues: {
       name: user.name,
       surname: user.surname,
-      phone_number: '+38' + `${user.phone_number}`,
+      phone_number: user.phone_number,
       email: user.email,
       password: '',
       password_confirmation: '',
@@ -147,7 +147,7 @@ const PersonalData = observer(() => {
               type="text"
               {...register('phone_number', {
                 pattern: {
-                  value: phoneRegExp,
+                  value: phoneEditRegExp,
                   message: phoneMessage.pattern,
                 },
                 required: phoneMessage.required,
