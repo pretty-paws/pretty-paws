@@ -104,5 +104,9 @@
   "Паролі не збігаються": "Passwords do not match",
   "Будь ласка, підтвердіть пароль": "Please confirm the password",
   "Введені паролі не збігаються": "The entered passwords do not match",
-  "Ви маєте дати дозвіл на обробку даних": "You must give permission to process data"
+  "Ви маєте дати дозвіл на обробку даних": "You must give permission to process data",
+  "The selected email is invalid.": "The selected email is invalid.",
+  "Entered password is incorrect. Please check and try again.": "Entered password is incorrect. Please check and try again.",
+  "The phone number has already been taken.": "The phone number has already been taken.",
+  "The email has already been taken.": "The email has already been taken."
 }

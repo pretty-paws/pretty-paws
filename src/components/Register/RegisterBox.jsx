@@ -31,7 +31,7 @@ const RegisterBox = observer(() => {
   const store = useStore();
 
   const {
-    auth: { signUp, setEmail },
+    auth: { signUp, setEmail, state, error, errorType },
   } = store;
 
   const { screen } = useWindowSize();
@@ -68,8 +68,9 @@ const RegisterBox = observer(() => {
     setEmail(data.email);
     // console.log(data);
     signUp(userData);
+    reset(data, { keepValues: true });
     redirect('/');
-    reset();
+    // state === 'error' ? :
   };
 
   return (
@@ -161,14 +162,12 @@ const RegisterBox = observer(() => {
               e.target.value = e.target.value.replace(/[^0-9+]/g, '');
             }}
             className={
-              errors.phone_number
+              errors.phone_number ||
+              (state === 'error' && errorType === 'phone_number')
                 ? 'register-input phone-input error'
                 : 'register-input phone-input '
             }
             type="number"
-            // placeholder={phoneFocused ? '' : '+380__ ___ ___'}
-            // value={phoneFocused ? phone_number : ''}
-            // {...register('phone_number')}
             {...register('phone_number', {
               pattern: {
                 value: phoneRegExp,
@@ -183,22 +182,30 @@ const RegisterBox = observer(() => {
             })}
             aria-invalid={errors.phone_number ? 'true' : 'false'}
           />
-          {errors.phone_number && (
+          {errors.phone_number ||
+          (state === 'error' && errorType === 'phone_number') ? (
             <svg className="error-icon" width="24px" height="24px">
               <use href={sprite + '#error'} />
             </svg>
-          )}
+          ) : null}
           {errors.phone_number && (
             <p role="alert" className="register-error">
               {t(`${errors.phone_number.message}`)}
             </p>
           )}
+          {state === 'error' && errorType === 'phone_number' ? (
+            <p role="alert" className="register-error">
+              {t(`${error}`)}
+            </p>
+          ) : null}
         </label>
         <label className="register-label">
           {t('Електронна пошта')}
           <input
             className={
-              errors.email ? 'register-input error' : 'register-input  '
+              errors.email || (state === 'error' && errorType === 'email')
+                ? 'register-input error'
+                : 'register-input  '
             }
             type="email"
             placeholder={t('Електронна адреса')}
@@ -212,16 +219,21 @@ const RegisterBox = observer(() => {
             })}
             aria-invalid={errors.email ? 'true' : 'false'}
           />
-          {errors.email && (
+          {errors.email || (state === 'error' && errorType === 'email') ? (
             <svg className="error-icon" width="24px" height="24px">
               <use href={sprite + '#error'} />
             </svg>
-          )}
+          ) : null}
           {errors.email && (
             <p role="alert" className="register-error">
               {t(`${errors.email.message}`)}
             </p>
           )}
+          {state === 'error' && errorType === 'email' ? (
+            <p role="alert" className="register-error">
+              {t(`${error}`)}
+            </p>
+          ) : null}
         </label>
         <label className="register-label">
           {t('Пароль')}
