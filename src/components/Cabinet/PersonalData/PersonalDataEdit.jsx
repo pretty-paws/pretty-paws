@@ -60,6 +60,8 @@ const PersonalData = observer(() => {
   const password = watch('password', '');
   const password_confirmation = watch('password_confirmation', '');
 
+  console.log(user.phone_number);
+
   const onSubmit = data => {
     console.log(data);
     navigate('/cabinet/personal_data');
@@ -137,7 +139,17 @@ const PersonalData = observer(() => {
             <div className="edit-label-text">{t('Телефон')}</div>
             <input
               onInput={e => {
-                e.target.value = e.target.value.replace(/[^0-9+]/g, '');
+                // e.target.value = e.target.value.replace(/[^0-9+]/g, '');
+
+                let value = e.target.value.replace(/[^0-9+]/g, '');
+
+                let plusCount = (value.match(/\+/g) || []).length;
+
+                if (plusCount > 1) {
+                  value = value.slice(0, value.lastIndexOf('+'));
+                }
+
+                e.target.value = value;
               }}
               className={
                 errors.phone_number

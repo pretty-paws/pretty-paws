@@ -39,15 +39,15 @@ const LoginWithPhone = () => {
           <input
             // onFocus={() => setPhoneFocused(true)}
             // onBlur={() => setPhoneFocused(false)}
-            // onInput={e => {
-            //   e.target.value = e.target.value.replace(/[^0-9+]/g, '');
-            // }}
+            onInput={e => {
+              e.target.value = e.target.value.replace(/[^0-9+]/g, '');
+            }}
             className={
               errors.phone_number
                 ? 'login-input phone-input error'
                 : 'login-input phone-input'
             }
-            type="text"
+            type="number"
             // placeholder={phoneFocused ? '' : '+380__ ___ ___'}
             // value={phoneFocused ? phone_number : ''}
             {...register('phone_number', {
