@@ -17,6 +17,8 @@ export class AuthStore {
   email = localStorage.getItem('email') || '';
   authorised = JSON.parse(localStorage.getItem('authorised')) || false;
   state = 'pending';
+  errorType = '';
+  error = '';
   rememberMe = JSON.parse(localStorage.getItem('rememberMe')) || false;
 
   constructor() {
@@ -37,7 +39,7 @@ export class AuthStore {
     this.state = 'pending';
     try {
       const { data } = await registerUser(userData);
-      console.log('sign up data', data);
+      // console.log('sign up data', data);
       runInAction(() => {
         this.confirmation_code = data.data.code;
         this.verifyCode({
@@ -47,19 +49,19 @@ export class AuthStore {
         this.state = 'done';
       });
     } catch (error) {
-      toast.error(error.message, {
-        style: {
-          border: '1px solid #713200',
-          padding: '16px',
-          color: '#713200',
-        },
-        iconTheme: {
-          primary: '#713200',
-          secondary: '#FFFAEE',
-        },
-      });
       runInAction(() => {
         this.state = 'error';
+        const errorData = error.response.data.error;
+
+        if ('email' in errorData) {
+          this.errorType = 'email';
+          this.error = errorData.email[0];
+          // console.log(this.errorType, this.error);
+        }
+        if ('phone_number' in errorData) {
+          this.errorType = 'phone_number';
+          this.error = errorData.phone_number[0];
+        }
       });
     }
   }
@@ -93,31 +95,33 @@ export class AuthStore {
       localStorage.setItem('authorised', true);
 
       runInAction(() => {
-        console.log(data.data.token);
+        // console.log(data.data.token);
         this.token = data.data.token;
         this.authorised = true;
         this.user = data.data.user;
         this.email = data.data.user.email;
-        this.rememberMe === true
+        this.rememberMe === true && this.state !== 'error'
           ? localStorage.setItem('email', data.data.user.email)
           : null;
         this.state = 'done';
         window.scrollTo({ top: 0, behavior: 'smooth' });
       });
     } catch (error) {
-      toast.error('Неправильні данні', {
-        style: {
-          border: '1px solid #713200',
-          padding: '16px',
-          color: '#713200',
-        },
-        iconTheme: {
-          primary: '#713200',
-          secondary: '#FFFAEE',
-        },
-      });
+      console.log(error.response);
       runInAction(() => {
         this.state = 'error';
+        const errorData = error.response.data.error;
+        console.log(errorData);
+
+        if ('email' in errorData) {
+          this.errorType = 'email';
+          this.error = errorData.email[0];
+          console.log(this.errorType, this.error);
+        }
+        if ('password' in errorData) {
+          this.errorType = 'password';
+          this.error = errorData.password[0];
+        }
       });
     }
   }
@@ -131,6 +135,7 @@ export class AuthStore {
         this.state = 'done';
       });
     } catch (error) {
+      this.authorised === false;
       toast.error('Сессія закінчилась. Авторизуйтесь знов', {
         style: {
           border: '1px solid #713200',
@@ -143,7 +148,7 @@ export class AuthStore {
         },
       });
       runInAction(() => {
-        this.authorised === false;
+        // this.authorised === false;
         this.state = 'error';
         this.rememberMe === false ? localStorage.removeItem('email') : null;
         this.token === '';

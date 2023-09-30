@@ -20,7 +20,7 @@ const LogInBox = observer(() => {
 
   const store = useStore();
   const {
-    auth: { logIn, setRememberMe },
+    auth: { logIn, setRememberMe, state, error, errorType },
   } = store;
 
   const getValueFromStorage = () => {
@@ -78,7 +78,11 @@ const LogInBox = observer(() => {
         <label className="login-label">
           {t('Електронна пошта')}
           <input
-            className={errors.email ? 'login-input error' : 'login-input '}
+            className={
+              errors.email || (state === 'error' && errorType === 'email')
+                ? 'login-input error'
+                : 'login-input '
+            }
             type="email"
             placeholder={t('Електронна адреса')}
             {...register('email', {
@@ -91,16 +95,21 @@ const LogInBox = observer(() => {
             })}
             aria-invalid={errors.email ? 'true' : 'false'}
           />
-          {errors.email && (
+          {errors.email || (state === 'error' && errorType === 'email') ? (
             <svg className="error-icon" width="24px" height="24px">
               <use href={sprite + '#error'} />
             </svg>
-          )}
+          ) : null}
           {errors.email && (
             <p role="alert" className="login-error">
               {t(`${errors.email.message}`)}
             </p>
           )}
+          {state === 'error' && errorType === 'email' ? (
+            <p role="alert" className="login-error">
+              {t(`${error}`)}
+            </p>
+          ) : null}
         </label>
         <label className="login-label">
           {t('Пароль')}
@@ -112,7 +121,11 @@ const LogInBox = observer(() => {
               }
             }}
             placeholder={t('Пароль')}
-            className={errors.password ? 'login-input error' : 'login-input '}
+            className={
+              errors.password || (state === 'error' && errorType === 'password')
+                ? 'login-input error'
+                : 'login-input '
+            }
             type={passwordVisibility ? 'text' : 'password'}
             {...register('password', {
               pattern: {
@@ -143,6 +156,11 @@ const LogInBox = observer(() => {
               {t(`${errors.password.message}`)}
             </p>
           )}
+          {state === 'error' && errorType === 'password' ? (
+            <p role="alert" className="login-error">
+              {t(`${error}`)}
+            </p>
+          ) : null}
         </label>
         <div className="button-checkbox-container">
           <div className="checkbox-container">
