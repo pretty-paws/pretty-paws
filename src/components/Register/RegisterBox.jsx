@@ -31,7 +31,7 @@ const RegisterBox = observer(() => {
   const store = useStore();
 
   const {
-    auth: { signUp, setEmail, state, error, errorType },
+    auth: { signUp, setEmail, state, error, errorType, setState },
   } = store;
 
   const { screen } = useWindowSize();
@@ -57,7 +57,8 @@ const RegisterBox = observer(() => {
     },
   });
 
-  // const phone_number = watch('phone_number', '');
+  const phone_number = watch('phone_number', '');
+  const email = watch('email', '');
   const password = watch('password', '');
   const password_confirmation = watch('password_confirmation', '');
 
@@ -154,34 +155,38 @@ const RegisterBox = observer(() => {
         </label>
         <label className="register-label">
           {t('Телефон')}
-          <p className="register__country-code">+380</p>
-          <input
-            // onFocus={() => setPhoneFocused(true)}
-            // onBlur={() => setPhoneFocused(false)}
-            onInput={e => {
-              e.target.value = e.target.value.replace(/[^0-9+]/g, '');
-            }}
-            className={
-              errors.phone_number ||
-              (state === 'error' && errorType === 'phone_number')
-                ? 'register-input phone-input error'
-                : 'register-input phone-input '
-            }
-            type="number"
-            {...register('phone_number', {
-              pattern: {
-                value: phoneRegExp,
-                message: phoneMessage.pattern,
-              },
-              required: phoneMessage.required,
-              maxLength: { value: 9, message: phoneMessage.maxLength },
-              minLength: {
-                value: 9,
-                message: phoneMessage.minLength,
-              },
-            })}
-            aria-invalid={errors.phone_number ? 'true' : 'false'}
-          />
+          <div style={{ position: 'relative' }}>
+            <p className="register__country-code">+380</p>
+            <input
+              // onFocus={() => setPhoneFocused(true)}
+              // onBlur={() => setPhoneFocused(false)}
+              onInput={e => {
+                e.target.value = e.target.value.replace(/[^0-9+]/g, '');
+
+                phone_number !== e.target.value && setState();
+              }}
+              className={
+                errors.phone_number ||
+                (state === 'error' && errorType === 'phone_number')
+                  ? 'register-input phone-input error'
+                  : 'register-input phone-input '
+              }
+              type="number"
+              {...register('phone_number', {
+                pattern: {
+                  value: phoneRegExp,
+                  message: phoneMessage.pattern,
+                },
+                required: phoneMessage.required,
+                maxLength: { value: 9, message: phoneMessage.maxLength },
+                minLength: {
+                  value: 9,
+                  message: phoneMessage.minLength,
+                },
+              })}
+              aria-invalid={errors.phone_number ? 'true' : 'false'}
+            />
+          </div>
           {errors.phone_number ||
           (state === 'error' && errorType === 'phone_number') ? (
             <svg className="error-icon" width="24px" height="24px">
@@ -204,6 +209,9 @@ const RegisterBox = observer(() => {
         <label className="register-label">
           {t('Електронна пошта')}
           <input
+            onInput={e => {
+              email !== e.target.value && setState();
+            }}
             className={
               errors.email || (state === 'error' && errorType === 'email')
                 ? 'register-input error'

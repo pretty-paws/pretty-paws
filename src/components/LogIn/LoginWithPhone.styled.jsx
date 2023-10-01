@@ -41,7 +41,7 @@ export const StyledLoginWithPhone = styled.div`
     color: #111;
     font-size: 13px;
     font-weight: 400;
-    line-height: 1.5;
+    /* line-height: 1.5; */
 
     @media screen and (min-width: 834px) {
       padding: 4px 8px 8px 15px;
@@ -68,11 +68,12 @@ export const StyledLoginWithPhone = styled.div`
     color: var(--font-color-black);
     position: absolute;
     z-index: 2;
-    top: 31px;
+     top: 50%;
+    transform: translateY(-50%); */
     left: 15px;
     font-size: 13px;
     font-weight: 400;
-    line-height: 1.5;
+    /* line-height: 1.5; */
   }
 
   & .phone-input {

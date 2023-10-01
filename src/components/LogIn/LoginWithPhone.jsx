@@ -35,35 +35,37 @@ const LoginWithPhone = () => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <label className="login-label">
           {t('Телефон')}
-          <p className="login__country-code">+380</p>
-          <input
-            // onFocus={() => setPhoneFocused(true)}
-            // onBlur={() => setPhoneFocused(false)}
-            onInput={e => {
-              e.target.value = e.target.value.replace(/[^0-9+]/g, '');
-            }}
-            className={
-              errors.phone_number
-                ? 'login-input phone-input error'
-                : 'login-input phone-input'
-            }
-            type="number"
-            // placeholder={phoneFocused ? '' : '+380__ ___ ___'}
-            // value={phoneFocused ? phone_number : ''}
-            {...register('phone_number', {
-              pattern: {
-                value: phoneRegExp,
-                message: phoneMessage.pattern,
-              },
-              required: phoneMessage.required,
-              maxLength: { value: 9, message: phoneMessage.maxLength },
-              minLength: {
-                value: 9,
-                message: phoneMessage.minLength,
-              },
-            })}
-            aria-invalid={errors.phone_number ? 'true' : 'false'}
-          />
+          <div style={{ position: 'relative' }}>
+            <p className="login__country-code">+380</p>
+            <input
+              // onFocus={() => setPhoneFocused(true)}
+              // onBlur={() => setPhoneFocused(false)}
+              onInput={e => {
+                e.target.value = e.target.value.replace(/[^0-9+]/g, '');
+              }}
+              className={
+                errors.phone_number
+                  ? 'login-input phone-input error'
+                  : 'login-input phone-input'
+              }
+              type="number"
+              // placeholder={phoneFocused ? '' : '+380__ ___ ___'}
+              // value={phoneFocused ? phone_number : ''}
+              {...register('phone_number', {
+                pattern: {
+                  value: phoneRegExp,
+                  message: phoneMessage.pattern,
+                },
+                required: phoneMessage.required,
+                maxLength: { value: 9, message: phoneMessage.maxLength },
+                minLength: {
+                  value: 9,
+                  message: phoneMessage.minLength,
+                },
+              })}
+              aria-invalid={errors.phone_number ? 'true' : 'false'}
+            />
+          </div>
           {errors.phone_number && (
             <svg className="error-icon" width="24px" height="24px">
               <use href={sprite + '#error'} />

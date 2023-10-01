@@ -20,7 +20,7 @@ const LogInBox = observer(() => {
 
   const store = useStore();
   const {
-    auth: { logIn, setRememberMe, state, error, errorType },
+    auth: { logIn, setRememberMe, state, error, errorType, setState },
   } = store;
 
   const getValueFromStorage = () => {
@@ -37,6 +37,7 @@ const LogInBox = observer(() => {
     handleSubmit,
     formState: { errors, isValid },
     reset,
+    watch,
   } = useForm({
     mode: 'all',
     defaultValues: {
@@ -45,6 +46,8 @@ const LogInBox = observer(() => {
       rememberMe: getValueFromStorage(),
     },
   });
+
+  const email = watch('email', '');
 
   const onRememberMeChange = e => {
     const isChecked = e.target.checked;
@@ -78,6 +81,9 @@ const LogInBox = observer(() => {
         <label className="login-label">
           {t('Електронна пошта')}
           <input
+            onInput={e => {
+              email !== e.target.value && setState();
+            }}
             className={
               errors.email || (state === 'error' && errorType === 'email')
                 ? 'login-input error'
@@ -105,7 +111,7 @@ const LogInBox = observer(() => {
               {t(`${errors.email.message}`)}
             </p>
           )}
-          {state === 'error' && errorType === 'email' && !errors.email ? (
+          {state === 'error' && errorType === 'email' ? (
             <p role="alert" className="login-error">
               {t(`${error}`)}
             </p>
@@ -156,7 +162,7 @@ const LogInBox = observer(() => {
               {t(`${errors.password.message}`)}
             </p>
           )}
-          {state === 'error' && errorType === 'password' && !errors.password ? (
+          {state === 'error' && errorType === 'password' ? (
             <p role="alert" className="login-error">
               {t(`${error}`)}
             </p>

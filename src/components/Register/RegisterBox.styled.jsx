@@ -70,11 +70,21 @@ export const StyledRegisterBox = styled.div`
   & .register__country-code {
     position: absolute;
     z-index: 2;
-    top: 33px;
+    top: 50%;
+    transform: translateY(-50%);
     left: 15px;
     font-size: 13px;
     font-weight: 400;
-    line-height: 1.5;
+
+    /* @media screen and (min-width: 834px) {
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    @media screen and (min-width: 1440px) {
+      top: 33px;
+      left: 15px;
+    } */
   }
 
   & .register-input {
@@ -90,7 +100,6 @@ export const StyledRegisterBox = styled.div`
     color: #111;
     font-size: 13px;
     font-weight: 400;
-    line-height: 1.5;
 
     &::-webkit-outer-spin-button,
     &::-webkit-inner-spin-button {

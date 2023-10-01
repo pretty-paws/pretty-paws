@@ -35,6 +35,10 @@ export class AuthStore {
     localStorage.setItem('rememberMe', bool);
   }
 
+  setState() {
+    this.state = 'done';
+  }
+
   async signUp(userData) {
     this.state = 'pending';
     try {
