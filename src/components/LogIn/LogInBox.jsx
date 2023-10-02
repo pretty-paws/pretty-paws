@@ -48,6 +48,7 @@ const LogInBox = observer(() => {
   });
 
   const email = watch('email', '');
+  const password = watch('password', '');
 
   const onRememberMeChange = e => {
     const isChecked = e.target.checked;
@@ -125,6 +126,8 @@ const LogInBox = observer(() => {
               if (e.target.value.includes(' ')) {
                 e.target.value = e.target.value.replace(' ', '');
               }
+
+              password !== e.target.value && setState();
             }}
             placeholder={t('Пароль')}
             className={
