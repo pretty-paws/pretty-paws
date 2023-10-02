@@ -108,5 +108,8 @@
   "The selected email is invalid.": "Обрана пошта неправильна або незареєстрована",
   "Entered password is incorrect. Please check and try again.": "Введений пароль невірний. Спробуйте ще раз.",
   "The phone number has already been taken.": "Користувач з таким номером вже зареєстрований",
-  "The email has already been taken.": "Користувач з такою поштою вже зареєстрований"
+  "The email has already been taken.": "Користувач з такою поштою вже зареєстрований",
+  "The category animal id field is required.": "Оберіть категорію",
+  "The email field is required.": "Введіть Ваш email",
+  "Оберіть категорію і введіть Вашу пошту": "Оберіть категорію і введіть Вашу пошту"
 }
