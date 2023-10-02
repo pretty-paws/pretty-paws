@@ -109,5 +109,8 @@
   "The selected email is invalid.": "The selected email is invalid.",
   "Entered password is incorrect. Please check and try again.": "Entered password is incorrect. Please check and try again.",
   "The phone number has already been taken.": "The phone number has already been taken.",
-  "The email has already been taken.": "The email has already been taken."
+  "The email has already been taken.": "The email has already been taken.",
+  "The category animal id field is required.": "The category of animal is required.",
+  "The email field is required.": "The email is required.",
+  "Оберіть категорію і введіть Вашу пошту": "Choose a category and write your email"
 }

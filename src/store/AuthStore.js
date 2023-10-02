@@ -129,18 +129,18 @@ export class AuthStore {
     this.state = 'pending';
     try {
       const res = await refreshUser();
-      console.log('result in login', res);
+      console.log('result in refresh', res);
       runInAction(() => {
         this.user = res.data.data.user;
         this.state = 'done';
       });
     } catch (error) {
-      console.log('error in log in', error.response);
+      console.log('error in refresh', error.response);
       runInAction(() => {
         this.state = 'error';
-        this.authorised === false;
+        this.authorised = false;
         this.rememberMe === false ? localStorage.removeItem('email') : null;
-        this.token === '';
+        this.token = '';
         localStorage.setItem('authorised', false);
         localStorage.setItem('token', '');
       });
@@ -185,17 +185,34 @@ export class AuthStore {
   }
 
   async subscribe(data) {
+    console.log(data);
     this.state = 'pending';
     try {
-      await subscribe(data);
+      const res = await subscribe(data);
+      console.log(res);
 
       runInAction(() => {
         this.state = 'done';
       });
     } catch (error) {
-      toast.error(error.message);
       runInAction(() => {
         this.state = 'error';
+        const errorData = error.response.data.error;
+        console.log(errorData);
+
+        if ('email' in errorData) {
+          this.errorType = 'email';
+          this.error = errorData.email[0];
+        }
+        if ('category_animal_id' in errorData) {
+          this.errorType = 'category_animal_id';
+          this.error = errorData.category_animal_id[0];
+        }
+
+        if ('category_animal_id' in errorData && 'email' in errorData) {
+          this.errorType = 'both';
+          this.error = 'Оберіть категорію і введіть Вашу пошту';
+        }
       });
     }
   }
