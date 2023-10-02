@@ -32,14 +32,17 @@ const PersonalData = observer(() => {
         )}
 
         <h2 className="personal-data__header">{t('Особисті дані')}</h2>
-        <NavLink
-          to="/cabinet/personal_data/edit"
-          className={({ isActive }) => (isActive ? 'active-edit' : '')}
-        >
-          <svg width="24px" height="24px" className="personal-data__edit">
-            <use href={sprite + '#edit'} />
-          </svg>
-        </NavLink>
+
+        {location.pathname === '/cabinet/personal_data' && (
+          <NavLink
+            to="/cabinet/personal_data/edit"
+            className={({ isActive }) => (isActive ? 'active-edit' : '')}
+          >
+            <svg width="24px" height="24px" className="personal-data__edit">
+              <use href={sprite + '#edit'} />
+            </svg>
+          </NavLink>
+        )}
       </div>
       {location.pathname === '/cabinet/personal_data' && (
         <div className="personal-data__body">

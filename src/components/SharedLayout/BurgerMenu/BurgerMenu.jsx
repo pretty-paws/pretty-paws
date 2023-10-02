@@ -60,8 +60,8 @@ const BurgerMenu = ({ active, setActive }) => {
   }
 
   useEffect(() => {
-    console.log('changed id ');
-    console.log('selected animal', selectedAnimal);
+    // console.log('changed id ');
+    // console.log('selected animal', selectedAnimal);
     if (selectedAnimal != undefined) {
       console.log('changed id ', selectedAnimal);
 

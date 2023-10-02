@@ -1,18 +1,17 @@
 import React from 'react';
-import sprite from '../../img/svg-sprite/sprite.svg';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
 import { StyledLoginBox } from './LogInBox.styled';
 
 import LoginWithPhone from './LoginWithPhone';
 import { SocialNetsAuth } from './SocialNetsAuth';
 import { useStore } from '../../store/AuthProvider';
 import { observer } from 'mobx-react-lite';
-import { emailRegExp, passwordRegExp } from '../../validation/regexp';
-import { emailMessage, passwordMessage } from '../../validation/messages';
 import useWindowSize from '../../hooks/useWindowSize';
 import { useTranslation } from 'react-i18next';
+import Password from './InputFields/Password';
+import Email from './InputFields/Email';
+import Checkbox from './InputFields/Checkbox';
 
 const LogInBox = observer(() => {
   const { t } = useTranslation();
@@ -30,8 +29,6 @@ const LogInBox = observer(() => {
     return false;
   };
 
-  const [passwordVisibility, setPasswordVisibility] = useState(false);
-
   const {
     register,
     handleSubmit,
@@ -46,9 +43,6 @@ const LogInBox = observer(() => {
       rememberMe: getValueFromStorage(),
     },
   });
-
-  const email = watch('email', '');
-  const password = watch('password', '');
 
   const onRememberMeChange = e => {
     const isChecked = e.target.checked;
@@ -79,114 +73,29 @@ const LogInBox = observer(() => {
       <LoginWithPhone />
       <p className="login-text">{t('Або увійти за ел. адресою')}</p>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <label className="login-label">
-          {t('Електронна пошта')}
-          <input
-            onInput={e => {
-              email !== e.target.value && setState();
-            }}
-            className={
-              errors.email || (state === 'error' && errorType === 'email')
-                ? 'login-input error'
-                : 'login-input '
-            }
-            type="email"
-            placeholder={t('Електронна адреса')}
-            {...register('email', {
-              pattern: {
-                value: emailRegExp,
-                message: emailMessage.pattern,
-              },
-              required: emailMessage.required,
-              maxLength: { value: 50, message: emailMessage.maxLength },
-            })}
-            aria-invalid={errors.email ? 'true' : 'false'}
-          />
-          {errors.email || (state === 'error' && errorType === 'email') ? (
-            <svg className="error-icon" width="24px" height="24px">
-              <use href={sprite + '#error'} />
-            </svg>
-          ) : null}
-          {errors.email && (
-            <p role="alert" className="login-error">
-              {t(`${errors.email.message}`)}
-            </p>
-          )}
-          {state === 'error' && errorType === 'email' ? (
-            <p role="alert" className="login-error">
-              {t(`${error}`)}
-            </p>
-          ) : null}
-        </label>
-        <label className="login-label">
-          {t('Пароль')}
-          <input
-            onInput={e => {
-              console.log(e.target.value);
-              if (e.target.value.includes(' ')) {
-                e.target.value = e.target.value.replace(' ', '');
-              }
-
-              password !== e.target.value && setState();
-            }}
-            placeholder={t('Пароль')}
-            className={
-              errors.password || (state === 'error' && errorType === 'password')
-                ? 'login-input error'
-                : 'login-input '
-            }
-            type={passwordVisibility ? 'text' : 'password'}
-            {...register('password', {
-              pattern: {
-                value: passwordRegExp,
-                message: passwordMessage.pattern,
-              },
-              required: passwordMessage.required,
-              minLength: {
-                value: 6,
-                message: passwordMessage.minLength,
-              },
-              maxLength: { value: 50, message: passwordMessage.maxLength },
-            })}
-            aria-invalid={errors.password ? 'true' : 'false'}
-          />
-          <svg
-            width="24px"
-            height="24px"
-            className="login-icon-eye"
-            onClick={() => setPasswordVisibility(!passwordVisibility)}
-          >
-            <use
-              href={passwordVisibility ? sprite + '#eye' : sprite + '#eye-off'}
-            />
-          </svg>
-          {errors.password && (
-            <p role="alert" className="login-error">
-              {t(`${errors.password.message}`)}
-            </p>
-          )}
-          {state === 'error' && errorType === 'password' ? (
-            <p role="alert" className="login-error">
-              {t(`${error}`)}
-            </p>
-          ) : null}
-        </label>
-        <div className="button-checkbox-container">
-          <div className="checkbox-container">
-            <input
-              className="login-checkbox"
-              type="checkbox"
-              placeholder="rememberMe"
-              onClick={e => onRememberMeChange(e)}
-              {...register('rememberMe')}
-            />
-            <p className="login-agree">{t('Запам’ятати мене')}</p>
-          </div>
-          <p className="login-agree">{t('Забули пароль?')}</p>
-        </div>
-        <button type="submit" className="login-button" disabled={!isValid}>
-          {t('Увійти')}
-        </button>
+        <Email
+          errors={errors}
+          register={register}
+          watch={watch}
+          error={error}
+          state={state}
+          errorType={errorType}
+          setState={setState}
+        />
+        <Password
+          errors={errors}
+          register={register}
+          watch={watch}
+          error={error}
+          state={state}
+          errorType={errorType}
+          setState={setState}
+        />
+        <Checkbox
+          onRememberMeChange={onRememberMeChange}
+          register={register}
+          isValid={isValid}
+        />
       </form>
       <SocialNetsAuth title="Або увійти через" />
     </StyledLoginBox>

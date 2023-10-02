@@ -95,32 +95,27 @@ export class AuthStore {
     this.state = 'pending';
     try {
       const { data } = await loginUser(userData);
-      // localStorage.setItem('token', data.data.token);
       localStorage.setItem('authorised', true);
 
       runInAction(() => {
-        // console.log(data.data.token);
         this.token = data.data.token;
         this.authorised = true;
         this.user = data.data.user;
         this.email = data.data.user.email;
         this.rememberMe === true && this.state !== 'error'
           ? localStorage.setItem('email', data.data.user.email)
-          : null;
+          : localStorage.removeItem('email', data.data.user.email);
         this.state = 'done';
         window.scrollTo({ top: 0, behavior: 'smooth' });
       });
     } catch (error) {
-      // console.log(error.response);
       runInAction(() => {
         this.state = 'error';
         const errorData = error.response.data.error;
-        // console.log(errorData);
 
         if ('email' in errorData) {
           this.errorType = 'email';
           this.error = errorData.email[0];
-          // console.log(this.errorType, this.error);
         }
         if ('password' in errorData) {
           this.errorType = 'password';
@@ -134,29 +129,18 @@ export class AuthStore {
     this.state = 'pending';
     try {
       const res = await refreshUser();
+      console.log('result in login', res);
       runInAction(() => {
         this.user = res.data.data.user;
         this.state = 'done';
       });
     } catch (error) {
-      this.authorised === false;
-      toast.error('Сессія закінчилась. Авторизуйтесь знов', {
-        style: {
-          border: '1px solid #713200',
-          padding: '16px',
-          color: '#713200',
-        },
-        iconTheme: {
-          primary: '#713200',
-          secondary: '#FFFAEE',
-        },
-      });
+      console.log('error in log in', error.response);
       runInAction(() => {
-        // this.authorised === false;
         this.state = 'error';
+        this.authorised === false;
         this.rememberMe === false ? localStorage.removeItem('email') : null;
         this.token === '';
-        // this.state = 'done';
         localStorage.setItem('authorised', false);
         localStorage.setItem('token', '');
       });
