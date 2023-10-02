@@ -13,6 +13,7 @@ import { useState } from 'react';
 import { publicRoutes } from '../../../routes';
 import { animalsSvg } from '../../../utils/animalBarSvgLinks';
 import { useTranslation } from 'react-i18next';
+import { useStore } from '../../../store/AuthProvider';
 
 const BurgerMenu = ({ active, setActive }) => {
   const [openedCatalogue, setOpenedCatalogue] = useState(false);
@@ -21,6 +22,11 @@ const BurgerMenu = ({ active, setActive }) => {
   const [language, setLanguage] = useState(
     localStorage.getItem('language') || 'en'
   );
+
+  const store = useStore();
+  const {
+    auth: { authorised },
+  } = store;
 
   const { i18n, t } = useTranslation();
 
@@ -154,13 +160,16 @@ const BurgerMenu = ({ active, setActive }) => {
                     </svg>
                   </div>
                 )}
-                <Link to="/login" onClick={() => setActive(false)}>
+                <Link
+                  to={authorised ? '/cabinet' : '/login'}
+                  onClick={() => setActive(false)}
+                >
                   <button
                     className="burger__login-button"
                     type="button"
                     //   onClick={() => showModal(true)}
                   >
-                    {t('Вхід для своїх')}
+                    {authorised ? t('Кабінет') : t('Вхід для своїх')}
                   </button>
                 </Link>
                 <svg
