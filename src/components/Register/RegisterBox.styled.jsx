@@ -72,19 +72,9 @@ export const StyledRegisterBox = styled.div`
     z-index: 2;
     top: 50%;
     transform: translateY(-50%);
-    left: 15px;
+    left: 10px;
     font-size: 13px;
     font-weight: 400;
-
-    /* @media screen and (min-width: 834px) {
-      top: 50%;
-      transform: translateY(-50%);
-    }
-
-    @media screen and (min-width: 1440px) {
-      top: 33px;
-      left: 15px;
-    } */
   }
 
   & .register-input {
@@ -119,7 +109,7 @@ export const StyledRegisterBox = styled.div`
   }
 
   & .phone-input {
-    padding-left: 46px;
+    padding-left: 42px;
   }
 
   & .register-icon-eye {

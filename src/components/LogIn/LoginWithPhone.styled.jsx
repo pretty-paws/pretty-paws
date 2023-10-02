@@ -31,7 +31,7 @@ export const StyledLoginWithPhone = styled.div`
   & .login-input {
     display: block;
     margin-top: 4px;
-    padding: 8px 8px 8px 15px;
+    padding-left: 15px;
     width: 100%;
     height: 40px;
     border-radius: 8px;
@@ -44,7 +44,7 @@ export const StyledLoginWithPhone = styled.div`
     /* line-height: 1.5; */
 
     @media screen and (min-width: 834px) {
-      padding: 4px 8px 8px 15px;
+      padding-left: 15px;
     }
 
     &::-webkit-outer-spin-button,
@@ -60,7 +60,6 @@ export const StyledLoginWithPhone = styled.div`
       color: var(--font-color-darkgray);
       font-size: 13px;
       font-weight: 400;
-      line-height: 1.5;
     }
   }
 
@@ -68,16 +67,15 @@ export const StyledLoginWithPhone = styled.div`
     color: var(--font-color-black);
     position: absolute;
     z-index: 2;
-     top: 50%;
-    transform: translateY(-50%); */
-    left: 15px;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
     font-size: 13px;
     font-weight: 400;
-    /* line-height: 1.5; */
   }
 
   & .phone-input {
-    padding-left: 46px;
+    padding-left: 42px;
   }
 
   & .login-input.phone-input.error {

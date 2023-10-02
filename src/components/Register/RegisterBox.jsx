@@ -158,10 +158,12 @@ const RegisterBox = observer(() => {
           <div style={{ position: 'relative' }}>
             <p className="register__country-code">+380</p>
             <input
-              // onFocus={() => setPhoneFocused(true)}
-              // onBlur={() => setPhoneFocused(false)}
               onInput={e => {
-                e.target.value = e.target.value.replace(/[^0-9+]/g, '');
+                const inputValue = e.target.value;
+                if (inputValue.startsWith('+380')) {
+                  e.target.value = inputValue.slice(4);
+                }
+                e.target.value = e.target.value.replace(/[^0-9]/g, '');
 
                 phone_number !== e.target.value && setState();
               }}
@@ -171,7 +173,7 @@ const RegisterBox = observer(() => {
                   ? 'register-input phone-input error'
                   : 'register-input phone-input '
               }
-              type="number"
+              type="text"
               {...register('phone_number', {
                 pattern: {
                   value: phoneRegExp,
