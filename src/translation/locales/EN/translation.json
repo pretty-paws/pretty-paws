@@ -112,5 +112,17 @@
   "The email has already been taken.": "The email has already been taken.",
   "The category animal id field is required.": "The category of animal is required.",
   "The email field is required.": "The email is required.",
-  "Оберіть категорію і введіть Вашу пошту": "Choose a category and write your email"
+  "Оберіть категорію і введіть Вашу пошту": "Choose a category and write your email",
+  "Ви успішно підписались": "You have successfully subscribed ",
+  "Підписки": "Subscription",
+  "Мої підписки": "My subscription",
+  "Поки що ви не оформили підписку на акції від PrettyPaws.": "Until you have subscribed to promotions from PrettyPaw",
+  "Підписатися на акції": "Subscribe to promotions",
+  "Відмінити": "Cancel",
+  "Акції для собак": "Promotions for dogs",
+  "Акції для котів": "Promotions for cats",
+  "Акції для гризунів": "Promotions for rodents",
+  "Акції для риб": "Promotions for fish",
+  "Акції для птахів": "Promotions for birds",
+  "Акції для рептилій": "Promotions for reptiles"
 }

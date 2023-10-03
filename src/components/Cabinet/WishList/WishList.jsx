@@ -23,9 +23,7 @@ const WishList = () => {
       </div>
       <div className="wishlist__body">
         <p className="wishlist__text">
-          {t(
-            'Ви ще не додавали товари до улюблених. Перегляньте товари в каталозі, адже у нас безліч переваг для своїх.'
-          )}
+          {t('Поки ви не оформили підписку на акції від PrettyPaw')}
         </p>
         <button type="button" className="wishlist__button">
           {t('До каталогу')}

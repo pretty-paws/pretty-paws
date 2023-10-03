@@ -14,8 +14,7 @@ export const StyledEditForm = styled.div`
     flex-direction: column;
     gap: 16px;
     @media screen and (min-width: 834px) {
-      align-items: center;
-      align-items: flex-start;
+      /* align-items: center; */
     }
 
     @media screen and (min-width: 1440px) {
@@ -27,12 +26,14 @@ export const StyledEditForm = styled.div`
   .edit-label {
     position: relative;
     display: flex;
+    flex-direction: column;
     gap: 15px;
     position: relative;
     border-bottom: 1px solid #000;
     padding: 10px 0 10px 10px;
 
     @media screen and (min-width: 834px) {
+      flex-direction: row;
       gap: 24px;
     }
 
@@ -40,15 +41,16 @@ export const StyledEditForm = styled.div`
     }
   }
   .edit-label-text {
+    white-space: nowrap;
     width: 118px;
     font-size: 16px;
     font-weight: 400;
     line-height: 20px;
     @media screen and (min-width: 834px) {
-      width: 160px;
+      width: 170px;
     }
     @media screen and (min-width: 1440px) {
-      width: 170px;
+      width: 220px;
     }
   }
   .edit-input {
@@ -57,19 +59,35 @@ export const StyledEditForm = styled.div`
     font-size: 16px;
     font-weight: 500;
     line-height: 20px;
+
+    @media screen and (min-width: 834px) {
+      width: 100%;
+    }
+    @media screen and (min-width: 1440px) {
+    }
   }
 
   .edit-icon-eye {
     position: absolute;
-    top: 9px;
+    top: 55%;
     right: 5px;
+    @media screen and (min-width: 834px) {
+      top: 9px;
+    }
+    @media screen and (min-width: 1440px) {
+    }
   }
 
   .error-icon {
     background-color: #fff;
     position: absolute;
-    top: 9px;
+    top: 55%;
     right: 5px;
+    @media screen and (min-width: 834px) {
+      top: 9px;
+    }
+    @media screen and (min-width: 1440px) {
+    }
   }
 
   .edit-error {

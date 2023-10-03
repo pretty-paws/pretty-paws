@@ -10,6 +10,7 @@ import PersonalData from './Cabinet/PersonalData/PersonalData';
 import PersonalDataEdit from './Cabinet/PersonalData/PersonalDataEdit';
 import Orders from './Cabinet/Orders/Orders';
 import WishList from './Cabinet/WishList/WishList';
+import Subscription from './Cabinet/Subscription/Subscription';
 import { observer } from 'mobx-react-lite';
 
 const AppRouter = observer(() => {
@@ -53,6 +54,12 @@ const AppRouter = observer(() => {
           <Route
             path="wish_list"
             element={<PrivateRoute redirectTo="/" component={<WishList />} />}
+          />
+          <Route
+            path="subscription"
+            element={
+              <PrivateRoute redirectTo="/" component={<Subscription />} />
+            }
           />
         </Route>
         {/* public routes */}

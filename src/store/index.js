@@ -1,11 +1,11 @@
 import { makeAutoObservable } from 'mobx';
-import { SubscriptionStore } from './SubscriptionStore';
+// import { ProfileStore } from './ProfileStore';
 
 import { AuthStore } from './AuthStore';
 
 export class RootStore {
   auth = new AuthStore();
-  subscriptionStore = new SubscriptionStore();
+  // profile = new ProfileStore();
 
   constructor() {
     makeAutoObservable(this, {}, { autoBind: true });
