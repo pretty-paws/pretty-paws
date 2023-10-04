@@ -43,7 +43,7 @@ const PasswordChange = observer(() => {
   };
 
   return (
-    <div>
+    <div className="password-change__box">
       <form onSubmit={handleSubmit(onSubmit)}>
         <Password
           errors={errors}
