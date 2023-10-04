@@ -9,6 +9,9 @@ const AnimalsBar = observer(
   ({ type, getCategory, chosenCategory, isSubmitted }) => {
     // let location = useLocation();
 
+    // const ref = useRef(null);
+    // console.log('AnimalsBar', ref.current);
+
     function includesCategory(category) {
       if (isSubmitted) return false;
       if (!chosenCategory) return;
@@ -17,7 +20,7 @@ const AnimalsBar = observer(
     }
 
     return (
-      <StyledAnimalsBar type={type} id="subscription">
+      <StyledAnimalsBar type={type}>
         {animalsSvg.map(({ link, category }) => {
           return (
             <Link key={link}>

@@ -7,6 +7,7 @@ import {
   registerUser,
   registerVerify,
   subscribe,
+  updatePass,
   updateUser,
 } from '../services/authAPI';
 
@@ -141,6 +142,7 @@ export class AuthStore {
         this.token = '';
         localStorage.setItem('authorised', false);
         localStorage.setItem('token', '');
+        toast.error('Сессія закінчилась. Вам потрібно залогінитись знов.');
       });
     }
   }
@@ -206,14 +208,32 @@ export class AuthStore {
   async updateProfile(data) {
     this.state = 'pending';
     try {
-      await updateUser(data);
-
+      const res = await updateUser(data);
+      console.log(res);
       runInAction(() => {
         this.state = 'done';
       });
     } catch (error) {
       runInAction(() => {
         this.state = 'error';
+        const errorData = error.response.data.error;
+        console.log(errorData);
+      });
+    }
+  }
+
+  async updatePassword(data) {
+    this.state = 'pending';
+    try {
+      const res = await updatePass(data);
+      console.log(res);
+      runInAction(() => {
+        this.state = 'done';
+      });
+    } catch (error) {
+      runInAction(() => {
+        this.state = 'error';
+        this.errorType = 'password-change';
         const errorData = error.response.data.error;
         console.log(errorData);
       });

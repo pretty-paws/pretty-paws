@@ -5,7 +5,7 @@ import sprite from '../../../../img/svg-sprite/sprite.svg';
 import { nameRegExp } from '../../../../validation/regexp';
 import { surNameMessage } from '../../../../validation/messages';
 
-const Surname = ({ errors, register }) => {
+const Surname = ({ errors, register, handleEditingStart }) => {
   const { t } = useTranslation();
   return (
     <label className={errors.surname ? 'edit-label error' : 'edit-label'}>
@@ -14,6 +14,7 @@ const Surname = ({ errors, register }) => {
         className={errors.surname ? 'edit-input error' : 'edit-input '}
         type="text"
         placeholder={toString('Прізвище')}
+        onInput={() => handleEditingStart()}
         {...register('surname', {
           pattern: {
             value: nameRegExp,
@@ -47,4 +48,5 @@ export default Surname;
 Surname.propTypes = {
   errors: PropTypes.object.isRequired,
   register: PropTypes.func.isRequired,
+  handleEditingStart: PropTypes.func,
 };

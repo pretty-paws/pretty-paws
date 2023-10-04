@@ -5,7 +5,7 @@ import sprite from '../../../../img/svg-sprite/sprite.svg';
 import { phoneEditRegExp } from '../../../../validation/regexp';
 import { phoneMessage } from '../../../../validation/messages';
 
-const PhoneNumber = ({ errors, register }) => {
+const PhoneNumber = ({ errors, register, handleEditingStart }) => {
   const { t } = useTranslation();
 
   return (
@@ -13,6 +13,7 @@ const PhoneNumber = ({ errors, register }) => {
       <div className="edit-label-text">{t('Телефон')}</div>
       <input
         onInput={e => {
+          handleEditingStart();
           let value = e.target.value.replace(/[^0-9+]/g, '');
           let plusCount = (value.match(/\+/g) || []).length;
 
@@ -60,4 +61,5 @@ export default PhoneNumber;
 PhoneNumber.propTypes = {
   errors: PropTypes.object.isRequired,
   register: PropTypes.func.isRequired,
+  handleEditingStart: PropTypes.func,
 };

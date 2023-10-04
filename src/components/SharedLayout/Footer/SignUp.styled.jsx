@@ -85,7 +85,7 @@ export const StyledSignUp = styled.section`
   & .sign-up__error {
     white-space: nowrap;
     position: absolute;
-    left: 0;
+    left: 30px;
     /* transform: translateX(-50%); */
     bottom: 15px;
     /* color: var(--accent-color-orange); */

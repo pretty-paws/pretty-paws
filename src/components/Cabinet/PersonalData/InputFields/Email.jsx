@@ -5,7 +5,7 @@ import sprite from '../../../../img/svg-sprite/sprite.svg';
 import { emailRegExp } from '../../../../validation/regexp';
 import { emailMessage } from '../../../../validation/messages';
 
-const Email = ({ errors, register }) => {
+const Email = ({ errors, register, handleEditingStart }) => {
   const { t } = useTranslation();
 
   return (
@@ -17,6 +17,7 @@ const Email = ({ errors, register }) => {
         className={errors.email ? 'edit-input error' : 'edit-input  '}
         type="email"
         placeholder={t('Електронна адреса')}
+        onInput={() => handleEditingStart()}
         {...register('email', {
           pattern: {
             value: emailRegExp,
@@ -46,4 +47,5 @@ export default Email;
 Email.propTypes = {
   errors: PropTypes.object.isRequired,
   register: PropTypes.func.isRequired,
+  handleEditingStart: PropTypes.func,
 };

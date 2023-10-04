@@ -59,3 +59,12 @@ export const updateUser = async data => {
   console.log(result);
   return result;
 };
+
+export const updatePass = async data => {
+  axios.defaults.headers.common.Authorization = `Bearer ${
+    localStorage.getItem('token') || ''
+  }`;
+  const result = await axios.post(`/profile/update-password`, data);
+  console.log(result);
+  return result;
+};

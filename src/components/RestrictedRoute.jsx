@@ -10,7 +10,7 @@ export const RestrictedRoute = observer(
       auth: { authorised },
     } = store;
 
-    console.log(authorised);
+    // console.log(authorised);
 
     return authorised === true ? <Navigate to={redirectTo} /> : Component;
   }
