@@ -71,7 +71,9 @@ const PasswordChange = observer(() => {
             (errorType === 'password-change' && state !== 'done')
           }
         >
-          {isSubmitted && !isEditing ? t('Дані оновлено') : t('Зберегти зміни')}
+          {isSubmitted && !isEditing
+            ? t('Пароль змінено')
+            : t('Змінити пароль')}
         </button>
       </form>
     </div>
