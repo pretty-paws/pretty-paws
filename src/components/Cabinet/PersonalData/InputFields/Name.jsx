@@ -5,7 +5,7 @@ import { nameRegExp } from '../../../../validation/regexp';
 import { nameMessage } from '../../../../validation/messages';
 import sprite from '../../../../img/svg-sprite/sprite.svg';
 
-const Name = ({ errors, register }) => {
+const Name = ({ errors, register, handleEditingStart }) => {
   const { t } = useTranslation();
   return (
     <label className={errors.name ? 'edit-label error' : 'edit-label'}>
@@ -14,6 +14,7 @@ const Name = ({ errors, register }) => {
         className="edit-input"
         placeholder={t('Ім’я')}
         type="text"
+        onInput={() => handleEditingStart()}
         {...register('name', {
           pattern: {
             value: nameRegExp,
@@ -47,4 +48,5 @@ export default Name;
 Name.propTypes = {
   errors: PropTypes.object.isRequired,
   register: PropTypes.func.isRequired,
+  handleEditingStart: PropTypes.func,
 };

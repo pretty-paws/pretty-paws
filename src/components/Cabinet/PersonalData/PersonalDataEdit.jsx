@@ -3,32 +3,32 @@ import { useForm } from 'react-hook-form';
 import { useStore } from '../../../store/AuthProvider';
 import { observer } from 'mobx-react-lite';
 import { StyledEditForm } from './PersonalDataEdit.styled';
-import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import Name from './InputFields/Name';
 import Surname from './InputFields/Surname';
 import PhoneNumber from './InputFields/PhoneNumber';
 import Email from './InputFields/Email';
-import Password from './InputFields/Password';
-import PasswordConfirm from './InputFields/PasswordConfirm';
+import PasswordChange from './PasswordChange';
+import { useState } from 'react';
 
 const PersonalData = observer(() => {
   const { t } = useTranslation();
-
-  const navigate = useNavigate();
   const store = useStore();
   const {
-    auth: { user, state },
+    auth: { user, updateProfile },
   } = store;
   const values = user;
+
+  const [isEditing, setIsEditing] = useState(false);
+
+  const handleEditingStart = () => {
+    setIsEditing(true);
+  };
 
   const {
     register,
     handleSubmit,
-    formState: { errors, isValid },
-    reset,
-    watch,
-    setError,
+    formState: { errors, isValid, isSubmitted },
   } = useForm({
     mode: 'onChange',
     defaultValues: {
@@ -36,48 +36,47 @@ const PersonalData = observer(() => {
       surname: user.surname,
       phone_number: user.phone_number,
       email: user.email,
-      password: '',
-      password_confirmation: '',
     },
     values,
   });
 
-  const password = watch('password', '');
-
-  //   const phone_number = watch('phone_number', '');
-
-  console.log(user.phone_number);
-
   const onSubmit = data => {
-    console.log(data);
-    navigate('/cabinet/personal_data');
-    reset();
+    updateProfile(data);
+    setIsEditing(false);
   };
+
   return (
     <StyledEditForm>
-      {state === 'pending' ? null : (
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <Name errors={errors} register={register} />
-          <Surname errors={errors} register={register} />
-          <PhoneNumber errors={errors} register={register} />
-          <Email errors={errors} register={register} />
-          <Password
-            errors={errors}
-            register={register}
-            setError={setError}
-            watch={watch}
-          />
-          <PasswordConfirm
-            errors={errors}
-            register={register}
-            password={password}
-          />
-
-          <button type="submit" className="edit-button" disabled={!isValid}>
-            {t('Зберегти зміни')}
-          </button>
-        </form>
-      )}
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <Name
+          errors={errors}
+          register={register}
+          handleEditingStart={handleEditingStart}
+        />
+        <Surname
+          errors={errors}
+          register={register}
+          handleEditingStart={handleEditingStart}
+        />
+        <PhoneNumber
+          errors={errors}
+          register={register}
+          handleEditingStart={handleEditingStart}
+        />
+        <Email
+          errors={errors}
+          register={register}
+          handleEditingStart={handleEditingStart}
+        />
+        <button
+          type="submit"
+          className="edit-button"
+          disabled={!isEditing || (!isEditing && !isValid)}
+        >
+          {isSubmitted && !isEditing ? t('Дані оновлено') : t('Зберегти зміни')}
+        </button>
+      </form>
+      <PasswordChange />
     </StyledEditForm>
   );
 });

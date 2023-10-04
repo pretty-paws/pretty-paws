@@ -75,8 +75,8 @@
   "Задонать на корм для пухнастих улюбленців": "Donate for pet food",
   "Детальніше": "Learn more",
   "Змінити пароль": "Change password",
-  "Ще раз пароль": "Repeat new password",
-  "Ще раз новий пароль": "Repeat new password",
+  "Ще раз пароль": "Repeat password",
+  "Ще раз новий пароль": "Repeat password",
   "Зберегти зміни": "Save changes",
   "Поки що тут немає жодного замовлення. Давай виправимо це прямо зараз": "So far, there are no orders here. Let's fix this right now.",
   "Ви ще не додавали товари до улюблених. Перегляньте товари в каталозі, адже у нас безліч переваг для своїх.": "You haven't added any products to your favorites yet. Check out the products in the catalog, as we have plenty of benefits for our customers.",
@@ -116,7 +116,7 @@
   "Ви успішно підписались": "You have successfully subscribed ",
   "Підписки": "Subscription",
   "Мої підписки": "My subscription",
-  "Поки що ви не оформили підписку на акції від PrettyPaws.": "Until you have subscribed to promotions from PrettyPaw",
+  "Поки що ви не оформили підписку на акції від PrettyPaws.": "You have not subscribed to promotions from PrettyPaws yet.",
   "Підписатися на акції": "Subscribe to promotions",
   "Відмінити": "Cancel",
   "Акції для собак": "Promotions for dogs",
@@ -124,5 +124,8 @@
   "Акції для гризунів": "Promotions for rodents",
   "Акції для риб": "Promotions for fish",
   "Акції для птахів": "Promotions for birds",
-  "Акції для рептилій": "Promotions for reptiles"
+  "Акції для рептилій": "Promotions for reptiles",
+  "Дані оновлено": "Updated",
+  "Ви використали старий пароль": "You have used an old password",
+  "Пароль змінено": "Password changed"
 }

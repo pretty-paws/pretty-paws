@@ -64,13 +64,11 @@ const SignUp = observer(() => {
       <GlobalContainer>
         <div className="sign-up__container">
           <p className="sign-up__title">{t('Підписатися на акції для')}</p>
-          <a href="#subscription">
-            <AnimalsBar
-              getCategory={getCategory}
-              chosenCategory={chosenCategory}
-              isSubmitted={isSubmitted}
-            />
-          </a>
+          <AnimalsBar
+            getCategory={getCategory}
+            chosenCategory={chosenCategory}
+            isSubmitted={isSubmitted}
+          />
           <div
             className={
               authorised === true

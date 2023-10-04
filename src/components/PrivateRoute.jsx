@@ -10,7 +10,7 @@ export const PrivateRoute = observer(
       auth: { authorised },
     } = store;
 
-    console.log(authorised);
+    // console.log(authorised);
 
     const shouldRedirect = !authorised;
 

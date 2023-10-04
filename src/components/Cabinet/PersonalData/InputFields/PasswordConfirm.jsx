@@ -5,7 +5,12 @@ import sprite from '../../../../img/svg-sprite/sprite.svg';
 import { passwordConfirmMessage } from '../../../../validation/messages';
 import useWindowSize from '../../../../hooks/useWindowSize';
 
-const PasswordConfirm = ({ errors, register, password }) => {
+const PasswordConfirm = ({
+  errors,
+  register,
+  password,
+  handleEditingStart,
+}) => {
   const { t } = useTranslation();
   const { screen } = useWindowSize();
 
@@ -14,7 +19,7 @@ const PasswordConfirm = ({ errors, register, password }) => {
   return (
     <label
       className={
-        errors.password_confirmation ? 'edit-label error' : 'edit-label'
+        errors.new_password_confirmation ? 'edit-label error' : 'edit-label'
       }
     >
       <div className="edit-label-text">
@@ -22,21 +27,22 @@ const PasswordConfirm = ({ errors, register, password }) => {
       </div>
       <input
         onInput={e => {
+          handleEditingStart();
           if (e.target.value.includes(' ')) {
             e.target.value = e.target.value.replace(' ', '');
           }
         }}
         className={
-          errors.password_confirmation ? 'edit-input error' : 'edit-input  '
+          errors.new_password_confirmation ? 'edit-input error' : 'edit-input  '
         }
         placeholder="********"
         type={verificationVisibility ? 'text' : 'password'}
-        {...register('password_confirmation', {
+        {...register('new_password_confirmation', {
           required: passwordConfirmMessage.required,
           validate: value =>
             value === password || passwordConfirmMessage.notMatch,
         })}
-        aria-invalid={errors.password_confirmation ? 'true' : 'false'}
+        aria-invalid={errors.new_password_confirmation ? 'true' : 'false'}
       />
       <svg
         width="24px"
@@ -48,9 +54,9 @@ const PasswordConfirm = ({ errors, register, password }) => {
           href={verificationVisibility ? sprite + '#eye' : sprite + '#eye-off'}
         />
       </svg>
-      {errors.password_confirmation && (
+      {errors.new_password_confirmation && (
         <p role="alert" className="edit-error">
-          {t(`${errors.password_confirmation.message}`)}
+          {t(`${errors.new_password_confirmation.message}`)}
         </p>
       )}
     </label>
@@ -63,4 +69,5 @@ PasswordConfirm.propTypes = {
   errors: PropTypes.object.isRequired,
   register: PropTypes.func.isRequired,
   password: PropTypes.string,
+  handleEditingStart: PropTypes.func,
 };

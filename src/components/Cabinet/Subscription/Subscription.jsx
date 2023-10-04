@@ -51,18 +51,22 @@ const Subscription = observer(() => {
             {t('Поки що ви не оформили підписку на акції від PrettyPaws.')}
           </p>
         )}
-        <Link to="/cabinet/subscription#subscription">
-          <button
-            type="button"
-            className={
-              screen === 'desktop'
-                ? 'subscription__button desktop'
-                : 'subscription__button'
-            }
-          >
-            {t('Підписатися на акції')}
-          </button>
-        </Link>
+        <button
+          onClick={() =>
+            window.scrollTo({
+              top: 1000,
+              behavior: 'smooth',
+            })
+          }
+          type="button"
+          className={
+            screen === 'desktop'
+              ? 'subscription__button desktop'
+              : 'subscription__button'
+          }
+        >
+          {t('Підписатися на акції')}
+        </button>
       </div>
     </StyledSubscription>
   );

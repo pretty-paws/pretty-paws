@@ -141,4 +141,8 @@ export const StyledEditForm = styled.div`
 
     transition: all var(--transition);
   }
+
+  .password-change__box {
+    margin-top: 40px;
+  }
 `;
