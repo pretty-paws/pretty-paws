@@ -23,7 +23,7 @@ const WishList = () => {
       </div>
       <div className="wishlist__body">
         <p className="wishlist__text">
-          {t('Поки ви не оформили підписку на акції від PrettyPaw')}
+          {t('Поки що ви не оформили підписку на акції від PrettyPaws.')}
         </p>
         <button type="button" className="wishlist__button">
           {t('До каталогу')}
