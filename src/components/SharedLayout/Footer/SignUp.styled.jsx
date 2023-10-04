@@ -108,6 +108,10 @@ export const StyledSignUp = styled.section`
     }
   }
 
+  .success {
+    color: white;
+  }
+
   & .sign-up-input::placeholder {
     font-size: 16px;
     font-weight: 500;

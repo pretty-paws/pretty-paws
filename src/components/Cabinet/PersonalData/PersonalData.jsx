@@ -23,13 +23,21 @@ const PersonalData = observer(() => {
   return (
     <StyledPersonalData>
       <div className="personal-data__header-box">
-        {location.pathname === '/cabinet/personal_data/edit' && (
+        {location.pathname === '/cabinet/personal_data/edit' ? (
           <Link to="/cabinet/personal_data">
             <svg width="24px" height="24px" className="personal-data__arrow">
               <use href={sprite + '#arrow-down'} />
             </svg>
           </Link>
-        )}
+        ) : null}
+        {location.pathname === '/cabinet/personal_data' &&
+        screen === 'mobile' ? (
+          <Link to="/cabinet">
+            <svg width="24px" height="24px" className="personal-data__arrow">
+              <use href={sprite + '#arrow-down'} />
+            </svg>
+          </Link>
+        ) : null}
 
         <h2 className="personal-data__header">{t('Особисті дані')}</h2>
 

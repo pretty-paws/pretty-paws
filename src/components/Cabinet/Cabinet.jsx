@@ -74,6 +74,21 @@ const Cabinet = observer(() => {
                 </div>
               </NavLink>
             </div>
+            <div className="cabinet__line-box">
+              <NavLink
+                to="subscription"
+                className={({ isActive }) =>
+                  isActive ? 'link active-item' : 'link'
+                }
+              >
+                <div className="cabinet__menu-item">
+                  <svg width="24px" height="24px">
+                    <use href={sprite + '#subcribe'} />
+                  </svg>
+                  <div>{t('Підписки')}</div>
+                </div>
+              </NavLink>
+            </div>
           </div>
         </StyledCabinet>
       )}
@@ -126,6 +141,21 @@ const Cabinet = observer(() => {
                     <use href={sprite + '#favourite'} />
                   </svg>
                   <div>{t('Список бажань')}</div>
+                </div>
+              </NavLink>
+            </div>
+            <div className="cabinet__line-box">
+              <NavLink
+                to="subscription"
+                className={({ isActive }) =>
+                  isActive ? 'link active-item' : 'link'
+                }
+              >
+                <div className="cabinet__menu-item">
+                  <svg width="24px" height="24px">
+                    <use href={sprite + '#subcribe'} />
+                  </svg>
+                  <div>{t('Підписки')}</div>
                 </div>
               </NavLink>
             </div>
