@@ -3,9 +3,11 @@ import styled from 'styled-components';
 export const StyledPersonalData = styled.div`
   background: #fff;
   width: 100%;
-  /* padding: 10px 16px; */
-
   @media screen and (min-width: 834px) {
+    border-radius: 8px;
+    background: #fff;
+    height: fit-content;
+    padding: 40px 24px;
   }
 
   @media screen and (min-width: 1440px) {
@@ -13,7 +15,7 @@ export const StyledPersonalData = styled.div`
     border-radius: 8px;
   }
 
-  .personal-data__header-box {
+  /* .personal-data__header-box {
     position: relative;
     margin-bottom: 24px;
     padding: 10px 16px;
@@ -32,9 +34,9 @@ export const StyledPersonalData = styled.div`
       align-items: flex-end;
       margin: 0 0 40px;
     }
-  }
+  } */
 
-  .personal-data__arrow {
+  /* .personal-data__arrow {
     margin: 0 10px;
     transform: rotate(90deg);
   }
@@ -55,9 +57,9 @@ export const StyledPersonalData = styled.div`
       font-weight: 500;
       line-height: 32px;
     }
-  }
+  } */
 
-  .personal-data__edit {
+  /* .personal-data__edit {
     cursor: pointer;
     position: absolute;
     top: 10px;
@@ -72,9 +74,9 @@ export const StyledPersonalData = styled.div`
       top: 5px;
       right: 33px;
     }
-  }
+  } */
 
-  .active-edit::after {
+  /* .active-edit::after {
     content: '';
     z-index: 1;
     position: absolute;
@@ -93,6 +95,10 @@ export const StyledPersonalData = styled.div`
       top: -3px;
       right: 25px;
     }
+  } */
+
+  .personal-data__body {
+    width: 100%;
   }
 
   @media screen and (max-width: 834px) {
@@ -105,14 +111,15 @@ export const StyledPersonalData = styled.div`
   }
 
   table {
-    /* margin: 0 26px; */
     @media screen and (min-width: 834px) {
-      margin: 0 16px;
+      /* margin: 0 16px; */
     }
   }
 
   table td {
-    border: 10px solid transparent;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-right: 20px solid transparent;
     padding-bottom: 16px;
 
     @media screen and (min-width: 834px) {
@@ -120,6 +127,7 @@ export const StyledPersonalData = styled.div`
 
     @media screen and (min-width: 1440px) {
       padding-bottom: 22px;
+      border-right: 34px solid transparent;
     }
   }
 
@@ -127,7 +135,7 @@ export const StyledPersonalData = styled.div`
     font-size: 16px;
     font-weight: 400;
     line-height: 20px;
-    padding-right: 24px;
+    /* padding-right: 24px; */
   }
 
   table tbody tr td:last-child {

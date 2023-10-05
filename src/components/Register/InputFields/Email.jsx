@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import sprite from '../../../img/svg-sprite/sprite.svg';
 import { emailRegExp } from '../../../validation/regexp';
 import { emailMessage } from '../../../validation/messages';
@@ -16,12 +16,16 @@ const Email = ({
 }) => {
   const { t } = useTranslation();
   const email = watch('email', '');
+  useEffect(() => {
+    setState();
+  }, []);
 
   return (
     <label className="register-label">
       {t('Електронна пошта')}
       <input
         onInput={e => {
+          e.target.value = e.target.value.replace(/[!#$%^&*()+=\\<>?,]/g, '');
           email !== e.target.value && setState();
         }}
         className={

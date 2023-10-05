@@ -15,15 +15,17 @@ const Footer = () => {
   return (
     <>
       <SignUp />
-      <GlobalContainer>
-        <StyledFooter>
-          <FooterLogo />
-          <FooterContacts />
-          {screen === 'mobile' && <FooterSocialBar />}
-          <FooterMenuItems />
-          <PaymentBox />
-        </StyledFooter>
-      </GlobalContainer>
+      <footer>
+        <GlobalContainer>
+          <StyledFooter>
+            <FooterLogo />
+            <FooterContacts />
+            {screen === 'mobile' && <FooterSocialBar />}
+            <FooterMenuItems />
+            <PaymentBox />
+          </StyledFooter>
+        </GlobalContainer>
+      </footer>
     </>
   );
 };
