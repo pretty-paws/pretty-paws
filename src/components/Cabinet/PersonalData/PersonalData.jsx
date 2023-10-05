@@ -2,11 +2,12 @@ import React from 'react';
 import sprite from '../../../img/svg-sprite/sprite.svg';
 import { useStore } from '../../../store/AuthProvider';
 import { StyledPersonalData } from './PersonalData.styled';
-import { Link, NavLink, Outlet, useNavigate } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import { observer } from 'mobx-react-lite';
 import useWindowSize from '../../../hooks/useWindowSize';
 import { useTranslation } from 'react-i18next';
+import CabinetTitle from './CabinetTitle/CabinetTitle';
 // import { logOut } from '../../../services/authAPI';
 
 const PersonalData = observer(() => {
@@ -22,7 +23,8 @@ const PersonalData = observer(() => {
 
   return (
     <StyledPersonalData>
-      <div className="personal-data__header-box">
+      <CabinetTitle header={'Особисті дані'} />
+      {/* <div className="personal-data__header-box">
         {location.pathname === '/cabinet/personal_data/edit' ? (
           <Link to="/cabinet/personal_data">
             <svg width="24px" height="24px" className="personal-data__arrow">
@@ -51,7 +53,7 @@ const PersonalData = observer(() => {
             </svg>
           </NavLink>
         )}
-      </div>
+      </div> */}
       {location.pathname === '/cabinet/personal_data' && (
         <div className="personal-data__body">
           <table>

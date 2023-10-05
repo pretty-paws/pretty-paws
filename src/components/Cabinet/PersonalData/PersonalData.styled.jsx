@@ -3,6 +3,13 @@ import styled from 'styled-components';
 export const StyledPersonalData = styled.div`
   background: #fff;
   width: 100%;
+  @media screen and (min-width: 834px) {
+    border-radius: 8px;
+    background: #fff;
+    height: fit-content;
+    padding: 40px 24px;
+  }
+
   /* padding: 10px 16px; */
 
   @media screen and (min-width: 834px) {

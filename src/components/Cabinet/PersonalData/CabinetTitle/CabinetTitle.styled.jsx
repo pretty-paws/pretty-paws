@@ -42,4 +42,42 @@ export const StyledCabinetTitle = styled.div`
       line-height: 32px;
     }
   }
+
+  .cabinetTitle__edit {
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 31px;
+    z-index: 2;
+
+    @media screen and (min-width: 834px) {
+      top: 0;
+      right: 32px;
+    }
+    @media screen and (min-width: 1440px) {
+      top: 5px;
+      right: 33px;
+    }
+  }
+
+  .active-edit::after {
+    content: '';
+    z-index: 1;
+    position: absolute;
+    top: 3px;
+    right: 23px;
+    width: 40px;
+    height: 40px;
+    border-radius: 100px;
+    background-color: var(--hover-blue);
+
+    @media screen and (min-width: 834px) {
+      top: -7px;
+      right: 24px;
+    }
+    @media screen and (min-width: 1440px) {
+      top: -3px;
+      right: 25px;
+    }
+  }
 `;
