@@ -20,13 +20,15 @@ const Email = ({
   }, []);
 
   const { t } = useTranslation();
-
   const email = watch('email', '');
 
   return (
     <label className="login-label">
       {t('Електронна пошта')}
       <input
+        onFocus={() => {
+          setState();
+        }}
         onInput={e => {
           const sanitizedValue = e.target.value.replace(
             /[!#$%^&*()+=\\<>?,]/g,
@@ -64,7 +66,7 @@ const Email = ({
           {t(`${errors.email.message}`)}
         </p>
       )}
-      {state === 'error' && errorType === 'email' ? (
+      {state === 'error' && errorType === 'email' && !errors.email ? (
         <p role="alert" className="login-error">
           {t(`${error}`)}
         </p>
