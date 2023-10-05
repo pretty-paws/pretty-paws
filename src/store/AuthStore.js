@@ -181,7 +181,7 @@ export class AuthStore {
 
       runInAction(() => {
         this.state = 'done';
-        this.refresh();
+        this.authorised === true && this.refresh();
       });
     } catch (error) {
       runInAction(() => {

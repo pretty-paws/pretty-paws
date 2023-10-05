@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import AnimalsBar from '../AnimalsBar/AnimalsBar';
 import sprite from '../../../img/svg-sprite/sprite.svg';
 import { StyledSignUp } from './SignUp.styled';
@@ -11,9 +11,22 @@ import { emailMessage } from '../../../validation/messages';
 import { useForm } from 'react-hook-form';
 
 const SignUp = observer(() => {
+  console.log(document.body.lastElementChild.childNodes[0].childNodes[3]);
   const { t } = useTranslation();
   const [chosenCategory, setChosenCategory] = useState([]);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [visible, setVisible] = useState(true);
+
+  useEffect(() => {
+    let timeout;
+    if (isSubmitted === true) {
+      timeout = setTimeout(() => {
+        setVisible(false);
+      }, 5000);
+    }
+
+    return () => clearTimeout(timeout);
+  }, [isSubmitted]);
 
   const store = useStore();
   const {
@@ -56,6 +69,7 @@ const SignUp = observer(() => {
     });
     subscribe(formData);
     setIsSubmitted(true);
+    setVisible(true);
     setChosenCategory([]);
   };
 
@@ -130,7 +144,10 @@ const SignUp = observer(() => {
                 {state === 'error' && errorType === 'both' ? (
                   <div className="sign-up__error">{t(`${error}`)}</div>
                 ) : null}
-                {isSubmitted && state !== 'error' && !errors.email ? (
+                {isSubmitted &&
+                state !== 'error' &&
+                !errors.email &&
+                visible ? (
                   <div className=" sign-up__error success">
                     {t(`${'Ви успішно підписались'}`)}
                   </div>
@@ -139,7 +156,6 @@ const SignUp = observer(() => {
             </form>
           </div>
         </div>
-        {/* </div> */}
       </GlobalContainer>
     </StyledSignUp>
   );

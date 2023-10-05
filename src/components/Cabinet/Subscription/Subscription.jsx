@@ -10,6 +10,8 @@ import { animalsSvg } from '../../../utils/animalBarSvgLinks';
 const Subscription = observer(() => {
   const { t } = useTranslation();
   const { screen } = useWindowSize();
+  const subscriptionSection =
+    document.body.lastElementChild.childNodes[0].childNodes[3];
 
   const store = useStore();
   const {
@@ -54,7 +56,7 @@ const Subscription = observer(() => {
         <button
           onClick={() =>
             window.scrollTo({
-              top: 1000,
+              top: subscriptionSection.getBoundingClientRect().top,
               behavior: 'smooth',
             })
           }
