@@ -16,6 +16,7 @@ const Email = ({
 }) => {
   const { t } = useTranslation();
   const email = watch('email', '');
+
   useEffect(() => {
     setState();
   }, []);
