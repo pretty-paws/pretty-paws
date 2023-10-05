@@ -55,29 +55,34 @@ const PersonalData = observer(() => {
         )}
       </div> */}
       {location.pathname === '/cabinet/personal_data' && (
-        <div className="personal-data__body">
-          <table>
-            <tbody>
-              <tr>
-                <td>{t('Ім’я')}</td>
-                <td>{user.name}</td>
-              </tr>
-              <tr>
-                <td>{t('Прізвище')}</td>
-                <td>{user.surname}</td>
-              </tr>
-              <tr>
-                <td>{t('Телефон')}</td>
-                <td>{user.phone_number}</td>
-              </tr>
-              <tr>
-                <td>
-                  {screen === 'mobile' ? t('Ел. пошта') : t('Електронна пошта')}
-                </td>
-                <td>{user.email}</td>
-              </tr>
-            </tbody>
-          </table>
+        <>
+          {' '}
+          <div className="personal-data__body">
+            <table>
+              <tbody>
+                <tr>
+                  <td>{t('Ім’я')}</td>
+                  <td>{user.name}</td>
+                </tr>
+                <tr>
+                  <td>{t('Прізвище')}</td>
+                  <td>{user.surname}</td>
+                </tr>
+                <tr>
+                  <td>{t('Телефон')}</td>
+                  <td>{user.phone_number}</td>
+                </tr>
+                <tr>
+                  <td>
+                    {screen === 'mobile'
+                      ? t('Ел. пошта')
+                      : t('Електронна пошта')}
+                  </td>
+                  <td>{user.email}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
           {screen === 'mobile' && (
             <div className="cabinet-logout">
               <svg width="24px" height="24px">
@@ -94,7 +99,7 @@ const PersonalData = observer(() => {
               </button>
             </div>
           )}
-        </div>
+        </>
       )}
 
       <Outlet />

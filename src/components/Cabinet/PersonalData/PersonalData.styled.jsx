@@ -109,6 +109,10 @@ export const StyledPersonalData = styled.div`
       flex-direction: column;
       align-items: center;
     }
+
+    .personal-data__body .cabinet-logout {
+      align-items: left;
+    }
   }
 
   table {
