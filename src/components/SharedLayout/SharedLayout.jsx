@@ -9,6 +9,7 @@ import useWindowSize from '../../hooks/useWindowSize';
 import { useScrollDirection } from '../../hooks/useScrollDirection';
 import { Toaster } from 'react-hot-toast';
 import { observer } from 'mobx-react-lite';
+import ScrollButton from './ScrollButton/ScrollButton';
 
 const SharedLayout = observer(() => {
   const { screen } = useWindowSize();
@@ -26,6 +27,7 @@ const SharedLayout = observer(() => {
       <Outlet />
       <Toaster position="top-right" reverseOrder={true} />
       <Footer />
+      <ScrollButton />
     </StyledWrapper>
   );
 });
