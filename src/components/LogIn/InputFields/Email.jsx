@@ -24,6 +24,8 @@ const Email = ({
       {t('Електронна пошта')}
       <input
         onInput={e => {
+          e.target.value = e.target.value.replace(/[!#$%^&*()+=\\<>?,]/g, '');
+          console.log(e.target.value);
           email !== e.target.value && setState();
         }}
         className={
