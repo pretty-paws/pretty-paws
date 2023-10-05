@@ -2,16 +2,16 @@ import { useTranslation } from 'react-i18next';
 import useWindowSize from '../../../hooks/useWindowSize';
 import { StyledSubscription } from './Subscription.styled';
 import { Link } from 'react-router-dom';
-import sprite from '../../../img/svg-sprite/sprite.svg';
 import { useStore } from '../../../store/AuthProvider';
 import { observer } from 'mobx-react-lite';
 import { animalsSvg } from '../../../utils/animalBarSvgLinks';
+import CabinetTitle from '../PersonalData/CabinetTitle/CabinetTitle';
 
 const Subscription = observer(() => {
   const { t } = useTranslation();
   const { screen } = useWindowSize();
   const subscriptionSection =
-    document.body.lastElementChild.childNodes[0].childNodes[3];
+    document.body.lastElementChild?.childNodes[0]?.childNodes[3];
 
   const store = useStore();
   const {
@@ -20,16 +20,7 @@ const Subscription = observer(() => {
 
   return (
     <StyledSubscription>
-      <div className="subscription__header-box">
-        {screen === 'mobile' && (
-          <Link to={'/cabinet'}>
-            <svg width="24px" height="24px" className="subscription__arrow">
-              <use href={sprite + '#arrow-down'} />
-            </svg>
-          </Link>
-        )}
-        <h2 className="subscription__header">{t('Мої підписки')}</h2>
-      </div>
+      <CabinetTitle header={'Мої підписки'} />
       <div className="subscription__body">
         {subscriptions.map(({ id }) => (
           <div className="subscription__box" key={id}>

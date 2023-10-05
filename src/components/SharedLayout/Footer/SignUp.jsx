@@ -11,7 +11,6 @@ import { emailMessage } from '../../../validation/messages';
 import { useForm } from 'react-hook-form';
 
 const SignUp = observer(() => {
-  console.log(document.body.lastElementChild.childNodes[0].childNodes[3]);
   const { t } = useTranslation();
   const [chosenCategory, setChosenCategory] = useState([]);
   const [isSubmitted, setIsSubmitted] = useState(false);
