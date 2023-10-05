@@ -6,7 +6,9 @@ export const StyledTooltip = styled.div`
   & .tooltip {
     position: absolute;
     top: 35px;
-    left: -100%;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
     padding: 4px 12px;
     justify-content: center;
     color: #ffffff;
