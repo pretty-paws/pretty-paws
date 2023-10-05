@@ -25,7 +25,7 @@ const Email = ({
       <input
         onInput={e => {
           e.target.value = e.target.value.replace(/[!#$%^&*()+=\\<>?,]/g, '');
-          console.log(e.target.value);
+          // console.log(e.target.value);
           email !== e.target.value && setState();
         }}
         className={

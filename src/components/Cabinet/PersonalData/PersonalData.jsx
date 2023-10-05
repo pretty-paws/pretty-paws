@@ -24,39 +24,8 @@ const PersonalData = observer(() => {
   return (
     <StyledPersonalData>
       <CabinetTitle header={'Особисті дані'} />
-      {/* <div className="personal-data__header-box">
-        {location.pathname === '/cabinet/personal_data/edit' ? (
-          <Link to="/cabinet/personal_data">
-            <svg width="24px" height="24px" className="personal-data__arrow">
-              <use href={sprite + '#arrow-down'} />
-            </svg>
-          </Link>
-        ) : null}
-        {location.pathname === '/cabinet/personal_data' &&
-        screen === 'mobile' ? (
-          <Link to="/cabinet">
-            <svg width="24px" height="24px" className="personal-data__arrow">
-              <use href={sprite + '#arrow-down'} />
-            </svg>
-          </Link>
-        ) : null}
-
-        <h2 className="personal-data__header">{t('Особисті дані')}</h2>
-
-        {location.pathname === '/cabinet/personal_data' && (
-          <NavLink
-            to="/cabinet/personal_data/edit"
-            className={({ isActive }) => (isActive ? 'active-edit' : '')}
-          >
-            <svg width="24px" height="24px" className="personal-data__edit">
-              <use href={sprite + '#edit'} />
-            </svg>
-          </NavLink>
-        )}
-      </div> */}
       {location.pathname === '/cabinet/personal_data' && (
         <>
-          {' '}
           <div className="personal-data__body">
             <table>
               <tbody>
