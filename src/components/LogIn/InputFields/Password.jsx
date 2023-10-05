@@ -24,7 +24,7 @@ const Password = ({
       {t('Пароль')}
       <input
         onInput={e => {
-          console.log(e.target.value);
+          // console.log(e.target.value);
           if (e.target.value.includes(' ')) {
             e.target.value = e.target.value.replace(' ', '');
           }

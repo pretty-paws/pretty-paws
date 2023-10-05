@@ -69,11 +69,11 @@ const BurgerMenu = ({ active, setActive }) => {
     // console.log('changed id ');
     // console.log('selected animal', selectedAnimal);
     if (selectedAnimal != undefined) {
-      console.log('changed id ', selectedAnimal);
+      // console.log('changed id ', selectedAnimal);
 
       setShowAnimalCatalog(true);
       setOpenedCatalogue(false);
-      console.log(getAnimalName(selectedAnimal));
+      // console.log(getAnimalName(selectedAnimal));
     }
   }, [selectedAnimal]);
 

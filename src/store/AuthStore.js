@@ -176,8 +176,8 @@ export class AuthStore {
   async subscribe(data) {
     this.state = 'pending';
     try {
-      const res = await subscribe(data);
-      console.log(res.data);
+      await subscribe(data);
+      // console.log(res.data);
 
       runInAction(() => {
         this.state = 'done';
@@ -208,16 +208,15 @@ export class AuthStore {
   async updateProfile(data) {
     this.state = 'pending';
     try {
-      const res = await updateUser(data);
-      console.log(res);
+      await updateUser(data);
       runInAction(() => {
         this.state = 'done';
       });
     } catch (error) {
       runInAction(() => {
         this.state = 'error';
-        const errorData = error.response.data.error;
-        console.log(errorData);
+        // const errorData = error.response.data.error;
+        // console.log(errorData);
       });
     }
   }
@@ -225,8 +224,8 @@ export class AuthStore {
   async updatePassword(data) {
     this.state = 'pending';
     try {
-      const res = await updatePass(data);
-      console.log(res);
+      await updatePass(data);
+      // console.log(res);
       runInAction(() => {
         this.state = 'done';
       });
@@ -234,8 +233,8 @@ export class AuthStore {
       runInAction(() => {
         this.state = 'error';
         this.errorType = 'password-change';
-        const errorData = error.response.data.error;
-        console.log(errorData);
+        // const errorData = error.response.data.error;
+        // console.log(errorData);
       });
     }
   }
