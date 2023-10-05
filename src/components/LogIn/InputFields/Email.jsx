@@ -22,16 +22,20 @@ const Email = ({
   const { t } = useTranslation();
 
   const email = watch('email', '');
-  console.log(errors.email);
 
   return (
     <label className="login-label">
       {t('Електронна пошта')}
       <input
         onInput={e => {
-          e.target.value = e.target.value.replace(/[!#$%^&*()+=\\<>?,]/g, '');
-          // console.log(e.target.value);
-          email !== e.target.value && setState();
+          const sanitizedValue = e.target.value.replace(
+            /[!#$%^&*()+=\\<>?,]/g,
+            ''
+          );
+
+          e.target.value = sanitizedValue;
+
+          email !== sanitizedValue && setState();
         }}
         className={
           errors.email || (state === 'error' && errorType === 'email')
