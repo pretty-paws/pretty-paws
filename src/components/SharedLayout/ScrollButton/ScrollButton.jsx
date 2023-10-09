@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button } from './ScrollButton.styled';
 import buttonIcon from '../../../img/up-button.png';
 
@@ -22,6 +22,23 @@ const ScrollButton = () => {
   };
 
   window.addEventListener('scroll', toggleVisible);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrolled = document.documentElement.scrollTop;
+      if (scrolled > 300) {
+        setVisible(true);
+      } else if (scrolled <= 300) {
+        setVisible(false);
+      }
+    };
+    window.addEventListener('touchmove', handleScroll);
+
+    // Clean up the event listener on component unmount
+    return () => {
+      window.removeEventListener('touchmove', handleScroll);
+    };
+  }, []);
 
   return (
     <Button>

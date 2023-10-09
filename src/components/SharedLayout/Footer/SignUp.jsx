@@ -64,7 +64,7 @@ const SignUp = observer(() => {
     const formData = new FormData();
     formData.append('email', data.email);
     chosenCategory.forEach(category => {
-      formData.append(`${`category_animal_id[${category - 1}]`}`, category);
+      formData.append(`${`animal_id[${category - 1}]`}`, category);
     });
     subscribe(formData);
     setIsSubmitted(true);
