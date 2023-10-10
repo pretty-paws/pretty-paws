@@ -1,8 +1,10 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import sprite from '../../../../img/svg-sprite/sprite.svg';
 import { SearchBox } from './SearchStyled';
 
 const Search = () => {
+  const { t } = useTranslation();
   return (
     <SearchBox>
       <svg className="search-box__search-icon">
@@ -11,7 +13,7 @@ const Search = () => {
       <input
         className="search-box__input"
         type="search"
-        placeholder="Шукати продукт або бренд"
+        placeholder={t('Шукати продукт або бренд')}
         name="search"
       />
     </SearchBox>

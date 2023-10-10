@@ -37,4 +37,8 @@ export const StyledAnimalsBar = styled.div`
       background-color: var(--accent-color-beige);
     }
   }
+
+  .chosen {
+    background-color: var(--accent-color-beige);
+  }
 `;

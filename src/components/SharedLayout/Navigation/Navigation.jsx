@@ -3,8 +3,10 @@ import sprite from '../../../img/svg-sprite/sprite.svg';
 import { StyledNavigation } from './Navigation.styled';
 import { NavLink } from 'react-router-dom';
 import { publicRoutes } from '../../../routes';
+import { useTranslation } from 'react-i18next';
 
 const Navigation = () => {
+  const { t } = useTranslation();
   return (
     <StyledNavigation>
       <NavLink to="/catalog">
@@ -21,7 +23,7 @@ const Navigation = () => {
                   to={path}
                   className={({ isActive }) => (isActive ? 'active-link' : '')}
                 >
-                  {name}
+                  {t(`${name}`)}
                 </NavLink>
               </li>
             );

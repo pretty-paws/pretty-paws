@@ -1,5 +1,5 @@
 import { makeAutoObservable } from 'mobx';
-import { SubscriptionStore } from './SubscriptionStore';
+// import { ProfileStore } from './ProfileStore';
 
 import { AuthStore } from './AuthStore';
 import { CategoryStore } from './CategoryStore';
@@ -9,6 +9,9 @@ export class RootStore {
   subscriptionStore = new SubscriptionStore();
   category = new CategoryStore();
   animal = new AnimalStore();
+
+  // profile = new ProfileStore();
+
   constructor() {
     makeAutoObservable(this, {}, { autoBind: true });
   }

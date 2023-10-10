@@ -7,16 +7,21 @@ import {
   registerUser,
   registerVerify,
   subscribe,
+  updatePass,
+  updateUser,
 } from '../services/authAPI';
 
 export class AuthStore {
   confirmation_code = 0;
   token = 0;
   user = [];
+  subscriptions = [];
   userName = localStorage.getItem('userName') || '';
   email = localStorage.getItem('email') || '';
   authorised = JSON.parse(localStorage.getItem('authorised')) || false;
   state = 'pending';
+  error = '';
+  errorType = '';
   rememberMe = JSON.parse(localStorage.getItem('rememberMe')) || false;
 
   constructor() {
@@ -33,11 +38,14 @@ export class AuthStore {
     localStorage.setItem('rememberMe', bool);
   }
 
+  setState() {
+    this.state = 'done';
+  }
+
   async signUp(userData) {
     this.state = 'pending';
     try {
       const { data } = await registerUser(userData);
-      console.log('sign up data', data);
       runInAction(() => {
         this.confirmation_code = data.data.code;
         this.verifyCode({
@@ -47,19 +55,18 @@ export class AuthStore {
         this.state = 'done';
       });
     } catch (error) {
-      toast.error(error.message, {
-        style: {
-          border: '1px solid #713200',
-          padding: '16px',
-          color: '#713200',
-        },
-        iconTheme: {
-          primary: '#713200',
-          secondary: '#FFFAEE',
-        },
-      });
       runInAction(() => {
         this.state = 'error';
+        const errorData = error.response.data.error;
+
+        if ('email' in errorData) {
+          this.errorType = 'email';
+          this.error = errorData.email[0];
+        }
+        if ('phone_number' in errorData) {
+          this.errorType = 'phone_number';
+          this.error = errorData.phone_number[0];
+        }
       });
     }
   }
@@ -68,7 +75,6 @@ export class AuthStore {
     this.state = 'pending';
     try {
       const { data } = await registerVerify(email, confirmation_code);
-      console.log('verifyCode', data);
       runInAction(() => {
         localStorage.setItem('token', data.data.token);
         localStorage.setItem('authorised', true);
@@ -90,33 +96,31 @@ export class AuthStore {
     try {
       const { data } = await loginUser(userData);
       localStorage.setItem('authorised', true);
-      localStorage.setItem('token', data.data.token);
 
       runInAction(() => {
         this.token = data.data.token;
         this.authorised = true;
         this.user = data.data.user;
         this.email = data.data.user.email;
-        this.rememberMe === true
+        this.rememberMe === true && this.state !== 'error'
           ? localStorage.setItem('email', data.data.user.email)
-          : null;
+          : localStorage.removeItem('email', data.data.user.email);
         this.state = 'done';
         window.scrollTo({ top: 0, behavior: 'smooth' });
       });
     } catch (error) {
-      toast.error('Неправильні данні', {
-        style: {
-          border: '1px solid #713200',
-          padding: '16px',
-          color: '#713200',
-        },
-        iconTheme: {
-          primary: '#713200',
-          secondary: '#FFFAEE',
-        },
-      });
       runInAction(() => {
         this.state = 'error';
+        const errorData = error.response.data.error;
+
+        if ('email' in errorData) {
+          this.errorType = 'email';
+          this.error = errorData.email[0];
+        }
+        if ('password' in errorData) {
+          this.errorType = 'password';
+          this.error = errorData.password[0];
+        }
       });
     }
   }
@@ -127,28 +131,18 @@ export class AuthStore {
       const res = await refreshUser();
       runInAction(() => {
         this.user = res.data.data.user;
+        this.subscriptions = res.data.data.user.subscriptions;
         this.state = 'done';
       });
     } catch (error) {
-      toast.error('Сессія закінчилась. Авторизуйтесь знов', {
-        style: {
-          border: '1px solid #713200',
-          padding: '16px',
-          color: '#713200',
-        },
-        iconTheme: {
-          primary: '#713200',
-          secondary: '#FFFAEE',
-        },
-      });
       runInAction(() => {
-        this.authorised === false;
         this.state = 'error';
+        this.authorised = false;
         this.rememberMe === false ? localStorage.removeItem('email') : null;
-        this.token === '';
-        // this.state = 'done';
+        this.token = '';
         localStorage.setItem('authorised', false);
         localStorage.setItem('token', '');
+        toast.error('Сессія закінчилась. Вам потрібно залогінитись знов.');
       });
     }
   }
@@ -170,17 +164,6 @@ export class AuthStore {
         this.state = 'done';
       });
     } catch (error) {
-      toast.error(error.message, {
-        style: {
-          border: '1px solid #713200',
-          padding: '16px',
-          color: '#713200',
-        },
-        iconTheme: {
-          primary: '#713200',
-          secondary: '#FFFAEE',
-        },
-      });
       runInAction(() => {
         this.authorised = false;
         this.state = 'error';
@@ -194,14 +177,64 @@ export class AuthStore {
     this.state = 'pending';
     try {
       await subscribe(data);
+      // console.log(res.data);
 
+      runInAction(() => {
+        this.state = 'done';
+        this.authorised === true && this.refresh();
+      });
+    } catch (error) {
+      runInAction(() => {
+        this.state = 'error';
+        const errorData = error.response.data.error;
+
+        if ('email' in errorData) {
+          this.errorType = 'email';
+          this.error = errorData.email[0];
+        }
+        if ('category_animal_id' in errorData) {
+          this.errorType = 'category_animal_id';
+          this.error = errorData.category_animal_id[0];
+        }
+
+        if ('category_animal_id' in errorData && 'email' in errorData) {
+          this.errorType = 'both';
+          this.error = 'Оберіть категорію і введіть Вашу пошту';
+        }
+      });
+    }
+  }
+
+  async updateProfile(data) {
+    this.state = 'pending';
+    try {
+      await updateUser(data);
       runInAction(() => {
         this.state = 'done';
       });
     } catch (error) {
-      toast.error(error.message);
       runInAction(() => {
         this.state = 'error';
+        // const errorData = error.response.data.error;
+        // console.log(errorData);
+      });
+    }
+  }
+
+  async updatePassword(data) {
+    this.state = 'pending';
+    try {
+      await updatePass(data);
+      // console.log(res);
+      runInAction(() => {
+        this.state = 'done';
+      });
+    } catch (error) {
+      runInAction(() => {
+        this.state = 'error';
+        this.errorType = 'password-change';
+        // const errorData = error.response.data.error;
+        // console.log(errorData);
       });
     }
   }

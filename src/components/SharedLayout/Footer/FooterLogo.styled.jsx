@@ -5,10 +5,10 @@ export const StyledFooterLogo = styled.div`
 
   @media screen and (min-width: 834px) {
     text-align: left;
+    flex: 1;
   }
 
   @media screen and (min-width: 1440px) {
-    flex: 1;
   }
 
   .footer__logo {

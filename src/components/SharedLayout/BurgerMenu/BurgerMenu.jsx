@@ -12,6 +12,8 @@ import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { publicRoutes } from '../../../routes';
 import { animalsSvg } from '../../../utils/animalBarSvgLinks';
+import { useTranslation } from 'react-i18next';
+import { useStore } from '../../../store/AuthProvider';
 
 import { observer } from 'mobx-react-lite';
 import { useStore } from '../../../store/AuthProvider';
@@ -19,8 +21,23 @@ import { useStore } from '../../../store/AuthProvider';
 const BurgerMenu = observer(({ active, setActive }) => {
   const [openedCatalogue, setOpenedCatalogue] = useState(false);
   const [showAnimalCatalog, setShowAnimalCatalog] = useState(false);
-
   const [selectedAnimal, setSelectedAnimal] = useState();
+  const [language, setLanguage] = useState(
+    localStorage.getItem('language') || 'en'
+  );
+
+  const store = useStore();
+  const {
+    auth: { authorised },
+  } = store;
+
+  const { i18n, t } = useTranslation();
+
+  const handleLanguageChange = lang => {
+    localStorage.setItem('language', lang);
+    setLanguage(lang);
+    i18n.changeLanguage(lang);
+  };
 
   //   object with UseStore
   const store = useStore();
@@ -54,14 +71,14 @@ const BurgerMenu = observer(({ active, setActive }) => {
   }
 
   useEffect(() => {
-    console.log('changed id ');
-    console.log('selected animal', selectedAnimal);
+    // console.log('changed id ');
+    // console.log('selected animal', selectedAnimal);
     if (selectedAnimal != undefined) {
-      console.log('changed id ', selectedAnimal);
+      // console.log('changed id ', selectedAnimal);
 
       setShowAnimalCatalog(true);
       setOpenedCatalogue(false);
-      console.log(getAnimalName(selectedAnimal));
+      // console.log(getAnimalName(selectedAnimal));
     }
   }, [selectedAnimal]);
 
@@ -88,6 +105,17 @@ const BurgerMenu = observer(({ active, setActive }) => {
       </div>
     );
   });
+  useEffect(() => {
+    if (active) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+    return () => {
+      document.body.style.overflow = 'auto';
+    };
+  }, [active]);
+
 
   return (
     <>
@@ -122,20 +150,39 @@ const BurgerMenu = observer(({ active, setActive }) => {
           >
             <div onClick={e => e.stopPropagation()}>
               <div className="burger__head">
-                <svg
-                  className="burger-language-uk-icon"
-                  width="24px"
-                  height="24px"
+                {language === 'en' && (
+                  <div onClick={() => handleLanguageChange('ua')}>
+                    <svg
+                      className="burger-language-icon"
+                      width="24px"
+                      height="24px"
+                    >
+                      <use href={sprite + '#ua'} />
+                    </svg>
+                  </div>
+                )}
+
+                {language === 'ua' && (
+                  <div onClick={() => handleLanguageChange('en')}>
+                    <svg
+                      className="burger-language-icon"
+                      width="24px"
+                      height="24px"
+                    >
+                      <use href={sprite + '#uk'} />
+                    </svg>
+                  </div>
+                )}
+                <Link
+                  to={authorised ? '/cabinet' : '/login'}
+                  onClick={() => setActive(false)}
                 >
-                  <use href={sprite + '#uk'} />
-                </svg>
-                <Link to="/login" onClick={() => setActive(false)}>
                   <button
                     className="burger__login-button"
                     type="button"
                     //   onClick={() => showModal(true)}
                   >
-                    Вхід для своїх
+                    {authorised ? t('Кабінет') : t('Вхід для своїх')}
                   </button>
                 </Link>
                 <svg
@@ -165,7 +212,7 @@ const BurgerMenu = observer(({ active, setActive }) => {
                   >
                     <use href={sprite + '#arrow-down'} />
                   </svg>
-                  <p>Каталог товарів</p>
+                  <p>{t('Каталог товарів')}</p>
                 </div>
                 {openedCatalogue && (
                   <AnimalsBar type="burger" getID={handleAnimalClick} />
@@ -173,7 +220,7 @@ const BurgerMenu = observer(({ active, setActive }) => {
                 {publicRoutes.slice(1).map(({ name, path }) => {
                   return (
                     <Link to={path} key={name} onClick={() => setActive(false)}>
-                      <p>{name}</p>
+                      <p>{t(`${name}`)}</p>
                     </Link>
                   );
                 })}

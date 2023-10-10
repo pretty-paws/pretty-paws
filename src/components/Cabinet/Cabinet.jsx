@@ -7,8 +7,10 @@ import { CabinetContainer, StyledCabinet } from './Cabinet.styled';
 import NewUserBar from './NewUserBar/NewUserBar';
 import { useLocation } from 'react-router-dom';
 import useWindowSize from '../../hooks/useWindowSize';
+import { useTranslation } from 'react-i18next';
 
 const Cabinet = observer(() => {
+  const { t } = useTranslation();
   const { screen } = useWindowSize();
   const store = useStore();
   const {
@@ -16,14 +18,17 @@ const Cabinet = observer(() => {
   } = store;
 
   let location = useLocation();
-  //   console.log(location.pathname === '/cabinet' && screen === 'mobile');
 
   return (
     <CabinetContainer>
       {location.pathname === '/cabinet' && screen === 'mobile' && (
         <StyledCabinet>
           <div className="cabinet__menu">
-            <h2 className="cabinet__header">Привіт, {user.name}</h2>
+            <h2 className="cabinet__header">
+              {t('Привіт,')}
+
+              {user.name}
+            </h2>
             <div className="cabinet__line-box">
               <NavLink
                 to="personal_data"
@@ -35,7 +40,7 @@ const Cabinet = observer(() => {
                   <svg width="24px" height="24px">
                     <use href={sprite + '#account'} />
                   </svg>
-                  <div>Особисті дані</div>
+                  <div>{t('Особисті дані')}</div>
                 </div>
               </NavLink>
             </div>
@@ -50,7 +55,7 @@ const Cabinet = observer(() => {
                   <svg width="24px" height="24px">
                     <use href={sprite + '#orders'} />
                   </svg>
-                  <div>Мої замовлення</div>
+                  <div>{t('Мої замовлення')}</div>
                 </div>
               </NavLink>
             </div>
@@ -65,7 +70,22 @@ const Cabinet = observer(() => {
                   <svg width="24px" height="24px">
                     <use href={sprite + '#favourite'} />
                   </svg>
-                  <div>Список бажань</div>
+                  <div>{t('Список бажань')}</div>
+                </div>
+              </NavLink>
+            </div>
+            <div className="cabinet__line-box">
+              <NavLink
+                to="subscription"
+                className={({ isActive }) =>
+                  isActive ? 'link active-item' : 'link'
+                }
+              >
+                <div className="cabinet__menu-item">
+                  <svg width="24px" height="24px">
+                    <use href={sprite + '#subcribe'} />
+                  </svg>
+                  <div>{t('Підписки')}</div>
                 </div>
               </NavLink>
             </div>
@@ -75,7 +95,10 @@ const Cabinet = observer(() => {
       {screen !== 'mobile' && (
         <StyledCabinet>
           <div className="cabinet__menu">
-            <h2 className="cabinet__header">Привіт, {user.name}</h2>
+            <h2 className="cabinet__header">
+              {t('Привіт,')}
+              {user.name}
+            </h2>
             <div className="cabinet__line-box">
               <NavLink
                 to="personal_data"
@@ -87,7 +110,7 @@ const Cabinet = observer(() => {
                   <svg width="24px" height="24px">
                     <use href={sprite + '#account'} />
                   </svg>
-                  <div>Особисті дані</div>
+                  <div>{t('Особисті дані')}</div>
                 </div>
               </NavLink>
             </div>
@@ -102,7 +125,7 @@ const Cabinet = observer(() => {
                   <svg width="24px" height="24px">
                     <use href={sprite + '#orders'} />
                   </svg>
-                  <div>Мої замовлення</div>
+                  <div>{t('Мої замовлення')}</div>
                 </div>
               </NavLink>
             </div>
@@ -117,7 +140,22 @@ const Cabinet = observer(() => {
                   <svg width="24px" height="24px">
                     <use href={sprite + '#favourite'} />
                   </svg>
-                  <div>Список бажань</div>
+                  <div>{t('Список бажань')}</div>
+                </div>
+              </NavLink>
+            </div>
+            <div className="cabinet__line-box">
+              <NavLink
+                to="subscription"
+                className={({ isActive }) =>
+                  isActive ? 'link active-item' : 'link'
+                }
+              >
+                <div className="cabinet__menu-item">
+                  <svg width="24px" height="24px">
+                    <use href={sprite + '#subcribe'} />
+                  </svg>
+                  <div>{t('Підписки')}</div>
                 </div>
               </NavLink>
             </div>
@@ -127,7 +165,7 @@ const Cabinet = observer(() => {
                 <use href={sprite + '#logout'} />
               </svg>
               <button className="cabinet-logout-btn" onClick={() => logOut()}>
-                Вийти з акаунту
+                {t('Вийти з акаунту')}
               </button>
             </div>
           </div>

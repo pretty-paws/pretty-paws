@@ -76,19 +76,46 @@ export const StyledSignUp = styled.section`
       margin-bottom: 0;
       width: 413px;
     }
+
+    &.error {
+      border: 2px solid var(--accent-color-orange);
+    }
+  }
+
+  & .sign-up__error {
+    white-space: nowrap;
+    position: absolute;
+    left: 30px;
+    /* transform: translateX(-50%); */
+    bottom: 15px;
+    /* color: var(--accent-color-orange); */
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16px;
+
+    @media screen and (min-width: 834px) {
+      font-size: 15px;
+      /* left: 50%; */
+      /* transform: translateX(-50%); */
+      bottom: 10px;
+    }
+
+    @media screen and (min-width: 1440px) {
+      font-size: 16px;
+      /* left: 50%; */
+      /* transform: translateX(-50%); */
+      bottom: -25px;
+    }
+  }
+
+  .success {
+    color: white;
   }
 
   & .sign-up-input::placeholder {
     font-size: 16px;
     font-weight: 500;
     line-height: 20px;
-
-    @media screen and (min-width: 834px) {
-      font-size: 16px;
-    }
-
-    @media screen and (min-width: 1440px) {
-    }
   }
 
   & .sign-up-icon {

@@ -2,23 +2,27 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { StyledAlreadyRegisteredBox } from './AlreadyRegistered.styled';
 import { SocialNetsAuth } from '../LogIn/SocialNetsAuth';
+import { useTranslation } from 'react-i18next';
 
 const AlreadyRegistered = () => {
+  const { t } = useTranslation();
   return (
     <StyledAlreadyRegisteredBox>
-      <h2 className="already-registered-header">Зареєстрований користувач?</h2>
+      <h2 className="already-registered-header">
+        {t('Зареєстрований користувач?')}
+      </h2>
       <Link to="/login">
         <button type="button" className="already-registered-button">
-          Увійти
+          {t('Увійти')}
         </button>
       </Link>
-      <SocialNetsAuth title="Або увійти через" />
+      <SocialNetsAuth title={t('Або увійти через')} />
 
       <p className="already-registered-agree">
-        Продовжуючи, ви погоджуєтесь з
+        {t('Продовжуючи, ви погоджуєтесь з')}
         <span className="already-registered-agreement">
           {' '}
-          умовами користування{' '}
+          {t('умовами користування')}{' '}
         </span>
         PrettyPaws.ua
       </p>

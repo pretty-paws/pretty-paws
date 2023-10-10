@@ -8,8 +8,10 @@ import Navigation from './Navigation/Navigation';
 import useWindowSize from '../../hooks/useWindowSize';
 import { useScrollDirection } from '../../hooks/useScrollDirection';
 import { Toaster } from 'react-hot-toast';
+import { observer } from 'mobx-react-lite';
+import ScrollButton from './ScrollButton/ScrollButton';
 
-const SharedLayout = () => {
+const SharedLayout = observer(() => {
   const { screen } = useWindowSize();
   const scrollDirection = useScrollDirection();
   return (
@@ -25,8 +27,9 @@ const SharedLayout = () => {
       <Outlet />
       <Toaster position="top-right" reverseOrder={true} />
       <Footer />
+      <ScrollButton />
     </StyledWrapper>
   );
-};
+});
 
 export default SharedLayout;

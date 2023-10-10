@@ -103,6 +103,7 @@ export const StyledCabinet = styled.div`
   }
 
   & .cabinet-logout-btn {
+    padding-left: 16px;
     font-size: 16px;
     font-weight: 400;
     line-height: 20px;
