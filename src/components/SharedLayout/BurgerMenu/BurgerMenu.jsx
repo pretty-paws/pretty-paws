@@ -13,38 +13,43 @@ import { useState } from 'react';
 import { publicRoutes } from '../../../routes';
 import { animalsSvg } from '../../../utils/animalBarSvgLinks';
 
-const BurgerMenu = ({ active, setActive }) => {
+import { observer } from 'mobx-react-lite';
+import { useStore } from '../../../store/AuthProvider';
+
+const BurgerMenu = observer(({ active, setActive }) => {
   const [openedCatalogue, setOpenedCatalogue] = useState(false);
   const [showAnimalCatalog, setShowAnimalCatalog] = useState(false);
 
   const [selectedAnimal, setSelectedAnimal] = useState();
+
+  //   object with UseStore
+  const store = useStore();
+  const { category, animal } = store;
 
   //  function that get id animal clicked
   const handleAnimalClick = animalid => {
     setSelectedAnimal(animalid);
     console.log(animalsSvg[animalid].link);
   };
+
   const closeAnimalCatalog = () => {
     setShowAnimalCatalog(false);
     setSelectedAnimal(null);
   };
 
+  const closeMenu = () => {
+    setShowAnimalCatalog(false);
+    setSelectedAnimal(null);
+    setActive(false);
+  };
+  //   fuction get animal name with selected element
   function getAnimalName(animalId) {
-    switch (animalId) {
-      case 0:
-        return 'dog';
-      case 1:
-        return 'cat';
-      case 2:
-        return 'mouse';
-      case 3:
-        return 'fish';
-      case 4:
-        return 'bird';
-      case 5:
-        return 'lizard';
-      default:
-        return 'Unknown Animal';
+    const animalID = animal.animal.find(animal => animal.id === animalId);
+
+    if (animalID) {
+      return animalID.title;
+    } else {
+      return 'Тваринку не знайдено';
     }
   }
 
@@ -59,6 +64,31 @@ const BurgerMenu = ({ active, setActive }) => {
       console.log(getAnimalName(selectedAnimal));
     }
   }, [selectedAnimal]);
+
+  const filteredCategory = category.categores.filter(
+    ctg => ctg.category_animal_id === selectedAnimal
+  );
+
+  const categoryItems = filteredCategory.map(ctg => {
+    const filteredSubCategory = category.subCategory.filter(
+      subCtg => subCtg.category_id === ctg.id
+    );
+    return (
+      <div className="subburger__animal" key={ctg.id}>
+        <Link to="" onClick={closeMenu}>
+          <h3 className="animal__title">{ctg.title}</h3>
+        </Link>
+        <ul className="animal__list">
+          {filteredSubCategory.map(subCategory => (
+            <Link to="" onClick={closeMenu} key={subCategory.id}>
+              <li className="animal__list-item">{subCategory.title}</li>
+            </Link>
+          ))}
+        </ul>
+      </div>
+    );
+  });
+
   return (
     <>
       <StyledBackdrop
@@ -74,26 +104,10 @@ const BurgerMenu = ({ active, setActive }) => {
                   <use href={sprite + '#arrow-down'} />
                 </svg>
                 <h3 className="subburger__title">
-                  Title {getAnimalName(selectedAnimal)}
+                  {getAnimalName(selectedAnimal)}
                 </h3>
               </div>
-              <div className="subburger__animal">
-                <h3 className="animal__title">Title</h3>
-                <ul className="animal__list">
-                  <Link to="" onClick={closeAnimalCatalog}>
-                    <li className="animal__list-item"> Item 1</li>
-                  </Link>
-                  <Link to="" onClick={closeAnimalCatalog}>
-                    <li className="animal__list-item"> Item 2</li>
-                  </Link>
-                  <Link to="" onClick={closeAnimalCatalog}>
-                    <li className="animal__list-item"> Item 3</li>
-                  </Link>
-                  <Link to="" onClick={closeAnimalCatalog}>
-                    <li className="animal__list-item"> Item 4</li>
-                  </Link>
-                </ul>
-              </div>
+              {categoryItems}
               <div className="subburger__footer">
                 <AnimalsBar type="burger" getID={handleAnimalClick} />
               </div>
@@ -170,7 +184,7 @@ const BurgerMenu = ({ active, setActive }) => {
       )}
     </>
   );
-};
+});
 
 export default BurgerMenu;
 

@@ -19,6 +19,7 @@ export const StyledBackdrop = styled.div`
 `;
 
 export const StyledAnimalCatalog = styled.div`
+  overflow: scroll;
   position: fixed;
   z-index: 1000000000;
   top: 0;
@@ -26,15 +27,15 @@ export const StyledAnimalCatalog = styled.div`
   width: 100%;
   height: 100vh;
   background-color: var(--background-color);
-  /* transform: translateX(-100%); */
-  /* transition: all var(--transition); */
+  transform: translateX(0);
+  transition: all var(--transition);
 
   display: flex;
   flex-direction: column;
 
-  /* & .active {
-    transform: translateX(0);
-  } */
+  & .active {
+    transform: translateX(-100%);
+  }
 
   @media screen and (min-width: 834px) {
     width: 50%;
