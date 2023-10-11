@@ -6,7 +6,7 @@ import { CategoryStore } from './CategoryStore';
 import { AnimalStore } from './AnimalStore';
 export class RootStore {
   auth = new AuthStore();
-  subscriptionStore = new SubscriptionStore();
+  // subscriptionStore = new SubscriptionStore();
   category = new CategoryStore();
   animal = new AnimalStore();
 

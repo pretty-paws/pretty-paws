@@ -16,7 +16,7 @@ import { useTranslation } from 'react-i18next';
 import { useStore } from '../../../store/AuthProvider';
 
 import { observer } from 'mobx-react-lite';
-import { useStore } from '../../../store/AuthProvider';
+// import { useStore } from '../../../store/AuthProvider';
 
 const BurgerMenu = observer(({ active, setActive }) => {
   const [openedCatalogue, setOpenedCatalogue] = useState(false);
@@ -29,6 +29,8 @@ const BurgerMenu = observer(({ active, setActive }) => {
   const store = useStore();
   const {
     auth: { authorised },
+    category,
+    animal,
   } = store;
 
   const { i18n, t } = useTranslation();
@@ -40,8 +42,8 @@ const BurgerMenu = observer(({ active, setActive }) => {
   };
 
   //   object with UseStore
-  const store = useStore();
-  const { category, animal } = store;
+  // const store = useStore();
+  // const { category, animal } = store;
 
   //  function that get id animal clicked
   const handleAnimalClick = animalid => {
@@ -115,7 +117,6 @@ const BurgerMenu = observer(({ active, setActive }) => {
       document.body.style.overflow = 'auto';
     };
   }, [active]);
-
 
   return (
     <>
