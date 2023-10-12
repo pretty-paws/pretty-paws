@@ -111,7 +111,7 @@ export const StyledAnimalCatalog = styled.div`
 `;
 
 export const StyledBurger = styled.div`
-  overflow: scroll;
+  overflow: auto;
   position: fixed;
   z-index: 1000000000;
   top: 0;
