@@ -10,7 +10,8 @@ import './i18n';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
+  // <React.StrictMode>
+  <>
     <GlobalStyles />
     <I18nextProvider i18n={i18next}>
       <BrowserRouter basename="/pretty-paws">
@@ -19,5 +20,6 @@ root.render(
         </AuthProvider>
       </BrowserRouter>
     </I18nextProvider>
-  </React.StrictMode>
+  </>
+  // </React.StrictMode>
 );

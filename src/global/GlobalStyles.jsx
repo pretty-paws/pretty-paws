@@ -31,6 +31,7 @@ body {
   font-family: 'IBM Plex Sans', sans-serif;
   color: var(--font-color-black);
   background-color: #EFEFEF;
+  position: relative;
 
   &.menu-opened {
   height: 100vh;

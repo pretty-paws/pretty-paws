@@ -1,9 +1,10 @@
 import styled from 'styled-components';
 
 export const StyledWishList = styled.div`
+  position: relative;
   @media screen and (min-width: 834px) {
     border-radius: 8px;
-    background: #fff;
+    background: ${props => (props.noWhiteBG !== null ? '' : '#fff')};
     height: fit-content;
     padding: 40px 24px;
   }
@@ -46,6 +47,53 @@ export const StyledWishList = styled.div`
       font-size: 24px;
       font-weight: 500;
       line-height: 32px;
+    }
+  }
+
+  .wishList__favourite-container {
+    display: flex;
+    gap: 24px;
+    width: 756px;
+    overflow: hidden;
+  }
+
+  .left-arrow {
+    cursor: pointer;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    top: 48%;
+    left: 0;
+    z-index: 1000;
+    border-radius: 100px;
+    background: #fff;
+    box-shadow: 0px 0px 6px 0px rgba(14, 36, 35, 0.1);
+
+    svg {
+      transform: rotate(90deg);
+    }
+  }
+
+  .right-arrow {
+    cursor: pointer;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    top: 48%;
+    right: 0;
+    z-index: 1000;
+    border-radius: 100px;
+    background: #fff;
+    box-shadow: 0px 0px 6px 0px rgba(14, 36, 35, 0.073);
+
+    svg {
+      transform: rotate(-90deg);
     }
   }
 

@@ -18,28 +18,31 @@ const Subscription = observer(() => {
     auth: { subscriptions },
   } = store;
 
+  console.log(subscriptions);
+
   return (
     <StyledSubscription>
       <CabinetTitle header={'Мої підписки'} />
       <div className="subscription__body">
-        {subscriptions.map(({ id }) => (
-          <div className="subscription__box" key={id}>
-            <div className="subscription__category">
-              <div className={'animals-bar-icon-box'}>
-                <svg className="animals-bar-icon" width="24px" height="24px">
-                  <use href={animalsSvg[id - 1].link} />
-                </svg>
+        {subscriptions !== null &&
+          subscriptions.map(({ id }) => (
+            <div className="subscription__box" key={id}>
+              <div className="subscription__category">
+                <div className={'animals-bar-icon-box'}>
+                  <svg className="animals-bar-icon" width="24px" height="24px">
+                    <use href={animalsSvg[id - 1].link} />
+                  </svg>
+                </div>
+                <p className="subscription__text">
+                  {t(`${animalsSvg[id - 1].message}`)}
+                </p>
               </div>
-              <p className="subscription__text">
-                {t(`${animalsSvg[id - 1].message}`)}
-              </p>
+              <Link>
+                <p className="subscription__decline">{t('Відмінити')}</p>
+              </Link>
             </div>
-            <Link>
-              <p className="subscription__decline">{t('Відмінити')}</p>
-            </Link>
-          </div>
-        ))}
-        {subscriptions.length === null && (
+          ))}
+        {subscriptions === null && (
           <p className="subscription__nothing">
             {t('Поки що ви не оформили підписку на акції від PrettyPaws.')}
           </p>
