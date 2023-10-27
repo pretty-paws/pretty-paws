@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+// import { createPortal } from 'react-dom';
 import { NavLink } from 'react-router-dom';
 import { StyledHeader } from './Header.styled';
 import sprite from '../../../img/svg-sprite/sprite.svg';
@@ -12,10 +13,12 @@ import UserBar from './UserBar';
 import useWindowSize from '../../../hooks/useWindowSize';
 import BurgerMenu from '../BurgerMenu/BurgerMenu';
 import { useTranslation } from 'react-i18next';
+// import CartModal from './CartModal/CartModal';
 
 const Header = observer(() => {
   const { t } = useTranslation();
   const [menuActive, setMenuActive] = useState(false);
+  // const [cartModalOpen, setCartModalOpen] = useState(false);
   const { screen } = useWindowSize();
 
   const store = useStore();

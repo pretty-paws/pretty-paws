@@ -1,74 +1,162 @@
-import React from 'react';
-import { StyledCardProduct, StyledCardVariant } from './CardProduct.styled';
+import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import sprite from '../../../img/svg-sprite/sprite.svg';
-import imgNextGard from '../../../img/card-discount/nexgard_spectra.jpg';
-const CardProduct = () => {
-  return (
-    <StyledCardProduct>
-      {/* header card */}
-      <div className="card-header">
-        <div className="card-img">
-          <img src={imgNextGard} alt="imgNextGard" />
+import { observer } from 'mobx-react-lite';
+import { StyledCardProduct } from './CardProduct.styled';
+import { useStore } from '../../../store/AuthProvider';
+import { Link } from 'react-router-dom';
+const CardProduct = observer(
+  ({
+    id,
+    title,
+    description,
+    image_url,
+    price,
+    promotional_price,
+    is_promotional,
+    quantity,
+    country,
+  }) => {
+    const store = useStore();
+    const {
+      auth: { refresh, user, authorised },
+      cart: { addToCart, alreadyAdded, removeFromCart },
+      favourite: { toggleFavourite },
+    } = store;
+
+    function checkFavourite(id) {
+      if (!authorised) return false;
+      return user.favorites?.some(product => product.id === id);
+    }
+
+    function handleClick() {
+      if (alreadyAdded(id)) {
+        removeFromCart(id);
+        return;
+      }
+
+      const product = {
+        id,
+        title,
+        description,
+        image_url,
+        price,
+        promotional_price,
+        is_promotional,
+        quantity,
+        country,
+        amount: 1,
+      };
+      console.log(product);
+      addToCart(product);
+    }
+    const [buttonName, setButtonName] = useState('Додано');
+    const [errorMessage, setErrorMessage] = useState(false);
+    function handleAddFavourite() {
+      if (!authorised) setErrorMessage(true);
+      toggleFavourite(id);
+      refresh();
+    }
+
+    useEffect(() => {
+      let timeout;
+      if (errorMessage === true) {
+        timeout = setTimeout(() => {
+          setErrorMessage(false);
+        }, 4000);
+      }
+
+      return () => clearTimeout(timeout);
+    }, [errorMessage]);
+
+    function handleMouseEnter() {
+      setButtonName('Видалити');
+    }
+    function handleMouseLeave() {
+      setButtonName('Додано');
+    }
+
+    return (
+      <StyledCardProduct biggerMargin={promotional_price !== 0}>
+        {is_promotional === 1 && <div className="product__sale">Акція</div>}
+        <div className="product__img-container">
+          <img className="product__img" src={image_url} alt={title} />
         </div>
-        <div className="card-type">
-          <p className="card-type__text">Акція</p>
+        <div className="product__details">
+          <span className="product__amount">{quantity}</span>
+          <span className="product__country">
+            <img
+              src={country.icon_url}
+              alt={country}
+              width=" 14px"
+              height=" 14px"
+            />
+            {country.title}
+          </span>
         </div>
-        {/* variant type card */}
-        <div className="card-variant">
-          <StyledCardVariant>
-            <p className="variant-text">2-3.5 кг</p>
-          </StyledCardVariant>
-          <StyledCardVariant isActive={1}>
-            <p className="variant-text">3.5 7.5 кг</p>
-          </StyledCardVariant>
-          <StyledCardVariant>
-            <p className="variant-text">7.5-15 кг</p>
-          </StyledCardVariant>
-          <div className="variant-arrow">
-            <svg className="card-icon-arrow" width="10px" height="10px">
-              <use href={sprite + '#arrow-black'} />
+        <div className="product__description">
+          <b>{title}</b>
+          <span> - {description}</span>
+        </div>
+        <div className="product__price-fav-box">
+          {promotional_price !== 0 ? (
+            <div>
+              <div className="product__old-price">{price}₴</div>
+              <div className="product__price">{promotional_price}₴</div>
+            </div>
+          ) : (
+            <div className="product__price">{price}₴</div>
+          )}
+          <div className="product__fav-compare">
+            {errorMessage && (
+              <div className="product__error-message">
+                <p>
+                  Будь-ласка,{' '}
+                  <Link to="/register">
+                    <span>зареєструйтесь</span>
+                  </Link>{' '}
+                  на сайті, щоб додавати товари до обраних
+                </p>
+              </div>
+            )}
+            <div onClick={handleAddFavourite} className="product__fav-icon">
+              {checkFavourite(id) ? (
+                <svg width=" 26px" height=" 26px">
+                  <use href={sprite + '#favorite_selected'} />
+                </svg>
+              ) : (
+                <svg width=" 24px" height=" 24px">
+                  <use href={sprite + '#favorite'} />
+                </svg>
+              )}
+            </div>
+            <svg width=" 24px" height=" 24px">
+              <use href={sprite + '#scale'} />
             </svg>
           </div>
         </div>
-      </div>
-      {/* general info of card product */}
-      <div className="card-info">
-        <p className="card-info__name">
-          <b>Nexgard Spectra</b> (Нексгард Спектра) - Пігулки проти бліх, кліщів
-          і гельмінтів для собак (1 пігулка) (3,5-7,5 кг.)
-        </p>
-        <div className="card-info__detail">
-          <div className="card__price price">
-            <p className="price__basic">318.00 ₴</p>
-            <p className="price__discount">335.00 ₴</p>
-          </div>
-          <div className="card-info-country">
-            {/* Іконка країни */}
-            <svg
-              className="card-icon-country"
-              width=" 7.335px"
-              height=" 7.335px"
-            >
-              <use href={sprite + '#germany'} />
-            </svg>
-            <p className="country__name">Німеччина</p>
-          </div>
-        </div>
-      </div>
-      {/* button panel card */}
-      <div className="card-button-panel button-panel">
-        <button className="button-panel__buy">До кошика</button>
-        {/* Іконка улюблене */}
-        <svg className="card-icon-button" width=" 24px" height=" 24px">
-          <use href={sprite + '#favourite'} />
-        </svg>
-        {/* Іконка порівняння */}
-        <svg className="card-icon-button" width=" 24px" height=" 24px">
-          <use href={sprite + '#scale'} />
-        </svg>
-      </div>
-    </StyledCardProduct>
-  );
-};
+        <button
+          className={
+            alreadyAdded(id) ? 'product__button added' : 'product__button'
+          }
+          onClick={handleClick}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+        >
+          {alreadyAdded(id) ? buttonName : 'До кошика'}
+        </button>
+      </StyledCardProduct>
+    );
+  }
+);
 
 export default CardProduct;
+
+CardProduct.propTypes = {
+  id: PropTypes.number,
+  title: PropTypes.string.isRequired,
+  image_url: PropTypes.string.isRequired,
+  is_promotional: PropTypes.number.isRequired,
+  quantity: PropTypes.string.isRequired,
+  brand: PropTypes.string,
+};

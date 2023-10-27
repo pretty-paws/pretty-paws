@@ -111,7 +111,9 @@ export class AuthStore {
     } catch (error) {
       runInAction(() => {
         this.state = 'error';
-        const errorData = error.response.data.error;
+        const errorData = error.response.data?.error;
+
+        if (errorData === undefined) return;
 
         if ('email' in errorData) {
           this.errorType = 'email';
@@ -133,6 +135,10 @@ export class AuthStore {
         this.user = res.data.data.user;
         this.subscriptions = res.data.data.user.subscriptions;
         this.state = 'done';
+        localStorage.setItem(
+          'fav',
+          JSON.stringify(res.data.data.user.favorites)
+        );
       });
     } catch (error) {
       runInAction(() => {
@@ -187,6 +193,8 @@ export class AuthStore {
       runInAction(() => {
         this.state = 'error';
         const errorData = error.response.data.error;
+
+        if (errorData === undefined) return;
 
         if ('email' in errorData) {
           this.errorType = 'email';

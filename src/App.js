@@ -7,10 +7,19 @@ const App = observer(() => {
   const store = useStore();
   const {
     auth: { refresh, authorised },
+    cart: { getProducts },
+    // favourite: { getFavourite },
   } = store;
+  const language = localStorage.getItem('language') || 'ua';
+
   useEffect(() => {
     // getAnimals();
-    authorised && refresh();
+    if (authorised) {
+      refresh();
+      // if (state === 'done') getFavourite(user.favorites);
+      // if (state === 'done') console.log(user);
+    }
+    getProducts(language);
   }, [authorised]);
 
   return (

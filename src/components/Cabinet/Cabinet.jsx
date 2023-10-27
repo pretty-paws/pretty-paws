@@ -68,7 +68,7 @@ const Cabinet = observer(() => {
               >
                 <div className="cabinet__menu-item">
                   <svg width="24px" height="24px">
-                    <use href={sprite + '#favourite'} />
+                    <use href={sprite + '#favorite'} />
                   </svg>
                   <div>{t('Список бажань')}</div>
                 </div>
@@ -138,7 +138,7 @@ const Cabinet = observer(() => {
               >
                 <div className="cabinet__menu-item">
                   <svg width="24px" height="24px">
-                    <use href={sprite + '#favourite'} />
+                    <use href={sprite + '#favorite'} />
                   </svg>
                   <div>{t('Список бажань')}</div>
                 </div>

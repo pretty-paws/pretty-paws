@@ -107,4 +107,9 @@ export const publicRoutes = [
     path: CONTACT_ROUTE,
     Component: Contact,
   },
+  // {
+  //   name: 'Кошик',
+  //   path: CART_ROUTE,
+  //   Component: Cart,
+  // },
 ];
