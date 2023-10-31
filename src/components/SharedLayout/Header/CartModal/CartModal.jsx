@@ -11,22 +11,9 @@ const CartModal = observer(({ setCartModalOpen }) => {
   const [smallModal, setSmallModal] = useState({});
   const store = useStore();
   const {
-    auth: { refresh, user },
-    cart: {
-      cart,
-      total,
-      increaseAmount,
-      decreaseAmount,
-      removeFromCart,
-      // getProductByID,
-      // favProd,
-    },
-    favourite: {
-      // checkFavourite,
-      // addToFavourites,
-      // removeFromFavourites,
-      toggleFavourite,
-    },
+    auth: { refresh, user, authorised },
+    cart: { cart, total, increaseAmount, decreaseAmount, removeFromCart },
+    favourite: { toggleFavourite },
   } = store;
 
   function editedDescription(text) {
@@ -43,11 +30,12 @@ const CartModal = observer(({ setCartModalOpen }) => {
     return user.favorites?.some(product => product.id === id);
   }
 
+  const handleAddToFavourite = id => {
+    authorised ? toggleFavourite(id).then(() => refresh()) : null;
+  };
+
   return (
-    <StyledBackdrop
-      // onClick={() => setCartModalOpen(false)}
-      onMouseLeave={() => setCartModalOpen(false)}
-    >
+    <StyledBackdrop onMouseLeave={() => setCartModalOpen(false)}>
       <StyledModalBox>
         {total !== 0 ? (
           <>
@@ -116,7 +104,7 @@ const CartModal = observer(({ setCartModalOpen }) => {
                           className="cart-modal__more"
                           onClick={() =>
                             setSmallModal(prevState => {
-                              return { ...prevState, [id]: !prevState[id] };
+                              return { [id]: !prevState[id] };
                             })
                           }
                         >
@@ -137,10 +125,12 @@ const CartModal = observer(({ setCartModalOpen }) => {
                                 Видалити
                               </p>
                               <p
-                                onClick={() => {
-                                  toggleFavourite(id);
-                                  refresh();
-                                }}
+                                className={
+                                  authorised
+                                    ? null
+                                    : 'cart-modal__favouride-disabled'
+                                }
+                                onClick={() => handleAddToFavourite(id)}
                               >
                                 {checkFavourite(id)
                                   ? 'Видалити зі списку бажань'

@@ -111,6 +111,11 @@ export const StyledModalBox = styled.div`
     }
   }
 
+  & p.cart-modal__favouride-disabled {
+    color: var(--font-color-darkgray);
+    cursor: default;
+  }
+
   & .cart-modal__price-box {
     margin-top: 8px;
     display: flex;

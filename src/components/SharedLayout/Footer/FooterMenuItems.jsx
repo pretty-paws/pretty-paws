@@ -16,7 +16,16 @@ const FooterMenuItems = () => {
           <ul className="footer-menu-list">
             {clients.map(({ name, path }) => {
               return (
-                <Link key={name} to={path}>
+                <Link
+                  key={name}
+                  to={path}
+                  onClick={() =>
+                    window.scrollTo({
+                      top: 0,
+                      behavior: 'smooth',
+                    })
+                  }
+                >
                   <li className="footer-menu-item">{t(`${name}`)}</li>
                 </Link>
               );
@@ -28,7 +37,16 @@ const FooterMenuItems = () => {
           <ul className="footer-menu-list">
             {info.map(({ name, path }) => {
               return (
-                <Link key={name} to={path}>
+                <Link
+                  key={name}
+                  to={path}
+                  onClick={() =>
+                    window.scrollTo({
+                      top: 1000,
+                      behavior: 'smooth',
+                    })
+                  }
+                >
                   <li className="footer-menu-item">{t(`${name}`)}</li>
                 </Link>
               );
