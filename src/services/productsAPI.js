@@ -4,7 +4,7 @@ axios.defaults.baseURL = 'https://zoo-shop-api.online/api';
 
 export const fetchProducts = async language => {
   const result = await axios.get(`/products?lang=${language}`);
-  return result;
+  return result.data;
 };
 
 export const fetchProductByID = async id => {

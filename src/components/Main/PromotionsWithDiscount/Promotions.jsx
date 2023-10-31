@@ -46,40 +46,42 @@ const Promotions = observer(() => {
             <use href={sprite + '#arrow-down'} />
           </svg>
         </button>
+        {console.log(products)}
         <div className="promotions__card-container" ref={elementRef}>
-          {state === 'done' &&
-            products?.map(
-              ({
-                id,
-                title,
-                description,
-                image_url,
-                slug,
-                price,
-                promotional_price,
-                is_promotional,
-                quantity,
-                country,
-                brand,
-              }) => {
-                return (
-                  <CardProduct
-                    key={id}
-                    id={id}
-                    title={title}
-                    description={description}
-                    image_url={image_url}
-                    slug={slug}
-                    price={price}
-                    promotional_price={promotional_price}
-                    is_promotional={is_promotional}
-                    quantity={quantity}
-                    country={country}
-                    brand={brand}
-                  />
-                );
-              }
-            )}
+          {state === 'done'
+            ? products.map(
+                ({
+                  id,
+                  title,
+                  description,
+                  image_url,
+                  slug,
+                  price,
+                  promotional_price,
+                  is_promotional,
+                  quantity,
+                  country,
+                  brand,
+                }) => {
+                  return (
+                    <CardProduct
+                      key={id}
+                      id={id}
+                      title={title}
+                      description={description}
+                      image_url={image_url}
+                      slug={slug}
+                      price={price}
+                      promotional_price={promotional_price}
+                      is_promotional={is_promotional}
+                      quantity={quantity}
+                      country={country}
+                      brand={brand}
+                    />
+                  );
+                }
+              )
+            : null}
           <CardLink></CardLink>
         </div>
       </div>
