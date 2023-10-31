@@ -48,7 +48,7 @@ const Promotions = observer(() => {
         </button>
         <div className="promotions__card-container" ref={elementRef}>
           {state === 'done' &&
-            products.map(
+            products?.map(
               ({
                 id,
                 title,
