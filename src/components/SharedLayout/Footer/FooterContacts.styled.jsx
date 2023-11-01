@@ -32,7 +32,6 @@ export const StyledFooterContacts = styled.div`
     height: 200px;
     border-radius: 10px;
     overflow: hidden;
-    /* padding: 2rem; */
 
     &::before {
       content: '';

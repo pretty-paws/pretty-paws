@@ -5,6 +5,10 @@ import { observer } from 'mobx-react-lite';
 import { StyledCardProduct } from './CardProduct.styled';
 import { useStore } from '../../../store/AuthProvider';
 import { Link } from 'react-router-dom';
+import { createPortal } from 'react-dom';
+
+import Notification from '../Notification/Notification';
+
 const CardProduct = observer(
   ({
     id,
@@ -23,6 +27,9 @@ const CardProduct = observer(
       cart: { addToCart, alreadyAdded, removeFromCart },
       favourite: { toggleFavourite },
     } = store;
+
+    const [cartNotification, setCartNotification] = useState(false);
+    const [favouriteNotification, setFavouriteNotification] = useState(false);
 
     function checkFavourite(id) {
       if (!authorised) return false;
@@ -49,15 +56,22 @@ const CardProduct = observer(
       };
       console.log(product);
       addToCart(product);
+      setCartNotification(true);
     }
     const [buttonName, setButtonName] = useState('Додано');
+
     const [errorMessage, setErrorMessage] = useState(false);
+
     function handleAddFavourite() {
       if (!authorised) {
         setErrorMessage(true);
         return;
       } else {
-        toggleFavourite(id).then(() => refresh());
+        toggleFavourite(id)
+          .then(() => {
+            refresh();
+          })
+          .finally(!checkFavourite(id) && setFavouriteNotification(true));
       }
     }
 
@@ -148,6 +162,30 @@ const CardProduct = observer(
         >
           {alreadyAdded(id) ? buttonName : 'До кошика'}
         </button>
+        {cartNotification
+          ? createPortal(
+              <Notification
+                text="Товар додано до кошикa"
+                button="Оформити замовлення"
+                link="/cart"
+                setNotification={setCartNotification}
+                notification={cartNotification}
+              />,
+              document.body
+            )
+          : null}
+        {favouriteNotification
+          ? createPortal(
+              <Notification
+                text="Товар додано до списку бажань"
+                button="Переглянути товари"
+                link="/favorite"
+                setNotification={setFavouriteNotification}
+                notification={favouriteNotification}
+              />,
+              document.body
+            )
+          : null}
       </StyledCardProduct>
     );
   }
