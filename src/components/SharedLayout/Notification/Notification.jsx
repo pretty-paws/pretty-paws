@@ -16,7 +16,7 @@ const Notification = ({
     if (notification === true) {
       timeout = setTimeout(() => {
         setNotification(false);
-      }, 2000);
+      }, 3000);
     }
 
     return () => clearTimeout(timeout);

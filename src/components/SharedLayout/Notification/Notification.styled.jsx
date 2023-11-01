@@ -12,8 +12,8 @@ export const StyledNotification = styled.div`
   }
 
   @media screen and (min-width: 1440px) {
-    top: 10%;
-    right: 12%;
+    top: 8%;
+    right: 40%;
   }
 
   display: flex;
