@@ -12,6 +12,8 @@ import Orders from './Cabinet/Orders/Orders';
 import WishList from './Cabinet/WishList/WishList';
 import Subscription from './Cabinet/Subscription/Subscription';
 import { observer } from 'mobx-react-lite';
+// import CartModal from './SharedLayout/Header/CartModal/CartModal';
+import Cart from './Cart/Cart';
 
 const AppRouter = observer(() => {
   return (
@@ -28,6 +30,7 @@ const AppRouter = observer(() => {
             exact
           />
         ))}
+        <Route path="cart" element={<Cart />} exact />
         <Route
           path="cabinet"
           element={<PrivateRoute redirectTo="/" component={<Cabinet />} />}

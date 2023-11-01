@@ -10,7 +10,15 @@ const FooterLogo = () => {
   const { t } = useTranslation();
   return (
     <StyledFooterLogo>
-      <Link to="/">
+      <Link
+        to="/"
+        onClick={() =>
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth',
+          })
+        }
+      >
         <svg className="footer__logo">
           <use href={sprite + '#logo'} />
         </svg>

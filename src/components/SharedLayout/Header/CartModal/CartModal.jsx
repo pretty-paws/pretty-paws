@@ -5,9 +5,12 @@ import sprite from '../../../../img/svg-sprite/sprite.svg';
 import { useStore } from '../../../../store/AuthProvider';
 import { observer } from 'mobx-react-lite';
 import { useState } from 'react';
+import useWindowSize from '../../../../hooks/useWindowSize';
 // import { useEffect } from 'react';
 
 const CartModal = observer(({ setCartModalOpen }) => {
+  console.log(setCartModalOpen);
+  const { screen } = useWindowSize();
   const [smallModal, setSmallModal] = useState({});
   const store = useStore();
   const {
@@ -35,7 +38,11 @@ const CartModal = observer(({ setCartModalOpen }) => {
   };
 
   return (
-    <StyledBackdrop onMouseLeave={() => setCartModalOpen(false)}>
+    <StyledBackdrop
+      onMouseLeave={() => {
+        if (screen === 'desktop') setCartModalOpen(false);
+      }}
+    >
       <StyledModalBox>
         {total !== 0 ? (
           <>

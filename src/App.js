@@ -8,16 +8,12 @@ const App = observer(() => {
   const {
     auth: { refresh, authorised },
     cart: { getProducts },
-    // favourite: { getFavourite },
   } = store;
   const language = localStorage.getItem('language') || 'ua';
 
   useEffect(() => {
-    // getAnimals();
     if (authorised) {
       refresh();
-      // if (state === 'done') getFavourite(user.favorites);
-      // if (state === 'done') console.log(user);
     }
     getProducts(language);
   }, [authorised]);
