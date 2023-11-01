@@ -14,9 +14,12 @@ const FooterContacts = () => {
 
   return (
     <StyledFooterContacts>
-      <div
-        className={location?.pathname === '/contact' ? 'contacts-page' : ''}
-      />
+      {location?.pathname === '/contact' && (
+        <div
+          className={location?.pathname === '/contact' ? 'contacts-page' : ''}
+        />
+      )}
+
       <div className="z-index">
         <h3 className="footer-menu-title">{t('Контакти')}</h3>
         <p className="footer-menu-phone">0 800 00 00 00</p>
