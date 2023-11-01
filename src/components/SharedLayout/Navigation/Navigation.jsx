@@ -7,6 +7,7 @@ import { useTranslation } from 'react-i18next';
 
 const Navigation = () => {
   const { t } = useTranslation();
+
   return (
     <StyledNavigation>
       <NavLink to="/catalog">
@@ -17,6 +18,23 @@ const Navigation = () => {
       <ul className="navigation-list">
         {publicRoutes &&
           publicRoutes.map(({ name, path }) => {
+            if (name === 'Контакти') {
+              return (
+                <li
+                  key={path}
+                  onClick={() => window.scrollTo(0, document.body.scrollHeight)}
+                >
+                  <NavLink
+                    to={path}
+                    className={({ isActive }) =>
+                      isActive ? 'active-link' : ''
+                    }
+                  >
+                    {t(`${name}`)}
+                  </NavLink>
+                </li>
+              );
+            }
             return (
               <li key={path}>
                 <NavLink

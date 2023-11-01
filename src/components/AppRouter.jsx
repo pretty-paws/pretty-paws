@@ -66,9 +66,13 @@ const AppRouter = observer(() => {
           />
         </Route>
         {/* public routes */}
-        {publicRoutes.map(({ path, Component }) => (
-          <Route key={path} path={path} element={<Component />} exact />
-        ))}
+        {publicRoutes.map(({ path, Component, name }) => {
+          if (name === 'Контакти')
+            return (
+              <Route key={path} path={path} element={<Component />} exact />
+            );
+          return <Route key={path} path={path} element={<Component />} exact />;
+        })}
         {routes.map(({ path, Component }) => (
           <Route
             key={path}
