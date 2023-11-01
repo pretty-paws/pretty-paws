@@ -42,7 +42,7 @@ const FooterMenuItems = () => {
                   to={path}
                   onClick={() =>
                     window.scrollTo({
-                      top: 1000,
+                      top: 0,
                       behavior: 'smooth',
                     })
                   }

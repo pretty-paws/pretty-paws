@@ -6,9 +6,12 @@ import { observer } from 'mobx-react-lite';
 import CardProduct from '../../SharedLayout/CardProduct/CardProduct';
 import useHorizontalScroll from '../../../hooks/useHorizontalScroll';
 import sprite from '../../../img/svg-sprite/sprite.svg';
+// import { GlobalContainer } from '../../../global/GlobalContainer';
+import useWindowSize from '../../../hooks/useWindowSize';
 
 const WishList = observer(() => {
   const { t } = useTranslation();
+  const { screen } = useWindowSize();
 
   const { elementRef, arrowDisable, handleHorizontalScroll } =
     useHorizontalScroll(30, 12, 600);
@@ -21,10 +24,12 @@ const WishList = observer(() => {
 
   return (
     <StyledWishList noWhiteBG={areFavourites}>
-      <CabinetTitle header={'Список бажань'} />
+      <CabinetTitle
+        header={areFavourites ? 'Мої улюблені товари' : 'Список бажань'}
+      />
       {user.favorites && user.favorites.length !== 0 ? (
         <div>
-          {user.favorites.length > 2 && (
+          {user.favorites.length > 2 && screen === 'desktop' && (
             <>
               <button
                 className="left-arrow"
@@ -45,6 +50,7 @@ const WishList = observer(() => {
               </button>
             </>
           )}
+          {/* <GlobalContainer> */}
           <div className="wishList__favourite-container" ref={elementRef}>
             {user.favorites.map(
               ({
@@ -79,6 +85,7 @@ const WishList = observer(() => {
               }
             )}
           </div>
+          {/* </GlobalContainer> */}
         </div>
       ) : (
         <>

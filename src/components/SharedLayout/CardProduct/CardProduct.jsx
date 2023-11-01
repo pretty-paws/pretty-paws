@@ -53,9 +53,12 @@ const CardProduct = observer(
     const [buttonName, setButtonName] = useState('Додано');
     const [errorMessage, setErrorMessage] = useState(false);
     function handleAddFavourite() {
-      if (!authorised) setErrorMessage(true);
-      toggleFavourite(id);
-      refresh();
+      if (!authorised) {
+        setErrorMessage(true);
+        return;
+      } else {
+        toggleFavourite(id).then(() => refresh());
+      }
     }
 
     useEffect(() => {
