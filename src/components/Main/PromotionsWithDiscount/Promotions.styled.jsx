@@ -16,7 +16,6 @@ export const StyledPromotion = styled.section`
     display: flex;
     gap: 24px;
     overflow: hidden;
-    width: 1140px;
   }
 
   .left-arrow {
