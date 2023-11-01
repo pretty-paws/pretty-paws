@@ -1,10 +1,20 @@
 import styled from 'styled-components';
 
 export const StyledNotification = styled.div`
-  position: absolute;
+  position: fixed;
   z-index: 100000000000;
-  top: 20%;
-  right: 30%;
+  top: 1%;
+  right: 1%;
+
+  @media screen and (min-width: 834px) {
+    top: 10%;
+    right: 12%;
+  }
+
+  @media screen and (min-width: 1440px) {
+    top: 10%;
+    right: 12%;
+  }
 
   display: flex;
   flex-direction: column;
