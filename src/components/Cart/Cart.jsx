@@ -5,11 +5,12 @@ import { useStore } from '../../store/AuthProvider';
 import { observer } from 'mobx-react-lite';
 import { useState } from 'react';
 import { GlobalContainer } from '../../global/GlobalContainer';
+import { useTranslation } from 'react-i18next';
 // import useWindowSize from '../../../../hooks/useWindowSize';
 // import { useEffect } from 'react';
 
-const Cart = observer(({ setCartModalOpen }) => {
-  console.log(setCartModalOpen);
+const Cart = observer(() => {
+  const { t } = useTranslation();
   // const { screen } = useWindowSize();
   const [smallModal, setSmallModal] = useState({});
   const store = useStore();
@@ -43,7 +44,7 @@ const Cart = observer(({ setCartModalOpen }) => {
         {total !== 0 ? (
           <>
             <div>
-              <h2 className="cart-modal__title">Кошик</h2>
+              <h2 className="cart-modal__title">{t('Кошик')}</h2>
               <div className="cart-modal__products-block">
                 {cart.map(
                   ({
@@ -125,7 +126,7 @@ const Cart = observer(({ setCartModalOpen }) => {
                                   removeFromCart(id);
                                 }}
                               >
-                                Видалити
+                                {t('Видалити')}
                               </p>
                               <p
                                 className={
@@ -136,8 +137,8 @@ const Cart = observer(({ setCartModalOpen }) => {
                                 onClick={() => handleAddToFavourite(id)}
                               >
                                 {checkFavourite(id)
-                                  ? 'Видалити зі списку бажань'
-                                  : 'Додати до списку бажань'}
+                                  ? t('Видалити зі списку бажань')
+                                  : t('Додати до списку бажань')}
                               </p>
                             </div>
                           )}
@@ -149,26 +150,26 @@ const Cart = observer(({ setCartModalOpen }) => {
               </div>
             </div>
             <div className="cart-modal__delivery">
-              <p>Доставка</p>
+              <p>{t('Доставка')}</p>
               <p>
-                <b>За тарифами перевізника</b>
+                <b>{t('За тарифами перевізника')}</b>
               </p>
             </div>
             <div className="cart-modal__total">
-              <p>Сума до сплати</p>
+              <p>{t('Сума до сплати')}</p>
               <p>
                 <b>{total}.00₴</b>
               </p>
             </div>
             <button className="cart-modal__button" type="button">
-              Оформити замовлення
+              {t('Оформити замовлення')}
             </button>
           </>
         ) : (
           <>
-            <h2 className="cart-modal__title">Кошик порожній</h2>
+            <h2 className="cart-modal__title">{toolbar('Кошик порожній')}</h2>
             <button className="cart-modal__button" type="button">
-              Знайти товар
+              {t('Знайти товар')}
             </button>
           </>
         )}

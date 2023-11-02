@@ -25,7 +25,7 @@ const WishList = observer(() => {
   return (
     <StyledWishList noWhiteBG={areFavourites}>
       <CabinetTitle
-        header={areFavourites ? 'Мої улюблені товари' : 'Список бажань'}
+        header={areFavourites ? t('Мої улюблені товари') : t('Список бажань')}
       />
       {user.favorites && user.favorites.length !== 0 ? (
         <div>
@@ -50,7 +50,6 @@ const WishList = observer(() => {
               </div>
             </>
           )}
-          {/* <GlobalContainer> */}
           <div className="wishList__favourite-container" ref={elementRef}>
             {user.favorites.map(
               ({
@@ -85,11 +84,9 @@ const WishList = observer(() => {
               }
             )}
           </div>
-          {/* </GlobalContainer> */}
         </div>
       ) : (
         <>
-          {/* <CabinetTitle header={'Список бажань'} /> */}
           <div className="wishlist__body">
             <p className="wishlist__text">
               {t('Поки що ви не оформили підписку на акції від PrettyPaws.')}

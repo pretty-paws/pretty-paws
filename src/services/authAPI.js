@@ -51,6 +51,14 @@ export const subscribe = async data => {
   return result;
 };
 
+export const unsubscribe = async data => {
+  axios.defaults.headers.common.Authorization = `Bearer ${
+    localStorage.getItem('token') || ''
+  }`;
+  const result = await axios.post(`/subscriptions/delete`, data);
+  return result;
+};
+
 export const updateUser = async data => {
   axios.defaults.headers.common.Authorization = `Bearer ${
     localStorage.getItem('token') || ''

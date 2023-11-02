@@ -14,6 +14,7 @@ import Subscription from './Cabinet/Subscription/Subscription';
 import { observer } from 'mobx-react-lite';
 // import CartModal from './SharedLayout/Header/CartModal/CartModal';
 import Cart from './Cart/Cart';
+import CatalogList from './Catalog/CatalogList';
 
 const AppRouter = observer(() => {
   return (
@@ -70,6 +71,12 @@ const AppRouter = observer(() => {
           if (name === 'Контакти')
             return (
               <Route key={path} path={path} element={<Component />} exact />
+            );
+          if (name === 'Каталог товарів')
+            return (
+              <Route key={path} path={path} element={<Component />} exact>
+                <Route path={`${path}/:category`} element={<CatalogList />} />
+              </Route>
             );
           return <Route key={path} path={path} element={<Component />} exact />;
         })}

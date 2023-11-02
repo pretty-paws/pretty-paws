@@ -39,8 +39,16 @@ export const StyledHelp = styled.div`
 
   .section {
     text-align: left;
+
     .tablet {
       text-align: center;
+      @media screen and (min-width: 834px) {
+        text-align: left;
+      }
+
+      @media screen and (min-width: 1440px) {
+        text-align: left;
+      }
     }
   }
 
