@@ -27,6 +27,7 @@ const UserBar = observer(({ setActive }) => {
 
   const store = useStore();
   const {
+    auth: { authorised, user, state },
     cart: {
       productAmount,
 
@@ -39,13 +40,18 @@ const UserBar = observer(({ setActive }) => {
       <StyledUserBar onClick={() => screen === 'mobile' && setActive(false)}>
         <ToolTip text={t('Улюблені товари')}>
           <NavLink
-            to="/favorite"
+            to="/cabinet/wish_list"
             className={({ isActive }) => (isActive ? 'active-link' : '')}
           >
             <div className="user-bar__container">
               <svg className="user-bar__icon">
                 <use href={sprite + '#favorite'} />
               </svg>
+              {state === 'done' && authorised && (
+                <span className="user-bar__basket-badge">
+                  {user.favorites.length}
+                </span>
+              )}
               {screen !== 'desktop' && (
                 <span className="menu__item">{t('Улюблені товари')}</span>
               )}
