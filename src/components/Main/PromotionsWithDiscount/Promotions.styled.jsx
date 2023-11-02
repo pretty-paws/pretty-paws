@@ -4,7 +4,7 @@ export const StyledPromotion = styled.section`
   display: flex;
   flex-direction: column;
   position: relative;
-  margin-bottom: 156px;
+  margin-bottom: 100px;
 
   @media screen and (min-width: 834px) {
     margin-bottom: 100px;

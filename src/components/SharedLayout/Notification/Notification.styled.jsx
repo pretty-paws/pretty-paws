@@ -7,8 +7,8 @@ export const StyledNotification = styled.div`
   right: 1%;
 
   @media screen and (min-width: 834px) {
-    top: 10%;
-    right: 12%;
+    top: 23%;
+    right: 7%;
   }
 
   @media screen and (min-width: 1440px) {
