@@ -10,8 +10,10 @@ import { observer } from 'mobx-react-lite';
 import useHorizontalScroll from '../../../hooks/useHorizontalScroll';
 import sprite from '../../../img/svg-sprite/sprite.svg';
 import useWindowSize from '../../../hooks/useWindowSize';
+import { useLocation } from 'react-router-dom';
 
 const Promotions = observer(() => {
+  const location = useLocation();
   const { screen } = useWindowSize();
   const store = useStore();
   const {
@@ -29,9 +31,11 @@ const Promotions = observer(() => {
           <h2>{t('Пропозиції зі знижкою')}</h2>
         </Title>
       </div>
-      <div className="promotion-animals-bar">
-        <AnimalsBar type={'section'} />
-      </div>
+      {location.pathname === '/' && (
+        <div className="promotion-animals-bar">
+          <AnimalsBar type={'section'} />
+        </div>
+      )}
       <div>
         {screen === 'desktop' && (
           <>
