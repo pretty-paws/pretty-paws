@@ -31,7 +31,7 @@ const WishList = observer(() => {
         <div>
           {user.favorites.length > 2 && screen === 'desktop' && (
             <>
-              <button
+              <div
                 className="left-arrow"
                 onClick={() => handleHorizontalScroll('left')}
                 disabled={arrowDisable}
@@ -39,15 +39,15 @@ const WishList = observer(() => {
                 <svg width=" 24px" height=" 24px">
                   <use href={sprite + '#arrow-down'} />
                 </svg>
-              </button>
-              <button
+              </div>
+              <div
                 className="right-arrow"
                 onClick={() => handleHorizontalScroll('right')}
               >
                 <svg width=" 24px" height=" 24px">
                   <use href={sprite + '#arrow-down'} />
                 </svg>
-              </button>
+              </div>
             </>
           )}
           {/* <GlobalContainer> */}

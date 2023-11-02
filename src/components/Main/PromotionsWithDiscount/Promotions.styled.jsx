@@ -46,8 +46,7 @@ export const StyledPromotion = styled.section`
     z-index: 1000;
     border-radius: 100px;
     background: #fff;
-    box-shadow: 0px 0px 6px 0px rgba(14, 36, 35, 0.073);
-
+    box-shadow: 0px 0px 6px 0px rgba(14, 36, 35, 0.1);
     svg {
       transform: rotate(90deg);
     }
@@ -66,8 +65,7 @@ export const StyledPromotion = styled.section`
     z-index: 1000;
     border-radius: 100px;
     background: #fff;
-    box-shadow: 0px 0px 6px 0px rgba(14, 36, 35, 0.073);
-
+    box-shadow: 0px 0px 6px 0px rgba(14, 36, 35, 0.1);
     svg {
       transform: rotate(-90deg);
     }
