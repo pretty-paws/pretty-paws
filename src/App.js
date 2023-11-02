@@ -20,7 +20,7 @@ const App = observer(() => {
 
   return (
     <>
-      <AppRouter />;
+      <AppRouter />
     </>
   );
 });
