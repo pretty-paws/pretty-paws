@@ -1,10 +1,15 @@
 import { makeAutoObservable, runInAction } from 'mobx';
-import { fetchAnimals, fetchCategories } from '../services/categoriesAPI';
+import {
+  fetchAnimals,
+  fetchCategories,
+  fetchProducts,
+} from '../services/categoriesAPI';
 
 export class CatalogStore {
   state = '';
   animals = [];
   categories = [];
+  products = [];
 
   constructor() {
     makeAutoObservable(this, {}, { autoBind: true });
@@ -31,6 +36,21 @@ export class CatalogStore {
       const { data } = await fetchCategories(category);
       runInAction(() => {
         this.categories = data;
+        this.state = 'done';
+      });
+    } catch (error) {
+      runInAction(() => {
+        this.state = 'error';
+      });
+    }
+  }
+
+  async getProducts(id, language) {
+    this.state = 'pending';
+    try {
+      const { data } = await fetchProducts(id, language);
+      runInAction(() => {
+        this.products = data;
         this.state = 'done';
       });
     } catch (error) {
