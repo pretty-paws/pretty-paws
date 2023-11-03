@@ -3,21 +3,29 @@ import { useStore } from '../../store/AuthProvider';
 import { GlobalContainer } from '../../global/GlobalContainer';
 import sprite from '../../img/svg-sprite/sprite.svg';
 import { StyledCatalog } from './Catalog.styled';
-import { NavLink, Outlet, useLocation } from 'react-router-dom';
+import { NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { observer } from 'mobx-react-lite';
-import { useTranslation } from 'react-i18next';
 
 const Catalog = observer(() => {
-  const { t } = useTranslation();
+  const language = localStorage.getItem('language') || 'ua';
 
   const location = useLocation();
+  const navigate = useNavigate();
   const store = useStore();
   const {
     catalog: { getAnimals, animals },
   } = store;
+
   useEffect(() => {
-    getAnimals();
-  }, []);
+    getAnimals(language);
+  }, [language]);
+
+  useEffect(() => {
+    if (location.pathname === '/catalog') {
+      navigate('/catalog/1', { replace: true });
+    }
+  }, [location.pathname, navigate]);
+
   return (
     <GlobalContainer>
       <StyledCatalog>
@@ -49,13 +57,7 @@ const Catalog = observer(() => {
             : null}
         </ul>
 
-        <div className="catalog__list-box">
-          {location.pathname === '/catalog' ? (
-            <div>{t('Оберіть категорію')}</div>
-          ) : (
-            <Outlet />
-          )}
-        </div>
+        <Outlet />
       </StyledCatalog>
     </GlobalContainer>
   );

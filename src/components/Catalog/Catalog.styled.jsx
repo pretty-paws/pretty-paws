@@ -59,7 +59,6 @@ export const StyledCatalog = styled.div`
   }
 
   .catalog__list-box {
-    padding: 16px 0px 24px 40px;
     background-color: #fff;
     height: fit-content;
 

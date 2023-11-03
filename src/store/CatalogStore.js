@@ -10,10 +10,10 @@ export class CatalogStore {
     makeAutoObservable(this, {}, { autoBind: true });
   }
 
-  async getAnimals() {
+  async getAnimals(language) {
     this.state = 'pending';
     try {
-      const { data } = await fetchAnimals();
+      const { data } = await fetchAnimals(language);
       runInAction(() => {
         this.animals = data;
         this.state = 'done';
