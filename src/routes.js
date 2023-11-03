@@ -2,7 +2,7 @@
 import New from './components/New/New';
 import Blog from './components/Blog/Blog';
 import Help from './components/Help/Help';
-import Catalog from './components/Catalog/Catalog';
+import CatalogPage from './components/Catalog/CatalogPage';
 import Promotions from './components/Promotions/Promotions';
 import Contact from './components/Contact/Contact';
 import Delivery from './components/Delivery/Delivery';
@@ -71,7 +71,7 @@ export const publicRoutes = [
   {
     name: 'Каталог товарів',
     path: CATALOG_ROUTE,
-    Component: Catalog,
+    Component: CatalogPage,
   },
   {
     name: 'Акції',

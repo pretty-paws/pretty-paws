@@ -36,8 +36,4 @@ export const clients = [
     name: 'Блог',
     path: '/blog',
   },
-  {
-    name: 'Контакти',
-    path: '/contats',
-  },
 ];

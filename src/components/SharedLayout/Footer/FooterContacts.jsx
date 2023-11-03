@@ -10,7 +10,7 @@ const FooterContacts = () => {
   const { screen } = useWidnowSize();
   const { t } = useTranslation();
   const location = useLocation();
-  console.log(location);
+  // console.log(location);
 
   return (
     <StyledFooterContacts>
