@@ -11,11 +11,11 @@ const FilterPage = observer(() => {
   const store = useStore();
   const language = localStorage.getItem('language');
   const {
-    catalog: { state, categoryName, getFilters },
+    catalog: { state, categorySlug, getFilters },
   } = store;
 
   useEffect(() => {
-    getFilters(categoryName, language);
+    getFilters(categorySlug, language);
   }, [language]);
 
   return state === `done` ? (

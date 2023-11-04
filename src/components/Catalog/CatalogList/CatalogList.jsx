@@ -9,7 +9,7 @@ const CatalogList = observer(() => {
 
   const store = useStore();
   const {
-    catalog: { animals, setCategoryName },
+    catalog: { animals, setCategoryName, setCategorySlug },
   } = store;
 
   if (!animals[category]) {
@@ -28,7 +28,10 @@ const CatalogList = observer(() => {
               {Object.entries(category.subcategories).map(subcategory => {
                 return (
                   <Link
-                    onClick={() => setCategoryName(category.title)}
+                    onClick={() => {
+                      setCategoryName(category.title);
+                      setCategorySlug(category.slug);
+                    }}
                     key={subcategory[0]}
                     to={`/catalog/category/${categoryNumber}/subcategory/${subcategory[0]}`}
                   >

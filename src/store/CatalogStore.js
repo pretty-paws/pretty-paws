@@ -14,6 +14,7 @@ export class CatalogStore {
   filters = [];
   animalName = '';
   categoryName = '';
+  categorySlug = '';
 
   constructor() {
     makeAutoObservable(this, {}, { autoBind: true });
@@ -27,6 +28,11 @@ export class CatalogStore {
   setCategoryName(name) {
     this.categoryName = name;
     localStorage.setItem('categoryName', name);
+  }
+
+  setCategorySlug(slug) {
+    this.categorySlug = slug;
+    localStorage.setItem('categorySlug', slug);
   }
 
   async getAnimals(language) {
