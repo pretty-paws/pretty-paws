@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
-import { useStore } from '../../store/AuthProvider';
+import { useStore } from '../../../store/AuthProvider';
 // import { GlobalContainer } from '../../global/GlobalContainer';
-import sprite from '../../img/svg-sprite/sprite.svg';
+import sprite from '../../../img/svg-sprite/sprite.svg';
 import { StyledCatalog } from './Catalog.styled';
 import { NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { observer } from 'mobx-react-lite';
@@ -14,7 +14,7 @@ const Catalog = observer(() => {
   const navigate = useNavigate();
   const store = useStore();
   const {
-    catalog: { getAnimals, animals },
+    catalog: { getAnimals, animals, setAnimalName },
   } = store;
 
   useEffect(() => {
@@ -23,19 +23,19 @@ const Catalog = observer(() => {
 
   useEffect(() => {
     if (location.pathname === '/catalog/category') {
+      setAnimalName('Коти');
       navigate('/catalog/category/1', { replace: true });
     }
   }, [location.pathname, navigate]);
 
   return (
-    // <GlobalContainer>
-    // {filterPage === false ? (
     <StyledCatalog>
       <ul className="catalog__animal-categories">
         {animals?.length !== 0
           ? animals.map(animal => {
               return (
                 <NavLink
+                  onClick={() => setAnimalName(animal.title)}
                   key={animal.id}
                   to={`/catalog/category/${animal.id}`}
                   className={({ isActive }) =>
@@ -61,10 +61,6 @@ const Catalog = observer(() => {
 
       <Outlet />
     </StyledCatalog>
-    // ) : (
-    // <FilterPage />
-    // )}
-    // </GlobalContainer>
   );
 });
 

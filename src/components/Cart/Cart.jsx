@@ -167,7 +167,7 @@ const Cart = observer(() => {
           </>
         ) : (
           <>
-            <h2 className="cart-modal__title">{toolbar('Кошик порожній')}</h2>
+            <h2 className="cart-modal__title">{t('Кошик порожній')}</h2>
             <button className="cart-modal__button" type="button">
               {t('Знайти товар')}
             </button>

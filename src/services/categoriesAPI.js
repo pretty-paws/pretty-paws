@@ -20,3 +20,10 @@ export const fetchProducts = async (id, language) => {
   );
   return result;
 };
+
+export const fetchFilters = async (category, language) => {
+  console.log(language);
+  console.log(category);
+  const result = await axios.get(`/filters/${category}`);
+  return result;
+};

@@ -16,7 +16,7 @@ import { observer } from 'mobx-react-lite';
 import Cart from './Cart/Cart';
 import CatalogList from './Catalog/CatalogList/CatalogList';
 import FilterPage from './Catalog/FilterPage/FilterPage';
-import Catalog from './Catalog/Catalog';
+import Catalog from './Catalog/Catalog/Catalog';
 
 const AppRouter = observer(() => {
   return (
@@ -76,21 +76,27 @@ const AppRouter = observer(() => {
             );
           if (name === 'Каталог товарів')
             return (
-              <>
-                <Route key={path} path={path} element={<Component />} exact>
-                  <Route path={`${path}/category`} element={<Catalog />}>
+              <React.Fragment key={path}>
+                <Route path={path} element={<Component />} exact>
+                  <Route
+                    key={path}
+                    path={`${path}/category`}
+                    element={<Catalog />}
+                  >
                     <Route
+                      key={path}
                       path={`${path}/category/:category`}
                       element={<CatalogList />}
                     />
                   </Route>
                   <Route
+                    key={path}
                     // path={`${path}/category/:id`}
                     path={`${path}/category/:category/subcategory/:subcategory`}
                     element={<FilterPage />}
                   />
                 </Route>
-              </>
+              </React.Fragment>
             );
           return <Route key={path} path={path} element={<Component />} exact />;
         })}

@@ -4,13 +4,12 @@ import { observer } from 'mobx-react-lite';
 import { StyledCatalogList } from './CatalogList.styled';
 
 const CatalogList = observer(() => {
-  // console.log(setFilterPage);
   const { category } = useParams();
   const categoryNumber = category;
 
   const store = useStore();
   const {
-    catalog: { animals },
+    catalog: { animals, setCategoryName },
   } = store;
 
   if (!animals[category]) {
@@ -29,12 +28,11 @@ const CatalogList = observer(() => {
               {Object.entries(category.subcategories).map(subcategory => {
                 return (
                   <Link
+                    onClick={() => setCategoryName(category.title)}
                     key={subcategory[0]}
                     to={`/catalog/category/${categoryNumber}/subcategory/${subcategory[0]}`}
                   >
-                    <li onClick={() => console.log(subcategory[0])}>
-                      {subcategory[1]}
-                    </li>
+                    <li>{subcategory[1]}</li>
                   </Link>
                 );
               })}
