@@ -41,3 +41,11 @@ export const StyledAnimalsBar = styled.div`
     background-color: var(--accent-color-beige);
   }
 `;
+export const StyledVerticalAnimalsBar = styled(StyledAnimalsBar)`
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 40px;
+  @media screen and (min-width: 834px) {
+    width: auto;
+  }
+`;

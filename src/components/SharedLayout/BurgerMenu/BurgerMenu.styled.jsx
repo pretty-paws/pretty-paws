@@ -27,14 +27,13 @@ export const StyledAnimalCatalog = styled.div`
   width: 100%;
   height: 100vh;
   background-color: var(--background-color);
-  transform: translateX(0);
+  transform: translateX(100%);
   transition: all var(--transition);
-
   display: flex;
   flex-direction: column;
 
-  & .active {
-    transform: translateX(-100%);
+  &.active {
+    transform: translateX(0%);
   }
 
   @media screen and (min-width: 834px) {
