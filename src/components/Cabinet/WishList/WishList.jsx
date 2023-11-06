@@ -6,9 +6,12 @@ import { observer } from 'mobx-react-lite';
 import CardProduct from '../../SharedLayout/CardProduct/CardProduct';
 import useHorizontalScroll from '../../../hooks/useHorizontalScroll';
 import sprite from '../../../img/svg-sprite/sprite.svg';
+// import { GlobalContainer } from '../../../global/GlobalContainer';
+import useWindowSize from '../../../hooks/useWindowSize';
 
 const WishList = observer(() => {
   const { t } = useTranslation();
+  const { screen } = useWindowSize();
 
   const { elementRef, arrowDisable, handleHorizontalScroll } =
     useHorizontalScroll(30, 12, 600);
@@ -21,12 +24,14 @@ const WishList = observer(() => {
 
   return (
     <StyledWishList noWhiteBG={areFavourites}>
-      <CabinetTitle header={'Список бажань'} />
+      <CabinetTitle
+        header={areFavourites ? t('Мої улюблені товари') : t('Список бажань')}
+      />
       {user.favorites && user.favorites.length !== 0 ? (
         <div>
-          {user.favorites.length > 2 && (
+          {user.favorites.length > 2 && screen === 'desktop' && (
             <>
-              <button
+              <div
                 className="left-arrow"
                 onClick={() => handleHorizontalScroll('left')}
                 disabled={arrowDisable}
@@ -34,15 +39,15 @@ const WishList = observer(() => {
                 <svg width=" 24px" height=" 24px">
                   <use href={sprite + '#arrow-down'} />
                 </svg>
-              </button>
-              <button
+              </div>
+              <div
                 className="right-arrow"
                 onClick={() => handleHorizontalScroll('right')}
               >
                 <svg width=" 24px" height=" 24px">
                   <use href={sprite + '#arrow-down'} />
                 </svg>
-              </button>
+              </div>
             </>
           )}
           <div className="wishList__favourite-container" ref={elementRef}>
@@ -82,7 +87,6 @@ const WishList = observer(() => {
         </div>
       ) : (
         <>
-          {/* <CabinetTitle header={'Список бажань'} /> */}
           <div className="wishlist__body">
             <p className="wishlist__text">
               {t('Поки що ви не оформили підписку на акції від PrettyPaws.')}

@@ -10,6 +10,11 @@ export const StyledCardProduct = styled.div`
   background: #fff;
   display: flex;
   flex-direction: column;
+  @media screen and (max-width: 833px) {
+  }
+
+  @media screen and (min-width: 1440px) {
+  }
 
   & .product__sale {
     padding: 8px;

@@ -10,7 +10,7 @@ import { createPortal } from 'react-dom';
 import CartModal from './CartModal/CartModal';
 import { useStore } from '../../../store/AuthProvider';
 
-const UserBar = observer(() => {
+const UserBar = observer(({ setActive }) => {
   const [cartModalOpen, setCartModalOpen] = useState(false);
   const [language, setLanguage] = useState(
     localStorage.getItem('language') || 'ua'
@@ -27,6 +27,7 @@ const UserBar = observer(() => {
 
   const store = useStore();
   const {
+    auth: { authorised, user, state },
     cart: {
       productAmount,
 
@@ -36,16 +37,21 @@ const UserBar = observer(() => {
 
   return (
     <>
-      <StyledUserBar>
+      <StyledUserBar onClick={() => screen === 'mobile' && setActive(false)}>
         <ToolTip text={t('Улюблені товари')}>
           <NavLink
-            to="/favorite"
+            to="/cabinet/wish_list"
             className={({ isActive }) => (isActive ? 'active-link' : '')}
           >
             <div className="user-bar__container">
               <svg className="user-bar__icon">
                 <use href={sprite + '#favorite'} />
               </svg>
+              {state === 'done' && authorised && (
+                <span className="user-bar__basket-badge">
+                  {user.favorites.length}
+                </span>
+              )}
               {screen !== 'desktop' && (
                 <span className="menu__item">{t('Улюблені товари')}</span>
               )}
@@ -74,7 +80,7 @@ const UserBar = observer(() => {
         >
           <div
             className="user-bar__container"
-            onMouseEnter={() => setCartModalOpen(true)}
+            onMouseEnter={() => screen === 'desktop' && setCartModalOpen(true)}
           >
             <svg className="user-bar__icon">
               <use href={sprite + '#basket'} />
@@ -113,11 +119,12 @@ const UserBar = observer(() => {
           </ToolTip>
         )}
       </StyledUserBar>
-      {cartModalOpen === true &&
-        createPortal(
-          <CartModal setCartModalOpen={setCartModalOpen} />,
-          document.body
-        )}
+      {cartModalOpen === true && screen === 'desktop'
+        ? createPortal(
+            <CartModal setCartModalOpen={setCartModalOpen} />,
+            document.body
+          )
+        : null}
     </>
   );
 });

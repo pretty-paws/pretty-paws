@@ -15,10 +15,10 @@ const Subscription = observer(() => {
 
   const store = useStore();
   const {
-    auth: { subscriptions },
+    auth: { subscriptions, unSubscribe },
   } = store;
 
-  console.log(subscriptions);
+  // console.log(subscriptions);
 
   return (
     <StyledSubscription>
@@ -37,7 +37,7 @@ const Subscription = observer(() => {
                   {t(`${animalsSvg[id - 1].message}`)}
                 </p>
               </div>
-              <Link>
+              <Link onClick={() => unSubscribe({ animal_id: id })}>
                 <p className="subscription__decline">{t('Відмінити')}</p>
               </Link>
             </div>

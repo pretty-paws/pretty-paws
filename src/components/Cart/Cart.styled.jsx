@@ -1,33 +1,14 @@
 import styled from 'styled-components';
 
-export const StyledBackdrop = styled.div`
-  @media screen and (min-width: 834px) {
-  }
-
-  @media screen and (min-width: 1440px) {
-    position: fixed;
-    pointer-events: none;
-    top: 90px;
-    right: 150px;
-    width: 416px;
-    height: fit-content;
-    z-index: 100000;
-  }
-`;
-
 export const StyledModalBox = styled.div`
   padding: 0 16px;
   @media screen and (min-width: 834px) {
   }
 
   @media screen and (min-width: 1440px) {
-    position: absolute;
-    z-index: 10000000;
-    pointer-events: auto;
     border-radius: 8px;
     background-color: #fff;
     padding: 40px 24px;
-    width: 416px;
     height: fit-content;
     display: flex;
     flex-direction: column;

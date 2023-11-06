@@ -14,12 +14,11 @@ export const StyledAnimalsBar = styled.div`
     width: ${props => (props.type === 'burger' ? 'calc(50vw / 2)' : '100%')};
     gap: ${props => (props.type === 'burger' ? '24px' : '16px')};
 
-    justify-content: center;
+    justify-content: ${props =>
+      props.type === 'section' ? 'right' : 'center'};
   }
 
   @media screen and (min-width: 1440px) {
-    /* flex: 1; */
-    /* width: max-content; */
     gap: 16px;
   }
 

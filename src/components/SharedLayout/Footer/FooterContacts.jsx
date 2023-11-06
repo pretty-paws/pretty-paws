@@ -4,19 +4,28 @@ import { StyledFooterContacts } from './FooterContacts.styled';
 import useWidnowSize from '../../../hooks/useWindowSize';
 import FooterSocialBar from './FooterSocialBar';
 import { useTranslation } from 'react-i18next';
+import { useLocation } from 'react-router-dom';
 
 const FooterContacts = () => {
   const { screen } = useWidnowSize();
   const { t } = useTranslation();
+  const location = useLocation();
+  // console.log(location);
 
   return (
     <StyledFooterContacts>
-      <div>
+      {location?.pathname === '/contact' && (
+        <div
+          className={location?.pathname === '/contact' ? 'contacts-page' : ''}
+        />
+      )}
+
+      <div className="z-index">
         <h3 className="footer-menu-title">{t('Контакти')}</h3>
         <p className="footer-menu-phone">0 800 00 00 00</p>
         <p className="footer-menu-text">{t('Безкоштовно по Україні')}</p>
       </div>
-      <div>
+      <div className="z-index">
         <p className="footer-menu-title">{t('Графік роботи call-центру')}</p>
         <ul className="footer-menu-list">
           <li className="footer-menu-time">{t('ПН - ПТ')}: 09:00 - 20:00</li>
@@ -25,7 +34,7 @@ const FooterContacts = () => {
         </ul>
       </div>
       {screen !== 'mobile' && (
-        <div>
+        <div className="z-index">
           <FooterSocialBar />
         </div>
       )}

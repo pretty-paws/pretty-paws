@@ -2,7 +2,7 @@
 import New from './components/New/New';
 import Blog from './components/Blog/Blog';
 import Help from './components/Help/Help';
-import Catalog from './components/Catalog/Catalog';
+import CatalogPage from './components/Catalog/CatalogPage';
 import Promotions from './components/Promotions/Promotions';
 import Contact from './components/Contact/Contact';
 import Delivery from './components/Delivery/Delivery';
@@ -21,13 +21,13 @@ import {
   REGISTER_ROUTE,
   FAVORITE_ROUTE,
   COMPARISON_ROUTE,
-  CART_ROUTE,
+  // CART_ROUTE,
   LOGIN_ROUTE,
   // CABINET,
 } from './utils/consts';
 import Favorite from './components/Favorite/Favorite';
 import Comparison from './components/Comparison/Comparison';
-import Cart from './components/Cart/Cart';
+// import Cart from './components/Cart/Cart';
 // import Cabinet from './components/Cabinet/Cabinet';
 
 // Описує  усі маршрути(роути) нашого додатку
@@ -55,11 +55,7 @@ export const routes = [
     path: COMPARISON_ROUTE,
     Component: Comparison,
   },
-  {
-    name: 'Кошик',
-    path: CART_ROUTE,
-    Component: Cart,
-  },
+
   // {
   //   name: 'Кабінет',
   //   path: CABINET,
@@ -75,7 +71,7 @@ export const publicRoutes = [
   {
     name: 'Каталог товарів',
     path: CATALOG_ROUTE,
-    Component: Catalog,
+    Component: CatalogPage,
   },
   {
     name: 'Акції',

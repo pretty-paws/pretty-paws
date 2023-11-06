@@ -7,7 +7,7 @@ import { StyledSocialBar } from './FooterSocialBar.styled';
 
 const FooterSocialBar = () => {
   return (
-    <StyledSocialBar>
+    <StyledSocialBar className="z-index">
       <Link to="/">
         <svg className="animals-bar-icon" width="24px" height="24px">
           <use href={sprite + '#facebook'} />

@@ -5,6 +5,11 @@ import { observer } from 'mobx-react-lite';
 import { StyledCardProduct } from './CardProduct.styled';
 import { useStore } from '../../../store/AuthProvider';
 import { Link } from 'react-router-dom';
+import { createPortal } from 'react-dom';
+
+import Notification from '../Notification/Notification';
+import { useTranslation } from 'react-i18next';
+
 const CardProduct = observer(
   ({
     id,
@@ -17,12 +22,17 @@ const CardProduct = observer(
     quantity,
     country,
   }) => {
+    const { t } = useTranslation();
+
     const store = useStore();
     const {
       auth: { refresh, user, authorised },
       cart: { addToCart, alreadyAdded, removeFromCart },
       favourite: { toggleFavourite },
     } = store;
+
+    const [cartNotification, setCartNotification] = useState(false);
+    const [favouriteNotification, setFavouriteNotification] = useState(false);
 
     function checkFavourite(id) {
       if (!authorised) return false;
@@ -47,15 +57,23 @@ const CardProduct = observer(
         country,
         amount: 1,
       };
-      console.log(product);
       addToCart(product);
+      setCartNotification(true);
     }
-    const [buttonName, setButtonName] = useState('Додано');
+
     const [errorMessage, setErrorMessage] = useState(false);
+
     function handleAddFavourite() {
-      if (!authorised) setErrorMessage(true);
-      toggleFavourite(id);
-      refresh();
+      if (!authorised) {
+        setErrorMessage(true);
+        return;
+      } else {
+        toggleFavourite(id)
+          .then(() => {
+            refresh();
+          })
+          .finally(!checkFavourite(id) && setFavouriteNotification(true));
+      }
     }
 
     useEffect(() => {
@@ -69,16 +87,11 @@ const CardProduct = observer(
       return () => clearTimeout(timeout);
     }, [errorMessage]);
 
-    function handleMouseEnter() {
-      setButtonName('Видалити');
-    }
-    function handleMouseLeave() {
-      setButtonName('Додано');
-    }
-
     return (
       <StyledCardProduct biggerMargin={promotional_price !== 0}>
-        {is_promotional === 1 && <div className="product__sale">Акція</div>}
+        {is_promotional === 1 && (
+          <div className="product__sale">{t('Акція')}</div>
+        )}
         <div className="product__img-container">
           <img className="product__img" src={image_url} alt={title} />
         </div>
@@ -111,11 +124,11 @@ const CardProduct = observer(
             {errorMessage && (
               <div className="product__error-message">
                 <p>
-                  Будь-ласка,{' '}
+                  {t('Будь-ласка,')}
                   <Link to="/register">
-                    <span>зареєструйтесь</span>
-                  </Link>{' '}
-                  на сайті, щоб додавати товари до обраних
+                    <span>{t('зареєструйтесь')}</span>
+                  </Link>
+                  {t('на сайті, щоб додавати товари до обраних')}
                 </p>
               </div>
             )}
@@ -140,11 +153,33 @@ const CardProduct = observer(
             alreadyAdded(id) ? 'product__button added' : 'product__button'
           }
           onClick={handleClick}
-          onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
         >
-          {alreadyAdded(id) ? buttonName : 'До кошика'}
+          {alreadyAdded(id) ? t('Додано') : t('До кошика')}
         </button>
+        {cartNotification
+          ? createPortal(
+              <Notification
+                text={t('Товар додано до кошикa')}
+                button={t('Оформити замовлення')}
+                link="/cart"
+                setNotification={setCartNotification}
+                notification={cartNotification}
+              />,
+              document.body
+            )
+          : null}
+        {favouriteNotification
+          ? createPortal(
+              <Notification
+                text={t('Товар додано до списку бажань')}
+                button={t('Переглянути товари')}
+                link="/favorite"
+                setNotification={setFavouriteNotification}
+                notification={favouriteNotification}
+              />,
+              document.body
+            )
+          : null}
       </StyledCardProduct>
     );
   }

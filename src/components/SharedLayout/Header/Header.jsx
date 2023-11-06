@@ -24,6 +24,7 @@ const Header = observer(() => {
   const store = useStore();
   const {
     auth: { authorised },
+    cart: { productAmount },
   } = store;
 
   if (menuActive) {
@@ -59,7 +60,7 @@ const Header = observer(() => {
                 <svg className="header__basket-icon" width="24px" height="24px">
                   <use href={sprite + '#basket'} />
                 </svg>
-                <span className="header__basket-badge">0</span>
+                <span className="header__basket-badge">{productAmount}</span>
               </div>
             </NavLink>
             <NavLink

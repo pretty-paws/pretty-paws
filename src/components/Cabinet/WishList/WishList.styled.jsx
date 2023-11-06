@@ -6,7 +6,7 @@ export const StyledWishList = styled.div`
     border-radius: 8px;
     background: ${props => (props.noWhiteBG !== null ? '' : '#fff')};
     height: fit-content;
-    padding: 40px 24px;
+    padding: ${props => (props.noWhiteBG !== null ? '' : '40px 24px')};
   }
   .wishlist__header-box {
     position: relative;
@@ -53,8 +53,30 @@ export const StyledWishList = styled.div`
   .wishList__favourite-container {
     display: flex;
     gap: 24px;
-    width: 756px;
-    overflow: hidden;
+    width: auto;
+    overflow-x: scroll;
+    margin: 0 16px;
+
+    @media screen and (min-width: 834px) {
+      width: 465px;
+    }
+
+    @media screen and (min-width: 1440px) {
+      width: 756px;
+    }
+
+    &::-webkit-scrollbar {
+      width: 5px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background-color: #f1f1f1;
+    }
+
+    & ::-webkit-scrollbar-thumb {
+      background-color: #bfbfbf;
+      border-radius: 3px;
+    }
   }
 
   .left-arrow {
@@ -90,7 +112,7 @@ export const StyledWishList = styled.div`
     z-index: 1000;
     border-radius: 100px;
     background: #fff;
-    box-shadow: 0px 0px 6px 0px rgba(14, 36, 35, 0.073);
+    box-shadow: 0px 0px 6px 0px rgba(14, 36, 35, 0.1);
 
     svg {
       transform: rotate(-90deg);

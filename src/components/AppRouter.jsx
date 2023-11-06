@@ -12,6 +12,11 @@ import Orders from './Cabinet/Orders/Orders';
 import WishList from './Cabinet/WishList/WishList';
 import Subscription from './Cabinet/Subscription/Subscription';
 import { observer } from 'mobx-react-lite';
+// import CartModal from './SharedLayout/Header/CartModal/CartModal';
+import Cart from './Cart/Cart';
+import CatalogList from './Catalog/CatalogList/CatalogList';
+import FilterPage from './Catalog/FilterPage/FilterPage';
+import Catalog from './Catalog/Catalog/Catalog';
 
 const AppRouter = observer(() => {
   return (
@@ -28,6 +33,7 @@ const AppRouter = observer(() => {
             exact
           />
         ))}
+        <Route path="cart" element={<Cart />} exact />
         <Route
           path="cabinet"
           element={<PrivateRoute redirectTo="/" component={<Cabinet />} />}
@@ -63,9 +69,37 @@ const AppRouter = observer(() => {
           />
         </Route>
         {/* public routes */}
-        {publicRoutes.map(({ path, Component }) => (
-          <Route key={path} path={path} element={<Component />} exact />
-        ))}
+        {publicRoutes.map(({ path, Component, name }) => {
+          if (name === 'Контакти')
+            return (
+              <Route key={path} path={path} element={<Component />} exact />
+            );
+          if (name === 'Каталог товарів')
+            return (
+              <React.Fragment key={path}>
+                <Route path={path} element={<Component />} exact>
+                  <Route
+                    key={path}
+                    path={`${path}/category`}
+                    element={<Catalog />}
+                  >
+                    <Route
+                      key={path}
+                      path={`${path}/category/:category`}
+                      element={<CatalogList />}
+                    />
+                  </Route>
+                  <Route
+                    key={path}
+                    // path={`${path}/category/:id`}
+                    path={`${path}/category/:category/subcategory/:subcategory`}
+                    element={<FilterPage />}
+                  />
+                </Route>
+              </React.Fragment>
+            );
+          return <Route key={path} path={path} element={<Component />} exact />;
+        })}
         {routes.map(({ path, Component }) => (
           <Route
             key={path}

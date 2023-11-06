@@ -7,6 +7,7 @@ import {
   registerUser,
   registerVerify,
   subscribe,
+  unsubscribe,
   updatePass,
   updateUser,
 } from '../services/authAPI';
@@ -209,6 +210,23 @@ export class AuthStore {
           this.errorType = 'both';
           this.error = 'Оберіть категорію і введіть Вашу пошту';
         }
+      });
+    }
+  }
+
+  async unSubscribe(data) {
+    this.state = 'pending';
+    try {
+      console.log(data);
+      await unsubscribe(data);
+
+      runInAction(() => {
+        this.state = 'done';
+        this.authorised === true && this.refresh();
+      });
+    } catch (error) {
+      runInAction(() => {
+        this.state = 'error';
       });
     }
   }

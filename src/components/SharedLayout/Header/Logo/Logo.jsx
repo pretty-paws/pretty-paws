@@ -6,7 +6,15 @@ import { StyledLogoContainer } from './Logo.styled';
 const Logo = () => {
   return (
     <StyledLogoContainer>
-      <Link to="/">
+      <Link
+        to="/"
+        onClick={() =>
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth',
+          })
+        }
+      >
         <svg className="logo">
           <use href={sprite + '#logo'} />
         </svg>
