@@ -11,7 +11,7 @@ import AnimalsBar from '../AnimalsBar/AnimalsBar';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { publicRoutes } from '../../../routes';
-import { animalsSvg } from '../../../utils/animalBarSvgLinks';
+// import { animalsSvg } from '../../../utils/animalBarSvgLinks';
 import { useTranslation } from 'react-i18next';
 import { useStore } from '../../../store/AuthProvider';
 
@@ -19,13 +19,18 @@ import { observer } from 'mobx-react-lite';
 // import { useStore } from '../../../store/AuthProvider';
 
 const BurgerMenu = observer(({ active, setActive }) => {
+  //  main catalog burger menu
   const [openedCatalogue, setOpenedCatalogue] = useState(false);
+  //   state for subcategory animals
   const [showAnimalCatalog, setShowAnimalCatalog] = useState(false);
-  const [selectedAnimal, setSelectedAnimal] = useState();
+  //   chosen category with animals bar
+  const [chosenCategory, setChosenCategory] = useState([]);
+
   const [language, setLanguage] = useState(
     localStorage.getItem('language') || 'en'
   );
 
+  //   store with user, animals,category
   const store = useStore();
   const {
     auth: { authorised },
@@ -46,24 +51,26 @@ const BurgerMenu = observer(({ active, setActive }) => {
   // const { category, animal } = store;
 
   //  function that get id animal clicked
-  const handleAnimalClick = animalid => {
-    setSelectedAnimal(animalid);
-    console.log(animalsSvg[animalid].link);
+  const handleAnimalClick = category => {
+    setShowAnimalCatalog(true);
+    setOpenedCatalogue(false);
+    setChosenCategory([category]);
   };
 
   const closeAnimalCatalog = () => {
     setShowAnimalCatalog(false);
-    setSelectedAnimal(null);
+    setChosenCategory([]);
   };
 
   const closeMenu = () => {
     setShowAnimalCatalog(false);
-    setSelectedAnimal(null);
+    setChosenCategory([]);
     setActive(false);
   };
+
   //   fuction get animal name with selected element
   function getAnimalName(animalId) {
-    const animalID = animal.animal.find(animal => animal.id === animalId);
+    const animalID = animal.animal.find(animal => animal.id === animalId[0]);
 
     if (animalID) {
       return animalID.title;
@@ -71,42 +78,35 @@ const BurgerMenu = observer(({ active, setActive }) => {
       return 'Тваринку не знайдено';
     }
   }
+  const filteredCategory =
+    chosenCategory && chosenCategory.length > 0
+      ? category.categores.filter(
+          ctg => ctg.category_animal_id === chosenCategory[0]
+        )
+      : [];
 
-  useEffect(() => {
-    // console.log('changed id ');
-    // console.log('selected animal', selectedAnimal);
-    if (selectedAnimal != undefined) {
-      // console.log('changed id ', selectedAnimal);
-
-      setShowAnimalCatalog(true);
-      setOpenedCatalogue(false);
-      // console.log(getAnimalName(selectedAnimal));
-    }
-  }, [selectedAnimal]);
-
-  const filteredCategory = category.categores.filter(
-    ctg => ctg.category_animal_id === selectedAnimal
-  );
-
-  const categoryItems = filteredCategory.map(ctg => {
-    const filteredSubCategory = category.subCategory.filter(
-      subCtg => subCtg.category_id === ctg.id
-    );
-    return (
-      <div className="subburger__animal" key={ctg.id}>
-        <Link to="" onClick={closeMenu}>
-          <h3 className="animal__title">{ctg.title}</h3>
-        </Link>
-        <ul className="animal__list">
-          {filteredSubCategory.map(subCategory => (
-            <Link to="" onClick={closeMenu} key={subCategory.id}>
-              <li className="animal__list-item">{subCategory.title}</li>
+  const categoryItems = filteredCategory
+    ? filteredCategory.map(ctg => {
+        const filteredSubCategory = category.subCategory.filter(
+          subCtg => subCtg.category_id === ctg.id
+        );
+        return (
+          <div className="subburger__animal" key={ctg.id}>
+            <Link to="" onClick={closeMenu}>
+              <h3 className="animal__title">{ctg.title}</h3>
             </Link>
-          ))}
-        </ul>
-      </div>
-    );
-  });
+            <ul className="animal__list">
+              {filteredSubCategory.map(subCategory => (
+                <Link to="" onClick={closeMenu} key={subCategory.id}>
+                  <li className="animal__list-item">{subCategory.title}</li>
+                </Link>
+              ))}
+            </ul>
+          </div>
+        );
+      })
+    : null;
+
   useEffect(() => {
     if (active) {
       document.body.style.overflow = 'hidden';
@@ -133,12 +133,16 @@ const BurgerMenu = observer(({ active, setActive }) => {
                   <use href={sprite + '#arrow-down'} />
                 </svg>
                 <h3 className="subburger__title">
-                  {getAnimalName(selectedAnimal)}
+                  {getAnimalName(chosenCategory)}
                 </h3>
               </div>
               {categoryItems}
               <div className="subburger__footer">
-                <AnimalsBar type="burger" getID={handleAnimalClick} />
+                <AnimalsBar
+                  type="burger"
+                  getCategory={handleAnimalClick}
+                  chosenCategory={chosenCategory}
+                />
               </div>
             </div>
           </StyledAnimalCatalog>
@@ -216,7 +220,11 @@ const BurgerMenu = observer(({ active, setActive }) => {
                   <p>{t('Каталог товарів')}</p>
                 </div>
                 {openedCatalogue && (
-                  <AnimalsBar type="burger" getID={handleAnimalClick} />
+                  <AnimalsBar
+                    type="burger"
+                    getCategory={handleAnimalClick}
+                    chosenCategory={chosenCategory}
+                  />
                 )}
                 {publicRoutes.slice(1).map(({ name, path }) => {
                   return (
