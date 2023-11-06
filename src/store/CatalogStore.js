@@ -11,7 +11,7 @@ export class CatalogStore {
   animals = [];
   categories = [];
   products = [];
-  filters = [];
+  filters = {};
   animalName = '';
   categoryName = '';
   categorySlug = '';
@@ -69,8 +69,9 @@ export class CatalogStore {
     this.state = 'pending';
     try {
       const { data } = await fetchFilters(category, language);
+      console.log(data.data);
       runInAction(() => {
-        this.filters = data;
+        this.filters = data.data;
         this.state = 'done';
       });
     } catch (error) {

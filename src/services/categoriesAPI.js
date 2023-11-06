@@ -22,8 +22,6 @@ export const fetchProducts = async (id, language) => {
 };
 
 export const fetchFilters = async (category, language) => {
-  console.log(language);
-  console.log(category);
-  const result = await axios.get(`/filters/${category}`);
+  const result = await axios.get(`/filters/${category}?lang=${language}`);
   return result;
 };

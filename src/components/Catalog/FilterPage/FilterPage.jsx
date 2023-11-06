@@ -15,7 +15,11 @@ const FilterPage = observer(() => {
   } = store;
 
   useEffect(() => {
-    getFilters(categorySlug, language);
+    let slug;
+    categorySlug
+      ? (slug = categorySlug)
+      : (slug = localStorage.getItem('categorySlug'));
+    getFilters(slug, language);
   }, [language]);
 
   return state === `done` ? (
