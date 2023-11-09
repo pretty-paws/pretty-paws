@@ -15,7 +15,7 @@ const PaymentBox = () => {
           <use href={sprite + '#mastercard'} />
         </svg>
       </div>
-      <p className="footer__rights">© 2023 PrettyPaw. All Rights Reserved</p>
+      <p className="footer__rights">© 2023 PrettyPaws. All Rights Reserved</p>
     </StyledSocialNetsBar>
   );
 };
