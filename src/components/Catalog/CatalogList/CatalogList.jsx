@@ -4,19 +4,28 @@ import { observer } from 'mobx-react-lite';
 import { StyledCatalogList } from './CatalogList.styled';
 
 const CatalogList = observer(() => {
-  const { category } = useParams();
-  const categoryNumber = category;
+  const { animalName } = useParams();
 
   const store = useStore();
   const {
-    catalog: { animals, setCategoryName, setCategorySlug },
+    catalog: {
+      animals,
+      setCategoryName,
+      setCategorySlug,
+      setCategoryID,
+      setSubcategoryID,
+    },
   } = store;
 
-  if (!animals[category]) {
+  const chosenAnimal = animals.find(animal => {
+    if (animal.slug === animalName) return animal;
+  });
+
+  if (!chosenAnimal) {
     return <div>Loading...</div>;
   }
 
-  const categories = Object.values(animals[category - 1].categories);
+  const categories = Object.values(chosenAnimal.categories);
 
   return (
     <StyledCatalogList>
@@ -28,12 +37,15 @@ const CatalogList = observer(() => {
               {Object.entries(category.subcategories).map(subcategory => {
                 return (
                   <Link
+                    state={{ from: '/catalog/animal' }}
                     onClick={() => {
                       setCategoryName(category.title);
                       setCategorySlug(category.slug);
+                      setCategoryID(category.id);
+                      setSubcategoryID(subcategory[0]);
                     }}
                     key={subcategory[0]}
-                    to={`/catalog/category/${categoryNumber}/subcategory/${subcategory[0]}`}
+                    to={`/catalog/animal/${chosenAnimal.slug}/category/${category.slug}`}
                   >
                     <li>{subcategory[1]}</li>
                   </Link>

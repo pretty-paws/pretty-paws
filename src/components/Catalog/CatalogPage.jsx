@@ -15,15 +15,14 @@ const CatalogPage = observer(() => {
   } = store;
 
   useEffect(() => {
-    getAnimals(language);
-  }, [language]);
-
-  useEffect(() => {
     if (location.pathname === '/catalog') {
-      navigate('/catalog/category', { replace: true });
+      navigate('/catalog/animal', { replace: true });
     }
   }, [location.pathname]);
 
+  useEffect(() => {
+    location.pathname === '/catalog/animal' && getAnimals(language);
+  }, [language, location.pathname]);
   return (
     <GlobalContainer>
       <Outlet />

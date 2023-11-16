@@ -88,99 +88,103 @@ const CardProduct = observer(
     }, [errorMessage]);
 
     return (
-      <StyledCardProduct biggerMargin={promotional_price !== 0}>
-        {is_promotional === 1 && (
-          <div className="product__sale">{t('Акція')}</div>
-        )}
-        <div className="product__img-container">
-          <img className="product__img" src={image_url} alt={title} />
-        </div>
-        <div className="product__details">
-          <span className="product__amount">{quantity}</span>
-          <span className="product__country">
-            <img
-              src={country.icon_url}
-              alt={country}
-              width=" 14px"
-              height=" 14px"
-            />
-            {country.title}
-          </span>
-        </div>
-        <div className="product__description">
-          <b>{title}</b>
-          <span> - {description}</span>
-        </div>
-        <div className="product__price-fav-box">
-          {promotional_price !== 0 ? (
-            <div>
-              <div className="product__old-price">{price}₴</div>
-              <div className="product__price">{promotional_price}₴</div>
-            </div>
-          ) : (
-            <div className="product__price">{price}₴</div>
+      <Link
+      // to={`${}/animal/:animalName/category/:category/:subcategory/:product_name`}
+      >
+        <StyledCardProduct biggerMargin={promotional_price !== 0}>
+          {is_promotional === 1 && (
+            <div className="product__sale">{t('Акція')}</div>
           )}
-          <div className="product__fav-compare">
-            {errorMessage && (
-              <div className="product__error-message">
-                <p>
-                  {t('Будь-ласка,')}
-                  <Link to="/register">
-                    <span>{t('зареєструйтесь')}</span>
-                  </Link>
-                  {t('на сайті, щоб додавати товари до обраних')}
-                </p>
-              </div>
-            )}
-            <div onClick={handleAddFavourite} className="product__fav-icon">
-              {checkFavourite(id) ? (
-                <svg width=" 26px" height=" 26px">
-                  <use href={sprite + '#favorite_selected'} />
-                </svg>
-              ) : (
-                <svg width=" 24px" height=" 24px">
-                  <use href={sprite + '#favorite'} />
-                </svg>
-              )}
-            </div>
-            <svg width=" 24px" height=" 24px">
-              <use href={sprite + '#scale'} />
-            </svg>
+          <div className="product__img-container">
+            <img className="product__img" src={image_url} alt={title} />
           </div>
-        </div>
-        <button
-          className={
-            alreadyAdded(id) ? 'product__button added' : 'product__button'
-          }
-          onClick={handleClick}
-        >
-          {alreadyAdded(id) ? t('Додано') : t('До кошика')}
-        </button>
-        {cartNotification
-          ? createPortal(
-              <Notification
-                text={t('Товар додано до кошикa')}
-                button={t('Оформити замовлення')}
-                link="/cart"
-                setNotification={setCartNotification}
-                notification={cartNotification}
-              />,
-              document.body
-            )
-          : null}
-        {favouriteNotification
-          ? createPortal(
-              <Notification
-                text={t('Товар додано до списку бажань')}
-                button={t('Переглянути товари')}
-                link="/favorite"
-                setNotification={setFavouriteNotification}
-                notification={favouriteNotification}
-              />,
-              document.body
-            )
-          : null}
-      </StyledCardProduct>
+          <div className="product__details">
+            <span className="product__amount">{quantity}</span>
+            <span className="product__country">
+              <img
+                src={country.icon_url}
+                alt={country}
+                width=" 14px"
+                height=" 14px"
+              />
+              {country.title}
+            </span>
+          </div>
+          <div className="product__description">
+            <b>{title}</b>
+            <span> - {description}</span>
+          </div>
+          <div className="product__price-fav-box">
+            {promotional_price !== 0 ? (
+              <div>
+                <div className="product__old-price">{price}₴</div>
+                <div className="product__price">{promotional_price}₴</div>
+              </div>
+            ) : (
+              <div className="product__price">{price}₴</div>
+            )}
+            <div className="product__fav-compare">
+              {errorMessage && (
+                <div className="product__error-message">
+                  <p>
+                    {t('Будь-ласка,')}
+                    <Link to="/register">
+                      <span>{t('зареєструйтесь')}</span>
+                    </Link>
+                    {t('на сайті, щоб додавати товари до обраних')}
+                  </p>
+                </div>
+              )}
+              <div onClick={handleAddFavourite} className="product__fav-icon">
+                {checkFavourite(id) ? (
+                  <svg width=" 26px" height=" 26px">
+                    <use href={sprite + '#favorite_selected'} />
+                  </svg>
+                ) : (
+                  <svg width=" 24px" height=" 24px">
+                    <use href={sprite + '#favorite'} />
+                  </svg>
+                )}
+              </div>
+              <svg width=" 24px" height=" 24px">
+                <use href={sprite + '#scale'} />
+              </svg>
+            </div>
+          </div>
+          <button
+            className={
+              alreadyAdded(id) ? 'product__button added' : 'product__button'
+            }
+            onClick={handleClick}
+          >
+            {alreadyAdded(id) ? t('Додано') : t('До кошика')}
+          </button>
+          {cartNotification
+            ? createPortal(
+                <Notification
+                  text={t('Товар додано до кошикa')}
+                  button={t('Оформити замовлення')}
+                  link="/cart"
+                  setNotification={setCartNotification}
+                  notification={cartNotification}
+                />,
+                document.body
+              )
+            : null}
+          {favouriteNotification
+            ? createPortal(
+                <Notification
+                  text={t('Товар додано до списку бажань')}
+                  button={t('Переглянути товари')}
+                  link="/favorite"
+                  setNotification={setFavouriteNotification}
+                  notification={favouriteNotification}
+                />,
+                document.body
+              )
+            : null}
+        </StyledCardProduct>
+      </Link>
     );
   }
 );
