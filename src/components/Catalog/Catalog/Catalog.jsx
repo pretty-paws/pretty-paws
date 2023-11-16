@@ -14,17 +14,25 @@ const Catalog = observer(() => {
   const navigate = useNavigate();
   const store = useStore();
   const {
-    catalog: { getAnimals, animals, setAnimalName },
+    catalog: {
+      getAnimals,
+      animals,
+      setAnimalName,
+      setAnimalSlug,
+      getSubcategories,
+    },
   } = store;
 
   useEffect(() => {
     getAnimals(language);
+    getSubcategories(language);
   }, [language]);
 
   useEffect(() => {
-    if (location.pathname === '/catalog/category') {
+    if (location.pathname === '/catalog/animal') {
       setAnimalName('Коти');
-      navigate('/catalog/category/1', { replace: true });
+
+      navigate('/catalog/animal/cats', { replace: true });
     }
   }, [location.pathname, navigate]);
 
@@ -35,9 +43,12 @@ const Catalog = observer(() => {
           ? animals.map(animal => {
               return (
                 <NavLink
-                  onClick={() => setAnimalName(animal.title)}
+                  onClick={() => {
+                    setAnimalName(animal.title);
+                    setAnimalSlug(animal.slug);
+                  }}
                   key={animal.id}
-                  to={`/catalog/category/${animal.id}`}
+                  to={`/catalog/animal/${animal.slug}`}
                   className={({ isActive }) =>
                     isActive ? 'active-animal-category border' : 'border'
                   }

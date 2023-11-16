@@ -80,21 +80,26 @@ const AppRouter = observer(() => {
                 <Route path={path} element={<Component />} exact>
                   <Route
                     key={path}
-                    path={`${path}/category`}
+                    path={`${path}/animal`}
                     element={<Catalog />}
                   >
                     <Route
                       key={path}
-                      path={`${path}/category/:category`}
+                      path={`${path}/animal/:animalName`}
                       element={<CatalogList />}
                     />
                   </Route>
                   <Route
                     key={path}
-                    // path={`${path}/category/:id`}
-                    path={`${path}/category/:category/subcategory/:subcategory`}
+                    path={`${path}/animal/:animalName/category/:category`}
                     element={<FilterPage />}
-                  />
+                  >
+                    <Route
+                      key={path}
+                      path={`${path}/animal/:animalName/category/:category/:subcategory/:product_name`}
+                      element={<FilterPage />}
+                    />
+                  </Route>
                 </Route>
               </React.Fragment>
             );

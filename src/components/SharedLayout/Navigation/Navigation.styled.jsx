@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const StyledNavigation = styled.div`
   position: relative;
-  margin: 35px 0 20px;
+  margin: 34px 0 26px;
 
   & .navigation-icon {
     position: absolute;

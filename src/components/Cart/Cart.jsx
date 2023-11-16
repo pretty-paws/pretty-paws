@@ -1,4 +1,3 @@
-// import { Link } from 'react-router-dom';
 import { StyledModalBox } from './Cart.styled';
 import sprite from '../../img/svg-sprite/sprite.svg';
 import { useStore } from '../../store/AuthProvider';
@@ -6,12 +5,9 @@ import { observer } from 'mobx-react-lite';
 import { useState } from 'react';
 import { GlobalContainer } from '../../global/GlobalContainer';
 import { useTranslation } from 'react-i18next';
-// import useWindowSize from '../../../../hooks/useWindowSize';
-// import { useEffect } from 'react';
 
 const Cart = observer(() => {
   const { t } = useTranslation();
-  // const { screen } = useWindowSize();
   const [smallModal, setSmallModal] = useState({});
   const store = useStore();
   const {

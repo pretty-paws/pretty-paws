@@ -1,11 +1,12 @@
 import styled from 'styled-components';
 
 export const StyledFilterPage = styled.div`
-  padding: 27px 0 96px;
+  padding: 19px 0 96px;
   .filter-page__breadcrumbs {
     display: flex;
     gap: 8px;
     justify-content: left;
+    align-items: center;
 
     font-size: 14px;
     font-weight: 400;
@@ -20,5 +21,12 @@ export const StyledFilterPage = styled.div`
   .filter-arrow {
     fill: #6c6c6c;
     stroke: #6c6c6c;
+  }
+
+  .filter__block {
+    margin-top: 24px;
+    display: grid;
+    grid-template-columns: 267px 1fr;
+    column-gap: 24px;
   }
 `;

@@ -3,9 +3,10 @@ import { StyledBackdrop, StyledModalBox } from './CartModal.styled';
 import sprite from '../../../../img/svg-sprite/sprite.svg';
 import { useStore } from '../../../../store/AuthProvider';
 import { observer } from 'mobx-react-lite';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import useWindowSize from '../../../../hooks/useWindowSize';
 import { useTranslation } from 'react-i18next';
+import { useOutsideClickDetect } from '../../../../hooks/useOutsideClickDetect';
 
 const CartModal = observer(({ setCartModalOpen }) => {
   const { t } = useTranslation();
@@ -17,6 +18,9 @@ const CartModal = observer(({ setCartModalOpen }) => {
     cart: { cart, total, increaseAmount, decreaseAmount, removeFromCart },
     favourite: { toggleFavourite },
   } = store;
+
+  const selectRef = useRef(null);
+  useOutsideClickDetect(selectRef, setCartModalOpen);
 
   function editedDescription(text) {
     if (!text) return;
@@ -42,7 +46,7 @@ const CartModal = observer(({ setCartModalOpen }) => {
         if (screen === 'desktop') setCartModalOpen(false);
       }}
     >
-      <StyledModalBox>
+      <StyledModalBox ref={selectRef}>
         {total !== 0 ? (
           <>
             <div>

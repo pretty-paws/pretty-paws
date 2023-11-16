@@ -19,3 +19,10 @@ export const toggleFav = async id => {
   const result = await axios.post(`/products/${id}/favorite`);
   return result;
 };
+
+export const fetchFilteredProducts = async (category, language, query) => {
+  const result = await axios.get(
+    `/categories/${category}/products?lang=${language}${query}`
+  );
+  return result;
+};
