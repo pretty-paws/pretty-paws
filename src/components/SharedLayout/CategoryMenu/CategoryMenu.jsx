@@ -34,6 +34,7 @@ const CategoryMenu = ({ mouseLeave, data__visible }) => {
   const filteredAnimalCategory = category.categores.filter(
     category => category.category_animal_id === chosenAnimal[0]
   );
+
   const filteredSubCategory = category.subCategory.filter(
     subCtg => subCtg.category_id === chosenCategory
   );
