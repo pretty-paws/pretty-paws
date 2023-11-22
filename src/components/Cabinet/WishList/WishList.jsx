@@ -69,10 +69,10 @@ const WishList = observer(() => {
                   <CardProduct
                     key={id}
                     id={id}
+                    slug={slug}
                     title={title}
                     description={description}
                     image_url={image_url}
-                    slug={slug}
                     price={price}
                     promotional_price={promotional_price}
                     is_promotional={is_promotional}

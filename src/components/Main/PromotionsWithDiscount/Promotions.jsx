@@ -58,7 +58,7 @@ const Promotions = observer(() => {
             </div>
           </>
         )}
-        {console.log(products)}
+        {/* {console.log(products)} */}
         <div className="promotions__card-container" ref={elementRef}>
           {state === 'done'
             ? products.map(

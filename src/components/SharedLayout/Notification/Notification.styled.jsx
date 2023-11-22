@@ -5,6 +5,7 @@ export const StyledNotification = styled.div`
   z-index: 100000000000;
   top: 1%;
   right: 1%;
+  /* pointer-events: none;/ */
 
   @media screen and (min-width: 834px) {
     top: 23%;

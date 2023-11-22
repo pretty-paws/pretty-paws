@@ -136,7 +136,7 @@ export class CatalogStore {
       runInAction(() => {
         this.subcategories = data;
         localStorage.setItem('subcategories', JSON.stringify(data));
-        console.log(this.subcategories);
+        // console.log(this.subcategories);
         this.state = 'done';
       });
     } catch (error) {
@@ -150,7 +150,7 @@ export class CatalogStore {
     this.filterState = 'pending';
     try {
       const { data } = await fetchFilters(category, language);
-      console.log(data.data);
+      // console.log(data.data);
       runInAction(() => {
         this.filters = data.data;
         this.filterState = 'done';
@@ -167,7 +167,7 @@ export class CatalogStore {
     this.state = 'pending';
     try {
       const { data } = await fetchFilteredProducts(category, language, query);
-      console.log(data.data);
+      // console.log(data.data);
       runInAction(() => {
         this.filteredProducts = data.data;
         this.state = 'done';

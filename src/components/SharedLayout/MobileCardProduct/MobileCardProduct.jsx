@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
-import sprite from '../../../img/svg-sprite/sprite.svg';
 import { observer } from 'mobx-react-lite';
-import { StyledCardProduct } from './CardProduct.styled';
-import { useStore } from '../../../store/AuthProvider';
+import React from 'react';
+import { useEffect } from 'react';
+import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useStore } from '../../../store/AuthProvider';
 import { createPortal } from 'react-dom';
-
 import Notification from '../Notification/Notification';
 import { useTranslation } from 'react-i18next';
+import sprite from '../../../img/svg-sprite/sprite.svg';
+import { StyledMobileCardProduct } from './MobileCardProduct.styled';
 
-const CardProduct = observer(
+const MobileCardProduct = observer(
   ({
     id,
     slug,
@@ -24,7 +24,6 @@ const CardProduct = observer(
     country,
   }) => {
     const { t } = useTranslation();
-
     const store = useStore();
     const {
       auth: { refresh, user, authorised },
@@ -37,6 +36,10 @@ const CardProduct = observer(
     const [favouriteNotification, setFavouriteNotification] = useState(false);
     const navigate = useNavigate();
     // const [actionPerformed, setActionPerformed] = useState(false);
+
+    function handleDescription(text) {
+      return text.slice(0, 35);
+    }
 
     function checkFavourite(id) {
       if (!authorised) return false;
@@ -93,19 +96,10 @@ const CardProduct = observer(
 
       return () => clearTimeout(timeout);
     }, [errorMessage]);
-
     return (
-      // <Link
-      //   to={
-      //     // actionPerformed
-      //     `/catalog/animal/${animalSlug}/category/${categorySlug}/${subcategorySlug}/${slug}`
-      //     // : null
-      //   }
-      // >
-      <StyledCardProduct
+      <StyledMobileCardProduct
         biggerMargin={promotional_price !== 0}
-        onClick={e => {
-          e.stopPropagation();
+        onClick={() => {
           navigate(
             `/catalog/animal/${animalSlug}/category/${categorySlug}/${subcategorySlug}/${slug}`
           );
@@ -114,34 +108,37 @@ const CardProduct = observer(
         {is_promotional === 1 && (
           <div className="product__sale">{t('Акція')}</div>
         )}
-        <div className="product__img-container">
-          <img className="product__img" src={image_url} alt={title} />
-        </div>
-        <div className="product__details">
-          <span className="product__amount">{quantity}</span>
-          <span className="product__country">
-            <img
-              src={country.icon_url}
-              alt={country}
-              width=" 14px"
-              height=" 14px"
-            />
-            {country.title}
-          </span>
-        </div>
         <div className="product__description">
-          <b>{title}</b>
-          <span> - {description}</span>
-        </div>
-        <div className="product__price-fav-box">
-          {promotional_price !== 0 ? (
-            <div>
-              <div className="product__old-price">{price}₴</div>
-              <div className="product__price">{promotional_price}₴</div>
+          <div className="product__img-container">
+            <img className="product__img" src={image_url} alt={title} />
+          </div>
+          <div>
+            <b>{title}</b>
+            <span> - {handleDescription(description)}</span>
+            <div className="product__details">
+              <span className="product__amount">{quantity}</span>
+              <span className="product__country">
+                <img
+                  src={country.icon_url}
+                  alt={country}
+                  width=" 14px"
+                  height=" 14px"
+                />
+                {country.title}
+              </span>
             </div>
-          ) : (
-            <div className="product__price">{price}₴</div>
-          )}
+            <div className="product__price-fav-box">
+              {promotional_price !== 0 ? (
+                <div>
+                  <div className="product__old-price">{price}₴</div>
+                  <div className="product__price">{promotional_price}₴</div>
+                </div>
+              ) : (
+                <div className="product__price">{price}₴</div>
+              )}
+            </div>
+          </div>
+
           <div className="product__fav-compare">
             {errorMessage && (
               <div className="product__error-message">
@@ -170,6 +167,7 @@ const CardProduct = observer(
             </svg>
           </div>
         </div>
+
         <button
           className={
             alreadyAdded(id) ? 'product__button added' : 'product__button'
@@ -202,19 +200,9 @@ const CardProduct = observer(
               document.body
             )
           : null}
-      </StyledCardProduct>
-      // </Link>
+      </StyledMobileCardProduct>
     );
   }
 );
 
-export default CardProduct;
-
-CardProduct.propTypes = {
-  id: PropTypes.number,
-  title: PropTypes.string.isRequired,
-  image_url: PropTypes.string.isRequired,
-  is_promotional: PropTypes.number.isRequired,
-  quantity: PropTypes.string.isRequired,
-  brand: PropTypes.string,
-};
+export default MobileCardProduct;

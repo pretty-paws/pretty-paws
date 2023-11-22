@@ -12,11 +12,11 @@ import Orders from './Cabinet/Orders/Orders';
 import WishList from './Cabinet/WishList/WishList';
 import Subscription from './Cabinet/Subscription/Subscription';
 import { observer } from 'mobx-react-lite';
-// import CartModal from './SharedLayout/Header/CartModal/CartModal';
 import Cart from './Cart/Cart';
 import CatalogList from './Catalog/CatalogList/CatalogList';
 import FilterPage from './Catalog/FilterPage/FilterPage';
 import Catalog from './Catalog/Catalog/Catalog';
+import ProductDetailedCardPage from './Catalog/ProductDetailedCardPage/ProductDetailedCardPage';
 
 const AppRouter = observer(() => {
   return (
@@ -93,13 +93,12 @@ const AppRouter = observer(() => {
                     key={path}
                     path={`${path}/animal/:animalName/category/:category`}
                     element={<FilterPage />}
-                  >
-                    <Route
-                      key={path}
-                      path={`${path}/animal/:animalName/category/:category/:subcategory/:product_name`}
-                      element={<FilterPage />}
-                    />
-                  </Route>
+                  ></Route>
+                  <Route
+                    key={path}
+                    path={`${path}/animal/:animalName/category/:category/:subcategory/:product_name`}
+                    element={<ProductDetailedCardPage />}
+                  />
                 </Route>
               </React.Fragment>
             );

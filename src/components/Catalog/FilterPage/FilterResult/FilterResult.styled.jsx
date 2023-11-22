@@ -1,8 +1,15 @@
 import styled from 'styled-components';
 
 export const StyledFilterResults = styled.div`
-  margin-top: 40px;
+  margin-top: 30px;
   display: flex;
   flex-wrap: wrap;
   gap: 24px;
+
+  @media screen and (min-width: 834px) {
+    margin-top: 40px;
+  }
+
+  @media screen and (min-width: 1440px) {
+  }
 `;

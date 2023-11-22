@@ -5,20 +5,34 @@ import { useStore } from '../../../../../store/AuthProvider';
 
 const Countries = observer(
   ({
-    filters,
-    isCountryChosen,
-    setIsCountryChosen,
+    // filters,
+    // isCountryChosen,
+    // setIsCountryChosen,
     setShowFilterBox,
     showFilterBox,
+    searchParams,
+    setSearchParams,
   }) => {
     const store = useStore();
     const {
-      catalog: { resetedFilter },
+      catalog: { resetedFilter, filters },
     } = store;
 
     const countries = Object.entries(filters?.countries);
     const countriesArray = new Array(countries.length).fill(false);
     const [isChecked, setIsChecked] = useState(countriesArray);
+
+    useEffect(() => {
+      const chosenCountries = searchParams
+        .get('countries')
+        ?.split(',')
+        .filter(Boolean);
+      const initialCheckedState = countries.map((_, index) =>
+        chosenCountries?.includes(countries[index][1].slug)
+      );
+
+      setIsChecked(initialCheckedState);
+    }, []);
 
     useEffect(() => {
       resetedFilter === true &&
@@ -33,19 +47,49 @@ const Countries = observer(
       setIsChecked(updatedCheckedState);
     };
 
-    function handleSubcategoryChoice(item) {
-      if (isCountryChosen.includes(item)) {
-        const index = isCountryChosen.findIndex(
-          subcategory => subcategory === item
-        );
-        const updatedChosen = [...isCountryChosen];
-        updatedChosen.splice(index, 1);
-        setIsCountryChosen(updatedChosen);
-      } else {
-        setIsCountryChosen([...isCountryChosen, item]);
+    const handleSubcategoryChoice = item => {
+      const currentSearchParams = new URLSearchParams(searchParams);
+      const countries = currentSearchParams.get(`countries`);
+      if (countries === null) handleQuery(item);
+      let countriesArray;
+      if (countries !== null) {
+        countriesArray = countries.split(',').filter(Boolean);
+        if (countriesArray.includes(item)) {
+          deleteQuery(item);
+        } else {
+          handleQuery(item);
+        }
       }
-    }
+    };
 
+    const handleQuery = item => {
+      const currentSearchParams = new URLSearchParams(searchParams);
+      const existingCountries = currentSearchParams.get('countries');
+      if (!existingCountries) {
+        currentSearchParams.set('countries', item);
+      } else {
+        const allCountries = [existingCountries, item];
+        currentSearchParams.set('countries', allCountries);
+      }
+
+      setSearchParams(currentSearchParams);
+    };
+
+    const deleteQuery = itemSlug => {
+      const currentSearchParams = new URLSearchParams(searchParams);
+      const countries = currentSearchParams
+        .get(`countries`)
+        .split(',')
+        .filter(Boolean);
+
+      const index = countries?.findIndex(item => {
+        item === itemSlug;
+      });
+
+      countries.splice(index, 1);
+      currentSearchParams.set('countries', countries);
+      setSearchParams(currentSearchParams);
+    };
     return (
       <div>
         <div

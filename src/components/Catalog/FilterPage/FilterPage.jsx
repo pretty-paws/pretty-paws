@@ -1,21 +1,21 @@
 import { observer } from 'mobx-react-lite';
 import React, { useEffect } from 'react';
 import { useStore } from '../../../store/AuthProvider';
-// import { Link } from 'react-router-dom';
 import { StyledFilterPage } from './FilterPage.styled';
 import Breadcrumbs from './Breadcrumbs/Breadcrumbs';
 import FilterBar from './FilterBar/FilterBar';
 import FilterResult from './FilterResult/FilterResult';
 import SortBar from './SortBar/SortBar';
-// import { useLocation } from 'react-router-dom';
-// import sprite from '../../../img/svg-sprite/sprite.svg';
+import useWindowSize from '../../../hooks/useWindowSize';
+import sprite from '../../../img/svg-sprite/sprite.svg';
+// import { createPortal } from 'react-dom';
+import { useState } from 'react';
 
 const FilterPage = observer(() => {
-  // const [searchParams] = useSearchParams();
-  // const searchQuery = localStorage.getItem('searchQuery') || null;
-  // console.log(searchQuery);
+  const { screen } = useWindowSize();
   const store = useStore();
   const language = localStorage.getItem('language') || 'ua';
+  const [openedFilter, setOpenedFilter] = useState(false);
   const {
     catalog: {
       categorySlug,
@@ -27,7 +27,6 @@ const FilterPage = observer(() => {
       getFilteredProducts,
     },
   } = store;
-  // const location = useLocation();
 
   useEffect(() => {
     let slug;
@@ -38,23 +37,78 @@ const FilterPage = observer(() => {
   }, [language, categorySlug]);
 
   useEffect(() => {
+    if (openedFilter) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+
+    return () => {
+      document.body.style.overflow = 'auto';
+    };
+  }, [openedFilter]);
+
+  useEffect(() => {
     const slug = getSubcategory(subcategoryID);
     getFilteredProducts(categoryID, language, `&subcategories[0]=${slug}`);
   }, []);
-
+  console.log(screen);
   return (
     <>
       <StyledFilterPage>
         {filterState === 'done' ? (
           <>
             <Breadcrumbs />
-            <div className="filter__block">
-              <FilterBar />
-              <div>
-                <SortBar />
+            {screen !== 'desktop' && (
+              <>
+                <div className="filter__mobile-btn-box">
+                  <button
+                    className="filter__mobile-btn"
+                    onClick={() => setOpenedFilter(true)}
+                  >
+                    <svg width="24px" height="24px">
+                      <use href={sprite + '#filter'} />
+                    </svg>
+                    Фільтри
+                  </button>
+                  <SortBar />
+                </div>
                 <FilterResult />
+                <div className="filter__load-more-btn-box">
+                  <button className="filter__load-more-btn" type="button">
+                    Завантажити ще
+                  </button>
+                </div>
+                {openedFilter ? (
+                  // createPortal(
+                  <>
+                    <div
+                      className={
+                        openedFilter
+                          ? 'filters__backdrop active'
+                          : 'filters__backdrop'
+                      }
+                    ></div>
+                    <FilterBar
+                      active={openedFilter}
+                      setOpenedFilter={setOpenedFilter}
+                    />
+                  </>
+                ) : // ,
+                // document.body
+                // )
+                null}
+              </>
+            )}
+            {screen === 'desktop' && (
+              <div className="filter__block">
+                <FilterBar />
+                <div>
+                  <SortBar />
+                  <FilterResult />
+                </div>
               </div>
-            </div>
+            )}
           </>
         ) : null}
       </StyledFilterPage>
