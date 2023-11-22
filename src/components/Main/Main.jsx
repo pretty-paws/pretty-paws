@@ -5,6 +5,7 @@ import { GlobalContainer } from '../../global/GlobalContainer';
 import { StyledMain } from './Main.styled';
 import HelpRegisterSection from './HelpRegisterSection/HelpRegisterSection';
 import BrandsSection from './BrandsSection/BrandsSection';
+import Blog from './Blog/Blog';
 import { useTranslation } from 'react-i18next';
 
 const Main = () => {
@@ -33,6 +34,9 @@ const Main = () => {
         text={t('Задонать на корм для пухнастих улюблинців')}
         button={t('Детальніше')}
       />
+      <GlobalContainer>
+        <Blog></Blog>
+      </GlobalContainer>
     </StyledMain>
   );
 };
