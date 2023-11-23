@@ -5,32 +5,41 @@ import { observer } from 'mobx-react-lite';
 const Price = observer(
   ({
     filters,
-    setIsPriceChosen,
     setShowFilterBox,
     showFilterBox,
     setSearchParams,
     searchParams,
   }) => {
-    const [isMinChosen, setIsMinChosen] = useState(
-      `&price_min=${filters.prices[0]}`
-    );
-    const [isMaxChosen, setIsMaxChosen] = useState(
-      `&price_max=${filters.prices[1]}`
-    );
-
-    const [priceRange, setPriceRange] = useState({
-      min: filters.prices[0],
-      max: filters.prices[1],
-    });
+    const [isMinChosen, setIsMinChosen] = useState(``);
+    const [isMaxChosen, setIsMaxChosen] = useState(``);
 
     useEffect(() => {
-      setIsPriceChosen(isMinChosen + isMaxChosen);
-    }, [isMinChosen, isMaxChosen]);
+      const minPrice =
+        searchParams.get('price_min') || filters.prices[0].toString();
+      const maxPrice =
+        searchParams.get('price_max') || filters.prices[1].toString();
+
+      setIsMinChosen(minPrice);
+      setIsMaxChosen(maxPrice);
+    }, [searchParams, filters.prices]);
+
+    const handleMinPrice = value => {
+      setIsMinChosen(value);
+      const currentSearchParams = new URLSearchParams(searchParams);
+      currentSearchParams.set('price_min', value);
+      setSearchParams(currentSearchParams);
+    };
+
+    const handleMaxPrice = value => {
+      setIsMaxChosen(value);
+      const currentSearchParams = new URLSearchParams(searchParams);
+      currentSearchParams.set('price_max', value);
+      setSearchParams(currentSearchParams);
+    };
 
     if (!filters || !filters.prices) {
       return <div>Loading...</div>;
     }
-    // console.log(setIsPriceChosen);
 
     return (
       <div>
@@ -62,49 +71,20 @@ const Price = observer(
               <label className="filter__min-label">Min</label>
               <input
                 name="min"
-                onChange={e => {
-                  const value = e.currentTarget.value;
-                  setIsMinChosen(`&price_min=${value}`);
-                  setPriceRange(prev => ({
-                    ...prev,
-                    min: value,
-                  }));
-                  const currentSearchParams = new URLSearchParams(searchParams);
-                  currentSearchParams.set('price_min', value);
-                  currentSearchParams.set('price_max', priceRange.max);
-                  setSearchParams(currentSearchParams.toString());
-                  // setSearchParams(
-                  //   `price_min=${e.currentTarget.value}&price_max=${priceRange.max}`
-                  // );
-                }}
+                onChange={e => handleMinPrice(e.currentTarget.value)}
                 className="filter__min-input"
                 type="number"
-                defaultValue={filters.prices[0]}
+                value={isMinChosen}
               />
             </div>
             <div>
               <label className="filter__max-label">Max</label>
               <input
                 name="max"
-                onChange={e => {
-                  const value = e.currentTarget.value;
-                  setIsMaxChosen(`&price_max=${value}`);
-                  setPriceRange(prev => ({
-                    ...prev,
-                    max: value,
-                  }));
-
-                  const currentSearchParams = new URLSearchParams(searchParams);
-                  currentSearchParams.set('price_max', value);
-                  currentSearchParams.set('price_min', priceRange.min);
-                  setSearchParams(currentSearchParams.toString());
-                  // setSearchParams(
-                  //   `price_min=${priceRange.min}&price_max=${value}`
-                  // );
-                }}
+                onChange={e => handleMaxPrice(e.currentTarget.value)}
                 className="filter__max-input"
                 type="number"
-                defaultValue={filters.prices[1]}
+                value={isMaxChosen}
               />
             </div>
           </div>

@@ -17,6 +17,16 @@ export const StyledSelect = styled.div`
     font-size: 14px;
     font-weight: 400;
     line-height: 18px;
+
+    @media screen and (min-width: 834px) {
+      border: 1px solid #53c5bd;
+      width: 241px;
+    }
+
+    @media screen and (min-width: 1440px) {
+      border: 1px solid #e7a973;
+      width: 267px;
+    }
   }
 
   .select__option {

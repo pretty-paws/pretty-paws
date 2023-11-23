@@ -1,41 +1,35 @@
 import React, { useEffect, useState } from 'react';
 import sprite from '../../../../../img/svg-sprite/sprite.svg';
-// import { useLocation } from 'react-router-dom';
 import { observer } from 'mobx-react-lite';
 import { useStore } from '../../../../../store/AuthProvider';
 
 const CategoriesBox = observer(
-  ({
-    filters,
-    isCategoryChosen,
-    setIsCategoryChosen,
-    setShowFilterBox,
-    showFilterBox,
-    searchParams,
-    setSearchParams,
-  }) => {
+  ({ setShowFilterBox, showFilterBox, searchParams, setSearchParams }) => {
     const store = useStore();
     const {
-      catalog: { subcategorySlug, resetedFilter },
+      catalog: { resetedFilter, filters },
     } = store;
 
     const subcategories = Object.entries(filters?.subcategories);
     const subcategoriesArray = new Array(subcategories.length).fill(false);
-    const index = subcategories.findIndex(item => {
-      return item[1].slug === subcategorySlug;
-    });
-    subcategoriesArray[index] = true;
+    const [isChecked, setIsChecked] = useState(subcategoriesArray);
 
     useEffect(() => {
-      setIsCategoryChosen([...isCategoryChosen, subcategorySlug]);
+      const chosenSubcategories = searchParams
+        .get('subcategories')
+        ?.split(',')
+        .filter(Boolean);
+      const initialCheckedState = subcategories.map((_, index) =>
+        chosenSubcategories?.includes(subcategories[index][1].slug)
+      );
+
+      setIsChecked(initialCheckedState);
     }, []);
 
     useEffect(() => {
       resetedFilter === true &&
         setIsChecked(new Array(subcategories.length).fill(false));
     }, [resetedFilter]);
-
-    const [isChecked, setIsChecked] = useState(subcategoriesArray);
 
     const handleOnChange = position => {
       const updatedCheckedState = isChecked.map((item, index) => {
@@ -45,42 +39,49 @@ const CategoriesBox = observer(
       setIsChecked(updatedCheckedState);
     };
 
-    function handleSubcategoryChoice(item) {
-      const index = isCategoryChosen.findIndex(
-        subcategory => subcategory === item
-      );
-
-      if (index !== -1) {
-        const index = isCategoryChosen.findIndex(
-          subcategory => subcategory === item
-        );
-        const updatedChosen = [...isCategoryChosen];
-        updatedChosen.splice(index, 1);
-        console.log('before delete', item, index);
-        setIsCategoryChosen(updatedChosen);
-        deleteQuery(isCategoryChosen[index], index);
-      } else {
-        setIsCategoryChosen([...isCategoryChosen, item]);
-        handleQuery(item, index);
+    const handleSubcategoryChoice = item => {
+      const currentSearchParams = new URLSearchParams(searchParams);
+      const subcategories = currentSearchParams.get(`subcategories`);
+      if (subcategories === null) handleQuery(item);
+      let subcategoriesArray;
+      if (subcategories !== null) {
+        subcategoriesArray = subcategories.split(',').filter(Boolean);
+        if (subcategoriesArray.includes(item)) {
+          deleteQuery(item);
+        } else {
+          handleQuery(item);
+        }
       }
-    }
+    };
 
-    function handleQuery(value, index) {
-      console.log(value);
-      console.log(index);
+    const handleQuery = item => {
       const currentSearchParams = new URLSearchParams(searchParams);
-      currentSearchParams.set(`category${index}`, value);
-      setSearchParams(currentSearchParams.toString());
-    }
+      const existingCategories = currentSearchParams.get('subcategories');
+      if (!existingCategories) {
+        currentSearchParams.set('subcategories', item);
+      } else {
+        const allCategories = [existingCategories, item];
+        currentSearchParams.set('subcategories', allCategories);
+      }
 
-    function deleteQuery(value, index) {
-      console.log(value);
-      console.log(index);
+      setSearchParams(currentSearchParams);
+    };
 
+    const deleteQuery = itemSlug => {
       const currentSearchParams = new URLSearchParams(searchParams);
-      currentSearchParams.delete(`category${index}`);
-      setSearchParams(currentSearchParams.toString());
-    }
+      const subcategories = currentSearchParams
+        .get(`subcategories`)
+        .split(',')
+        .filter(Boolean);
+
+      const index = subcategories?.findIndex(item => {
+        item === itemSlug;
+      });
+
+      subcategories.splice(index, 1);
+      currentSearchParams.set('subcategories', subcategories);
+      setSearchParams(currentSearchParams);
+    };
 
     return (
       <div>
@@ -116,7 +117,6 @@ const CategoriesBox = observer(
                     onClick={() => {
                       handleOnChange(index);
                       handleSubcategoryChoice(subcategory[1].slug);
-                      handleQuery(subcategory[1].slug, index);
                     }}
                   >
                     <label className="filters__list-label-box">

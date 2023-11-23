@@ -1,14 +1,84 @@
 import styled from 'styled-components';
 
 export const StyledFilterBar = styled.div`
-  /* margin-top: 43px; */
-  width: 267px;
-  padding: 16px 0;
+  margin-top: 80px;
+  position: fixed;
+  top: 80px;
+  left: 0;
+  z-index: 10000000000;
+  width: 100%;
+  height: fit-content;
+  padding: 16px 16px;
   background-color: #fff;
+  overflow-y: visible;
+
+  @media screen and (min-width: 834px) {
+    margin-top: 0;
+  }
+
+  @media screen and (max-width: 1439px) {
+    top: 0;
+    left: 0;
+    width: 385px;
+    padding: 10px 40px 16px;
+
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+
+    &.active {
+      transform: translateX(0);
+    }
+  }
+
+  @media screen and (min-width: 1440px) {
+    position: static;
+    z-index: 1;
+    height: fit-content;
+    width: 267px;
+    /* padding: 16px 0; */
+  }
+
+  .filter__mobile-top-bar {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+    height: 48px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    border-bottom: 1px solid #efefef;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 18px;
+
+    .filter-icon {
+      transform: rotate(180deg);
+    }
+
+    @media screen and (min-width: 834px) {
+      gap: 28px;
+      font-size: 20px;
+      font-weight: 500;
+
+      svg {
+        fill: #6c6c6c;
+      }
+    }
+  }
 
   .filter-bar__all-filters {
-    /* height: 50vh;
-    overflow-y: scroll; */
+    overflow-y: scroll;
+    height: fit-content;
+    max-height: 90vh;
+
+    @media screen and (min-width: 834px) {
+      max-height: 90vh;
+    }
+
+    @media screen and (min-width: 1440px) {
+      overflow-y: auto;
+      height: fit-content;
+    }
   }
   & .filter-bar__all-filters::-webkit-scrollbar {
     width: 5px;
@@ -86,8 +156,12 @@ export const StyledFilterBar = styled.div`
   .filter__sale-new-box {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 32px;
     padding: 0 8px 12px;
+
+    @media screen and (min-width: 1440px) {
+      gap: 16px;
+    }
   }
 
   .filter__sale-box {
@@ -96,6 +170,11 @@ export const StyledFilterBar = styled.div`
     font-size: 16px;
     font-weight: 500;
     line-height: 20px;
+
+    @media screen and (min-width: 1440px) {
+      font-size: 14px;
+      line-height: 18px;
+    }
   }
 
   .filter__price-box {
@@ -134,11 +213,16 @@ export const StyledFilterBar = styled.div`
   .filter__min-max::after {
     position: absolute;
     top: 60px;
-    left: 116px;
+    left: 150px;
     content: '';
     width: 35px;
     height: 1px;
     background-color: var(--font-color-darkgray);
+
+    @media screen and (min-width: 1440px) {
+      top: 60px;
+      left: 116px;
+    }
   }
 
   .filter__min-label,
@@ -152,7 +236,10 @@ export const StyledFilterBar = styled.div`
   }
 
   .filter__max-label {
-    left: 158px;
+    right: 80px;
+    @media screen and (min-width: 1440px) {
+      left: 158px;
+    }
   }
 
   .filter__min-input,
@@ -168,9 +255,16 @@ export const StyledFilterBar = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: baseline;
-    gap: 22px;
-    padding: 11px 8px 4px;
+    gap: 34px;
+    padding: 19px 8px 4px;
     /* border-bottom: 1px solid #d6d6d6; */
+    @media screen and (min-width: 834px) {
+    }
+
+    @media screen and (min-width: 1440px) {
+      padding: 11px 8px 4px;
+      gap: 22px;
+    }
   }
 
   .filters__list-item {
@@ -238,7 +332,7 @@ export const StyledFilterBar = styled.div`
   }
 
   .filter__show-more {
-    padding: 12px 8px;
+    padding: 26px 8px 16px;
     display: flex;
     align-items: center;
     gap: 8px;
@@ -247,6 +341,13 @@ export const StyledFilterBar = styled.div`
     font-weight: 400;
     line-height: 20px;
     border-bottom: 1px solid #d6d6d6;
+
+    @media screen and (min-width: 834px) {
+    }
+
+    @media screen and (min-width: 1440px) {
+      padding: 12px 8px;
+    }
   }
 
   .filter-plus {
@@ -257,18 +358,33 @@ export const StyledFilterBar = styled.div`
     margin: 24px 16px 16px;
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    align-items: center;
+    gap: 16px;
+
+    @media screen and (min-width: 834px) {
+    }
+
+    @media screen and (min-width: 1440px) {
+      gap: 24px;
+    }
   }
 
   .filter__button-apply,
   .filter__button-clear {
     border-radius: 100px;
-    width: 235px;
+    width: 100%;
     height: 52px;
 
     font-size: 16px;
     font-weight: 400;
     line-height: 20px;
+    @media screen and (min-width: 834px) {
+      width: 235px;
+    }
+
+    @media screen and (min-width: 1440px) {
+      width: 235px;
+    }
   }
 
   .filter__button-apply {
