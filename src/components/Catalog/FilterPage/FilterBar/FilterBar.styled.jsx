@@ -12,11 +12,8 @@ export const StyledFilterBar = styled.div`
   background-color: #fff;
   overflow-y: visible;
 
-  @media screen and (min-width: 834px) {
+  @media screen and (min-width: 834px) and (max-width: 1439px) {
     margin-top: 0;
-  }
-
-  @media screen and (max-width: 1439px) {
     top: 0;
     left: 0;
     width: 385px;
@@ -31,6 +28,7 @@ export const StyledFilterBar = styled.div`
   }
 
   @media screen and (min-width: 1440px) {
+    margin-top: 0px;
     position: static;
     z-index: 1;
     height: fit-content;
