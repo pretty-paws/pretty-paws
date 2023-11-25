@@ -35,7 +35,7 @@ export const StyledFilterBar = styled.div`
     z-index: 1;
     height: fit-content;
     width: 267px;
-    /* padding: 16px 0; */
+    padding: 16px 0;
   }
 
   .filter__mobile-top-bar {
