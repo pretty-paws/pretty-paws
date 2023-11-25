@@ -136,7 +136,7 @@ const FilterBar = observer(({ setOpenedFilter, active }) => {
   function handleApplyClick() {
     setFilter();
     getFilteredProducts(id, language, query);
-    setOpenedFilter(false);
+    screen !== 'desktop' && setOpenedFilter(false);
   }
 
   function handleResetClick() {
