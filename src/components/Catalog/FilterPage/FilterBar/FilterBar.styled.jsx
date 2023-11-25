@@ -219,6 +219,10 @@ export const StyledFilterBar = styled.div`
     height: 1px;
     background-color: var(--font-color-darkgray);
 
+    @media screen and (min-width: 834px) {
+      left: 132px;
+    }
+
     @media screen and (min-width: 1440px) {
       top: 60px;
       left: 114px;
