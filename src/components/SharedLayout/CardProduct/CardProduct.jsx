@@ -38,7 +38,7 @@ const CardProduct = observer(
     const navigate = useNavigate();
 
     function handleDescription(text) {
-      return text.slice(0, 35);
+      return text.slice(0, 50);
     }
 
     function checkFavourite(id) {

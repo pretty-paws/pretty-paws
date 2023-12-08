@@ -3,7 +3,7 @@ import sprite from '../../img/svg-sprite/sprite.svg';
 import { useStore } from '../../store/AuthProvider';
 import { observer } from 'mobx-react-lite';
 import { useState } from 'react';
-import { GlobalContainer } from '../../global/GlobalContainer';
+// import { GlobalContainer } from '../../global/GlobalContainer';
 import { useTranslation } from 'react-i18next';
 import { Link, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
@@ -82,107 +82,109 @@ const Cart = observer(() => {
   // };
 
   return (
-    <GlobalContainer>
-      <StyledModalBox>
-        {total !== 0 ? (
-          <>
-            <div>
-              <Link
-                to={{
-                  pathname: `/catalog/animal/${animalSlug}/category/${categorySlug}`,
-                  search: `?subcategories=${subcategorySlug}`,
-                }}
-              >
-                <div className="cart__continue-shopping" onClick={() => {}}>
-                  <svg width="22px" height="22px">
-                    <use href={sprite + '#arrow-black'} />
-                  </svg>
-                  <p>Продовжити покупки</p>
-                </div>
-              </Link>
-              <h2 className="cart-modal__title">{t('Кошик')}</h2>
-              <div className="cart-modal__products-block">
-                {cart.map(
-                  ({
-                    description,
-                    id,
-                    image_url,
-                    amount,
-                    price,
-                    promotional_price,
-                    title,
-                  }) => {
-                    return (
-                      <div key={id} className="cart-modal__product-card">
-                        <div className="cart-modal__image-container">
-                          <img
-                            className="cart-modal__product-img"
-                            src={image_url}
-                            alt={title}
-                          />
-                        </div>
-                        <div className="cart-modal__description">
-                          <p>{title}</p>
-                          <p>{editedDescription(description)}</p>
+    // <GlobalContainer>
+    <StyledModalBox>
+      {total !== 0 ? (
+        <>
+          <div className="cart__products-container">
+            <Link
+              to={{
+                pathname: `/catalog/animal/${animalSlug}/category/${categorySlug}`,
+                search: `?subcategories=${subcategorySlug}`,
+              }}
+            >
+              <div className="cart__continue-shopping" onClick={() => {}}>
+                <svg width="22px" height="22px">
+                  <use href={sprite + '#arrow-black'} />
+                </svg>
+                <p>Продовжити покупки</p>
+              </div>
+            </Link>
+            <h2 className="cart-modal__title">{t('Кошик')}</h2>
+            <div className="cart-modal__products-block">
+              {cart.map(
+                ({
+                  description,
+                  id,
+                  image_url,
+                  amount,
+                  price,
+                  promotional_price,
+                  title,
+                }) => {
+                  return (
+                    <div key={id} className="cart-modal__product-card">
+                      <div className="cart-modal__image-container">
+                        <img
+                          className="cart-modal__product-img"
+                          src={image_url}
+                          alt={title}
+                        />
+                      </div>
+                      <div className="cart-modal__description">
+                        <p>
+                          {title} - {editedDescription(description)}
+                        </p>
 
-                          {promotional_price !== 0 ? (
-                            <div className="cart-modal__price-box">
-                              <div className="product__price">
-                                {promotional_price}.00₴
-                              </div>
-                              <div className="product__old-price">
-                                {price}.00₴
-                              </div>
+                        {promotional_price !== 0 ? (
+                          <div className="cart-modal__price-box">
+                            <div className="product__price">
+                              {promotional_price}.00₴
                             </div>
-                          ) : (
-                            <div className="product__one-price">
+                            <div className="product__old-price">
                               {price}.00₴
                             </div>
-                          )}
-
-                          <div className="cart-modal__amount-box">
-                            <span
-                              onClick={() =>
-                                amount > 1 ? decreaseAmount(id) : null
-                              }
-                            >
-                              <svg width="24px" height="24px">
-                                <use href={sprite + '#minus'} />
-                              </svg>
-                            </span>
-                            <span> {amount} </span>
-                            <span
-                              onClick={() => {
-                                increaseAmount(id);
-                              }}
-                            >
-                              <svg width="24px" height="24px">
-                                <use href={sprite + '#plus'} />
-                              </svg>
-                            </span>
                           </div>
+                        ) : (
+                          <div className="product__one-price">{price}.00₴</div>
+                        )}
+
+                        <div className="cart-modal__amount-box">
+                          <span
+                            onClick={() =>
+                              amount > 1 ? decreaseAmount(id) : null
+                            }
+                          >
+                            <svg width="24px" height="24px">
+                              <use href={sprite + '#minus'} />
+                            </svg>
+                          </span>
+                          <span> {amount} </span>
+                          <span
+                            onClick={() => {
+                              increaseAmount(id);
+                            }}
+                          >
+                            <svg width="24px" height="24px">
+                              <use href={sprite + '#plus'} />
+                            </svg>
+                          </span>
                         </div>
-                        <div className="cart__amount-price">
+                      </div>
+                      <div className="cart__amount-price">
+                        <span>
                           {promotional_price === 0
                             ? price * amount
                             : promotional_price * amount}
                           ₴
-                        </div>
+                        </span>
+                      </div>
 
-                        <div
-                          onClick={() => {
-                            removeFromCart(id);
-                          }}
+                      <div
+                        className="cart__remove-btn"
+                        onClick={() => {
+                          removeFromCart(id);
+                        }}
+                      >
+                        <svg
+                          className="cart-modal__more-btn"
+                          width="24px"
+                          height="24px"
                         >
-                          <svg
-                            className="cart-modal__more-btn"
-                            width="24px"
-                            height="24px"
-                          >
-                            <use href={sprite + '#delete'} />
-                          </svg>
-                        </div>
-                        {/* <div
+                          <use href={sprite + '#delete'} />
+                        </svg>
+                      </div>
+                      {/* <div
                           className="cart-modal__more"
                           onClick={() =>
                             setSmallModal(prevState => {
@@ -220,13 +222,14 @@ const Cart = observer(() => {
                               </p>
                             </div>
                           )} */}
-                        {/* </div> */}
-                      </div>
-                    );
-                  }
-                )}
-              </div>
+                      {/* </div> */}
+                    </div>
+                  );
+                }
+              )}
             </div>
+          </div>
+          <div className="cart__additional-info-box">
             <div className="cart__additional-info">
               <div>
                 <svg
@@ -262,39 +265,42 @@ const Cart = observer(() => {
                 </p>
               </div>
             </div>
-            <div
-              id="stickyContainer"
-              className={
-                isSticky
-                  ? 'cart__delivery-total-box sticky'
-                  : 'cart__delivery-total-box'
-              }
-            >
+          </div>
+          <div
+            id="stickyContainer"
+            className={
+              isSticky
+                ? 'cart__delivery-total-box sticky'
+                : 'cart__delivery-total-box'
+            }
+          >
+            <div className="cart-modal__delivery-box">
               <div className="cart-modal__delivery">
-                <p>{t('Доставка')}</p>
+                <p>{t('Доставка')}:</p>
                 <p>{t('За тарифами перевізника')}</p>
               </div>
               <div className="cart-modal__total">
-                <p>{t('Сума до сплати')}</p>
+                <p>{t('Сума замовлення')}:</p>
                 <p>
                   <b className="cart__total-price">{total}.00₴</b>
                 </p>
               </div>
-              <button className="cart-modal__button" type="button">
-                {t('Оформити замовлення')}
-              </button>
             </div>
-          </>
-        ) : (
-          <>
-            <h2 className="cart-modal__title">{t('Кошик порожній')}</h2>
             <button className="cart-modal__button" type="button">
-              {t('Знайти товар')}
+              {t('Оформити замовлення')}
             </button>
-          </>
-        )}
-      </StyledModalBox>
-    </GlobalContainer>
+          </div>
+        </>
+      ) : (
+        <>
+          <h2 className="cart-modal__title">{t('Кошик порожній')}</h2>
+          <button className="cart-modal__button" type="button">
+            {t('Знайти товар')}
+          </button>
+        </>
+      )}
+    </StyledModalBox>
+    // </GlobalContainer>
   );
 });
 
