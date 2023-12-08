@@ -5,12 +5,12 @@ import { useStore } from '../../store/AuthProvider';
 import { observer } from 'mobx-react-lite';
 
 const CatalogPage = observer(() => {
-  const language = localStorage.getItem('language') || 'ua';
   const navigate = useNavigate();
   const location = useLocation();
 
   const store = useStore();
   const {
+    auth: { language },
     catalog: { getAnimals },
   } = store;
 

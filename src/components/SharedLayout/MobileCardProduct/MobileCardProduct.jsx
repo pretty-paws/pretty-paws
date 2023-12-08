@@ -13,7 +13,7 @@ import { StyledMobileCardProduct } from './MobileCardProduct.styled';
 const MobileCardProduct = observer(
   ({
     id,
-    slug,
+    // slug,
     title,
     description,
     image_url,
@@ -101,7 +101,7 @@ const MobileCardProduct = observer(
         biggerMargin={promotional_price !== 0}
         onClick={() => {
           navigate(
-            `/catalog/animal/${animalSlug}/category/${categorySlug}/${subcategorySlug}/${slug}`
+            `/catalog/animal/${animalSlug}/category/${categorySlug}/${subcategorySlug}/${id}`
           );
         }}
       >

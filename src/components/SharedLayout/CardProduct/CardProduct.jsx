@@ -13,7 +13,7 @@ import { useTranslation } from 'react-i18next';
 const CardProduct = observer(
   ({
     id,
-    slug,
+    // slug,
     title,
     description,
     image_url,
@@ -36,14 +36,18 @@ const CardProduct = observer(
     const [cartNotification, setCartNotification] = useState(false);
     const [favouriteNotification, setFavouriteNotification] = useState(false);
     const navigate = useNavigate();
-    // const [actionPerformed, setActionPerformed] = useState(false);
+
+    function handleDescription(text) {
+      return text.slice(0, 35);
+    }
 
     function checkFavourite(id) {
       if (!authorised) return false;
       return user.favorites?.some(product => product.id === id);
     }
 
-    function handleClick() {
+    function handleClick(e) {
+      e.stopPropagation();
       if (alreadyAdded(id)) {
         removeFromCart(id);
         return;
@@ -63,18 +67,16 @@ const CardProduct = observer(
       };
       addToCart(product);
       setCartNotification(true);
-      // setActionPerformed(true);
     }
 
     const [errorMessage, setErrorMessage] = useState(false);
 
-    function handleAddFavourite() {
+    function handleAddFavourite(e) {
+      e.stopPropagation();
       if (!authorised) {
-        // setActionPerformed(true);
         setErrorMessage(true);
         return;
       } else {
-        // setActionPerformed(true);
         toggleFavourite(id)
           .then(() => {
             refresh();
@@ -95,19 +97,12 @@ const CardProduct = observer(
     }, [errorMessage]);
 
     return (
-      // <Link
-      //   to={
-      //     // actionPerformed
-      //     `/catalog/animal/${animalSlug}/category/${categorySlug}/${subcategorySlug}/${slug}`
-      //     // : null
-      //   }
-      // >
       <StyledCardProduct
         biggerMargin={promotional_price !== 0}
-        onClick={e => {
-          e.stopPropagation();
+        onClick={() => {
+          // setProductId(id);
           navigate(
-            `/catalog/animal/${animalSlug}/category/${categorySlug}/${subcategorySlug}/${slug}`
+            `/catalog/animal/${animalSlug}/category/${categorySlug}/${subcategorySlug}/${id}`
           );
         }}
       >
@@ -131,7 +126,7 @@ const CardProduct = observer(
         </div>
         <div className="product__description">
           <b>{title}</b>
-          <span> - {description}</span>
+          <span> - {handleDescription(description)}</span>
         </div>
         <div className="product__price-fav-box">
           {promotional_price !== 0 ? (
@@ -147,7 +142,7 @@ const CardProduct = observer(
               <div className="product__error-message">
                 <p>
                   {t('Будь-ласка,')}
-                  <Link to="/register">
+                  <Link to="/register" onClick={e => e.stopPropagation()}>
                     <span>{t('зареєструйтесь')}</span>
                   </Link>
                   {t('на сайті, щоб додавати товари до обраних')}
@@ -203,7 +198,6 @@ const CardProduct = observer(
             )
           : null}
       </StyledCardProduct>
-      // </Link>
     );
   }
 );

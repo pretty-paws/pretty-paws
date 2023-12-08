@@ -10,6 +10,7 @@ const Notification = ({
   link,
   setNotification,
   notification,
+  back,
 }) => {
   useEffect(() => {
     let timeout;
@@ -30,13 +31,19 @@ const Notification = ({
           className="notification__icon"
           width=" 26px"
           height=" 26px"
-          onClick={() => setNotification(false)}
+          onClick={e => {
+            e.stopPropagation();
+            setNotification(false);
+          }}
         >
           <use href={sprite + '#close'} />
         </svg>
       </div>
       <div className="notification__button-block">
-        <Link to={link}>
+        <Link
+          to={{ pathname: link, state: back }}
+          onClick={e => e.stopPropagation()}
+        >
           <button type="button" className="notification__button">
             {button}
           </button>
@@ -54,4 +61,5 @@ Notification.propTypes = {
   link: PropTypes.string.isRequired,
   setNotification: PropTypes.func.isRequired,
   notification: PropTypes.bool.isRequired,
+  back: PropTypes.string,
 };

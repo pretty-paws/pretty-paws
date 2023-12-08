@@ -5,14 +5,6 @@ export const StyledFilterPage = styled.div`
   position: relative;
 
   .filter-page__breadcrumbs {
-    display: flex;
-    gap: 8px;
-    justify-content: left;
-    align-items: center;
-
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 18px;
   }
 
   .filter__breadcrumbs__page,

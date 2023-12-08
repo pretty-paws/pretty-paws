@@ -12,22 +12,22 @@ import { useStore } from '../../../store/AuthProvider';
 
 const UserBar = observer(({ setActive }) => {
   const [cartModalOpen, setCartModalOpen] = useState(false);
-  const [language, setLanguage] = useState(
-    localStorage.getItem('language') || 'ua'
-  );
+  // const [language, setLanguage] = useState(
+  //   localStorage.getItem('language') || 'ua'
+  // );
   const { screen } = useWindowSize();
 
   const { i18n, t } = useTranslation();
 
   const handleLanguageChange = lang => {
-    localStorage.setItem('language', lang);
+    // localStorage.setItem('language', lang);
     setLanguage(lang);
     i18n.changeLanguage(lang);
   };
 
   const store = useStore();
   const {
-    auth: { authorised, user, state },
+    auth: { authorised, user, state, language, setLanguage },
     cart: {
       productAmount,
 

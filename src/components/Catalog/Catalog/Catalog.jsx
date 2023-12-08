@@ -8,12 +8,12 @@ import { observer } from 'mobx-react-lite';
 // import FilterPage from './FilterPage/FilterPage';
 
 const Catalog = observer(() => {
-  const language = localStorage.getItem('language') || 'ua';
   // const [filterPage, setFilterPage] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
   const store = useStore();
   const {
+    auth: { language },
     catalog: {
       getAnimals,
       animals,

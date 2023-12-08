@@ -7,8 +7,8 @@ export const fetchProducts = async language => {
   return result.data;
 };
 
-export const fetchProductByID = async id => {
-  const result = await axios.get(`/products/${id}`);
+export const fetchProductByID = async (id, lang) => {
+  const result = await axios.get(`/products/${id}?lang=${lang}`);
   return result;
 };
 

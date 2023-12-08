@@ -3,6 +3,8 @@ import styled from 'styled-components';
 export const StyledModalBox = styled.div`
   padding: 0 16px;
   @media screen and (min-width: 834px) {
+    padding: 0;
+    margin-top: 16px;
   }
 
   @media screen and (min-width: 1440px) {
@@ -15,15 +17,41 @@ export const StyledModalBox = styled.div`
     gap: 24px;
   }
 
+  .cart__continue-shopping {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    color: #005a9a;
+    font-family: IBM Plex Sans;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 18px;
+
+    svg {
+      transform: rotate(180deg);
+    }
+  }
+
   & .cart-modal__title {
-    font-size: 24px;
+    margin-top: 20px;
+    font-size: 20px;
     font-weight: 500;
-    line-height: 32px;
+    line-height: 26px;
+
+    @media screen and (min-width: 834px) {
+      margin-top: 36px;
+      font-size: 24px;
+    }
+
+    @media screen and (min-width: 1440px) {
+    }
   }
 
   & .cart-modal__product-card {
+    position: relative;
     display: flex;
-    gap: 5px;
+    gap: 24px;
     justify-content: space-between;
     padding: 18px 0;
     border-bottom: 0.5px solid #d6d6d6;
@@ -37,6 +65,7 @@ export const StyledModalBox = styled.div`
 
   & .cart-modal__products-block {
     @media screen and (min-width: 834px) {
+      margin-top: 24px;
     }
 
     @media screen and (min-width: 1440px) {
@@ -58,7 +87,7 @@ export const StyledModalBox = styled.div`
   }
 
   & .cart-modal__image-container {
-    width: 100px;
+    width: 76px;
     @media screen and (min-width: 834px) {
     }
 
@@ -70,8 +99,8 @@ export const StyledModalBox = styled.div`
 
   & .cart-modal__product-img {
     object-fit: cover;
-    height: 100%;
-    width: 100%;
+    /* height: 100%; */
+    /* width: 100%; */
     @media screen and (min-width: 834px) {
     }
 
@@ -142,15 +171,22 @@ export const StyledModalBox = styled.div`
   }
 
   & .cart-modal__price-box {
-    margin-top: 8px;
+    margin-top: 12px;
     display: flex;
-    gap: 4px;
+    gap: 16px;
     font-size: 16px;
     font-weight: 500;
   }
   & .product__old-price {
     color: var(--font-color-darkgray);
     text-decoration: line-through;
+  }
+
+  & .product__one-price {
+    margin-top: 12px;
+    color: var(--accent-color-orange);
+    font-size: 16px;
+    font-weight: 500;
   }
 
   & .product__price {
@@ -161,8 +197,8 @@ export const StyledModalBox = styled.div`
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    width: 82px;
-    height: 36px;
+    width: 101px;
+    height: 48px;
     margin-top: 10px;
     border-radius: 8px;
     border: 1px solid var(--font-color-black);
@@ -173,34 +209,84 @@ export const StyledModalBox = styled.div`
     /* line-height: 25px; */
   }
 
-  & .cart-modal__delivery {
-    display: flex;
-    justify-content: space-between;
-    font-size: 16px;
+  .cart__amount-price {
+    position: absolute;
+    bottom: 34px;
+    right: 45px;
+    font-size: 14px;
     font-weight: 400;
-    line-height: 20px;
+    line-height: 18px;
+  }
 
-    @media screen and (max-width: 833px) {
-      p {
-        margin: 25px 0;
+  .cart__additional-info {
+    width: 100vw;
+    margin-top: 24px;
+    margin-left: -32px;
+    padding: 8px 16px;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    & div {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 18px;
+      & svg {
+        flex-shrink: 0;
       }
     }
   }
 
+  .cart__delivery-total-box {
+    margin-top: 23px;
+    width: 100vw;
+    margin-top: 24px;
+    margin-left: -32px;
+    padding: 16px 16px;
+    background: #fff;
+  }
+
+  .sticky {
+    margin-top: 16px;
+    margin-left: 0;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 100000;
+  }
+
+  & .cart-modal__delivery {
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 18px;
+  }
+
   & .cart-modal__total {
     display: flex;
+    align-items: center;
+    justify-content: space-between;
     gap: 50px;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 20px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 18px;
+  }
+
+  .cart__total-price {
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 32px;
+    color: var(--accent-color-orange);
   }
 
   & .cart-modal__button {
-    @media screen and (max-width: 833px) {
-      margin: 40px 0 50px;
-    }
-
-    margin-top: 16px;
+    margin: 24px 0 0;
     width: 100%;
     height: 52px;
     border-radius: 100px;
@@ -211,5 +297,9 @@ export const StyledModalBox = styled.div`
     &:hover {
       background-color: var(--hover-blue);
     }
+
+    /* @media screen and (max-width: 833px) {
+      margin: 40px 0 50px;
+    } */
   }
 `;

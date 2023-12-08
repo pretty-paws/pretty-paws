@@ -11,6 +11,7 @@ import Countries from './Countries/Countries';
 import { useSearchParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import useWindowSize from '../../../../hooks/useWindowSize';
+// import { useRef } from 'react';
 
 const FilterBar = observer(({ setOpenedFilter, active }) => {
   const { screen } = useWindowSize();
@@ -18,6 +19,7 @@ const FilterBar = observer(({ setOpenedFilter, active }) => {
 
   const store = useStore();
   const {
+    auth: { language },
     catalog: {
       filters,
       categoryID,
@@ -43,7 +45,6 @@ const FilterBar = observer(({ setOpenedFilter, active }) => {
   const [brandsQuery, setBrandsQuery] = useState(null);
   const [countriesQuery, setCountriesQuery] = useState(null);
 
-  const language = localStorage.getItem('language') || 'ua';
   const id = categoryID || localStorage.getItem('categoryID');
 
   const query =
@@ -138,6 +139,16 @@ const FilterBar = observer(({ setOpenedFilter, active }) => {
     getFilteredProducts(id, language, query);
     screen !== 'desktop' && setOpenedFilter(false);
   }
+
+  // const isInitialRender = useRef(true);
+
+  // useEffect(() => {
+  //   if (!isInitialRender.current) {
+  //     getFilteredProducts(id, language, query);
+  //   } else {
+  //     isInitialRender.current = false;
+  //   }
+  // }, [language, id, query]);
 
   function handleResetClick() {
     resetFilter();

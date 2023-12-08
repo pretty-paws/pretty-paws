@@ -1,5 +1,5 @@
 import { makeAutoObservable, runInAction } from 'mobx';
-import { fetchProductByID, fetchProducts } from '../services/productsAPI';
+import { fetchProducts } from '../services/productsAPI';
 
 export class CartStore {
   state = '';
@@ -113,19 +113,19 @@ export class CartStore {
     }
   }
 
-  async getProductByID(id) {
-    this.state = 'pending';
-    try {
-      const { data } = await fetchProductByID(id);
-      return data;
-      // runInAction(() => {
-      //   // this.cartProducts = [...this.cartProducts, data];
-      //   this.state = 'done';
-      // });
-    } catch (error) {
-      runInAction(() => {
-        this.state = 'error';
-      });
-    }
-  }
+  // async getProductByID(id) {
+  //   this.state = 'pending';
+  //   try {
+  //     const { data } = await fetchProductByID(id);
+  //     return data;
+  //     // runInAction(() => {
+  //     //   // this.cartProducts = [...this.cartProducts, data];
+  //     //   this.state = 'done';
+  //     // });
+  //   } catch (error) {
+  //     runInAction(() => {
+  //       this.state = 'error';
+  //     });
+  //   }
+  // }
 }

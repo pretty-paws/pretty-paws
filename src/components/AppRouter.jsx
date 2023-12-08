@@ -96,7 +96,7 @@ const AppRouter = observer(() => {
                   ></Route>
                   <Route
                     key={path}
-                    path={`${path}/animal/:animalName/category/:category/:subcategory/:product_name`}
+                    path={`${path}/animal/:animalName/category/:category/:subcategory/:id`}
                     element={<ProductDetailedCardPage />}
                   />
                 </Route>

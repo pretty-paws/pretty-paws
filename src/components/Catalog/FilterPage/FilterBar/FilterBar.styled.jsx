@@ -75,7 +75,8 @@ export const StyledFilterBar = styled.div`
 
     @media screen and (min-width: 1440px) {
       overflow-y: auto;
-      height: fit-content;
+      max-height: max-content;
+      height: 100%;
     }
   }
   & .filter-bar__all-filters::-webkit-scrollbar {

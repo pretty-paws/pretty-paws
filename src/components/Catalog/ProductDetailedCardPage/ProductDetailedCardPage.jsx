@@ -1,13 +1,34 @@
 import React from 'react';
 import { StyledProductCard } from './ProductDetailedCardPage.styled';
 import Breadcrumbs from '../FilterPage/Breadcrumbs/Breadcrumbs';
+import { useStore } from '../../../store/AuthProvider';
+import { useEffect } from 'react';
+import { observer } from 'mobx-react-lite';
+import BigProductCard from './BigProductCard/BigProductCard';
+import { useParams } from 'react-router-dom';
 
-const ProductDetailedCard = () => {
+const ProductDetailedCard = observer(() => {
+  const { id } = useParams();
+  const store = useStore();
+  const {
+    auth: { language },
+    catalog: { getProductByID },
+  } = store;
+
+  useEffect(() => {
+    getProductByID(id, language);
+  }, [language]);
+
   return (
     <StyledProductCard>
-      <Breadcrumbs />
+      {id !== undefined ? (
+        <>
+          <Breadcrumbs page="product" />
+          <BigProductCard />
+        </>
+      ) : null}
     </StyledProductCard>
   );
-};
+});
 
 export default ProductDetailedCard;

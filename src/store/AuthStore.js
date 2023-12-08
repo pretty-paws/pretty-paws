@@ -20,6 +20,7 @@ export class AuthStore {
   userName = localStorage.getItem('userName') || '';
   email = localStorage.getItem('email') || '';
   authorised = JSON.parse(localStorage.getItem('authorised')) || false;
+  language = localStorage.getItem('language') || 'ua';
   state = 'pending';
   error = '';
   errorType = '';
@@ -27,6 +28,11 @@ export class AuthStore {
 
   constructor() {
     makeAutoObservable(this, {}, { autoBind: true });
+  }
+
+  setLanguage(language) {
+    this.language = language;
+    localStorage.setItem('language', language);
   }
 
   setEmail(email) {

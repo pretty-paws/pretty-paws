@@ -26,14 +26,14 @@ const BurgerMenu = observer(({ active, setActive }) => {
   //   chosen category with animals bar
   const [chosenCategory, setChosenCategory] = useState([]);
 
-  const [language, setLanguage] = useState(
-    localStorage.getItem('language') || 'en'
-  );
+  // const [language, setLanguage] = useState(
+  //   localStorage.getItem('language') || 'en'
+  // );
 
   //   store with user, animals,category
   const store = useStore();
   const {
-    auth: { authorised },
+    auth: { authorised, language, setLanguage },
     category,
     animal,
   } = store;

@@ -8,15 +8,14 @@ import FilterResult from './FilterResult/FilterResult';
 import SortBar from './SortBar/SortBar';
 import useWindowSize from '../../../hooks/useWindowSize';
 import sprite from '../../../img/svg-sprite/sprite.svg';
-// import { createPortal } from 'react-dom';
 import { useState } from 'react';
 
 const FilterPage = observer(() => {
   const { screen } = useWindowSize();
   const store = useStore();
-  const language = localStorage.getItem('language') || 'ua';
   const [openedFilter, setOpenedFilter] = useState(false);
   const {
+    auth: { language },
     catalog: {
       categorySlug,
       getFilters,
@@ -58,7 +57,7 @@ const FilterPage = observer(() => {
       <StyledFilterPage>
         {filterState === 'done' ? (
           <>
-            <Breadcrumbs />
+            <Breadcrumbs page="filter" />
             {screen !== 'desktop' && (
               <>
                 <div className="filter__mobile-btn-box">
