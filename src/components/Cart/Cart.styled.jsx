@@ -7,13 +7,6 @@ export const StyledModalBox = styled.div`
   }
 
   @media screen and (min-width: 1440px) {
-    border-radius: 8px;
-    background-color: #fff;
-    padding: 40px 24px;
-    height: fit-content;
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
   }
 
   .cart__products-container {
@@ -265,7 +258,7 @@ export const StyledModalBox = styled.div`
     }
 
     @media screen and (min-width: 1440px) {
-      width: 1440px;
+      max-width: 1440px;
       padding: 0px 150px;
     }
   }
@@ -311,10 +304,20 @@ export const StyledModalBox = styled.div`
       align-items: center;
       gap: 180px;
     }
+
+    @media screen and (min-width: 1440px) {
+      background: none;
+      position: static;
+      max-width: 1440px;
+      padding: 0px 150px;
+    }
   }
 
   .cart-modal__delivery-box {
     flex: 2;
+
+    @media screen and (min-width: 1440px) {
+    }
   }
 
   .sticky {

@@ -16,6 +16,7 @@ const CardProduct = observer(
     // slug,
     title,
     description,
+    short_description,
     image_url,
     price,
     promotional_price,
@@ -37,9 +38,9 @@ const CardProduct = observer(
     const [favouriteNotification, setFavouriteNotification] = useState(false);
     const navigate = useNavigate();
 
-    function handleDescription(text) {
-      return text.slice(0, 50);
-    }
+    // function handleDescription(text) {
+    //   return text.slice(0, 50);
+    // }
 
     function checkFavourite(id) {
       if (!authorised) return false;
@@ -57,6 +58,7 @@ const CardProduct = observer(
         id,
         title,
         description,
+        short_description,
         image_url,
         price,
         promotional_price,
@@ -126,7 +128,7 @@ const CardProduct = observer(
         </div>
         <div className="product__description">
           <b>{title}</b>
-          <span> - {handleDescription(description)}</span>
+          <span> - {short_description}</span>
         </div>
         <div className="product__price-fav-box">
           {promotional_price !== 0 ? (

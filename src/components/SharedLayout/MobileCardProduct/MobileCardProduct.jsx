@@ -16,6 +16,7 @@ const MobileCardProduct = observer(
     // slug,
     title,
     description,
+    short_description,
     image_url,
     price,
     promotional_price,
@@ -37,9 +38,9 @@ const MobileCardProduct = observer(
     const navigate = useNavigate();
     // const [actionPerformed, setActionPerformed] = useState(false);
 
-    function handleDescription(text) {
-      return text.slice(0, 35);
-    }
+    // function handleDescription(text) {
+    //   return text.slice(0, 35);
+    // }
 
     function checkFavourite(id) {
       if (!authorised) return false;
@@ -56,6 +57,7 @@ const MobileCardProduct = observer(
         id,
         title,
         description,
+        short_description,
         image_url,
         price,
         promotional_price,
@@ -114,7 +116,7 @@ const MobileCardProduct = observer(
           </div>
           <div>
             <b>{title}</b>
-            <span> - {handleDescription(description)}</span>
+            <span> - {short_description}</span>
             <div className="product__details">
               <span className="product__amount">{quantity}</span>
               <span className="product__country">

@@ -20,6 +20,7 @@ const FilterResult = observer(() => {
               id,
               title,
               description,
+              short_description,
               image_url,
               slug,
               price,
@@ -34,6 +35,7 @@ const FilterResult = observer(() => {
                   key={id}
                   id={id}
                   title={title}
+                  short_description={short_description}
                   description={description}
                   image_url={image_url}
                   slug={slug}
@@ -50,6 +52,7 @@ const FilterResult = observer(() => {
                   id={id}
                   title={title}
                   description={description}
+                  short_description={short_description}
                   image_url={image_url}
                   slug={slug}
                   price={price}

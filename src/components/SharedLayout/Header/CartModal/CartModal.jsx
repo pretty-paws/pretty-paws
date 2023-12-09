@@ -22,15 +22,15 @@ const CartModal = observer(({ setCartModalOpen }) => {
   const selectRef = useRef(null);
   useOutsideClickDetect(selectRef, setCartModalOpen);
 
-  function editedDescription(text) {
-    if (!text) return;
-    let editedText;
-    if (text.length <= 50) return text;
-    if (text.length > 50) {
-      editedText = text.slice(0, 50);
-    }
-    return editedText + '...';
-  }
+  // function editedDescription(text) {
+  //   if (!text) return;
+  //   let editedText;
+  //   if (text.length <= 50) return text;
+  //   if (text.length > 50) {
+  //     editedText = text.slice(0, 50);
+  //   }
+  //   return editedText + '...';
+  // }
 
   function checkFavourite(id) {
     return user.favorites?.some(product => product.id === id);
@@ -54,7 +54,8 @@ const CartModal = observer(({ setCartModalOpen }) => {
               <div className="cart-modal__products-block">
                 {cart.map(
                   ({
-                    description,
+                    // description,
+                    short_description,
                     id,
                     image_url,
                     amount,
@@ -73,7 +74,7 @@ const CartModal = observer(({ setCartModalOpen }) => {
                         </div>
                         <div className="cart-modal__description">
                           <p>{title}</p>
-                          <p>{editedDescription(description)}</p>
+                          <p>{short_description}</p>
 
                           {promotional_price !== 0 ? (
                             <div className="cart-modal__price-box">

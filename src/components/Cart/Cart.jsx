@@ -63,15 +63,15 @@ const Cart = observer(() => {
     };
   }, []);
 
-  function editedDescription(text) {
-    if (!text) return;
-    let editedText;
-    if (text.length <= 50) return text;
-    if (text.length > 50) {
-      editedText = text.slice(0, 50);
-    }
-    return editedText + '...';
-  }
+  // function editedDescription(text) {
+  //   if (!text) return;
+  //   let editedText;
+  //   if (text.length <= 50) return text;
+  //   if (text.length > 50) {
+  //     editedText = text.slice(0, 50);
+  //   }
+  //   return editedText + '...';
+  // }
 
   // function checkFavourite(id) {
   //   return user.favorites?.some(product => product.id === id);
@@ -104,7 +104,8 @@ const Cart = observer(() => {
             <div className="cart-modal__products-block">
               {cart.map(
                 ({
-                  description,
+                  // description,
+                  short_description,
                   id,
                   image_url,
                   amount,
@@ -123,7 +124,7 @@ const Cart = observer(() => {
                       </div>
                       <div className="cart-modal__description">
                         <p>
-                          {title} - {editedDescription(description)}
+                          {title} - {short_description}
                         </p>
 
                         {promotional_price !== 0 ? (
