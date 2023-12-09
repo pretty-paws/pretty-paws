@@ -77,10 +77,10 @@ const BigProductCard = observer(() => {
     return () => clearTimeout(timeout);
   }, [errorMessage]);
 
-  const reduceDescrition = text => {
-    if (!text) return;
-    return text.slice(0, 1600);
-  };
+  // const reduceDescrition = text => {
+  //   if (!text) return;
+  //   return text.slice(0, 1600);
+  // };
 
   return (
     <StyledBigProductCard>
@@ -282,15 +282,36 @@ const BigProductCard = observer(() => {
                 <p className="big-card__description-text">
                   {openDescription
                     ? productById.description
-                    : reduceDescrition(productById.description)}
+                    : productById.short_description}
                 </p>
                 <div className="big-card__show-more">
-                  <p onClick={() => setOpenDescription(!openDescription)}>
-                    Показати більше
-                  </p>
-                  <svg width=" 24px" height=" 24px">
-                    <use href={sprite + '#arrow-down'} />
-                  </svg>
+                  {openDescription ? (
+                    <>
+                      <p onClick={() => setOpenDescription(!openDescription)}>
+                        Показати менше
+                      </p>
+                      <svg
+                        className="product_card-description-arrow-desktop rotate"
+                        width=" 24px"
+                        height=" 24px"
+                      >
+                        <use href={sprite + '#arrow-down'} />
+                      </svg>
+                    </>
+                  ) : (
+                    <>
+                      <p onClick={() => setOpenDescription(!openDescription)}>
+                        Показати більше
+                      </p>
+                      <svg
+                        className="product_card-description-arrow-desktop"
+                        width=" 24px"
+                        height=" 24px"
+                      >
+                        <use href={sprite + '#arrow-down'} />
+                      </svg>
+                    </>
+                  )}
                 </div>
               </>
             )}

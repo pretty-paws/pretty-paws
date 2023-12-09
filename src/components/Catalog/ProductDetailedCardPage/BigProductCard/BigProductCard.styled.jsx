@@ -281,6 +281,12 @@ export const StyledBigProductCard = styled.div`
     }
   }
 
+  .product_card-description-arrow-desktop {
+    &.rotate {
+      transform: rotate(180deg);
+    }
+  }
+
   .product_card-description-text {
     margin-top: 16px;
   }
