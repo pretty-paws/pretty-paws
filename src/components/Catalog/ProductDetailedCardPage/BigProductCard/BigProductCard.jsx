@@ -77,10 +77,10 @@ const BigProductCard = observer(() => {
     return () => clearTimeout(timeout);
   }, [errorMessage]);
 
-  // const reduceDescrition = text => {
-  //   if (!text) return;
-  //   return text.slice(0, 1600);
-  // };
+  const reduceDescrition = text => {
+    if (!text) return;
+    return text.slice(0, 1600);
+  };
 
   return (
     <StyledBigProductCard>
@@ -114,7 +114,9 @@ const BigProductCard = observer(() => {
                 </div>
               </div>
               {screen !== 'mobile' && (
-                <h3 className="product__title">{productById.title}</h3>
+                <h3 className="product__title">
+                  {productById.title} - {productById.short_description}
+                </h3>
               )}
               <div className="product-card__image-data-block">
                 {screen === 'mobile' && (
@@ -282,7 +284,7 @@ const BigProductCard = observer(() => {
                 <p className="big-card__description-text">
                   {openDescription
                     ? productById.description
-                    : productById.short_description}
+                    : reduceDescrition(productById.description)}
                 </p>
                 <div className="big-card__show-more">
                   {openDescription ? (

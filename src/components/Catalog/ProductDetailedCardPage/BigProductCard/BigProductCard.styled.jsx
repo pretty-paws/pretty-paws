@@ -295,5 +295,6 @@ export const StyledBigProductCard = styled.div`
     display: flex;
     gap: 4px;
     align-items: center;
+    cursor: pointer;
   }
 `;
