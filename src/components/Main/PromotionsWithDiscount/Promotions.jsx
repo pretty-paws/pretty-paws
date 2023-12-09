@@ -65,6 +65,7 @@ const Promotions = observer(() => {
                 ({
                   id,
                   title,
+                  short_description,
                   description,
                   image_url,
                   slug,
@@ -80,6 +81,7 @@ const Promotions = observer(() => {
                       key={id}
                       id={id}
                       title={title}
+                      short_description={short_description}
                       description={description}
                       image_url={image_url}
                       slug={slug}
