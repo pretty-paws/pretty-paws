@@ -286,12 +286,13 @@ const BigProductCard = observer(() => {
                     ? productById.description
                     : reduceDescrition(productById.description)}
                 </p>
-                <div className="big-card__show-more">
+                <div>
                   {openDescription ? (
-                    <>
-                      <p onClick={() => setOpenDescription(!openDescription)}>
-                        Показати менше
-                      </p>
+                    <div
+                      className="big-card__show-more"
+                      onClick={() => setOpenDescription(!openDescription)}
+                    >
+                      <p>Показати менше</p>
                       <svg
                         className="product_card-description-arrow-desktop rotate"
                         width=" 24px"
@@ -299,12 +300,13 @@ const BigProductCard = observer(() => {
                       >
                         <use href={sprite + '#arrow-down'} />
                       </svg>
-                    </>
+                    </div>
                   ) : (
-                    <>
-                      <p onClick={() => setOpenDescription(!openDescription)}>
-                        Показати більше
-                      </p>
+                    <div
+                      className="big-card__show-more"
+                      onClick={() => setOpenDescription(!openDescription)}
+                    >
+                      <p>Показати більше</p>
                       <svg
                         className="product_card-description-arrow-desktop"
                         width=" 24px"
@@ -312,7 +314,7 @@ const BigProductCard = observer(() => {
                       >
                         <use href={sprite + '#arrow-down'} />
                       </svg>
-                    </>
+                    </div>
                   )}
                 </div>
               </>
