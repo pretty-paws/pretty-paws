@@ -7,6 +7,13 @@ export const StyledModalBox = styled.div`
   }
 
   @media screen and (min-width: 1440px) {
+    margin-left: auto;
+    margin-right: auto;
+    width: 1440px;
+    padding: 0 150px;
+    display: grid;
+    grid-template-columns: 655px 461px;
+    grid-column-gap: 24px;
   }
 
   .cart__products-container {
@@ -20,11 +27,14 @@ export const StyledModalBox = styled.div`
     @media screen and (min-width: 834px) {
       padding: 0 40px;
       width: 834px;
+      height: fit-content;
+      min-height: 600px;
+      overflow-y: scroll;
     }
 
     @media screen and (min-width: 1440px) {
-      width: 1440px;
-      padding: 0px 150px;
+      padding: 0;
+      width: 655px;
     }
   }
 
@@ -72,7 +82,7 @@ export const StyledModalBox = styled.div`
     }
 
     @media screen and (min-width: 1440px) {
-      gap: 0;
+      gap: 24px;
     }
   }
 
@@ -82,8 +92,6 @@ export const StyledModalBox = styled.div`
     }
 
     @media screen and (min-width: 1440px) {
-      height: 330px;
-      overflow-y: scroll;
     }
   }
   & .cart-modal__products-block::-webkit-scrollbar {
@@ -112,8 +120,6 @@ export const StyledModalBox = styled.div`
 
   & .cart-modal__product-img {
     object-fit: cover;
-    /* height: 100%; */
-    /* width: 100%; */
     @media screen and (min-width: 834px) {
     }
 
@@ -244,6 +250,11 @@ export const StyledModalBox = styled.div`
       bottom: 34px;
       right: 65%;
     }
+
+    @media screen and (min-width: 1440px) {
+      bottom: 40px;
+      right: 55%;
+    }
   }
 
   .cart__additional-info-box {
@@ -258,8 +269,22 @@ export const StyledModalBox = styled.div`
     }
 
     @media screen and (min-width: 1440px) {
-      max-width: 1440px;
-      padding: 0px 150px;
+      margin-top: 0;
+      max-width: 461px;
+      padding: 0;
+    }
+  }
+
+  .cart__additional-info-box__desktop {
+    @media screen and (min-width: 1440px) {
+      max-width: 461px;
+      height: 442px;
+      margin-top: 80px;
+      display: flex;
+      flex-direction: column-reverse;
+      justify-content: left;
+      background: #fff;
+      border-radius: 8px;
     }
   }
 
@@ -286,6 +311,13 @@ export const StyledModalBox = styled.div`
         flex-shrink: 0;
       }
     }
+
+    @media screen and (min-width: 1440px) {
+      margin-top: 24px;
+      margin-bottom: 0;
+      padding: 0 24px;
+      gap: 19px;
+    }
   }
 
   .cart__delivery-total-box {
@@ -308,8 +340,13 @@ export const StyledModalBox = styled.div`
     @media screen and (min-width: 1440px) {
       background: none;
       position: static;
-      max-width: 1440px;
-      padding: 0px 150px;
+      max-width: 461px;
+      flex-direction: column;
+      gap: 24px;
+      align-items: normal;
+      padding: 40px 24px 0;
+      margin-top: 0;
+      /* padding: 0px 150px; */
     }
   }
 
@@ -372,6 +409,31 @@ export const StyledModalBox = styled.div`
     @media screen and (min-width: 834px) {
       margin: 0;
       width: 235px;
+      height: 52px;
+    }
+
+    @media screen and (min-width: 1440px) {
+      flex: none;
+      width: 100%;
+      height: 52px;
+    }
+  }
+
+  .cart-modal__button-continue {
+    width: 100%;
+    height: 52px;
+    border-radius: 100px;
+    border: 0;
+    background: #fff;
+    transition: background-color var(--transition);
+    border: 2px solid var(--accent-color-blue);
+
+    &:hover {
+      background-color: var(--hover-blue);
+    }
+    @media screen and (min-width: 1440px) {
+      flex: none;
+      width: 100%;
       height: 52px;
     }
   }

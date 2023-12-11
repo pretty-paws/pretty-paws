@@ -3,13 +3,14 @@ import sprite from '../../img/svg-sprite/sprite.svg';
 import { useStore } from '../../store/AuthProvider';
 import { observer } from 'mobx-react-lite';
 import { useState } from 'react';
-// import { GlobalContainer } from '../../global/GlobalContainer';
 import { useTranslation } from 'react-i18next';
 import { Link, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
+import useWindowSize from '../../hooks/useWindowSize';
 
 const Cart = observer(() => {
   const location = useLocation();
+  const { screen } = useWindowSize();
 
   console.log(location);
   const { t } = useTranslation();
@@ -87,19 +88,21 @@ const Cart = observer(() => {
       {total !== 0 ? (
         <>
           <div className="cart__products-container">
-            <Link
-              to={{
-                pathname: `/catalog/animal/${animalSlug}/category/${categorySlug}`,
-                search: `?subcategories=${subcategorySlug}`,
-              }}
-            >
-              <div className="cart__continue-shopping" onClick={() => {}}>
-                <svg width="22px" height="22px">
-                  <use href={sprite + '#arrow-black'} />
-                </svg>
-                <p>Продовжити покупки</p>
-              </div>
-            </Link>
+            {screen !== 'desktop' && (
+              <Link
+                to={{
+                  pathname: `/catalog/animal/${animalSlug}/category/${categorySlug}`,
+                  search: `?subcategories=${subcategorySlug}`,
+                }}
+              >
+                <div className="cart__continue-shopping" onClick={() => {}}>
+                  <svg width="22px" height="22px">
+                    <use href={sprite + '#arrow-black'} />
+                  </svg>
+                  <p>Продовжити покупки</p>
+                </div>
+              </Link>
+            )}
             <h2 className="cart-modal__title">{t('Кошик')}</h2>
             <div className="cart-modal__products-block">
               {cart.map(
@@ -230,66 +233,73 @@ const Cart = observer(() => {
               )}
             </div>
           </div>
-          <div className="cart__additional-info-box">
-            <div className="cart__additional-info">
-              <div>
-                <svg
-                  className="cart-modal__more-btn"
-                  width="24px"
-                  height="24px"
-                >
-                  <use href={sprite + '#discount'} />
-                </svg>
-                <p>Знижка 5% на перше замовлення</p>
-              </div>
-              <div>
-                <svg
-                  className="cart-modal__more-btn"
-                  width="24px"
-                  height="24px"
-                >
-                  <use href={sprite + '#delivery'} />
-                </svg>
-                <p>Безкоштовне доставлення до поштомата від 200 грн</p>
-              </div>
-              <div>
-                <svg
-                  className="cart-modal__more-btn"
-                  width="24px"
-                  height="24px"
-                >
-                  <use href={sprite + '#payment'} />
-                </svg>
-                <p>
-                  Безпечна та швидка оплата карткою. Безготівковий розрахунок
-                  для юридичних осіб
-                </p>
-              </div>
-            </div>
-          </div>
-          <div
-            id="stickyContainer"
-            className={
-              isSticky
-                ? 'cart__delivery-total-box sticky'
-                : 'cart__delivery-total-box'
-            }
-          >
-            <div className="cart-modal__delivery-box">
-              <div className="cart-modal__delivery">
-                <p>{t('Доставка')}:</p>
-                <p>{t('За тарифами перевізника')}</p>
-              </div>
-              <div className="cart-modal__total">
-                <p>{t('Сума замовлення')}:</p>
-                <p>
-                  <b className="cart__total-price">{total}.00₴</b>
-                </p>
+          <div className="cart__additional-info-box__desktop">
+            <div className="cart__additional-info-box">
+              <div className="cart__additional-info">
+                <div>
+                  <svg
+                    className="cart-modal__more-btn"
+                    width="24px"
+                    height="24px"
+                  >
+                    <use href={sprite + '#discount'} />
+                  </svg>
+                  <p>Знижка 5% на перше замовлення</p>
+                </div>
+                <div>
+                  <svg
+                    className="cart-modal__more-btn"
+                    width="24px"
+                    height="24px"
+                  >
+                    <use href={sprite + '#delivery'} />
+                  </svg>
+                  <p>Безкоштовне доставлення до поштомата від 200 грн</p>
+                </div>
+                <div>
+                  <svg
+                    className="cart-modal__more-btn"
+                    width="24px"
+                    height="24px"
+                  >
+                    <use href={sprite + '#payment'} />
+                  </svg>
+                  <p>
+                    Безпечна та швидка оплата карткою. Безготівковий розрахунок
+                    для юридичних осіб
+                  </p>
+                </div>
               </div>
             </div>
-            <button className="cart-modal__button" type="button">
-              {t('Оформити замовлення')}
-            </button>
+            <div
+              id="stickyContainer"
+              className={
+                isSticky
+                  ? 'cart__delivery-total-box sticky'
+                  : 'cart__delivery-total-box'
+              }
+            >
+              <div className="cart-modal__delivery-box">
+                <div className="cart-modal__delivery">
+                  <p>{t('Доставка')}:</p>
+                  <p>{t('За тарифами перевізника')}</p>
+                </div>
+                <div className="cart-modal__total">
+                  <p>{t('Сума замовлення')}:</p>
+                  <p>
+                    <b className="cart__total-price">{total}.00₴</b>
+                  </p>
+                </div>
+              </div>
+              <button className="cart-modal__button" type="button">
+                {t('Оформити замовлення')}
+              </button>
+              {screen === 'desktop' && (
+                <button className="cart-modal__button-continue" type="button">
+                  {t('Продовжити покупки')}
+                </button>
+              )}
+            </div>
           </div>
         </>
       ) : (
