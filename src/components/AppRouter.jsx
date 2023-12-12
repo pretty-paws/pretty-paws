@@ -17,6 +17,7 @@ import CatalogList from './Catalog/CatalogList/CatalogList';
 import FilterPage from './Catalog/FilterPage/FilterPage';
 import Catalog from './Catalog/Catalog/Catalog';
 import ProductDetailedCardPage from './Catalog/ProductDetailedCardPage/ProductDetailedCardPage';
+import MakeOrder from './MakeOrder/MakeOrder';
 
 const AppRouter = observer(() => {
   return (
@@ -68,6 +69,11 @@ const AppRouter = observer(() => {
             }
           />
         </Route>
+        <Route
+          path="make_order"
+          element={<PrivateRoute redirectTo="/" component={<MakeOrder />} />}
+          exact
+        />
         {/* public routes */}
         {publicRoutes.map(({ path, Component, name }) => {
           if (name === 'Контакти')

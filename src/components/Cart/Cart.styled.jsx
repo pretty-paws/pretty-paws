@@ -338,6 +338,7 @@ export const StyledModalBox = styled.div`
     }
 
     @media screen and (min-width: 1440px) {
+      z-index: 1;
       background: none;
       position: static;
       max-width: 461px;

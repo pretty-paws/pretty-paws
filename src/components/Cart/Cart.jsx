@@ -14,13 +14,11 @@ const Cart = observer(() => {
 
   console.log(location);
   const { t } = useTranslation();
-  // const [smallModal, setSmallModal] = useState({});
   const [isSticky, setIsSticky] = useState(false);
   const store = useStore();
   const {
-    // auth: { refresh, user, authorised },
+    auth: { authorised },
     cart: { cart, total, increaseAmount, decreaseAmount, removeFromCart },
-    // favourite: { toggleFavourite },
     catalog: { animalSlug, categorySlug, subcategorySlug },
   } = store;
 
@@ -188,45 +186,6 @@ const Cart = observer(() => {
                           <use href={sprite + '#delete'} />
                         </svg>
                       </div>
-                      {/* <div
-                          className="cart-modal__more"
-                          onClick={() =>
-                            setSmallModal(prevState => {
-                              return { [id]: !prevState[id] };
-                            })
-                          }
-                        >
-                          <svg
-                            className="cart-modal__more-btn"
-                            width="24px"
-                            height="24px"
-                          >
-                            <use href={sprite + '#more'} />
-                          </svg>
-                          {smallModal[id] && (
-                            <div className="cart__small-modal">
-                              <p
-                                onClick={() => {
-                                  removeFromCart(id);
-                                }}
-                              >
-                                {t('Видалити')}
-                              </p>
-                              <p
-                                className={
-                                  authorised
-                                    ? null
-                                    : 'cart-modal__favouride-disabled'
-                                }
-                                onClick={() => handleAddToFavourite(id)}
-                              >
-                                {checkFavourite(id)
-                                  ? t('Видалити зі списку бажань')
-                                  : t('Додати до списку бажань')}
-                              </p>
-                            </div>
-                          )} */}
-                      {/* </div> */}
                     </div>
                   );
                 }
@@ -291,13 +250,25 @@ const Cart = observer(() => {
                   </p>
                 </div>
               </div>
-              <button className="cart-modal__button" type="button">
-                {t('Оформити замовлення')}
-              </button>
-              {screen === 'desktop' && (
-                <button className="cart-modal__button-continue" type="button">
-                  {t('Продовжити покупки')}
+              <Link
+                to={authorised ? '/make_order' : '/login'}
+                state={{ from: 'cart' }}
+              >
+                <button className="cart-modal__button" type="button">
+                  {t('Оформити замовлення')}
                 </button>
+              </Link>
+              {screen === 'desktop' && (
+                <Link
+                  to={{
+                    pathname: `/catalog/animal/${animalSlug}/category/${categorySlug}`,
+                    search: `?subcategories=${subcategorySlug}`,
+                  }}
+                >
+                  <button className="cart-modal__button-continue" type="button">
+                    {t('Продовжити покупки')}
+                  </button>
+                </Link>
               )}
             </div>
           </div>
