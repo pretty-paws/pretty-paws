@@ -1,34 +1,74 @@
 import React from 'react';
+import DOMPurify from 'dompurify';
 import sprite from '../../../img/svg-sprite/sprite.svg';
-import img from '../../../img/card-discount/nexgard_spectra__2.png';
 import { StyledCardBlog } from './CardBlog.styled';
-const CardBlog = () => {
-  return (
-    <StyledCardBlog>
-      <div className="blog__img-container">
-        <img className="blog__img" src={img} alt="" />
-      </div>
-      <div className="blog__content">
-        <div className="blog__text">
-          <h5 className="blog__title">
-            Де краще взяти тваринку і як про неї піклуватися
-          </h5>
-          <p className="blog__desc">
-            Уподобання майбутніх власників тварин можуть починатися від
-            звичайної собаки, і закінчуватися велетенськими рептиліями або
-            навіть диких тварин.
-          </p>
-          <div className="blog__info">
-            <svg width=" 24px" height=" 24px">
-              <use href={sprite + '#watch'} />
-            </svg>
-            <p className="blog__info-text">10 хвилин</p>
-          </div>
+import { observer } from 'mobx-react-lite';
+import PropTypes from 'prop-types';
+import { useNavigate } from 'react-router-dom';
+import useWindowSize from '../../../hooks/useWindowSize';
+const CardBlog = observer(
+  ({
+    id,
+    title,
+    short_description,
+    image_url,
+    category,
+    slug,
+    reading_time_minutes,
+  }) => {
+    const navigate = useNavigate();
+    const { screen } = useWindowSize();
+
+    function handleClickCard(e) {
+      e.stopPropagation();
+      alert('fff');
+      navigate(`/news/${category}/${slug}`);
+      console.log(`/news/${category}/${id}`);
+    }
+
+    const sanitizedDescription = DOMPurify.sanitize(short_description);
+
+    return (
+      <StyledCardBlog onClick={e => handleClickCard(e)}>
+        <div className="blog__img-container">
+          <img className="blog__img" src={image_url} alt={title} />
         </div>
-        <button className="blog__btn">Детальніше</button>
-      </div>
-    </StyledCardBlog>
-  );
+        <div className="blog__category">
+          <p className="blog__category-text">{category}</p>
+        </div>
+        <div className="blog__content">
+          <div className="blog__text">
+            <h5 className="blog__title">{title}</h5>
+            <div
+              className="blog__desc"
+              dangerouslySetInnerHTML={{
+                __html: sanitizedDescription,
+              }}
+            />
+          </div>
+          <div className="blog__info">
+            <svg className="blog__info-clock">
+              <use href={sprite + '#watch-gray'} />
+            </svg>
+            <p className="blog__info-text">{`${reading_time_minutes} хвилин`}</p>
+          </div>
+          {screen === 'desktop' && (
+            <button className="blog__btn">Детальніше</button>
+          )}
+        </div>
+      </StyledCardBlog>
+    );
+  }
+);
+
+CardBlog.propTypes = {
+  id: PropTypes.number,
+  title: PropTypes.string.isRequired,
+  image_url: PropTypes.string.isRequired,
+  category: PropTypes.string.isRequired,
+  slug: PropTypes.string,
+  reading_time_minutes: PropTypes.number.isRequired,
+  short_description: PropTypes.string.isRequired,
 };
 
 export default CardBlog;

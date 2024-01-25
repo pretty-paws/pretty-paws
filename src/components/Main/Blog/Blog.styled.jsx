@@ -23,12 +23,48 @@ export const StyledBlog = styled.div`
     }
   }
 
+  & .swiper {
+    position: static;
+    padding-bottom: 16px;
+  }
+
+  & .swiper-pagination-bullets,
+  .swiper-pagination-clickable,
+  .swiper-pagination-horizontal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    bottom: 75px;
+    align-items: center;
+    @media screen and (min-width: 1440px) {
+      display: none;
+    }
+  }
+  & .swiper-pagination-bullet
+  /* .swiper-pagination-bullet-active-prev, */
+  /* .swiper-pagination-bullet-active-next { */ {
+    width: 12px;
+    height: 12px;
+    background-color: #d6d6d6;
+    opacity: 1;
+  }
+
+  & .swiper-pagination-bullet-active {
+    width: 16px;
+    height: 16px;
+    background-color: #e7a973;
+  }
+
   & .blog__card-container {
     display: flex;
-    gap: 24px;
+    gap: 15.5px;
     overflow: hidden;
     width: auto;
     overflow-x: scroll;
+    @media screen and (min-width: 1440px) {
+      gap: 24px;
+    }
   }
   .left-arrow {
     cursor: pointer;
@@ -67,29 +103,11 @@ export const StyledBlog = styled.div`
       transform: rotate(-90deg);
     }
   }
-
-  .blog__card-container {
-    scrollbar-width: thin;
-    scrollbar-color: transparent transparent;
-  }
-
-  .blog__card-container::-webkit-scrollbar {
-    width: 8px;
-  }
-
-  .blog__card-container::-webkit-scrollbar-track {
-    background: transparent;
-  }
-
-  .blog__card-container::-webkit-scrollbar-thumb {
-    background-color: transparent;
-    border-radius: 4px;
-  }
-
-  .promotions__button-container {
+  /* 
+  & .promotions__button-container {
     display: flex;
     justify-content: center;
-  }
+  } */
 
   & .blog__button-container {
     margin-top: 40px;

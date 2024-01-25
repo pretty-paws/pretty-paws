@@ -10,12 +10,14 @@ const App = observer(() => {
   const {
     auth: { refresh, authorised, language },
     cart: { getProducts },
+    blog: { getBlogs },
   } = store;
 
   useEffect(() => {
     if (authorised) {
       refresh();
     }
+    getBlogs(language);
     getProducts(language);
   }, [authorised, i18n.language]);
 
