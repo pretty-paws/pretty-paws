@@ -30,6 +30,7 @@ const Cart = observer(() => {
       const stickyContainer = document.getElementById('stickyContainer');
 
       if (!stickyContainer) return;
+
       // console.log(scrollPosition, stickyContainer.offsetTop);
 
       let scrollDirection;
