@@ -11,6 +11,7 @@ const App = observer(() => {
     auth: { refresh, authorised, language },
     cart: { getProducts },
     blog: { getBlogs },
+    catalog: { getAnimals },
   } = store;
 
   useEffect(() => {
@@ -19,6 +20,7 @@ const App = observer(() => {
     }
     getBlogs(language);
     getProducts(language);
+    getAnimals(language);
   }, [authorised, i18n.language]);
 
   return (

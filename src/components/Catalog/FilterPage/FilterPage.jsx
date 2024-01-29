@@ -50,7 +50,7 @@ const FilterPage = observer(() => {
   useEffect(() => {
     const slug = getSubcategory(subcategoryID);
     getFilteredProducts(categoryID, language, `&subcategories[0]=${slug}`);
-  }, []);
+  }, [subcategoryID]);
   console.log(screen);
   return (
     <>

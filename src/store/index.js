@@ -9,12 +9,13 @@ import { CatalogStore } from './CatalogStore';
 import { BlogStore } from './BlogStore';
 export class RootStore {
   auth = new AuthStore();
-  category = new CategoryStore();
-  animal = new AnimalStore();
   cart = new CartStore();
   favourite = new FavouriteStore();
   catalog = new CatalogStore();
   blog = new BlogStore();
+
+  animal = new AnimalStore();
+  category = new CategoryStore();
 
   constructor() {
     makeAutoObservable(this, {}, { autoBind: true });

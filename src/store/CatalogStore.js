@@ -5,6 +5,7 @@ import {
   fetchFilters,
   fetchProducts,
   fetchSubcategories,
+  fetchFilterSubcategories,
 } from '../services/categoriesAPI';
 import {
   fetchFilteredProducts,
@@ -17,6 +18,8 @@ export class CatalogStore {
   animals = [];
   categories = [];
   subcategories = JSON.parse(localStorage.getItem('subcategories')) || [];
+  filteredSubcategories =
+    JSON.parse(localStorage.getItem('filteredSubcategories')) || [];
   products = [];
   productById = {};
   filters = {};
@@ -124,10 +127,11 @@ export class CatalogStore {
     }
   }
 
-  async getCategories(category) {
+  async getCategories(language, category) {
     this.state = 'pending';
+    console.log(category);
     try {
-      const { data } = await fetchCategories(category);
+      const { data } = await fetchCategories(language, category);
       runInAction(() => {
         this.categories = data;
         this.state = 'done';
@@ -146,6 +150,22 @@ export class CatalogStore {
       runInAction(() => {
         this.subcategories = data;
         localStorage.setItem('subcategories', JSON.stringify(data));
+        // console.log(this.subcategories);
+        this.state = 'done';
+      });
+    } catch (error) {
+      runInAction(() => {
+        this.state = 'error';
+      });
+    }
+  }
+  async getFilteredSubcategories(language, category) {
+    this.state = 'pending';
+    try {
+      const { data } = await fetchFilterSubcategories(language, category);
+      runInAction(() => {
+        this.filteredSubcategories = data;
+        localStorage.setItem('filteredSubcategories', JSON.stringify(data));
         // console.log(this.subcategories);
         this.state = 'done';
       });

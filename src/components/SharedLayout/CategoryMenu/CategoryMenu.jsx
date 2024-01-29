@@ -1,4 +1,4 @@
-import { React, useState } from 'react';
+import { React, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import sprite from '../../../img/svg-sprite/sprite.svg';
 
@@ -6,56 +6,87 @@ import { useStore } from '../../../store/AuthProvider';
 import PropTypes from 'prop-types';
 import { StyledCategoryMenu } from './CategoryMenu.styled';
 
-import AnimalsBar from '../AnimalsBar/AnimalsBar';
+import AnimalsIconBar from '../AnimalsIconBar/AnimalsIconBar';
+import { observer } from 'mobx-react-lite';
 
-const CategoryMenu = ({ mouseLeave, data__visible }) => {
+const CategoryMenu = observer(({ mouseLeave, data__visible }) => {
   //   store with user, animals,category
   const store = useStore();
-  const { category } = store;
-  const [chosenAnimal, setChosenAnimal] = useState([1]);
-  const [chosenCategory, setChosenCategory] = useState();
+  const {
+    // category,.
+    auth: { language },
+    catalog: {
+      animals,
+      animalSlug,
+      categories,
+      categorySlug,
+      getCategories,
+      filteredSubcategories,
+      getFilteredSubcategories,
+      setAnimalName,
+      setAnimalSlug,
+      setCategoryID,
+      setCategoryName,
+      setCategorySlug,
+      setSubcategoryID,
+      //   categoryName,
+    },
+  } = store;
+  const [chosenAnimal, setChosenAnimal] = useState([]);
   const [showSubCategory, setShowSubCategory] = useState(false);
 
-  const handleAnimalClick = animal => {
-    setChosenAnimal([animal]);
-  };
+  useEffect(() => {
+    setChosenAnimal([animals[0]]);
+  }, []);
+
+  useEffect(() => {
+    if (chosenAnimal.length > 0) {
+      let chosenId = chosenAnimal.map(animal => {
+        setAnimalName(animal.title);
+        setAnimalSlug(animal.slug);
+        return animal.id;
+      });
+      console.log(chosenId);
+      getCategories(language, chosenId[0]);
+    }
+  }, [chosenAnimal]);
+
+  useEffect(() => {
+    if (localStorage.getItem('categoryID')) {
+      getFilteredSubcategories(language, localStorage.getItem('categoryID'));
+    }
+  }, [showSubCategory]);
 
   const closeMenu = () => {
     setShowSubCategory(false);
   };
 
+  const handleAnimalClick = animal => {
+    setChosenAnimal([animal]);
+  };
   const handleCategoryClick = category => {
     if (category) {
-      setChosenCategory(category);
+      setCategoryID(category.id);
+      setCategoryName(category.title);
+      setCategorySlug(category.slug);
       setShowSubCategory(true);
     }
   };
 
-  const filteredAnimalCategory = category.categores.filter(
-    category => category.category_animal_id === chosenAnimal[0]
-  );
-
-  const filteredSubCategory = category.subCategory.filter(
-    subCtg => subCtg.category_id === chosenCategory
-  );
-
-  function getCategoryName(categoryId) {
-    const categoryID = category.categores.find(
-      category => category.id === categoryId
-    );
-    if (categoryID) {
-      return categoryID.title;
-    } else {
-      return 'Категорію не знайдено';
-    }
-  }
-
+  const handleSubCategoryClick = subcategory => {
+    setSubcategoryID(subcategory.id);
+    closeMenu();
+  };
   return (
     <StyledCategoryMenu onMouseLeave={mouseLeave} data__visible={data__visible}>
       {showSubCategory ? (
         <>
           <div className="subcategores">
-            <Link to="" onClick={closeMenu} className="subcategores__link">
+            <Link
+              to="/catalog"
+              onClick={closeMenu}
+              className="subcategores__link"
+            >
               <svg
                 className="subcategores__navigation-icon"
                 width="24px"
@@ -64,53 +95,70 @@ const CategoryMenu = ({ mouseLeave, data__visible }) => {
                 <use href={sprite + '#arrow-black'} />
               </svg>
               <h3 className="subcategores__title">
-                {getCategoryName(chosenCategory)}
+                {localStorage.getItem('categoryName')}
               </h3>
             </Link>
             <ul className="subcategores__list">
-              {filteredSubCategory.map(subCtg => {
-                return (
-                  <Link to="" onClick={closeMenu} key={subCtg.id}>
-                    <li className="subcategores__list-item">{subCtg.title}</li>
-                  </Link>
-                );
-              })}
+              {filteredSubcategories &&
+                filteredSubcategories.map(subCategory => {
+                  return (
+                    <Link
+                      state={{ from: '/catalog/animal' }}
+                      to={{
+                        pathname: `/catalog/animal/${animalSlug}/category/${categorySlug}`,
+                        search: `?subcategories=${subCategory.slug}`,
+                      }}
+                      onClick={() => handleSubCategoryClick(subCategory)}
+                      key={subCategory.id}
+                    >
+                      <li className="subcategores__list-item">
+                        {subCategory.title}
+                      </li>
+                    </Link>
+                  );
+                })}
             </ul>
           </div>
         </>
       ) : (
         <div className="categores__content">
-          <AnimalsBar
+          <AnimalsIconBar
             type="vertical"
+            animalsArray={animals}
             getCategory={handleAnimalClick}
             chosenCategory={chosenAnimal}
           />
           <div className="categores__animal">
             <ul className="categores__list">
-              {filteredAnimalCategory.map(ctg => {
-                return (
-                  <Link
-                    //   to=""
-                    className="category__link"
-                    onClick={() => handleCategoryClick(ctg.id)}
-                    key={ctg.id}
-                  >
-                    <li className="categores__list-item">{ctg.title}</li>
-                    <svg className="navigation-icon" width="24px" height="24px">
-                      <use href={sprite + '#arrow-black'} />
-                    </svg>
-                  </Link>
-                );
-              })}
+              {categories.length != 0 &&
+                categories.map(category => {
+                  return (
+                    <Link
+                      className="category__link"
+                      onClick={() => handleCategoryClick(category)}
+                      key={category.id}
+                    >
+                      <li className="categores__list-item">{category.title}</li>
+                      <svg
+                        className="navigation-icon"
+                        width="24px"
+                        height="24px"
+                      >
+                        <use href={sprite + '#arrow-black'} />
+                      </svg>
+                    </Link>
+                  );
+                })}
             </ul>
           </div>
         </div>
       )}
     </StyledCategoryMenu>
   );
-};
+});
+
 CategoryMenu.propTypes = {
   mouseLeave: PropTypes.any,
-  data__visible: PropTypes.bool, // Ожидаем, что data__visible будет булевым значением
+  data__visible: PropTypes.bool,
 };
 export default CategoryMenu;
