@@ -17,10 +17,10 @@ export const StyledMakeOrder = styled.div`
   }
 
   .make-order__personal-data {
-    margin-top: 24px;
+    margin: 24px 0;
     padding: 12px 16px;
     border-radius: 8px;
-    background: rgba(231, 169, 115, 0.5);
+    background-color: rgba(231, 169, 115, 0.5);
   }
 
   .make-order__personal-data-title {
@@ -61,16 +61,20 @@ export const StyledMakeOrder = styled.div`
     align-items: center;
     padding: 16px;
     border-radius: 8px 8px 0px 0px;
-    background: var(--accent-color-beige);
+
     font-size: 16px;
     font-weight: 400;
+
+    &.edit {
+      background: var(--accent-color-beige);
+    }
 
     svg {
       transform: rotate(-90deg);
     }
   }
 
-  form {
+  .personal-data__form {
     padding: 0 16px;
     display: flex;
     flex-direction: column;

@@ -28,16 +28,16 @@ const Cart = observer(() => {
     const handleScroll = () => {
       let scrollPosition = window.scrollY;
       const stickyContainer = document.getElementById('stickyContainer');
-      console.log(scrollPosition, stickyContainer.offsetTop);
+      // console.log(scrollPosition, stickyContainer.offsetTop);
 
       let scrollDirection;
 
       if (scrollPosition > lastScrollPosition) {
         scrollDirection = 'Down';
-        console.log('Scrolling Down');
+        // console.log('Scrolling Down');
       } else {
         scrollDirection = 'Up';
-        console.log('Scrolling Up');
+        // console.log('Scrolling Up');
       }
 
       lastScrollPosition = scrollPosition;

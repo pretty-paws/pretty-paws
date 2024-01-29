@@ -6,16 +6,20 @@ import { AnimalStore } from './AnimalStore';
 import { CartStore } from './CartStore';
 import { FavouriteStore } from './FavouriteStore';
 import { CatalogStore } from './CatalogStore';
+
 import { BlogStore } from './BlogStore';
+
+import { NovaPoshta } from './NovaPoshta';
+
 export class RootStore {
   auth = new AuthStore();
   cart = new CartStore();
   favourite = new FavouriteStore();
   catalog = new CatalogStore();
   blog = new BlogStore();
-
   animal = new AnimalStore();
   category = new CategoryStore();
+  novaPoshta = new NovaPoshta();
 
   constructor() {
     makeAutoObservable(this, {}, { autoBind: true });
