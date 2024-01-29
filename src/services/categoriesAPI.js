@@ -19,6 +19,12 @@ export const fetchSubcategories = async language => {
   return result;
 };
 
+export const fetchFilterSubcategories = async (language, category) => {
+  const result = await axios.get(
+    `/categories/${category}/subcategories?lang=${language}`
+  );
+  return result;
+};
 export const fetchProducts = async (id, language) => {
   const result = await axios.get(
     `/subcategories/${id}/products?price_min=12&price_max=200lang=${language}`
