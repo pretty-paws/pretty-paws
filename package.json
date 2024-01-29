@@ -35,7 +35,7 @@
     "eject": "react-scripts eject",
     "lint": "eslint src/**/*.{js,jsx,ts,tsx,json} --no-error-on-unmatched-pattern",
     "lint:fix": "eslint --fix src/**/*.{js,jsx,ts,tsx,json} --no-error-on-unmatched-pattern --fix",
-    "format": "prettier --write --ext src/**/*.{js,jsx,json} --config ./.prettierrc --no-error-on-unmatched-pattern"
+    "format": "prettier --write --ext js jsx json src/**/*.{js,jsx,json} --config ./.prettierrc --no-error-on-unmatched-pattern"
   },
   "husky": {
     "hooks": {
