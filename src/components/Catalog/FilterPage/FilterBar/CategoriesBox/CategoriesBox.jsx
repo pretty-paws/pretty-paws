@@ -19,6 +19,7 @@ const CategoriesBox = observer(
         .get('subcategories')
         ?.split(',')
         .filter(Boolean);
+      console.log('chosenSubcategories', chosenSubcategories);
       const initialCheckedState = subcategories.map((_, index) =>
         chosenSubcategories?.includes(subcategories[index][1].slug)
       );

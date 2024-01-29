@@ -13,12 +13,14 @@ import Delivery from './Delivery/Delivery';
 import PersonalData from './PersonalData/PersonalData';
 import Payment from './Payment/Payment';
 import Agreement from './Agreement/Agreement';
+import OrderDetails from './OrderDetails/OrderDetails';
 
 const MakeOrder = observer(() => {
   // const { t } = useTranslation();
   const store = useStore();
   const {
     auth: { user, updateProfile, state },
+    cart: { cart, total },
     novaPoshta: {
       getDistricts,
       getCities,
@@ -57,6 +59,7 @@ const MakeOrder = observer(() => {
       warehouse: '',
       payment: '',
       agreement: true,
+      acceptConditions: true,
     },
     values,
   });
@@ -109,6 +112,12 @@ const MakeOrder = observer(() => {
           />
           <Agreement handleChange={handleChange} register={register} />
         </form>
+        <OrderDetails
+          cart={cart}
+          total={total}
+          register={register}
+          handleChange={handleChange}
+        />
       </StyledMakeOrder>
     </GlobalContainer>
   ) : null;

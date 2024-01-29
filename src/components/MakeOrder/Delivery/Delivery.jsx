@@ -22,7 +22,7 @@ const Delivery = observer(
     const [city, getCity] = useState('');
     const [delivery, setDelivery] = useState(null);
     // console.log(city, delivery, setDelivery);
-    console.log('warehouses', warehouses);
+    // console.log('warehouses', warehouses);
 
     useEffect(() => {
       getCities({ areaRef: district });

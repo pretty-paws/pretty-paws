@@ -29,8 +29,7 @@ export const StyledAgreement = styled.div`
   }
 
   input.checked {
-    /* background-color: #007a7e;
-    position: relative; */
+    cursor: pointer;
   }
 
   .agreement__text {
