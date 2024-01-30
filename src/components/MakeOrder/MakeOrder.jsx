@@ -111,13 +111,14 @@ const MakeOrder = observer(() => {
             handleChange={handleChange}
           />
           <Agreement handleChange={handleChange} register={register} />
+
+          <OrderDetails
+            cart={cart}
+            total={total}
+            register={register}
+            handleChange={handleChange}
+          />
         </form>
-        <OrderDetails
-          cart={cart}
-          total={total}
-          register={register}
-          handleChange={handleChange}
-        />
       </StyledMakeOrder>
     </GlobalContainer>
   ) : null;

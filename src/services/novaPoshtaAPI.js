@@ -19,7 +19,7 @@ export const fetchDistricts = async () => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Api-Key': ApiKey,
+        // 'Api-Key': ApiKey,
       },
       body: JSON.stringify({
         apiKey: ApiKey,
@@ -51,7 +51,7 @@ export const fetchCities = async (areaRef, page = 1) => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Api-Key': ApiKey,
+        // 'Api-Key': ApiKey,
       },
       body: JSON.stringify({
         apiKey: ApiKey,
@@ -86,7 +86,7 @@ export const fetchWarehouses = async cityRef => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Api-Key': ApiKey,
+        // 'Api-Key': ApiKey,
       },
       body: JSON.stringify({
         apiKey: ApiKey,
