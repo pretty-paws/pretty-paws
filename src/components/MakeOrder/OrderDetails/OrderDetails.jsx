@@ -103,7 +103,7 @@ const OrderDetails = observer(({ cart, total, register, handleChange }) => {
           </span>
         </label>
       </div>
-      <button className="order-details__button" type="button">
+      <button className="order-details__button" type="submit">
         Підтвердити замовлення
       </button>
     </StyledOrderDetails>

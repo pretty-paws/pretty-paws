@@ -1,11 +1,12 @@
 const ApiKey = process.env.NovaPoshta_API_Key;
-const corsAnywhereUrl = 'https://cors-anywhere.herokuapp.com/';
-const novaPoshtaUrlDev = 'https://api.novaposhta.ua/v2.0/json/';
+// const corsAnywhereUrl = 'https://cors-anywhere.herokuapp.com/';
+// const novaPoshtaUrlDev = 'https://api.novaposhta.ua/v2.0/json/';
 const novaPoshtaUrlProd = 'https://api.novaposhta.ua/v2.0/json/';
 
 const getNovaPoshtaUrl = () => {
   if (process.env.NODE_ENV === 'development') {
-    return corsAnywhereUrl + novaPoshtaUrlDev;
+    // return corsAnywhereUrl + novaPoshtaUrlDev;
+    return novaPoshtaUrlProd;
   } else {
     return novaPoshtaUrlProd;
   }
@@ -19,7 +20,7 @@ export const fetchDistricts = async () => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Api-Key': ApiKey,
+        // 'Api-Key': ApiKey,
       },
       body: JSON.stringify({
         apiKey: ApiKey,
@@ -51,7 +52,7 @@ export const fetchCities = async (areaRef, page = 1) => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Api-Key': ApiKey,
+        // 'Api-Key': ApiKey,
       },
       body: JSON.stringify({
         apiKey: ApiKey,
@@ -86,7 +87,7 @@ export const fetchWarehouses = async cityRef => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Api-Key': ApiKey,
+        // 'Api-Key': ApiKey,
       },
       body: JSON.stringify({
         apiKey: ApiKey,
