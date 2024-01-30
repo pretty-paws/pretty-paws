@@ -34,7 +34,7 @@ const CategoryMenu = observer(({ mouseLeave, data__visible }) => {
   } = store;
   const [chosenAnimal, setChosenAnimal] = useState([]);
   const [showSubCategory, setShowSubCategory] = useState(false);
-
+  const [chosenCategory, setChosenCategory] = useState([]);
   useEffect(() => {
     setChosenAnimal([animals[0]]);
   }, []);
@@ -42,11 +42,10 @@ const CategoryMenu = observer(({ mouseLeave, data__visible }) => {
   useEffect(() => {
     if (chosenAnimal.length > 0) {
       let chosenId = chosenAnimal.map(animal => {
-        setAnimalName(animal.title);
-        setAnimalSlug(animal.slug);
+        // setAnimalName(animal.title);
+        // setAnimalSlug(animal.slug);
         return animal.id;
       });
-      console.log(chosenId);
       getCategories(language, chosenId[0]);
     }
   }, [chosenAnimal]);
@@ -66,16 +65,33 @@ const CategoryMenu = observer(({ mouseLeave, data__visible }) => {
   };
   const handleCategoryClick = category => {
     if (category) {
+      setChosenCategory([category]);
       setCategoryID(category.id);
       setCategoryName(category.title);
-      setCategorySlug(category.slug);
+      chosenAnimal.map(animal => {
+        setAnimalSlug(animal.slug);
+        setAnimalName(animal.title);
+      });
+      //   setCategoryName(category.title);
+      //   setCategorySlug(category.slug);
       setShowSubCategory(true);
     }
   };
 
   const handleSubCategoryClick = subcategory => {
-    setSubcategoryID(subcategory.id);
-    closeMenu();
+    if (subcategory) {
+      //   chosenAnimal.map(animal => {
+      //     setAnimalSlug(animal.slug);
+      //     setAnimalName(animal.title);
+      //   });
+      chosenCategory.map(category => {
+        //   setCategoryName(category.title);
+        setCategorySlug(category.slug);
+      });
+      setSubcategoryID(subcategory.id);
+      closeMenu();
+      mouseLeave();
+    }
   };
   return (
     <StyledCategoryMenu onMouseLeave={mouseLeave} data__visible={data__visible}>
@@ -83,7 +99,7 @@ const CategoryMenu = observer(({ mouseLeave, data__visible }) => {
         <>
           <div className="subcategores">
             <Link
-              to="/catalog"
+              //   to="/catalog"
               onClick={closeMenu}
               className="subcategores__link"
             >
@@ -134,6 +150,9 @@ const CategoryMenu = observer(({ mouseLeave, data__visible }) => {
                 categories.map(category => {
                   return (
                     <Link
+                      //   to={{
+                      //     pathname: `/catalog/animal/${animalSlug}/category/${categorySlug}`,
+                      //   }}
                       className="category__link"
                       onClick={() => handleCategoryClick(category)}
                       key={category.id}
