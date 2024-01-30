@@ -1,11 +1,12 @@
 const ApiKey = process.env.NovaPoshta_API_Key;
-const corsAnywhereUrl = 'https://cors-anywhere.herokuapp.com/';
-const novaPoshtaUrlDev = 'https://api.novaposhta.ua/v2.0/json/';
+// const corsAnywhereUrl = 'https://cors-anywhere.herokuapp.com/';
+// const novaPoshtaUrlDev = 'https://api.novaposhta.ua/v2.0/json/';
 const novaPoshtaUrlProd = 'https://api.novaposhta.ua/v2.0/json/';
 
 const getNovaPoshtaUrl = () => {
   if (process.env.NODE_ENV === 'development') {
-    return corsAnywhereUrl + novaPoshtaUrlDev;
+    // return corsAnywhereUrl + novaPoshtaUrlDev;
+    return novaPoshtaUrlProd;
   } else {
     return novaPoshtaUrlProd;
   }
