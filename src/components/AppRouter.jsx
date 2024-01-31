@@ -18,6 +18,7 @@ import FilterPage from './Catalog/FilterPage/FilterPage';
 import Catalog from './Catalog/Catalog/Catalog';
 import ProductDetailedCardPage from './Catalog/ProductDetailedCardPage/ProductDetailedCardPage';
 import MakeOrder from './MakeOrder/MakeOrder';
+import Order from './Cabinet/Order/Order';
 
 const AppRouter = observer(() => {
   return (
@@ -58,6 +59,11 @@ const AppRouter = observer(() => {
             path="orders"
             element={<PrivateRoute redirectTo="/" component={<Orders />} />}
           />
+          <Route
+            path="orders/:orderIndex"
+            element={<PrivateRoute redirectTo="/" component={<Order />} />}
+          />
+
           <Route
             path="wish_list"
             element={<PrivateRoute redirectTo="/" component={<WishList />} />}

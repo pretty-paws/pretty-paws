@@ -56,7 +56,55 @@ export const StyledOrders = styled.div`
     @media screen and (min-width: 834px) {
       margin: 0;
     }
+
+    &.white-bg {
+      padding: 40px 8px;
+      border-radius: 8px;
+      background: #fff;
+    }
   }
+
+  .orders__title {
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 32px;
+    margin-bottom: 40px;
+  }
+
+  .orders__table {
+    padding: 16px 0;
+    display: flex;
+    flex: 1 1 auto;
+    justify-content: space-between;
+    border-bottom: 1px solid #d6d6d6;
+  }
+
+  .orders__table_number {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 20px;
+  }
+
+  .orders__table_status {
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 18px;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    gap: 8px;
+  }
+
+  .orders__table_sum-date {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 18px;
+  }
+
   .orders__text {
     margin-top: 24px;
     font-size: 16px;

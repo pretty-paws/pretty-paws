@@ -38,16 +38,17 @@ const MobileCardProduct = observer(
     const navigate = useNavigate();
     // const [actionPerformed, setActionPerformed] = useState(false);
 
-    // function handleDescription(text) {
-    //   return text.slice(0, 35);
-    // }
+    function handleDescription(text) {
+      return text.slice(0, 40) + '...';
+    }
 
     function checkFavourite(id) {
       if (!authorised) return false;
       return user.favorites?.some(product => product.id === id);
     }
 
-    function handleClick() {
+    function handleClick(e) {
+      e.stopPropagation();
       if (alreadyAdded(id)) {
         removeFromCart(id);
         return;
@@ -116,7 +117,7 @@ const MobileCardProduct = observer(
           </div>
           <div>
             <b>{title}</b>
-            <span> - {short_description}</span>
+            <span> - {handleDescription(short_description)}</span>
             <div className="product__details">
               <span className="product__amount">{quantity}</span>
               <span className="product__country">

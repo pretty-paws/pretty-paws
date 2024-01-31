@@ -36,6 +36,13 @@ const VALIDATION_MESSAGES = {
   agreementMessage: {
     required: 'Ви маєте дати дозвіл на обробку даних',
   },
+  deliveryMessage: {
+    district: 'Необхідно вибрати область',
+    city: 'Необхідно вибрати населений пункт',
+    warehouse: 'Необхідно вибрати відділення',
+    postomat: 'Необхідно вибрати поштомат',
+    acceptConditions: 'Необхідно погодитись з умовами',
+  },
 };
 
 export const {
@@ -46,4 +53,5 @@ export const {
   passwordMessage,
   passwordConfirmMessage,
   agreementMessage,
+  deliveryMessage,
 } = VALIDATION_MESSAGES;

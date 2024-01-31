@@ -6,8 +6,24 @@ export const StyledDeliveryBack = styled.div`
   margin-bottom: 24px;
 
   .delivery__form {
-    gap: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
     padding: 14px 16px 18px;
+  }
+
+  .error-box {
+    position: relative;
+  }
+
+  .delivery-error {
+    position: absolute;
+    left: 10px;
+    bottom: -3px;
+    color: #f64b15;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 16px;
   }
 
   .delivery-title {

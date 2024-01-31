@@ -4,6 +4,7 @@ import sprite from '../../../img/svg-sprite/sprite.svg';
 import { observer } from 'mobx-react-lite';
 import { StyledDeliveryBack, StyledDeliveryform } from './Delivery.styled';
 import Select from 'react-select';
+import { deliveryMessage } from '../../../validation/messages';
 
 const Delivery = observer(
   ({
@@ -14,28 +15,30 @@ const Delivery = observer(
     cities,
     getWarehouses,
     warehouses,
+    postomats,
+    getPostomats,
     register,
     handleChange,
+    errors,
     // handleSubmit,
   }) => {
-    const [district, setDistrict] = useState('');
-    const [city, getCity] = useState('');
-    const [delivery, setDelivery] = useState(null);
-    // console.log(city, delivery, setDelivery);
-    // console.log('warehouses', warehouses);
+    const [district, setDistrict] = useState(null);
+    const [city, getCity] = useState(null);
+    const [delivery, setDelivery] = useState('warehouse');
 
     useEffect(() => {
-      getCities({ areaRef: district });
+      district !== null && getCities({ areaRef: district });
     }, [district]);
 
     useEffect(() => {
-      getWarehouses({ cityRef: city });
+      city !== null && getWarehouses({ cityName: city });
+      city !== null && getPostomats({ cityName: city });
     }, [city]);
 
-    const colourStyles = {
+    const getSelectStyles = error => ({
       control: (baseStyles, state) => ({
         ...baseStyles,
-        borderColor: '#53C5BD',
+        borderColor: error ? 'red' : '#53C5BD',
         borderRadius: '8px',
         width: '100%',
         marginBottom: '16px',
@@ -66,24 +69,7 @@ const Delivery = observer(
           : baseStyles.backgroundColor,
         color: isSelected ? 'white' : baseStyles.color,
       }),
-    };
-
-    // const {
-    //   register,
-    //   handleSubmit,
-    //   formState: { errors },
-    // } = useForm({
-    //   defaultValues: {
-    //     district: '',
-    //     city: '',
-    //     deliveryWay: '',
-    //     street: '',
-    //     house: '',
-    //     apartment: '',
-    //   },
-    // });
-
-    // console.log(errors);
+    });
 
     return (
       <StyledDeliveryBack>
@@ -108,40 +94,53 @@ const Delivery = observer(
         </div>
         {openedSection.delivery ? (
           <StyledDeliveryform className="delivery__form">
-            <Select
-              {...register('district', { required: true })}
-              options={districts.map(district => ({
-                value: district.ref,
-                label: district.name,
-              }))}
-              placeholder="Виберіть область"
-              styles={colourStyles}
-              onChange={e => {
-                handleChange('district', e.value);
-                setDistrict(e.value);
-              }}
-            />
-            <Select
-              {...register('city', { required: true })}
-              styles={colourStyles}
-              isSearchable
-              placeholder="Виберіть місто"
-              options={cities.map(city => ({
-                value: city.ref,
-                label: city.name,
-              }))}
-              onChange={selectedOption => {
-                handleChange('city', selectedOption.label);
-                getCity(selectedOption.value);
-              }}
-            />
+            <span className="error-box">
+              <Select
+                {...register('district', { required: true })}
+                options={districts.map(district => ({
+                  value: district.ref,
+                  label: district.name,
+                }))}
+                placeholder="Виберіть область"
+                styles={getSelectStyles(errors.district)}
+                onChange={e => {
+                  handleChange('district', e.value);
+                  setDistrict(e.value);
+                }}
+              />
+              {errors.district && (
+                <span className="delivery-error">
+                  {deliveryMessage.district}
+                </span>
+              )}
+            </span>
+            <span className="error-box">
+              <Select
+                {...register('city', { required: true })}
+                styles={getSelectStyles(errors.city)}
+                isSearchable
+                placeholder="Виберіть місто"
+                options={cities.map(city => ({
+                  value: city.ref,
+                  label: city.name,
+                }))}
+                onChange={selectedOption => {
+                  handleChange('city', selectedOption.label);
+                  getCity(selectedOption.label);
+                }}
+              />
+              {errors.city && (
+                <span className="delivery-error">{deliveryMessage.city}</span>
+              )}
+            </span>
             <div className="delivery__radio-btns">
               <p> Виберіть спосіб доставляння:</p>
               <div className="radio-btn-box">
                 <input
                   type="radio"
+                  defaultChecked
                   id="toPostOffice"
-                  {...register('Виберіть спосіб доставляння:', {
+                  {...register('deliveryWay', {
                     required: true,
                   })}
                   value="warehouse"
@@ -158,7 +157,7 @@ const Delivery = observer(
                 <input
                   type="radio"
                   id="toPostBox"
-                  {...register('Виберіть спосіб доставляння:', {
+                  {...register('deliveryWay', {
                     required: true,
                   })}
                   value="postomat"
@@ -175,7 +174,7 @@ const Delivery = observer(
                 <input
                   type="radio"
                   id="toAddress"
-                  {...register('Виберіть спосіб доставляння:', {
+                  {...register('deliveryWay', {
                     required: true,
                   })}
                   value="address"
@@ -204,7 +203,7 @@ const Delivery = observer(
                     id="street"
                     type="text"
                     placeholder="Вулиця"
-                    {...register('Вулиця', { required: true, max: 50, min: 0 })}
+                    {...register('street', { required: true, max: 50, min: 0 })}
                   />
                 </div>
                 <div className="delivery__house-flat-block">
@@ -220,7 +219,7 @@ const Delivery = observer(
                       id="house"
                       type="number"
                       placeholder="Номер будинку"
-                      {...register('Номер будинку', { required: true })}
+                      {...register('house', { required: true })}
                     />
                   </div>
                   <div className="label-input-block">
@@ -235,17 +234,17 @@ const Delivery = observer(
                       id="flat"
                       type="number"
                       placeholder="Номер квартири"
-                      {...register('Номер квартири', { required: true })}
+                      {...register('apartment', { required: true })}
                     />
                   </div>
                 </div>
               </>
             )}
-            {delivery !== 'address' && delivery !== null && (
-              <>
+            {delivery === 'warehouse' && delivery !== null && (
+              <span className="error-box">
                 <Select
                   {...register('warehouse', { required: true })}
-                  styles={colourStyles}
+                  styles={getSelectStyles(errors.warehouse)}
                   isSearchable
                   placeholder="Виберіть відділення"
                   options={warehouses.map(warehouse => ({
@@ -254,11 +253,36 @@ const Delivery = observer(
                   }))}
                   onChange={selectedOption => {
                     handleChange('warehouse', selectedOption.label);
-                    getCity(selectedOption.label);
                   }}
-                  // onInputChange={onCityInputChange}
                 />
-              </>
+                {errors.warehouse && (
+                  <span className="delivery-error">
+                    {deliveryMessage.warehouse}
+                  </span>
+                )}
+              </span>
+            )}
+            {delivery === 'postomat' && delivery !== null && (
+              <span className="error-box">
+                <Select
+                  {...register('postomat', { required: true })}
+                  styles={getSelectStyles(errors.postomat)}
+                  isSearchable
+                  placeholder="Виберіть поштомат"
+                  options={postomats.map(postomat => ({
+                    value: postomat.Ref,
+                    label: postomat.Description,
+                  }))}
+                  onChange={selectedOption => {
+                    handleChange('postomat', selectedOption.label);
+                  }}
+                />
+                {errors.postomat && (
+                  <span className="delivery-error">
+                    {deliveryMessage.postomat}
+                  </span>
+                )}
+              </span>
             )}
           </StyledDeliveryform>
         ) : null}

@@ -3,18 +3,19 @@ import styled from 'styled-components';
 export const StyledNotification = styled.div`
   position: fixed;
   z-index: 100000000000;
-  top: 1%;
-  right: 1%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   /* pointer-events: none;/ */
 
   @media screen and (min-width: 834px) {
-    top: 23%;
-    right: 7%;
+    top: 5%;
+    right: 5%;
+    transform: none;
   }
 
   @media screen and (min-width: 1440px) {
-    top: 8%;
-    right: 40%;
+    right: 30%;
   }
 
   display: flex;

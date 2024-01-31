@@ -1,26 +1,28 @@
 import React from 'react';
 import { GlobalContainer } from '../../global/GlobalContainer';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import sprite from '../../img/svg-sprite/sprite.svg';
 import { StyledMakeOrder } from './MakeOrder.styled';
 import { useStore } from '../../store/AuthProvider';
 import { observer } from 'mobx-react-lite';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-
+import { createPortal } from 'react-dom';
 // import { useTranslation } from 'react-i18next';
 import Delivery from './Delivery/Delivery';
 import PersonalData from './PersonalData/PersonalData';
 import Payment from './Payment/Payment';
 import Agreement from './Agreement/Agreement';
 import OrderDetails from './OrderDetails/OrderDetails';
+import ConfirmationPopup from './ConfirmationPopup/ConfirmationPopup';
+import CancelOrder from './CancelOrder/CancelOrder';
 
 const MakeOrder = observer(() => {
   // const { t } = useTranslation();
   const store = useStore();
   const {
     auth: { user, updateProfile, state },
-    cart: { cart, total },
+    cart: { cart, total, createOrder, emptyCart },
     novaPoshta: {
       getDistricts,
       getCities,
@@ -28,6 +30,8 @@ const MakeOrder = observer(() => {
       cities,
       getWarehouses,
       warehouses,
+      getPostomats,
+      postomats,
     },
   } = store;
   const values = user;
@@ -37,6 +41,9 @@ const MakeOrder = observer(() => {
     delivery: true,
     payment: true,
   });
+
+  const [confirmationPopup, setConfirmationPopup] = useState(false);
+  const [cancelOrder, setCancelOrder] = useState(false);
 
   const {
     register,
@@ -57,9 +64,10 @@ const MakeOrder = observer(() => {
       house: '',
       apartment: '',
       warehouse: '',
+      postomat: '',
       payment: '',
       agreement: true,
-      acceptConditions: true,
+      acceptConditions: false,
     },
     values,
   });
@@ -67,19 +75,64 @@ const MakeOrder = observer(() => {
     setValue(name, value);
   };
 
-  const onSubmit = data => console.log(data);
+  const onSubmit = ({
+    name,
+    surname,
+    phone_number,
+    email,
+    district,
+    city,
+    deliveryWay,
+    street,
+    house,
+    apartment,
+    warehouse,
+    postomat,
+    payment,
+    agreement,
+    acceptConditions,
+  }) => {
+    setConfirmationPopup(true);
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+    const order = {
+      name,
+      surname,
+      phone_number,
+      email,
+      district,
+      city,
+      deliveryWay,
+      street,
+      house,
+      apartment,
+      warehouse,
+      postomat,
+      payment,
+      agreement,
+      acceptConditions,
+      creationDate: new Date().toISOString(),
+      cart,
+      total,
+    };
+    createOrder(order);
+    emptyCart();
+    console.log(order);
+  };
 
   return state === 'done' ? (
     <GlobalContainer>
       <StyledMakeOrder>
-        <Link to="/cart">
-          <div className="make-order__back">
-            <svg width="24px" height="24px">
-              <use href={sprite + '#arrow-blue'} />
-            </svg>
-            <p>До кошика</p>
-          </div>
-        </Link>
+        {/* <Link to="/cart"> */}
+        <div className="make-order__back" onClick={() => setCancelOrder(true)}>
+          <svg width="24px" height="24px">
+            <use href={sprite + '#arrow-blue'} />
+          </svg>
+          <p>До кошика</p>
+        </div>
+        {/* </Link> */}
         <form onSubmit={handleSubmit(onSubmit)}>
           <PersonalData
             register={register}
@@ -103,6 +156,8 @@ const MakeOrder = observer(() => {
             cities={cities}
             getWarehouses={getWarehouses}
             warehouses={warehouses}
+            postomats={postomats}
+            getPostomats={getPostomats}
           />
           <Payment
             setOpenedSection={setOpenedSection}
@@ -117,8 +172,27 @@ const MakeOrder = observer(() => {
             total={total}
             register={register}
             handleChange={handleChange}
+            errors={errors}
           />
         </form>
+        {confirmationPopup === true
+          ? createPortal(
+              <ConfirmationPopup
+                confirmationPopup={confirmationPopup}
+                setConfirmationPopup={setConfirmationPopup}
+              />,
+              document.body
+            )
+          : null}
+        {cancelOrder === true
+          ? createPortal(
+              <CancelOrder
+                cancelOrder={cancelOrder}
+                setCancelOrder={setCancelOrder}
+              />,
+              document.body
+            )
+          : null}
       </StyledMakeOrder>
     </GlobalContainer>
   ) : null;

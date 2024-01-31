@@ -156,4 +156,14 @@ export const StyledOrderDetails = styled.div`
       background-color: var(--hover-blue);
     }
   }
+
+  .delivery-error {
+    position: absolute;
+    left: 40px;
+    bottom: -17px;
+    color: #f64b15;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 16px;
+  }
 `;

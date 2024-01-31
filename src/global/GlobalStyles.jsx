@@ -33,9 +33,9 @@ body {
   background-color: #EFEFEF;
   position: relative;
 
-  &.menu-opened {
-  height: 100vh;
-  overflow-y: hidden;
+  .menu-opened {
+  max-height: 100vh;
+  overflow: hidden;
 }
     
 }

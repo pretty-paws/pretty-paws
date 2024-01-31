@@ -2,6 +2,7 @@ import { makeAutoObservable, runInAction } from 'mobx';
 import {
   fetchCities,
   fetchDistricts,
+  fetchPostomats,
   fetchWarehouses,
 } from '../services/novaPoshtaAPI';
 
@@ -10,6 +11,7 @@ export class NovaPoshta {
   cities = [];
   cityPages = [];
   warehouses = [];
+  postomats = [];
   NPstate = '';
 
   constructor() {
@@ -48,18 +50,18 @@ export class NovaPoshta {
       let allCities = [];
 
       const firstPage = await fetchCities(areaRef);
-      // const totalPages = Math.ceil(firstPage.info.totalCount / 150);
-      allCities = [...firstPage.data];
+      const totalPages = Math.ceil(firstPage.info.totalCount / 150);
+      // allCities = [...firstPage.data];
 
-      // if (totalPages > 1) {
-      //   const restOfPages = await Promise.all(
-      //     Array.from({ length: totalPages - 1 }, (_, index) =>
-      //       fetchCities(areaRef, index + 2)
-      //     )
-      //   );
+      if (totalPages > 1) {
+        const restOfPages = await Promise.all(
+          Array.from({ length: totalPages - 1 }, (_, index) =>
+            fetchCities(areaRef, index + 2)
+          )
+        );
 
-      //   allCities = allCities.concat(...restOfPages.map(page => page.data));
-      // }
+        allCities = allCities.concat(...restOfPages.map(page => page.data));
+      }
 
       runInAction(() => {
         const cities = allCities.map(city => ({
@@ -77,13 +79,29 @@ export class NovaPoshta {
     }
   }
 
-  async getWarehouses({ cityRef }) {
+  async getWarehouses({ cityName }) {
     this.NPstate = 'pending';
     try {
-      const { data } = await fetchWarehouses(cityRef);
+      const { data } = await fetchWarehouses(cityName);
       // console.log('data', data);
       runInAction(() => {
         this.warehouses = data;
+        this.NPstate = 'done';
+      });
+    } catch (error) {
+      runInAction(() => {
+        this.NPstate = 'error';
+      });
+    }
+  }
+
+  async getPostomats({ cityName }) {
+    this.NPstate = 'pending';
+    try {
+      const { data } = await fetchPostomats(cityName);
+      // console.log('data', data);
+      runInAction(() => {
+        this.postomats = data;
         this.NPstate = 'done';
       });
     } catch (error) {
