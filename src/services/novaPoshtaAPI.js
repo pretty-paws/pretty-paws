@@ -79,7 +79,7 @@ export const fetchCities = async (areaRef, page = 1) => {
   }
 };
 
-export const fetchWarehouses = async cityRef => {
+export const fetchWarehouses = async cityName => {
   const url = getNovaPoshtaUrl();
 
   try {
@@ -94,9 +94,46 @@ export const fetchWarehouses = async cityRef => {
         modelName: 'Address',
         calledMethod: 'getWarehouses',
         methodProperties: {
-          CityRef: cityRef,
-          Page: '2',
+          CityName: cityName,
+          Page: '1',
           Limit: '200',
+          TypeOfWarehouseRef: '841339c7-591a-42e2-8233-7a0a00f0ed6f',
+          // TypeOfWarehouseRef: '9a68df70-0267-42a8-bb5c-37f427e36ee4',
+        },
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error fetching cities:', error);
+    throw error;
+  }
+};
+
+export const fetchPostomats = async cityName => {
+  const url = getNovaPoshtaUrl();
+
+  try {
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        // 'Api-Key': ApiKey,
+      },
+      body: JSON.stringify({
+        apiKey: ApiKey,
+        modelName: 'Address',
+        calledMethod: 'getWarehouses',
+        methodProperties: {
+          CityName: cityName,
+          Page: '1',
+          Limit: '200',
+          TypeOfWarehouseRef: 'f9316480-5f2d-425d-bc2c-ac7cd29decf0',
         },
       }),
     });

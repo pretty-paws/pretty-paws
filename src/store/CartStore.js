@@ -8,6 +8,7 @@ export class CartStore {
   cart = JSON.parse(localStorage.getItem('cart')) || [];
   total = Number(localStorage.getItem('total')) || 0;
   productAmount = Number(localStorage.getItem('productAmount')) || 0;
+  orders = JSON.parse(localStorage.getItem('orders')) || [];
 
   constructor() {
     makeAutoObservable(this, {}, { autoBind: true });
@@ -96,6 +97,20 @@ export class CartStore {
     }, 0);
     this.total = sum;
     localStorage.setItem('total', sum);
+  }
+
+  createOrder(order) {
+    this.orders.push(order);
+    localStorage.setItem('orders', JSON.stringify(this.orders));
+  }
+
+  emptyCart() {
+    this.cart = [];
+    this.total = 0;
+    this.productAmount = 0;
+    localStorage.removeItem('cart');
+    localStorage.removeItem('total');
+    localStorage.removeItem('productAmount');
   }
 
   async getProducts(language) {

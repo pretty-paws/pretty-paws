@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export const StyledMakeOrder = styled.div`
+  position: relative;
   .make-order__back {
     color: #005a9a;
     font-size: 14px;

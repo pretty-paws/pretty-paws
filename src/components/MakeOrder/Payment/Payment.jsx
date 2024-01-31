@@ -54,7 +54,7 @@ const Payment = observer(
                 })}
                 value="onReceiving"
                 onClick={e => {
-                  handleChange('deliveryWay', e.currentTarget.value);
+                  handleChange('payment', e.currentTarget.value);
                   // setDelivery(e.currentTarget.value);
                 }}
               />
@@ -71,7 +71,7 @@ const Payment = observer(
                 })}
                 value="onAccount"
                 onClick={e => {
-                  handleChange('deliveryWay', e.currentTarget.value);
+                  handleChange('payment', e.currentTarget.value);
                   // setDelivery(e.currentTarget.value);
                 }}
               />

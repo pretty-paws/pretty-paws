@@ -4,15 +4,15 @@ import { useStore } from '../../store/AuthProvider';
 import { observer } from 'mobx-react-lite';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useEffect } from 'react';
 import useWindowSize from '../../hooks/useWindowSize';
 
 const Cart = observer(() => {
-  const location = useLocation();
+  // const location = useLocation();
   const { screen } = useWindowSize();
 
-  console.log(location);
+  // console.log(location);
   const { t } = useTranslation();
   const [isSticky, setIsSticky] = useState(false);
   const store = useStore();
@@ -28,6 +28,8 @@ const Cart = observer(() => {
     const handleScroll = () => {
       let scrollPosition = window.scrollY;
       const stickyContainer = document.getElementById('stickyContainer');
+
+      if (!stickyContainer) return;
       // console.log(scrollPosition, stickyContainer.offsetTop);
 
       let scrollDirection;
@@ -254,7 +256,16 @@ const Cart = observer(() => {
                 to={authorised ? '/make_order' : '/login'}
                 state={{ from: 'cart' }}
               >
-                <button className="cart-modal__button" type="button">
+                <button
+                  className="cart-modal__button"
+                  type="button"
+                  onClick={() =>
+                    window.scrollTo({
+                      top: 0,
+                      behavior: 'smooth',
+                    })
+                  }
+                >
                   {t('Оформити замовлення')}
                 </button>
               </Link>
@@ -276,9 +287,11 @@ const Cart = observer(() => {
       ) : (
         <>
           <h2 className="cart-modal__title">{t('Кошик порожній')}</h2>
-          <button className="cart-modal__button" type="button">
-            {t('Знайти товар')}
-          </button>
+          <Link to="/catalog/animal/cats/category/food-for-cats?subcategories=tinned-feed-and-pouches">
+            <button className="cart-modal__button" type="button">
+              {t('Знайти товар')}
+            </button>
+          </Link>
         </>
       )}
     </StyledModalBox>

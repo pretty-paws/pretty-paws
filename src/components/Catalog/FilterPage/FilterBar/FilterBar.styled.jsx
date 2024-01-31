@@ -7,10 +7,10 @@ export const StyledFilterBar = styled.div`
   left: 0;
   z-index: 10000000000;
   width: 100%;
-  height: fit-content;
+  height: 80vh;
   padding: 16px 16px;
   background-color: #fff;
-  overflow-y: visible;
+  overflow-y: scroll;
 
   @media screen and (min-width: 834px) and (max-width: 1439px) {
     margin-top: 0;
@@ -18,7 +18,7 @@ export const StyledFilterBar = styled.div`
     left: 0;
     width: 385px;
     padding: 10px 40px 16px;
-
+    height: 100vh;
     transform: translateX(-100%);
     transition: transform 0.3s ease;
 
@@ -65,12 +65,11 @@ export const StyledFilterBar = styled.div`
   }
 
   .filter-bar__all-filters {
-    overflow-y: scroll;
-    height: fit-content;
-    max-height: 90vh;
+    overflow-y: auto;
+    /* height: 100%; */
 
     @media screen and (min-width: 834px) {
-      max-height: 90vh;
+      max-height: 100vh;
     }
 
     @media screen and (min-width: 1440px) {

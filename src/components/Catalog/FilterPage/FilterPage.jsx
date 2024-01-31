@@ -31,7 +31,7 @@ const FilterPage = observer(() => {
     let slug;
     categorySlug
       ? (slug = categorySlug)
-      : (slug = localStorage.getItem('categorySlug'));
+      : (slug = localStorage.getItem('categorySlug') || 'food-for-cats');
     getFilters(slug, language);
   }, [language, categorySlug]);
 
@@ -48,8 +48,8 @@ const FilterPage = observer(() => {
   }, [openedFilter]);
 
   useEffect(() => {
-    const slug = getSubcategory(subcategoryID);
-    getFilteredProducts(categoryID, language, `&subcategories[0]=${slug}`);
+    const slug = getSubcategory(subcategoryID) || 'tinned-feed-and-pouches';
+    getFilteredProducts(categoryID || 2, language, `&subcategories[0]=${slug}`);
   }, [subcategoryID]);
   console.log(screen);
   return (
