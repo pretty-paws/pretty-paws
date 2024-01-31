@@ -75,6 +75,7 @@ export const StyledCategoryMenu = styled.div`
     flex-direction: column;
     gap: 16px;
     justify-content: flex-start;
+    transition: all 1s 3s;
   }
 
   & .subcategores__link {

@@ -23,7 +23,7 @@ const CategoriesBox = observer(
       const initialCheckedState = subcategories.map((_, index) =>
         chosenSubcategories?.includes(subcategories[index][1].slug)
       );
-
+      console.log('initialCheckedState', initialCheckedState);
       setIsChecked(initialCheckedState);
     }, []);
 
