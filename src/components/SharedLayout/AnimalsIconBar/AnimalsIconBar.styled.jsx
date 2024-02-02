@@ -1,8 +1,11 @@
 import styled from 'styled-components';
 
 export const StyledAnimalsIconBar = styled.div`
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  /* grid-template-columns: repeat(min-max(60px, 1fr)); */
+  grid-template-columns: 1fr 1fr 1fr;
+  /* display: flex; */
+  /* flex-wrap: wrap; */
   align-items: center;
   justify-content: space-between;
   /* gap: ${props => (props.type === 'burger__lg' ? '40px' : '24px')}; */
