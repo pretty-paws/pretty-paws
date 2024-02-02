@@ -1,17 +1,20 @@
 import { React, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+
 import sprite from '../../../img/svg-sprite/sprite.svg';
 
-import { useStore } from '../../../store/AuthProvider';
-import PropTypes from 'prop-types';
 import { StyledCategoryMenu } from './CategoryMenu.styled';
 
 import AnimalsIconBar from '../AnimalsIconBar/AnimalsIconBar';
+
+import { useStore } from '../../../store/AuthProvider';
 import { observer } from 'mobx-react-lite';
 
 const CategoryMenu = observer(({ mouseLeave, data__visible }) => {
   //   store with user, animals,category
   const store = useStore();
+
   const {
     // category,.
     auth: { language },
@@ -32,6 +35,7 @@ const CategoryMenu = observer(({ mouseLeave, data__visible }) => {
       //   categoryName,
     },
   } = store;
+
   const [chosenAnimal, setChosenAnimal] = useState([]);
   const [showSubCategory, setShowSubCategory] = useState(false);
   const [chosenCategory, setChosenCategory] = useState([]);
@@ -63,6 +67,7 @@ const CategoryMenu = observer(({ mouseLeave, data__visible }) => {
   const handleAnimalClick = animal => {
     setChosenAnimal([animal]);
   };
+
   const handleCategoryClick = category => {
     if (category) {
       setChosenCategory([category]);
@@ -93,6 +98,7 @@ const CategoryMenu = observer(({ mouseLeave, data__visible }) => {
       mouseLeave();
     }
   };
+
   return (
     <StyledCategoryMenu onMouseLeave={mouseLeave} data__visible={data__visible}>
       {showSubCategory ? (
