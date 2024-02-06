@@ -45,6 +45,7 @@ export const StyledAnimalsIconBar = styled.div`
   }
 `;
 export const StyledVerticalAnimalsIconBar = styled(StyledAnimalsIconBar)`
+  display:flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 40px;
