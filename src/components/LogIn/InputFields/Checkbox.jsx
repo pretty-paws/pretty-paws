@@ -1,8 +1,9 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
+import { observer } from 'mobx-react-lite';
 
-const Checkbox = ({ onRememberMeChange, register, isValid }) => {
+const Checkbox = observer(({ onRememberMeChange, register, isValid }) => {
   const { t } = useTranslation();
 
   return (
@@ -20,12 +21,13 @@ const Checkbox = ({ onRememberMeChange, register, isValid }) => {
         </div>
         <p className="login-agree">{t('Забули пароль?')}</p>
       </div>
+
       <button type="submit" className="login-button" disabled={!isValid}>
         {t('Увійти')}
       </button>
     </>
   );
-};
+});
 
 export default Checkbox;
 
