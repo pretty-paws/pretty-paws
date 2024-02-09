@@ -7,6 +7,7 @@ import { AuthProvider } from './store/AuthProvider';
 import { I18nextProvider } from 'react-i18next';
 import i18next from 'i18next';
 import './i18n';
+import { LoaderProvider } from './store/LoaderProvider';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -16,7 +17,9 @@ root.render(
     <I18nextProvider i18n={i18next}>
       <BrowserRouter basename="/pretty-paws">
         <AuthProvider>
-          <App />
+          <LoaderProvider>
+            <App />
+          </LoaderProvider>
         </AuthProvider>
       </BrowserRouter>
     </I18nextProvider>

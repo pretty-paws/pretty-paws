@@ -24,7 +24,6 @@ const BurgerMenu = observer(({ active, setActive }) => {
   const [showAnimalCatalog, setShowAnimalCatalog] = useState(false);
   //   chosen category with animals bar
   const [chosenAnimal, setChosenAnimal] = useState([]);
-
   // const [language, setLanguage] = useState(
   //   localStorage.getItem('language') || 'en'
   // );
@@ -63,6 +62,7 @@ const BurgerMenu = observer(({ active, setActive }) => {
         setAnimalSlug(pet.slug);
         return pet.id;
       });
+
       getCategories(language, chosenId[0]);
     }
   }, [chosenAnimal]);
@@ -111,6 +111,9 @@ const BurgerMenu = observer(({ active, setActive }) => {
     closeMenu();
   };
   //   const [subCategories, setSubCategories] = useState([]);
+
+  //   const [visible, setVisible] = useState(false);
+
   return (
     <>
       <StyledBackdrop
@@ -176,24 +179,6 @@ const BurgerMenu = observer(({ active, setActive }) => {
                 />
               </div>
             </div>
-            {/* <div className="subburger__content">
-              <div className="subburger__head" onClick={closeAnimalCatalog}>
-                <svg className="subburger__arrow" width="24px" height="24px">
-                  <use href={sprite + '#arrow-down'} />
-                </svg>
-                <h3 className="subburger__title">
-                  {getAnimalName(chosenCategory)}
-                </h3>
-              </div>
-              {categoryItems}
-              <div className="subburger__footer">
-                <AnimalsBar
-                  type="burger"
-                  getCategory={handleAnimalClick}
-                  chosenCategory={chosenCategory}
-                />
-              </div>
-            </div> */}
           </StyledAnimalCatalog>
         </>
       ) : (
@@ -276,14 +261,7 @@ const BurgerMenu = observer(({ active, setActive }) => {
                     chosenCategory={chosenAnimal}
                   />
                 )}
-                {/* {openedCatalogue && (
-                  <AnimalsBar
-                    type="burger"
-                    getCategory={handleAnimalClick}
-                    chosenCategory={chosenCategory}
-                  />
-                )}
-				 */}
+
                 {publicRoutes.slice(1).map(({ name, path }) => {
                   return (
                     <Link to={path} key={name} onClick={() => setActive(false)}>
