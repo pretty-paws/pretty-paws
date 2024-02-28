@@ -83,8 +83,8 @@ const MakeOrder = observer(() => {
 
     if (
       name === 'postomat' ||
-      name === 'warehouse' ||
-      (name === 'apartment' && !errors.apartment)
+      name === 'warehouse'
+      // (name === 'apartment' && !errors.apartment)
     )
       setOpenedSection(prev => ({
         ...prev,

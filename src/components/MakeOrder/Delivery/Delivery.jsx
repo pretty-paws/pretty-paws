@@ -275,6 +275,14 @@ const Delivery = observer(
                           handleChange('apartment', e.target.value);
                           setDeliveryAppartment(e.target.value);
                         },
+                        onBlur: () => {
+                          setOpenedSection(prev => ({
+                            ...prev,
+                            delivery: !prev.delivery,
+                            payment: !prev.payment,
+                          }));
+                        },
+
                         required: true,
                       })}
                     />
