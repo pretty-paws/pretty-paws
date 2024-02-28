@@ -17,11 +17,19 @@ export const StyledMakeOrder = styled.div`
     font-weight: 500;
   }
 
+  .make-order__layout {
+    @media screen and (min-width: 1440px) {
+      display: grid;
+      grid-template-columns: 60% 37%;
+      grid-gap: 3%;
+    }
+  }
+
   .make-order__personal-data {
     margin: 24px 0;
     padding: 12px 16px;
     border-radius: 8px;
-    background-color: rgba(231, 169, 115, 0.5);
+    background: rgba(231, 169, 115, 0.5);
   }
 
   .make-order__personal-data-title {
@@ -60,13 +68,13 @@ export const StyledMakeOrder = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 16px;
     border-radius: 8px 8px 0px 0px;
 
     font-size: 16px;
     font-weight: 400;
 
     &.edit {
+      padding: 16px;
       background: var(--accent-color-beige);
     }
 

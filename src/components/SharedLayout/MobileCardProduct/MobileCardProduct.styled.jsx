@@ -4,7 +4,7 @@ export const StyledMobileCardProduct = styled.div`
   position: relative;
   padding: 8px 16px;
   width: 100%;
-  height: 254px;
+  height: fit-content;
   border-radius: 8px;
   background: #fff;
   display: flex;
@@ -14,13 +14,27 @@ export const StyledMobileCardProduct = styled.div`
     padding: 6px 8px;
     border-radius: 8px;
     position: absolute;
-    top: 30px;
-    left: 15px;
+    top: 8px;
+    left: 16px;
     display: flex;
     align-items: flex-start;
     justify-content: center;
     background-color: var(--accent-color-orange);
 
+    font-size: 12px;
+    font-weight: 400;
+  }
+
+  & .product__new {
+    padding: 6px 8px;
+    border-radius: 8px;
+    position: absolute;
+    top: 36px;
+    left: 16px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    background-color: #70db5e;
     font-size: 12px;
     font-weight: 400;
   }
@@ -51,6 +65,7 @@ export const StyledMobileCardProduct = styled.div`
     font-weight: 400;
   }
   & .product__amount {
+    display: inline-flex;
     padding: 3px 7px;
     border-radius: 8px;
     background: var(--accent-color-beige);
@@ -58,7 +73,7 @@ export const StyledMobileCardProduct = styled.div`
 
   & .product__country {
     padding: 3px 7px;
-    display: flex;
+    display: inline-flex;
     gap: 4px;
     border-radius: 8px;
     border: 1px solid var(--accent-color-beige);
@@ -147,7 +162,7 @@ export const StyledMobileCardProduct = styled.div`
     }
 
     &.added {
-      background-color: var(--font-color-gray);
+      background-color: var(--hover-blue);
     }
   }
 `;

@@ -16,6 +16,8 @@ const Orders = observer(() => {
     cart: { orders },
   } = store;
 
+  console.log('orders', orders);
+
   return (
     <StyledOrders>
       <CabinetTitle header={'Мої замовлення'} />

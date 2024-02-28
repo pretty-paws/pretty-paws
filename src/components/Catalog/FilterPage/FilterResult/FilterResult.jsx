@@ -26,6 +26,7 @@ const FilterResult = observer(() => {
               price,
               promotional_price,
               is_promotional,
+              is_new,
               quantity,
               country,
               brand,
@@ -42,6 +43,7 @@ const FilterResult = observer(() => {
                   price={price}
                   promotional_price={promotional_price}
                   is_promotional={is_promotional}
+                  is_new={is_new}
                   quantity={quantity}
                   country={country}
                   brand={brand}
@@ -58,6 +60,7 @@ const FilterResult = observer(() => {
                   price={price}
                   promotional_price={promotional_price}
                   is_promotional={is_promotional}
+                  is_new={is_new}
                   quantity={quantity}
                   country={country}
                   brand={brand}

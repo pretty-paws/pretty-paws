@@ -5,6 +5,11 @@ export const StyledOrderDetails = styled.div`
   border-radius: 8px;
   padding: 16px;
   margin-bottom: 100px;
+  @media screen and (min-width: 1440px) {
+    margin-top: 24px;
+    height: fit-content;
+    padding: 24px;
+  }
 
   .order-details_heading {
     display: flex;
@@ -34,18 +39,26 @@ export const StyledOrderDetails = styled.div`
     margin-bottom: 16px;
     display: flex;
     gap: 16px;
+    @media screen and (min-width: 834px) {
+      justify-content: space-between;
+    }
 
     img {
       height: 76px;
       width: 76px;
       object-fit: cover;
-      /* flex: 0.5; */
+
+      @media screen and (min-width: 834px) {
+      }
     }
 
     .order-details__item-description-block {
       font-size: 14px;
       font-weight: 400;
       line-height: 18px;
+      /* @media screen and (min-width: 834px) { */
+      flex: 2;
+      /* } */
 
       .order-details__item-description {
         margin-bottom: 16px;

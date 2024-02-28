@@ -21,6 +21,7 @@ const CardProduct = observer(
     price,
     promotional_price,
     is_promotional,
+    is_new,
     quantity,
     country,
   }) => {
@@ -111,6 +112,7 @@ const CardProduct = observer(
         {is_promotional === 1 && (
           <div className="product__sale">{t('Акція')}</div>
         )}
+        {is_new === true && <div className="product__new">{t('Новинка')}</div>}
         <div className="product__img-container">
           <img className="product__img" src={image_url} alt={title} />
         </div>

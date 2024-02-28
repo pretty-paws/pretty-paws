@@ -39,7 +39,7 @@ const MakeOrder = observer(() => {
   const [openedSection, setOpenedSection] = useState({
     personalData: false,
     delivery: true,
-    payment: true,
+    payment: false,
   });
 
   const [confirmationPopup, setConfirmationPopup] = useState(false);
@@ -59,7 +59,8 @@ const MakeOrder = observer(() => {
       email: user.email,
       district: '',
       city: '',
-      deliveryWay: '',
+      deliveryWay:
+        'У відділення Нової пошти' || localStorage.getItem('deliveryWay'),
       street: '',
       house: '',
       apartment: '',
@@ -72,7 +73,24 @@ const MakeOrder = observer(() => {
     values,
   });
   const handleChange = (name, value) => {
+    console.log('name', name);
     setValue(name, value);
+    if (name === 'payment')
+      setOpenedSection(prev => ({
+        ...prev,
+        payment: !prev.payment,
+      }));
+
+    if (
+      name === 'postomat' ||
+      name === 'warehouse' ||
+      (name === 'apartment' && !errors.apartment)
+    )
+      setOpenedSection(prev => ({
+        ...prev,
+        delivery: !prev.delivery,
+        payment: !prev.payment,
+      }));
   };
 
   const onSubmit = ({
@@ -119,8 +137,12 @@ const MakeOrder = observer(() => {
     };
     createOrder(order);
     emptyCart();
-    console.log(order);
+    console.log(new Date().toISOString());
   };
+
+  // useEffect(() => {
+  //   console.log('district', district.errors);
+  // }, [district]);
 
   return state === 'done' ? (
     <GlobalContainer>
@@ -133,48 +155,55 @@ const MakeOrder = observer(() => {
           <p>До кошика</p>
         </div>
         {/* </Link> */}
+        <h2 className="make-order__title">Оформлення замовлення</h2>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <PersonalData
-            register={register}
-            handleSubmit={handleSubmit}
-            errors={errors}
-            updateProfile={updateProfile}
-            user={user}
-            getDistricts={getDistricts}
-            setOpenedSection={setOpenedSection}
-            openedSection={openedSection}
-          />
-          <Delivery
-            register={register}
-            handleChange={handleChange}
-            handleSubmit={handleSubmit}
-            errors={errors}
-            setOpenedSection={setOpenedSection}
-            openedSection={openedSection}
-            getCities={getCities}
-            districts={districts}
-            cities={cities}
-            getWarehouses={getWarehouses}
-            warehouses={warehouses}
-            postomats={postomats}
-            getPostomats={getPostomats}
-          />
-          <Payment
-            setOpenedSection={setOpenedSection}
-            openedSection={openedSection}
-            register={register}
-            handleChange={handleChange}
-          />
-          <Agreement handleChange={handleChange} register={register} />
+          <div className="make-order__layout">
+            <div>
+              <PersonalData
+                register={register}
+                handleSubmit={handleSubmit}
+                errors={errors}
+                updateProfile={updateProfile}
+                user={user}
+                getDistricts={getDistricts}
+                setOpenedSection={setOpenedSection}
+                openedSection={openedSection}
+              />
+              <Delivery
+                register={register}
+                handleChange={handleChange}
+                handleSubmit={handleSubmit}
+                errors={errors}
+                setOpenedSection={setOpenedSection}
+                openedSection={openedSection}
+                getCities={getCities}
+                districts={districts}
+                cities={cities}
+                getWarehouses={getWarehouses}
+                warehouses={warehouses}
+                postomats={postomats}
+                getPostomats={getPostomats}
+                // handleDelivery={setDelivery}
+              />
+              <Payment
+                setOpenedSection={setOpenedSection}
+                openedSection={openedSection}
+                register={register}
+                handleChange={handleChange}
+              />
+              <Agreement handleChange={handleChange} register={register} />
+            </div>
 
-          <OrderDetails
-            cart={cart}
-            total={total}
-            register={register}
-            handleChange={handleChange}
-            errors={errors}
-          />
+            <OrderDetails
+              cart={cart}
+              total={total}
+              register={register}
+              handleChange={handleChange}
+              errors={errors}
+            />
+          </div>
         </form>
+
         {confirmationPopup === true
           ? createPortal(
               <ConfirmationPopup

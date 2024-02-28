@@ -20,11 +20,22 @@ const Delivery = observer(
     register,
     handleChange,
     errors,
+    // handleDelivery,
     // handleSubmit,
   }) => {
     const [district, setDistrict] = useState(null);
     const [city, getCity] = useState(null);
     const [delivery, setDelivery] = useState('warehouse');
+    const [deliveryWay, setDeliveryWay] = useState('У відділення Нової пошти');
+
+    const [districtDefault, setDistrictDefault] = useState('null');
+    const [cityDefault, setCityDefault] = useState(null);
+    const [warehouseDefault, setWarehouseDefault] = useState(null);
+    const [postomatDefault, setPostomatDefault] = useState(null);
+
+    const [deliveryStreet, setDeliveryStreet] = useState('');
+    const [deliveryHouse, setDeliveryHouse] = useState('');
+    const [deliveryAppartment, setDeliveryAppartment] = useState('');
 
     useEffect(() => {
       district !== null && getCities({ areaRef: district });
@@ -103,9 +114,14 @@ const Delivery = observer(
                 }))}
                 placeholder="Виберіть область"
                 styles={getSelectStyles(errors.district)}
-                onChange={e => {
-                  handleChange('district', e.value);
-                  setDistrict(e.value);
+                defaultValue={districtDefault}
+                onChange={selectedOption => {
+                  handleChange('district', selectedOption.value);
+                  setDistrict(selectedOption.value);
+                  setDistrictDefault({
+                    value: selectedOption.value,
+                    label: selectedOption.label,
+                  });
                 }}
               />
               {errors.district && (
@@ -124,9 +140,14 @@ const Delivery = observer(
                   value: city.ref,
                   label: city.name,
                 }))}
+                defaultValue={cityDefault}
                 onChange={selectedOption => {
                   handleChange('city', selectedOption.label);
                   getCity(selectedOption.label);
+                  setCityDefault({
+                    value: selectedOption.value,
+                    label: selectedOption.label,
+                  });
                 }}
               />
               {errors.city && (
@@ -138,7 +159,7 @@ const Delivery = observer(
               <div className="radio-btn-box">
                 <input
                   type="radio"
-                  defaultChecked
+                  checked={deliveryWay === 'У відділення Нової пошти'}
                   id="toPostOffice"
                   {...register('deliveryWay', {
                     required: true,
@@ -147,6 +168,8 @@ const Delivery = observer(
                   onClick={e => {
                     handleChange('deliveryWay', e.currentTarget.value);
                     setDelivery(e.currentTarget.value);
+                    setDeliveryWay('У відділення Нової пошти');
+                    // handleDelivery('e.currentTarget.value');
                   }}
                 />
                 <label className="radio_label" htmlFor="toPostOffice">
@@ -161,9 +184,12 @@ const Delivery = observer(
                     required: true,
                   })}
                   value="postomat"
+                  checked={deliveryWay === 'До поштомата Нової пошти'}
                   onClick={e => {
                     handleChange('deliveryWay', e.currentTarget.value);
                     setDelivery(e.currentTarget.value);
+                    setDeliveryWay('До поштомата Нової пошти');
+                    // handleDelivery('e.currentTarget.value');
                   }}
                 />
                 <label className="radio_label" htmlFor="toPostBox">
@@ -178,9 +204,12 @@ const Delivery = observer(
                     required: true,
                   })}
                   value="address"
+                  checked={deliveryWay === 'За адресою кур`єром Нової пошти'}
                   onClick={e => {
                     handleChange('deliveryWay', e.currentTarget.value);
                     setDelivery(e.currentTarget.value);
+                    setDeliveryWay('За адресою кур`єром Нової пошти');
+                    // handleDelivery('e.currentTarget.value');
                   }}
                 />
                 <label className="radio_label" htmlFor="toAddress">
@@ -196,14 +225,19 @@ const Delivery = observer(
                     Вулиця
                   </label>
                   <input
-                    onChange={e =>
-                      handleChange('street', e.currentTarget.value)
-                    }
                     className="delivery__street-input"
                     id="street"
                     type="text"
                     placeholder="Вулиця"
-                    {...register('street', { required: true, max: 50, min: 0 })}
+                    {...register('street', {
+                      onChange: e => {
+                        handleChange('street', e.target.value);
+                        setDeliveryStreet(e.target.value);
+                      },
+                      required: true,
+                      max: 50,
+                      min: 0,
+                    })}
                   />
                 </div>
                 <div className="delivery__house-flat-block">
@@ -212,14 +246,18 @@ const Delivery = observer(
                       Номер будинку
                     </label>
                     <input
-                      onChange={e =>
-                        handleChange('house', e.currentTarget.value)
-                      }
                       className="delivery__house-input"
                       id="house"
                       type="number"
                       placeholder="Номер будинку"
-                      {...register('house', { required: true })}
+                      {...register('house', {
+                        onChange: e => {
+                          console.log('e', e);
+                          handleChange('house', e.target.value);
+                          setDeliveryHouse(e.target.value);
+                        },
+                        required: true,
+                      })}
                     />
                   </div>
                   <div className="label-input-block">
@@ -227,14 +265,18 @@ const Delivery = observer(
                       Номер квартири
                     </label>
                     <input
-                      onChange={e =>
-                        handleChange('apartment', e.currentTarget.value)
-                      }
                       className="delivery__flat-input"
                       id="flat"
                       type="number"
                       placeholder="Номер квартири"
-                      {...register('apartment', { required: true })}
+                      {...register('apartment', {
+                        onChange: e => {
+                          console.log('e', e);
+                          handleChange('apartment', e.target.value);
+                          setDeliveryAppartment(e.target.value);
+                        },
+                        required: true,
+                      })}
                     />
                   </div>
                 </div>
@@ -251,8 +293,13 @@ const Delivery = observer(
                     value: warehouse.Ref,
                     label: warehouse.Description,
                   }))}
+                  defaultValue={warehouseDefault}
                   onChange={selectedOption => {
                     handleChange('warehouse', selectedOption.label);
+                    setWarehouseDefault({
+                      value: selectedOption.value,
+                      label: selectedOption.label,
+                    });
                   }}
                 />
                 {errors.warehouse && (
@@ -273,8 +320,13 @@ const Delivery = observer(
                     value: postomat.Ref,
                     label: postomat.Description,
                   }))}
+                  defaultValue={postomatDefault}
                   onChange={selectedOption => {
                     handleChange('postomat', selectedOption.label);
+                    setPostomatDefault({
+                      value: selectedOption.value,
+                      label: selectedOption.label,
+                    });
                   }}
                 />
                 {errors.postomat && (
@@ -285,7 +337,37 @@ const Delivery = observer(
               </span>
             )}
           </StyledDeliveryform>
-        ) : null}
+        ) : (
+          <>
+            <div className="delivery-done">
+              <div>{deliveryWay}</div>
+              <div>
+                {delivery === 'address' &&
+                  `Україна, ${
+                    'область ' + (districtDefault?.label || ' не обрано')
+                  }, ${'місто ' + (cityDefault?.label ?? ' не обрано')}, ${
+                    'вулиця ' + (deliveryStreet || 'вулицю не обрано')
+                  }, ${'будинок № ' + (deliveryHouse || ' не обрано')} , ${
+                    'квартира № ' + (deliveryAppartment || ' не обрано')
+                  }`}
+
+                {delivery === 'warehouse' &&
+                  `Україна, ${
+                    districtDefault?.label + ' область' ?? ' область не обрано'
+                  }, ${'місто ' + (cityDefault?.label ?? ' не обрано ')},${
+                    warehouseDefault?.label ?? 'відділення не обрано '
+                  }`}
+
+                {delivery === 'postomat' &&
+                  `Україна, ${
+                    districtDefault?.label + ' область' ?? ' область не обрано'
+                  }, ${'місто ' + (cityDefault?.label ?? ' не обрано ')},${
+                    postomatDefault?.label ?? 'поштомат не обрано '
+                  }`}
+              </div>
+            </div>
+          </>
+        )}
       </StyledDeliveryBack>
     );
   }
