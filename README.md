@@ -16,3 +16,5 @@
 1. React
 2. React-router-dom.
 3. Styled-components.
+4. React-select.
+5. Mobx

@@ -1,4 +1,4 @@
-import { Navigate } from 'react-router-dom';
+import { Navigate, useLocation } from 'react-router-dom';
 import { useStore } from '../store/AuthProvider';
 import PropTypes from 'prop-types';
 import { observer } from 'mobx-react-lite';
@@ -10,9 +10,18 @@ export const RestrictedRoute = observer(
       auth: { authorised },
     } = store;
 
-    // console.log(authorised);
+    const location = useLocation();
+    const registrationForOrder = location?.state?.from === 'cart';
 
-    return authorised === true ? <Navigate to={redirectTo} /> : Component;
+    return authorised === true ? (
+      registrationForOrder ? (
+        <Navigate to="/make_order" />
+      ) : (
+        <Navigate to={redirectTo} />
+      )
+    ) : (
+      Component
+    );
   }
 );
 

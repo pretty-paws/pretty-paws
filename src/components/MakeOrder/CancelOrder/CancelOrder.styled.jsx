@@ -24,6 +24,11 @@ export const StyledCancelOrder = styled.div`
     border-radius: 8px;
     background: #fff;
     text-align: center;
+    @media screen and (min-width: 834px) {
+      top: 20%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
   }
 
   .confirmationPopup_edit {

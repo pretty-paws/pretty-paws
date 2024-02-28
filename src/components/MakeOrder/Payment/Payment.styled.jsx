@@ -39,6 +39,9 @@ export const StyledPayment = styled.div`
     font-size: 14px;
     font-weight: 400;
     line-height: 18px;
+    @media screen and (min-width: 834px) {
+      font-size: 16px;
+    }
   }
 
   .radio-btn-box {

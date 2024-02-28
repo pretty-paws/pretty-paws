@@ -19,7 +19,15 @@ const LogInBox = observer(() => {
 
   const store = useStore();
   const {
-    auth: { logIn, setRememberMe, state, error, errorType, setState },
+    auth: {
+      logIn,
+      setRememberMe,
+      state,
+      error,
+      errorType,
+      setState,
+      authorised,
+    },
   } = store;
 
   const getValueFromStorage = () => {
@@ -95,6 +103,7 @@ const LogInBox = observer(() => {
           onRememberMeChange={onRememberMeChange}
           register={register}
           isValid={isValid}
+          authorised={authorised}
         />
       </form>
       <SocialNetsAuth title="Або увійти через" />

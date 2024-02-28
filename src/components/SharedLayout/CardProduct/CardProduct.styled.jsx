@@ -34,6 +34,21 @@ export const StyledCardProduct = styled.div`
     font-weight: 400;
   }
 
+  & .product__new {
+    padding: 8px;
+    border-radius: 8px;
+    position: absolute;
+    top: 5px;
+    left: 8px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    background-color: #70db5e;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+  }
+
   & .product__img-container {
     height: 160px;
     flex: 1;
@@ -144,7 +159,7 @@ export const StyledCardProduct = styled.div`
     }
 
     &.added {
-      background-color: var(--font-color-gray);
+      background-color: var(--hover-blue);
     }
   }
 `;

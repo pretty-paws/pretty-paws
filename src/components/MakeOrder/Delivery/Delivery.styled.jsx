@@ -47,6 +47,29 @@ export const StyledDeliveryBack = styled.div`
       }
     }
   }
+
+  .delivery-done {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    /* display: grid; */
+    /* grid-template-columns: 1fr 2fr; */
+    padding: 16px;
+    background: rgba(231, 169, 115, 0.5);
+
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 18px;
+
+    @media screen and (min-width: 834px) {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+    }
+
+    @media screen and (min-width: 1440px) {
+    }
+  }
 `;
 
 export const StyledDeliveryform = styled.div`
@@ -60,6 +83,9 @@ export const StyledDeliveryform = styled.div`
   }
 
   .delivery__radio-btns {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
     display: flex;
     flex-direction: column;
     gap: 24px;
@@ -70,6 +96,9 @@ export const StyledDeliveryform = styled.div`
     font-size: 14px;
     font-weight: 400;
     line-height: 18px;
+    @media screen and (min-width: 834px) {
+      font-size: 16px;
+    }
   }
 
   .radio-btn-box {

@@ -21,6 +21,7 @@ const MobileCardProduct = observer(
     price,
     promotional_price,
     is_promotional,
+    is_new,
     quantity,
     country,
   }) => {
@@ -39,7 +40,7 @@ const MobileCardProduct = observer(
     // const [actionPerformed, setActionPerformed] = useState(false);
 
     function handleDescription(text) {
-      return text.slice(0, 40) + '...';
+      return text.slice(0, 35) + '...';
     }
 
     function checkFavourite(id) {
@@ -111,6 +112,7 @@ const MobileCardProduct = observer(
         {is_promotional === 1 && (
           <div className="product__sale">{t('Акція')}</div>
         )}
+        {is_new === true && <div className="product__new">{t('Новинка')}</div>}
         <div className="product__description">
           <div className="product__img-container">
             <img className="product__img" src={image_url} alt={title} />

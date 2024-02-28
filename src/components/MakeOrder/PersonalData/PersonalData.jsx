@@ -65,7 +65,6 @@ const PersonalData = observer(
     };
     return (
       <>
-        <h2 className="make-order__title">Оформлення замовлення</h2>
         {openedSection.personalData ? (
           <div className="make-order__personal-data-edit">
             <div className="make-order__personal-data-title edit">
