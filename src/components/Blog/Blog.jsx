@@ -9,6 +9,8 @@ import HelpRegisterSection from '../Main/HelpRegisterSection/HelpRegisterSection
 import Promotions from '../Main/PromotionsWithDiscount/Promotions';
 import { useTranslation } from 'react-i18next';
 import useWindowSize from '../../hooks/useWindowSize';
+import { Link } from 'react-router-dom';
+// import BlogPagination from './BlogPagination/BlogPagination';
 // import DOMPurify from 'dompurify';
 
 const Blog = observer(() => {
@@ -21,6 +23,7 @@ const Blog = observer(() => {
     blog: {
       stateCategory,
       categories,
+      linksBlogs,
       //   function that get all categories
       getCategories,
       stateFilterBlog,
@@ -30,58 +33,56 @@ const Blog = observer(() => {
       totalPages,
     },
   } = store;
-  const [perPage, setPerPage] = useState(4);
+  const [perPage, setPerPage] = useState(8);
 
-  const [chosenCategory, setChosenCategory] = useState([]);
+  //   const [chosenCategory, setChosenCategory] = useState([]);
+  const [chosenCategory, setChosenCategory] = useState();
 
   const [activeLoadMore, setActiveLoadMore] = useState(false);
 
+  const [currentPage, setCurrentPage] = useState(1);
+
+  function changePerPage() {
+    let newPerPage;
+    switch (screen) {
+      case 'desktop':
+        // newPerPage = 3;
+        newPerPage = 8;
+        break;
+      case 'tablet':
+        newPerPage = 6;
+        break;
+      case 'mobile':
+        newPerPage = 4;
+        break;
+      default:
+        // newPerPage = 3; // значение по умолчанию
+        newPerPage = 8; // значение по умолчанию
+        break;
+    }
+    setPerPage(newPerPage);
+  }
+
   //   click to filter category
   function handleFilterClick(categoryId) {
-    const isCategoryChosen = chosenCategory.includes(categoryId);
-    if (isCategoryChosen) {
-      const newChosenCategory = [...chosenCategory];
-      const index = newChosenCategory.indexOf(categoryId);
-      newChosenCategory.splice(index, 1);
-      setChosenCategory(newChosenCategory);
-    } else {
-      setChosenCategory(prevChosenCategory => [
-        ...prevChosenCategory,
-        categoryId,
-      ]);
+    if (categoryId) {
+      setChosenCategory(categoryId);
     }
+    changePerPage();
   }
-  //   const changePrePage = () => {
-  //     switch (screen) {
-  //       case 'mobile':
-  //         setPerPage(4);
-  //         break;
-  //       case 'tablet':
-  //         setPerPage(6);
-  //         break;
-  //       case 'desktop':
-  //         setPerPage(8);
-  //         break;
 
-  //       //   default:
-  //       //     setPerPage(4);
-  //       //     break;
-  //     }
-  //   };
-
-  const [currentPage, setCurrentPage] = useState(1);
-  //   const [totalPage,setTotalPage] = useState(1);
-  //   const [loadedPaf,setLoadedPage] = useState([]);
+  const emptyCategory = categories.find(
+    category => category.id === chosenCategory
+  );
 
   // use effect for get information about categories and filtered news
   useEffect(() => {
-    // changePrePage();
+    changePerPage();
     getCategories(language);
     getFilterBlogs(language, chosenCategory, perPage, currentPage);
   }, [i18n.language]);
 
   useEffect(() => {
-    // changePrePage();
     if (activeLoadMore) {
       getFilterBlogs(language, chosenCategory, perPage, currentPage);
       setActiveLoadMore(false);
@@ -89,11 +90,8 @@ const Blog = observer(() => {
   }, [activeLoadMore]);
 
   useEffect(() => {
-    // changePrePage();
-    console.log('filter when change to get filter blogs ', chosenCategory);
-    if (chosenCategory.length != 0) {
+    if (chosenCategory != undefined) {
       setCurrentPage(1);
-      screen === 'desktop' ? setPerPage(8) : setPerPage(4);
       getFilterBlogs(language, chosenCategory, perPage, currentPage);
     } else {
       setCurrentPage(1);
@@ -101,17 +99,27 @@ const Blog = observer(() => {
     }
   }, [chosenCategory]);
 
-  const emptyCategory = categories.find(
-    category => category.id === chosenCategory[0]
-  );
-  if (emptyCategory != null && emptyCategory != undefined) {
-    console.log('emptyCategory', emptyCategory.title);
-  }
-  //   const sanitizedDescription = DOMPurify.sanitize(short_description);
-
   const handleLoadMore = () => {
     setCurrentPage(prevPage => prevPage + 1);
     setActiveLoadMore(true);
+  };
+
+  const handlePaginationClick = numPage => {
+    // setCurrentPage(numPage);
+    // setActiveLoadMore(true);
+    console.log('numPage', numPage);
+
+    setCurrentPage(numPage);
+    setActiveLoadMore(true);
+  };
+  const handlePaginationArrowClick = type => {
+    if (type === 'prev') {
+      setCurrentPage(prevPage => prevPage - 1);
+      setActiveLoadMore(true);
+    } else {
+      setCurrentPage(prevPage => prevPage + 1);
+      setActiveLoadMore(true);
+    }
   };
 
   return (
@@ -119,26 +127,46 @@ const Blog = observer(() => {
       <GlobalContainer>
         <div className="blog__block">
           <div className="blog__categories-block categories">
-            <p
-              className={`categories__item ${
-                chosenCategory.length === 0 ? 'active' : ''
-              }`}
-              onClick={() => setChosenCategory([])}
+            <Link
+              state={{ from: '/blog/news' }}
+              to={{
+                pathname: `/blog/news/`,
+                search: `?page=${currentPage}&per_page=${perPage}`,
+              }}
             >
-              Усі матеріали
-            </p>
+              <p
+                className={`categories__item ${
+                  // chosenCategory.length === 0 ? 'active' : ''
+                  chosenCategory === undefined ? 'active' : ''
+                }`}
+                onClick={() => setChosenCategory()}
+                //   onClick={() => setChosenCategory([])}
+              >
+                Усі матеріали
+              </p>
+            </Link>
+
             {stateCategory === 'done'
               ? categories.map(({ id, title }) => {
                   return (
-                    <p
+                    <Link
+                      state={{ from: '/blog/news' }}
+                      to={{
+                        pathname: `/blog/news/`,
+                        search: `?page=${currentPage}&per_page=${perPage}&categories[0]=${id}`,
+                      }}
                       key={id}
-                      className={`categories__item ${
-                        chosenCategory.includes(id) ? 'active' : ''
-                      }`}
-                      onClick={() => handleFilterClick(id)}
                     >
-                      {title}
-                    </p>
+                      <p
+                        className={`categories__item ${
+                          // chosenCategory.includes(id) ? 'active' : ''
+                          chosenCategory === id ? 'active' : ''
+                        }`}
+                        onClick={() => handleFilterClick(id)}
+                      >
+                        {title}
+                      </p>
+                    </Link>
                   );
                 })
               : null}
@@ -185,35 +213,103 @@ const Blog = observer(() => {
                 )
               : null}
           </div>
+          {/* <BlogPagination
+            perPage={perPage}
+            // setPerPage={setPerPage}
+            setActiveLoadMore={setActiveLoadMore}
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+            chosenCategory={chosenCategory}
+          ></BlogPagination> */}
           {screen === 'desktop'
-            ? currentPage < totalPages && (
+            ? totalPages > 1 && (
                 <div className="blog__pagination">
-                  {Array.from({ length: totalPages }, (_, index) => (
-                    <button key={index} className="pagination__btn">
-                      <p className="pagination__item">{index + 1}</p>
-                    </button>
-                  ))}
-                  <svg className="pagination__arrow" width="22px" height="22px">
-                    <use href={sprite + '#arrow-black'} />
-                  </svg>
-                </div>
-                /*{ <button className="pagination__btn">
-                    <p className="pagination__item">1</p>
-                  </button>
-                  <button className="pagination__btn active-pag">
-                    <p className="pagination__item">2</p>
-                  </button>
-                  <button className="pagination__btn">
-                    <p className="pagination__item">3</p>
-                  </button> */
-                /* <div className="blog__pagination">
-				
-                  
+                  {currentPage > 1 &&
+                    linksBlogs.some(
+                      link => link.label === '&laquo; Previous'
+                    ) && (
+                      <Link
+                        state={{ from: '/blog/news' }}
+                        to={{
+                          pathname: `/blog/news/`,
+                          search: `?page=${currentPage}&per_page=${perPage} ${
+                            chosenCategory
+                              ? `&categories[0]=${chosenCategory}`
+                              : ''
+                          }`,
+                        }}
+                      >
+                        <button
+                          className="pagination__btn"
+                          onClick={() => handlePaginationArrowClick('prev')}
+                        >
+                          <svg
+                            className="pagination__arrow-prev"
+                            width="22px"
+                            height="22px"
+                          >
+                            <use href={sprite + '#arrow-black'} />
+                          </svg>
+                        </button>
+                      </Link>
+                    )}
 
-                  <svg className="pagination__arrow" width="22px" height="22px">
-                    <use href={sprite + '#arrow-black'} />
-                  </svg>
-                </div> */
+                  {linksBlogs &&
+                    linksBlogs.map((link, index) => (
+                      <React.Fragment key={index}>
+                        {link.label !== '&laquo; Previous' &&
+                          link.label !== 'Next &raquo;' && (
+                            <Link
+                              key={index}
+                              className={`pagination__btn ${
+                                link.active ? 'active-pag' : ''
+                              }`}
+                              state={{ from: '/blog/news' }}
+                              to={{
+                                pathname: `/blog/news/`,
+                                search: `?page=${currentPage}&per_page=${perPage} ${
+                                  chosenCategory
+                                    ? `&categories[0]=${chosenCategory}`
+                                    : ''
+                                }`,
+                              }}
+                              onClick={() =>
+                                handlePaginationClick(Number(link.label))
+                              }
+                            >
+                              <p className="pagination__item">{link.label}</p>
+                            </Link>
+                          )}
+                      </React.Fragment>
+                    ))}
+                  {currentPage < totalPages &&
+                    linksBlogs.some(link => link.label === 'Next &raquo;') && (
+                      <Link
+                        state={{ from: '/blog/news' }}
+                        to={{
+                          pathname: `/blog/news/`,
+                          search: `?page=${currentPage}&per_page=${perPage} ${
+                            chosenCategory
+                              ? `&categories[0]=${chosenCategory}`
+                              : ''
+                          }`,
+                        }}
+                      >
+                        <button
+                          className="pagination__btn"
+                          onClick={() => handlePaginationArrowClick('next')}
+                        >
+                          <svg
+                            className="pagination__arrow-next"
+                            width="22px"
+                            height="22px"
+                          >
+                            <use href={sprite + '#arrow-black'} />
+                          </svg>
+                        </button>
+                      </Link>
+                    )}
+                </div>
               )
             : currentPage < totalPages && (
                 <button className="blog__more-btn" onClick={handleLoadMore}>
@@ -221,36 +317,6 @@ const Blog = observer(() => {
                 </button>
               )}
         </div>
-
-        {/* <div>
-          {stateFilterBlog === 'done'
-            ? filterBlogs.map(
-                ({ id, content }) => {
-                  return (
-                    <div
-                      key={id}
-                      dangerouslySetInnerHTML={{
-                        __html: DOMPurify.sanitize(content),
-                      }}
-                    />
-                  );
-                }
-                // ({
-                //   id,
-                //   title,
-                //   short_description,
-                //   content,
-                //   image_url,
-                //   category,
-                //   slug,
-                //   reading_time_minutes,
-                //   //   published_at,
-                // }) => {
-                //   return <div></div>;
-                // }
-              )
-            : null}
-        </div> */}
       </GlobalContainer>
 
       <HelpRegisterSection

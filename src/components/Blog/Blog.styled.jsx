@@ -112,10 +112,13 @@ export const StyledBlog = styled.div`
     font-weight: 500;
     line-height: 20px; /* 125% */
   }
-  & .pagination__arrow {
+  & .pagination__arrow-prev,
+  & .pagination__arrow-next {
     cursor: pointer;
   }
-
+  & .pagination__arrow-prev {
+    transform: rotate(180deg);
+  }
   & .blog__more-btn {
     width: 343px;
     padding: 16px 32px;

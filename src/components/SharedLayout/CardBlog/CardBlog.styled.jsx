@@ -179,6 +179,9 @@ export const StyledCardBlog = styled.div`
       line-height: 16px; /* 133.333% */
     }
   }
+  & .blog__btn-wrapp {
+    justify-self: center;
+  }
   & .blog__btn {
     padding: 8px 32px;
     border-radius: 100px;

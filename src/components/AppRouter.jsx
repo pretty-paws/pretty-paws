@@ -19,6 +19,8 @@ import Catalog from './Catalog/Catalog/Catalog';
 import ProductDetailedCardPage from './Catalog/ProductDetailedCardPage/ProductDetailedCardPage';
 import MakeOrder from './MakeOrder/MakeOrder';
 import Order from './Cabinet/Order/Order';
+import BlogDetailedCardPage from './Blog/BlogDetailedCardPage/BlogDetailedCardPage';
+import Blog from './Blog/Blog';
 
 const AppRouter = observer(() => {
   return (
@@ -111,6 +113,28 @@ const AppRouter = observer(() => {
                     path={`${path}/animal/:animalName/category/:category/:subcategory/:id`}
                     element={<ProductDetailedCardPage />}
                   />
+                </Route>
+              </React.Fragment>
+            );
+          if (name === 'Блог')
+            return (
+              <React.Fragment key={path}>
+                <Route
+                  key={path}
+                  path={`${path}/news/:news_name`}
+                  element={<BlogDetailedCardPage />}
+                />
+                <Route path={path} element={<Component />} exact>
+                  <Route
+                    key={path}
+                    path={`${path}/news`}
+                    element={<Blog />}
+                  ></Route>
+                  <Route
+                    key={path}
+                    path={`${path}/news/:page/:per_page/:categories`}
+                    element={<Blog />}
+                  ></Route>
                 </Route>
               </React.Fragment>
             );

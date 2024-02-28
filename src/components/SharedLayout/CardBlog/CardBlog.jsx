@@ -4,11 +4,14 @@ import sprite from '../../../img/svg-sprite/sprite.svg';
 import { StyledCardBlog } from './CardBlog.styled';
 import { observer } from 'mobx-react-lite';
 import PropTypes from 'prop-types';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import useWindowSize from '../../../hooks/useWindowSize';
+// import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+
 const CardBlog = observer(
   ({
-    id,
+    // id,
     title,
     short_description,
     image_url,
@@ -16,20 +19,16 @@ const CardBlog = observer(
     slug,
     reading_time_minutes,
   }) => {
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
     const { screen } = useWindowSize();
 
-    function handleClickCard(e) {
-      e.stopPropagation();
-      alert('fff');
-      navigate(`/news/${category}/${slug}`);
-      console.log(`/news/${category}/${id}`);
-    }
-
+    const navigate = useNavigate();
     const sanitizedDescription = DOMPurify.sanitize(short_description);
-
+    const handleDetailClick = () => {
+      navigate(`/blog/news/${slug}`);
+    };
     return (
-      <StyledCardBlog onClick={e => handleClickCard(e)}>
+      <StyledCardBlog>
         <div className="blog__img-container">
           <img className="blog__img" src={image_url} alt={title} />
         </div>
@@ -53,7 +52,9 @@ const CardBlog = observer(
             <p className="blog__info-text">{`${reading_time_minutes} хвилин`}</p>
           </div>
           {screen === 'desktop' && (
-            <button className="blog__btn">Детальніше</button>
+            <button className="blog__btn" onClick={handleDetailClick}>
+              Детальніше
+            </button>
           )}
         </div>
       </StyledCardBlog>
