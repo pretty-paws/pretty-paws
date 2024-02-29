@@ -4,18 +4,20 @@ export const StyledCardProduct = styled.div`
   position: relative;
   padding: 16px;
   height: 486px;
+  width: 273px;
   border-radius: 8px;
   background: #fff;
   display: flex;
+  flex-shrink: 0;
   flex-direction: column;
   cursor: pointer;
 
   @media screen and (min-width: 834px) {
-    max-width: 241px;
+    width: 241px;
   }
 
   @media screen and (min-width: 1440px) {
-    max-width: 267px;
+    width: 267px;
   }
 
   & .product__sale {
