@@ -13,7 +13,7 @@ export const StyledCatalogList = styled.div`
     margin: 10px 40px;
     display: grid;
     grid-template-columns: repeat(2, 50%);
-    gap: 20px;
+    gap: 30px;
   }
   @media screen and (min-width: 1440px) {
     margin: 10px 40px;
