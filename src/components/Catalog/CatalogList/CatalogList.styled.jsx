@@ -12,6 +12,12 @@ export const StyledCatalogList = styled.div`
   @media screen and (min-width: 834px) {
     margin: 10px 40px;
     display: grid;
+    grid-template-columns: repeat(2, 50%);
+    gap: 20px;
+  }
+  @media screen and (min-width: 1440px) {
+    margin: 10px 40px;
+    display: grid;
     grid-template-columns: repeat(3, 231px);
     gap: 40px;
   }
