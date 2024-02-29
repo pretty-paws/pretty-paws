@@ -42,16 +42,21 @@ const CatalogList = observer(() => {
     <StyledCatalogList>
       {categories.map(category => {
         return (
-          <div key={category.title}>
+          <div key={category.title} className="list__category-box">
             <h4 className="list__category-title">{category.title}</h4>
             <ul className="list__subcategories">
               {category.subcategories.map(subcategory => {
                 return (
                   <Link
                     state={{ from: '/catalog/animal' }}
-                    onClick={() =>
-                      handleSubcategoryClick(category, subcategory)
-                    }
+                    onClick={() => {
+                      handleSubcategoryClick(category, subcategory);
+
+                      window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth',
+                      });
+                    }}
                     key={subcategory.id}
                     to={{
                       pathname: `/catalog/animal/${chosenAnimal.slug}/category/${category.slug}`,

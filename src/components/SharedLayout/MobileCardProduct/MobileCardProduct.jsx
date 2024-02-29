@@ -100,6 +100,14 @@ const MobileCardProduct = observer(
 
       return () => clearTimeout(timeout);
     }, [errorMessage]);
+
+    const checkQuantity = quantity => {
+      if (quantity.length <= 5) {
+        return quantity;
+      } else if (quantity.length > 5) {
+        return quantity.slice(0, 5);
+      }
+    };
     return (
       <StyledMobileCardProduct
         biggerMargin={promotional_price !== 0}
@@ -121,7 +129,7 @@ const MobileCardProduct = observer(
             <b>{title}</b>
             <span> - {handleDescription(short_description)}</span>
             <div className="product__details">
-              <span className="product__amount">{quantity}</span>
+              <span className="product__amount">{checkQuantity(quantity)}</span>
               <span className="product__country">
                 <img
                   src={country.icon_url}

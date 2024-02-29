@@ -37,9 +37,20 @@ const BrandsSection = () => {
         })}
       </div>
       <div className="brands__button-container">
-        <button type="button" className="brands__button">
-          {t('До каталогу')}
-        </button>
+        <Link to="/catalog">
+          <button
+            type="button"
+            className="brands__button"
+            onClick={() =>
+              window.scrollTo({
+                top: 0,
+                behavior: 'smooth',
+              })
+            }
+          >
+            {t('До каталогу')}
+          </button>
+        </Link>
       </div>
     </BrandsContainer>
   );

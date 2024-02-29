@@ -5,10 +5,12 @@ import sprite from '../../../img/svg-sprite/sprite.svg';
 import { StyledCatalog } from './Catalog.styled';
 import { NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { observer } from 'mobx-react-lite';
+import useWindowSize from '../../../hooks/useWindowSize';
 // import FilterPage from './FilterPage/FilterPage';
 
 const Catalog = observer(() => {
   // const [filterPage, setFilterPage] = useState(false);
+  const { screen } = useWindowSize();
   const location = useLocation();
   const navigate = useNavigate();
   const store = useStore();
@@ -20,6 +22,7 @@ const Catalog = observer(() => {
       setAnimalName,
       setAnimalSlug,
       getSubcategories,
+      animalName,
     },
   } = store;
 
@@ -58,17 +61,20 @@ const Catalog = observer(() => {
                       <div className="catalog-animal-box">
                         <img src={animal.icon_url} alt={animal.title} />
                       </div>
-                      <p>{animal.title}</p>
+                      {screen !== 'mobile' && <p>{animal.title}</p>}
                     </div>
-                    <svg className="catalog-arrow" width="24px" height="24px">
-                      <use href={sprite + '#arrow-black'} />
-                    </svg>
+                    {screen !== 'mobile' && (
+                      <svg className="catalog-arrow" width="24px" height="24px">
+                        <use href={sprite + '#arrow-black'} />
+                      </svg>
+                    )}
                   </li>
                 </NavLink>
               );
             })
           : null}
       </ul>
+      {screen === 'mobile' && <div className="animal-name">{animalName}</div>}
 
       <Outlet />
     </StyledCatalog>
