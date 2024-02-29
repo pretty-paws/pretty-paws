@@ -3,8 +3,6 @@ import styled from 'styled-components';
 export const StyledCardProduct = styled.div`
   position: relative;
   padding: 16px;
-  min-width: 267px;
-  max-width: 267px;
   height: 486px;
   border-radius: 8px;
   background: #fff;
@@ -12,10 +10,12 @@ export const StyledCardProduct = styled.div`
   flex-direction: column;
   cursor: pointer;
 
-  @media screen and (max-width: 833px) {
+  @media screen and (min-width: 834px) {
+    max-width: 241px;
   }
 
   @media screen and (min-width: 1440px) {
+    max-width: 267px;
   }
 
   & .product__sale {
