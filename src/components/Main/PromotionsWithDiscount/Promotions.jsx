@@ -31,7 +31,7 @@ const Promotions = observer(({ query, title }) => {
   } = store;
 
   useEffect(() => {
-    if (query === 'is_new=true') {
+    if (query === 'new=1') {
       getFilteredNewProducts(animal, 'ua', query);
     } else if (query === 'is_promotional=1') {
       getFilteredSaleProducts(animal, 'ua', query);
@@ -41,7 +41,7 @@ const Promotions = observer(({ query, title }) => {
   const getProducts = query => {
     if (query === 'is_promotional=1') {
       return saleProducts;
-    } else if (query === 'is_new=true') {
+    } else if (query === 'new=1') {
       return newProducts;
     }
   };
@@ -88,7 +88,7 @@ const Promotions = observer(({ query, title }) => {
         {/* {console.log(products)} */}
         <div className="promotions__card-container" ref={elementRef}>
           {state === 'done'
-            ? getProducts(query).map(
+            ? getProducts(query)?.map(
                 ({
                   id,
                   title,
@@ -129,7 +129,7 @@ const Promotions = observer(({ query, title }) => {
         </div>
 
         <div className="promotions__button-container">
-          <Link to={query === 'is_new=true' ? '/new' : '/promotions'}>
+          <Link to={query === 'new=1' ? '/new' : '/promotions'}>
             <button className="promotions__button" type="button">
               Усі пропозиції
             </button>
