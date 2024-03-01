@@ -10,6 +10,7 @@ import {
 import {
   fetchFilteredProducts,
   fetchProductByID,
+  fetchSaleNewProducts,
 } from '../services/productsAPI';
 
 export class CatalogStore {
@@ -21,6 +22,8 @@ export class CatalogStore {
   filteredSubcategories =
     JSON.parse(localStorage.getItem('filteredSubcategories')) || [];
   products = [];
+  saleProducts = [];
+  newProducts = [];
   productById = {};
   filters = {};
   animalName = localStorage.getItem('animalName') || '';
@@ -200,6 +203,40 @@ export class CatalogStore {
       // console.log(data.data);
       runInAction(() => {
         this.filteredProducts = data.data;
+        this.state = 'done';
+      });
+    } catch (error) {
+      runInAction(() => {
+        this.state = 'error';
+      });
+    }
+  }
+
+  async getFilteredSaleProducts(category, language, query) {
+    // console.log(query);
+    this.state = 'pending';
+    try {
+      const { data } = await fetchSaleNewProducts(category, language, query);
+      console.log(data.data);
+      runInAction(() => {
+        this.saleProducts = data.data;
+        this.state = 'done';
+      });
+    } catch (error) {
+      runInAction(() => {
+        this.state = 'error';
+      });
+    }
+  }
+
+  async getFilteredNewProducts(category, language, query) {
+    // console.log(query);
+    this.state = 'pending';
+    try {
+      const { data } = await fetchSaleNewProducts(category, language, query);
+      console.log(data.data);
+      runInAction(() => {
+        this.newProducts = data.data;
         this.state = 'done';
       });
     } catch (error) {

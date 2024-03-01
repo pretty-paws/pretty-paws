@@ -31,6 +31,13 @@ export const StyledPromotion = styled.section`
     overflow: hidden;
     width: auto;
     overflow-x: scroll;
+    @media screen and (min-width: 834px) {
+      gap: 15px;
+    }
+
+    @media screen and (min-width: 1440px) {
+      gap: 24px;
+    }
   }
 
   .left-arrow {

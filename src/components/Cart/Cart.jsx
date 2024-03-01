@@ -9,10 +9,7 @@ import { useEffect } from 'react';
 import useWindowSize from '../../hooks/useWindowSize';
 
 const Cart = observer(() => {
-  // const location = useLocation();
   const { screen } = useWindowSize();
-
-  // console.log(location);
   const { t } = useTranslation();
   const [isSticky, setIsSticky] = useState(false);
   const store = useStore();
@@ -30,17 +27,12 @@ const Cart = observer(() => {
       const stickyContainer = document.getElementById('stickyContainer');
 
       if (!stickyContainer) return;
-
-      // console.log(scrollPosition, stickyContainer.offsetTop);
-
       let scrollDirection;
 
       if (scrollPosition > lastScrollPosition) {
         scrollDirection = 'Down';
-        // console.log('Scrolling Down');
       } else {
         scrollDirection = 'Up';
-        // console.log('Scrolling Up');
       }
 
       lastScrollPosition = scrollPosition;
@@ -65,15 +57,15 @@ const Cart = observer(() => {
     };
   }, []);
 
-  // function editedDescription(text) {
-  //   if (!text) return;
-  //   let editedText;
-  //   if (text.length <= 50) return text;
-  //   if (text.length > 50) {
-  //     editedText = text.slice(0, 50);
-  //   }
-  //   return editedText + '...';
-  // }
+  function editedDescription(text) {
+    if (!text) return;
+    let editedText;
+    if (text.length <= 35) return text;
+    if (text.length > 35) {
+      editedText = text.slice(0, 35);
+    }
+    return editedText + '...';
+  }
 
   // function checkFavourite(id) {
   //   return user.favorites?.some(product => product.id === id);
@@ -128,7 +120,7 @@ const Cart = observer(() => {
                       </div>
                       <div className="cart-modal__description">
                         <p>
-                          {title} - {short_description}
+                          {title} - {editedDescription(short_description)}
                         </p>
 
                         {promotional_price !== 0 ? (

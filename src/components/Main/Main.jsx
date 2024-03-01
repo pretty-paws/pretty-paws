@@ -15,7 +15,10 @@ const Main = () => {
     <StyledMain>
       <Hero />
       <GlobalContainer>
-        <Promotions />
+        <Promotions
+          query="is_promotional=1"
+          title={t('Пропозиції зі знижкою')}
+        />
       </GlobalContainer>
       <HelpRegisterSection
         animal="dog"
@@ -27,6 +30,7 @@ const Main = () => {
       />
       <GlobalContainer>
         <BrandsSection />
+        <Promotions query="new=1" title={t('Новинки')} />
       </GlobalContainer>
       <HelpRegisterSection
         animal="cat"

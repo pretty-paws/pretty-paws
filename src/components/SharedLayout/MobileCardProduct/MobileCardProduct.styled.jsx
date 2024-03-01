@@ -58,12 +58,13 @@ export const StyledMobileCardProduct = styled.div`
   & .product__details {
     margin-top: 12px;
     display: flex;
-    gap: 12px;
+    gap: 6px;
     justify-content: space-between;
     font-size: 12px;
     font-style: normal;
     font-weight: 400;
   }
+
   & .product__amount {
     display: inline-flex;
     padding: 3px 7px;
@@ -77,6 +78,8 @@ export const StyledMobileCardProduct = styled.div`
     gap: 4px;
     border-radius: 8px;
     border: 1px solid var(--accent-color-beige);
+    width: fit-content;
+    /* overflow-x: hidden; */
   }
 
   & .product__description {

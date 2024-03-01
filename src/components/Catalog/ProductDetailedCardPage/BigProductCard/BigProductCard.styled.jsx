@@ -234,7 +234,7 @@ export const StyledBigProductCard = styled.div`
     }
 
     &.added {
-      background-color: var(--font-color-gray);
+      background-color: var(--hover-blue);
     }
   }
 

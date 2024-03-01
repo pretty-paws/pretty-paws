@@ -2,6 +2,7 @@ import React from 'react';
 import { BackgroundContainer } from './HelpRegisterSection.styled';
 import PropTypes from 'prop-types';
 import { GlobalContainer } from '../../../global/GlobalContainer';
+import { Link } from 'react-router-dom';
 
 const HelpRegisterSection = ({ title, text, button, animal }) => {
   return (
@@ -10,7 +11,19 @@ const HelpRegisterSection = ({ title, text, button, animal }) => {
         <div className="container">
           <h3 className="title">{title}</h3>
           <p className="text">{text}</p>
-          <button className="button">{button}</button>
+          <Link to={animal === 'dog' ? '/register' : '/help'}>
+            <button
+              className="button"
+              onClick={() =>
+                window.scrollTo({
+                  top: 0,
+                  behavior: 'smooth',
+                })
+              }
+            >
+              {button}
+            </button>
+          </Link>
         </div>
       </GlobalContainer>
     </BackgroundContainer>
