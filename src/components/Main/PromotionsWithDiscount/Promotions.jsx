@@ -10,30 +10,57 @@ import { observer } from 'mobx-react-lite';
 import useHorizontalScroll from '../../../hooks/useHorizontalScroll';
 import sprite from '../../../img/svg-sprite/sprite.svg';
 import useWindowSize from '../../../hooks/useWindowSize';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import { useState } from 'react';
+import { useEffect } from 'react';
 
-const Promotions = observer(() => {
+const Promotions = observer(({ query, title }) => {
+  const [animal, setAnimal] = useState(1);
   const location = useLocation();
   const { screen } = useWindowSize();
   const store = useStore();
   const {
-    cart: { state, products },
+    // cart: { state },
+    catalog: {
+      state,
+      getFilteredNewProducts,
+      getFilteredSaleProducts,
+      saleProducts,
+      newProducts,
+    },
   } = store;
+
+  useEffect(() => {
+    if (query === 'is_new=true') {
+      getFilteredNewProducts(animal, 'ua', query);
+    } else if (query === 'is_promotional=1') {
+      getFilteredSaleProducts(animal, 'ua', query);
+    }
+  }, [animal, query]);
+
+  const getProducts = query => {
+    if (query === 'is_promotional=1') {
+      return saleProducts;
+    } else if (query === 'is_new=true') {
+      return newProducts;
+    }
+  };
 
   const { elementRef, arrowDisable, handleHorizontalScroll } =
     useHorizontalScroll(30, 12, 280);
 
   const { t } = useTranslation();
+
   return (
     <StyledPromotion>
       <div className="promotion-title-box">
         <Title>
-          <h2>{t('Пропозиції зі знижкою')}</h2>
+          <h2>{t(title)}</h2>
         </Title>
       </div>
       {location.pathname === '/' && (
         <div className="promotion-animals-bar">
-          <AnimalsBar type={'section'} />
+          <AnimalsBar type={'section'} setAnimal={setAnimal} animal={animal} />
         </div>
       )}
       <div>
@@ -61,7 +88,7 @@ const Promotions = observer(() => {
         {/* {console.log(products)} */}
         <div className="promotions__card-container" ref={elementRef}>
           {state === 'done'
-            ? products.map(
+            ? getProducts(query).map(
                 ({
                   id,
                   title,
@@ -72,6 +99,7 @@ const Promotions = observer(() => {
                   price,
                   promotional_price,
                   is_promotional,
+                  is_new,
                   quantity,
                   country,
                   brand,
@@ -88,6 +116,7 @@ const Promotions = observer(() => {
                       price={price}
                       promotional_price={promotional_price}
                       is_promotional={is_promotional}
+                      is_new={is_new}
                       quantity={quantity}
                       country={country}
                       brand={brand}
@@ -100,9 +129,11 @@ const Promotions = observer(() => {
         </div>
 
         <div className="promotions__button-container">
-          <button className="promotions__button" type="button">
-            Усі пропозиції
-          </button>
+          <Link to={query === 'is_new=true' ? '/new' : '/promotions'}>
+            <button className="promotions__button" type="button">
+              Усі пропозиції
+            </button>
+          </Link>
         </div>
       </div>
     </StyledPromotion>

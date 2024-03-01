@@ -7,9 +7,18 @@ import { animalsSvg } from '../../../utils/animalBarSvgLinks';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { observer } from 'mobx-react-lite';
+import { useStore } from '../../../store/AuthProvider';
 
 const AnimalsBar = observer(
-  ({ type, getCategory, chosenCategory, isSubmitted }) => {
+  ({ type, getCategory, chosenCategory, isSubmitted, setAnimal, animal }) => {
+    const store = useStore();
+    const {
+      catalog: {
+        animals,
+        // getFilteredNewProducts, getFilteredSaleProducts
+      },
+    } = store;
+
     function includesCategory(category) {
       if (isSubmitted) return false;
       if (!chosenCategory) return;
@@ -47,24 +56,24 @@ const AnimalsBar = observer(
           </StyledVerticalAnimalsBar>
         ) : (
           <StyledAnimalsBar type={type}>
-            {animalsSvg.map(({ link, category }) => {
+            {animals.map(({ category, title, icon_url, id }) => {
               return (
-                <Link key={link}>
+                <Link key={title}>
                   <div
                     className={
-                      includesCategory(category)
+                      includesCategory(category) || id === animal
                         ? 'animals-bar-icon-box chosen'
                         : 'animals-bar-icon-box'
                     }
-                    onClick={() => getCategory(category)}
+                    onClick={() => setAnimal(id)}
                   >
-                    <svg
+                    <div
                       className="animals-bar-icon"
                       width="24px"
                       height="24px"
                     >
-                      <use href={link} />
-                    </svg>
+                      <img alt={title} src={icon_url} />
+                    </div>
                   </div>
                 </Link>
               );

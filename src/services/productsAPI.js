@@ -26,3 +26,10 @@ export const fetchFilteredProducts = async (category, language, query) => {
   );
   return result;
 };
+
+export const fetchSaleNewProducts = async (category, language, query) => {
+  const result = await axios.get(
+    `/animals/${category}/products?lang=${language}&${query}`
+  );
+  return result;
+};
