@@ -30,7 +30,7 @@ const Main = () => {
       />
       <GlobalContainer>
         <BrandsSection />
-        <Promotions query="is_new=true" title={t('Новинки')} />
+        <Promotions query="new=1" title={t('Новинки')} />
       </GlobalContainer>
       <HelpRegisterSection
         animal="cat"
