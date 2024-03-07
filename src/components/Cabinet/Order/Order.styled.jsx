@@ -2,12 +2,19 @@ import styled from 'styled-components';
 
 export const StyledOrderBG = styled.div`
   background-color: #fff;
+  padding: 40px 24px;
 `;
 
 export const StyledOrder = styled.div`
   background-color: #fff;
   padding: 0 16px 24px;
 
+  .order_title-group {
+    display: flex;
+    align-items: top;
+    /* justify-content: center; */
+    gap: 16px;
+  }
   .order__title {
     font-size: 14px;
     font-weight: 400;

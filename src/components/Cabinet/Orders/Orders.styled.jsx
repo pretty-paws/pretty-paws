@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export const StyledOrders = styled.div`
+  width: 100%;
   @media screen and (min-width: 834px) {
     border-radius: 8px;
     background: #fff;
@@ -91,7 +92,7 @@ export const StyledOrders = styled.div`
     font-weight: 400;
     line-height: 18px;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: end;
     gap: 8px;
   }
