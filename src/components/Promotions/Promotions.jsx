@@ -27,7 +27,7 @@ const Promotions = observer(() => {
   const {
     catalog: { state, saleProducts, getFilteredSaleProducts },
   } = store;
-  console.log('newProducts', saleProducts.length);
+  // console.log('newProducts', saleProducts.length);
 
   useEffect(() => {
     setLoading(true);

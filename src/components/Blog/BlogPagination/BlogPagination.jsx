@@ -42,7 +42,7 @@ const BlogPagination = observer(
     const handlePaginationClick = numPage => {
       // setCurrentPage(numPage);
       // setActiveLoadMore(true);
-      console.log('numPage', numPage);
+      // console.log('numPage', numPage);
 
       setCurrentPage(numPage);
       setActiveLoadMore(true);
@@ -56,10 +56,10 @@ const BlogPagination = observer(
         setActiveLoadMore(true);
       }
     };
-    console.log('currentPage', currentPage);
-    console.log('perpage', perPage);
-    console.log('chosenCategory', chosenCategory);
-    console.log('linksBlogs', linksBlogs);
+    // console.log('currentPage', currentPage);
+    // console.log('perpage', perPage);
+    // console.log('chosenCategory', chosenCategory);
+    // console.log('linksBlogs', linksBlogs);
     return screen === 'desktop'
       ? totalPages > 1 && (
           <div className="blog__pagination">

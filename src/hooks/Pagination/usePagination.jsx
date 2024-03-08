@@ -24,7 +24,7 @@ export const usePagination = ({ totalCount, pageSize }) => {
   // }, [screen]);
   const paginationRange = useMemo(() => {
     const totalPageCount = Math.ceil(totalCount / pageSize);
-    console.log(totalPageCount, totalCount, pageSize);
+    // console.log(totalPageCount, totalCount, pageSize);
 
     return Array.from({ length: totalPageCount }, (_, index) => index + 1);
   }, [totalCount, pageSize]);

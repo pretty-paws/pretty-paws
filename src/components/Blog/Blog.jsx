@@ -107,7 +107,7 @@ const Blog = observer(() => {
   const handlePaginationClick = numPage => {
     // setCurrentPage(numPage);
     // setActiveLoadMore(true);
-    console.log('numPage', numPage);
+    // console.log('numPage', numPage);
 
     setCurrentPage(numPage);
     setActiveLoadMore(true);

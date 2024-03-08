@@ -15,7 +15,7 @@ const BigProductCard = observer(() => {
   const { t } = useTranslation();
   const { screen } = useWindowSize();
   const location = useLocation();
-  console.log(location.pathname);
+  // console.log(location.pathname);
 
   const store = useStore();
   const {

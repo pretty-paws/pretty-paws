@@ -28,7 +28,7 @@ const New = observer(() => {
   const {
     catalog: { state, newProducts, getFilteredNewProducts },
   } = store;
-  console.log('newProducts', newProducts.length);
+  // console.log('newProducts', newProducts.length);
 
   useEffect(() => {
     setLoading(true);

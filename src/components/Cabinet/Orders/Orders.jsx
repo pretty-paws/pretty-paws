@@ -16,7 +16,7 @@ const Orders = observer(() => {
     cart: { orders },
   } = store;
 
-  console.log('orders', orders);
+  // console.log('orders', orders);
 
   return (
     <StyledOrders>

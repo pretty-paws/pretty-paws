@@ -51,7 +51,7 @@ const FilterPage = observer(() => {
     const slug = getSubcategory(subcategoryID) || 'tinned-feed-and-pouches';
     getFilteredProducts(categoryID || 2, language, `&subcategories[0]=${slug}`);
   }, [subcategoryID]);
-  console.log(screen);
+  // console.log(screen);
   return (
     <>
       <StyledFilterPage>
