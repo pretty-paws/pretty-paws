@@ -2,9 +2,10 @@ import { observer } from 'mobx-react-lite';
 import React from 'react';
 import { useStore } from '../../../store/AuthProvider';
 import { parseDate } from '../../../utils/parseDate';
-import CabinetTitle from '../PersonalData/CabinetTitle/CabinetTitle';
+// import CabinetTitle from '../PersonalData/CabinetTitle/CabinetTitle';
 import { StyledOrder, StyledOrderBG } from './Order.styled';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
+import sprite from '../../../img/svg-sprite/sprite.svg';
 
 const Order = observer(() => {
   const store = useStore();
@@ -16,13 +17,24 @@ const Order = observer(() => {
   const { cart, total, creationDate } = orders[orderIndex];
   return (
     <StyledOrderBG>
-      <CabinetTitle header={'Мої замовлення'} />
+      {/* <CabinetTitle header={'Мої замовлення'} /> */}
 
       <StyledOrder>
         <div key={orderIndex}>
-          <h4 className="order__title">
-            Замовлення № {orderIndex + 1} від {parseDate(creationDate)}
-          </h4>
+          <Link to="/cabinet/orders">
+            <div className="order_title-group">
+              <svg
+                className="pagination__arrow-prev"
+                width="22px"
+                height="22px"
+              >
+                <use href={sprite + '#long_arrow'} />
+              </svg>
+              <h4 className="order__title">
+                Замовлення № {orderIndex + 1} від {parseDate(creationDate)}
+              </h4>
+            </div>
+          </Link>
           <div className="order__table">
             {cart.map(
               ({
