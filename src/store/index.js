@@ -11,6 +11,8 @@ import { BlogStore } from './BlogStore';
 
 import { NovaPoshta } from './NovaPoshta';
 
+import { HeroStore } from './HeroStore';
+
 export class RootStore {
   auth = new AuthStore();
   cart = new CartStore();
@@ -20,6 +22,7 @@ export class RootStore {
   animal = new AnimalStore();
   category = new CategoryStore();
   novaPoshta = new NovaPoshta();
+  hero = new HeroStore();
 
   constructor() {
     makeAutoObservable(this, {}, { autoBind: true });

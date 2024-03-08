@@ -22,7 +22,7 @@ export const StyledHero = styled.section`
     max-height: 380px;
 
     @media screen and (min-width: 834px) {
-      max-height: 450px;
+      min-height: 450px;
     }
   }
 

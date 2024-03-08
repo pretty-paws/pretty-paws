@@ -14,6 +14,7 @@ const App = observer(() => {
     cart: { getProducts },
     blog: { getBlogs },
     catalog: { getAnimals },
+    hero: { getOfferByAnimal },
   } = store;
 
   useEffect(() => {
@@ -27,6 +28,7 @@ const App = observer(() => {
           getAnimals(language),
           getBlogs(language),
           getProducts(language),
+          getOfferByAnimal(language),
         ]);
       } catch (error) {
         console.error('Error fetching data:', error);

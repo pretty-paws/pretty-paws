@@ -8,14 +8,14 @@ import useWindowSize from '../../../hooks/useWindowSize';
 import { useStore } from '../../../store/AuthProvider';
 
 const BlogPagination = observer(
-  (
+  ({
     perPage,
     // setPerPage,
     setActiveLoadMore,
     currentPage,
     setCurrentPage,
-    chosenCategory
-  ) => {
+    chosenCategory,
+  }) => {
     const { screen } = useWindowSize();
     const store = useStore();
     const {
@@ -42,7 +42,7 @@ const BlogPagination = observer(
     const handlePaginationClick = numPage => {
       // setCurrentPage(numPage);
       // setActiveLoadMore(true);
-      // console.log('numPage', numPage);
+
 
       setCurrentPage(numPage);
       setActiveLoadMore(true);
@@ -56,10 +56,7 @@ const BlogPagination = observer(
         setActiveLoadMore(true);
       }
     };
-    // console.log('currentPage', currentPage);
-    // console.log('perpage', perPage);
-    // console.log('chosenCategory', chosenCategory);
-    // console.log('linksBlogs', linksBlogs);
+
     return screen === 'desktop'
       ? totalPages > 1 && (
           <div className="blog__pagination">
@@ -69,7 +66,7 @@ const BlogPagination = observer(
                   state={{ from: '/blog/news' }}
                   to={{
                     pathname: `/blog/news/`,
-                    search: `?page=${currentPage}&per_page=${perPage} ${
+                    search: `?page=${currentPage}&per_page=${perPage}${
                       chosenCategory ? `&categories[0]=${chosenCategory}` : ''
                     }`,
                   }}
@@ -102,7 +99,7 @@ const BlogPagination = observer(
                         state={{ from: '/blog/news' }}
                         to={{
                           pathname: `/blog/news/`,
-                          search: `?page=${currentPage}&per_page=${perPage} ${
+                          search: `?page=${currentPage}&per_page=${perPage}${
                             chosenCategory
                               ? `&categories[0]=${chosenCategory}`
                               : ''
@@ -123,7 +120,7 @@ const BlogPagination = observer(
                   state={{ from: '/blog/news' }}
                   to={{
                     pathname: `/blog/news/`,
-                    search: `?page=${currentPage}&per_page=${perPage} ${
+                    search: `?page=${currentPage}&per_page=${perPage}${
                       chosenCategory ? `&categories[0]=${chosenCategory}` : ''
                     }`,
                   }}

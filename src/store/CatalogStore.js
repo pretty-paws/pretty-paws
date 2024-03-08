@@ -217,7 +217,7 @@ export class CatalogStore {
     this.state = 'pending';
     try {
       const { data } = await fetchSaleNewProducts(category, language, query);
-      // console.log(data.data);
+
       runInAction(() => {
         this.saleProducts = data.data;
         this.state = 'done';
@@ -234,7 +234,7 @@ export class CatalogStore {
     this.state = 'pending';
     try {
       const { data } = await fetchSaleNewProducts(category, language, query);
-      // console.log(data.data);
+
       runInAction(() => {
         this.newProducts = data.data;
         this.state = 'done';

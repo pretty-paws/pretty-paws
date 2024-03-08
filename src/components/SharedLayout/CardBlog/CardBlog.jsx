@@ -1,4 +1,5 @@
 import React from 'react';
+// need for visible html doc with back end
 import DOMPurify from 'dompurify';
 import sprite from '../../../img/svg-sprite/sprite.svg';
 import { StyledCardBlog } from './CardBlog.styled';
