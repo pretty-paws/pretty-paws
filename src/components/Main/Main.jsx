@@ -40,6 +40,7 @@ const Main = observer(() => {
         }
         button={authorised ? t('До каталогу') : t('Зареєструйся')}
       />
+      z
       <GlobalContainer>
         <BrandsSection />
         <Promotions query="new=1" title={t('Новинки')} />

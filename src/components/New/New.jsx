@@ -58,7 +58,7 @@ const New = observer(() => {
   return (
     <GlobalContainer>
       <NewProductsContainer>
-        <h2>{t('Новинки')}</h2>
+        <h2 className="title">{t('Новинки')}</h2>
         <div className="promotion-animals-bar">
           <AnimalsBar type={'section'} setAnimal={setAnimal} animal={animal} />
         </div>
