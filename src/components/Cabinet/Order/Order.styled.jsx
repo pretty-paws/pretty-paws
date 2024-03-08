@@ -2,30 +2,38 @@ import styled from 'styled-components';
 
 export const StyledOrderBG = styled.div`
   background-color: #fff;
+  padding: 40px 24px;
 `;
 
 export const StyledOrder = styled.div`
   background-color: #fff;
   padding: 0 16px 24px;
 
+  .order_title-group {
+    display: flex;
+    align-items: top;
+    /* justify-content: center; */
+    gap: 16px;
+  }
   .order__title {
     font-size: 14px;
     font-weight: 400;
     line-height: 18px;
-    margin-bottom: 16px;
+    margin-bottom: 40px;
   }
 
   .order__table {
     border-bottom: 1px solid #d6d6d6;
+    padding-bottom: 10px;
   }
 
   .order__table-row {
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 400;
     line-height: 16px;
 
     display: grid;
-    grid-template-columns: 55% 20% 20%;
+    grid-template-columns: 55% 23% 23%;
     margin-bottom: 8px;
 
     & p:nth-of-type(2) {
@@ -41,8 +49,8 @@ export const StyledOrder = styled.div`
     margin-top: 16px;
     display: flex;
     justify-content: space-between;
-    font-size: 14px;
-    font-weight: 400;
+    font-size: 16px;
+    font-weight: 500;
     line-height: 18px;
   }
 `;

@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export const StyledOrders = styled.div`
+  width: 100%;
   @media screen and (min-width: 834px) {
     border-radius: 8px;
     background: #fff;
@@ -58,7 +59,7 @@ export const StyledOrders = styled.div`
     }
 
     &.white-bg {
-      padding: 40px 8px;
+      padding: 16px 8px 40px;
       border-radius: 8px;
       background: #fff;
     }
@@ -76,6 +77,7 @@ export const StyledOrders = styled.div`
     display: flex;
     flex: 1 1 auto;
     justify-content: space-between;
+    align-items: flex-start;
     border-bottom: 1px solid #d6d6d6;
   }
 
@@ -91,7 +93,7 @@ export const StyledOrders = styled.div`
     font-weight: 400;
     line-height: 18px;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: end;
     gap: 8px;
   }

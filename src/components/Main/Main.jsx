@@ -7,9 +7,15 @@ import HelpRegisterSection from './HelpRegisterSection/HelpRegisterSection';
 import BrandsSection from './BrandsSection/BrandsSection';
 import Blog from './Blog/Blog';
 import { useTranslation } from 'react-i18next';
+import { observer } from 'mobx-react-lite';
+import { useStore } from '../../store/AuthProvider';
 
-const Main = () => {
+const Main = observer(() => {
   const { t } = useTranslation();
+  const store = useStore();
+  const {
+    auth: { authorised },
+  } = store;
 
   return (
     <StyledMain>
@@ -22,12 +28,19 @@ const Main = () => {
       </GlobalContainer>
       <HelpRegisterSection
         animal="dog"
-        title={t('Стань своїм')}
-        text={t(
-          'Зареєструйся на сайті і отримай знижку 5% на перше замовлення.  Для своїх у нас безліч переваг'
-        )}
-        button={t('Зареєструйся')}
+        title={authorised ? t('Pretty Paws') : t('Стань своїм')}
+        text={
+          authorised
+            ? t(
+                'Забезпечте своїх улюбленців якісними товарами за доступними цінами. Бо вони заслуговують найкращого!'
+              )
+            : t(
+                'Зареєструйся на сайті і отримай знижку 5% на перше замовлення.  Для своїх у нас безліч переваг'
+              )
+        }
+        button={authorised ? t('До каталогу') : t('Зареєструйся')}
       />
+      z
       <GlobalContainer>
         <BrandsSection />
         <Promotions query="new=1" title={t('Новинки')} />
@@ -43,6 +56,6 @@ const Main = () => {
       </GlobalContainer>
     </StyledMain>
   );
-};
+});
 
 export default Main;

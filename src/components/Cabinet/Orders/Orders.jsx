@@ -16,18 +16,20 @@ const Orders = observer(() => {
     cart: { orders },
   } = store;
 
-  console.log('orders', orders);
+  // console.log('orders', orders);
 
   return (
     <StyledOrders>
       <CabinetTitle header={'Мої замовлення'} />
       {orders.length !== 0 && (
         <div className="orders__body white-bg">
-          <h3 className="orders__title">Мої замовлення</h3>
+          {/* <h3 className="orders__title">Мої замовлення</h3> */}
           {orders.map(({ total, creationDate }, orderIndex) => (
             <Link to={`${orderIndex}`} key={orderIndex}>
               <div className="orders__table">
-                <h4 className="orders__table_number">№ {orderIndex + 1}</h4>
+                <h4 className="orders__table_number">
+                  № замовлення {orderIndex + 1}
+                </h4>
                 <div className="orders__table_sum-date">
                   <p>{total}.00 грн</p>
                   <p>{parseDate(creationDate)}</p>

@@ -223,7 +223,7 @@ export class AuthStore {
   async unSubscribe(data) {
     this.state = 'pending';
     try {
-      console.log(data);
+      // console.log(data);
       await unsubscribe(data);
 
       runInAction(() => {

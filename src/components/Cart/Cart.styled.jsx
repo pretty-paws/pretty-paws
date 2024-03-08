@@ -66,6 +66,9 @@ export const StyledModalBox = styled.div`
     }
 
     @media screen and (min-width: 1440px) {
+      font-size: 24px;
+      font-weight: 700;
+      line-height: 32px;
     }
   }
 
@@ -415,7 +418,7 @@ export const StyledModalBox = styled.div`
 
     @media screen and (min-width: 1440px) {
       flex: none;
-      width: 100%;
+      width: 235px;
       height: 52px;
     }
   }
@@ -437,5 +440,27 @@ export const StyledModalBox = styled.div`
       width: 100%;
       height: 52px;
     }
+  }
+
+  .cart__empty-info {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    margin-bottom: 50px;
+  }
+
+  .cart__empty-text {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
+  }
+
+  .cart__additional-info.empty {
+    padding: 40px 24px;
+    border-radius: 8px;
+    margin-bottom: 160px;
   }
 `;
