@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import CardBlog from '../SharedLayout/CardBlog/CardBlog';
-import sprite from '../../img/svg-sprite/sprite.svg';
+// import sprite from '../../img/svg-sprite/sprite.svg';
 import { observer } from 'mobx-react-lite';
 import { useStore } from '../../store/AuthProvider';
 import { GlobalContainer } from '../../global/GlobalContainer';
@@ -10,7 +10,8 @@ import Promotions from '../Main/PromotionsWithDiscount/Promotions';
 import { useTranslation } from 'react-i18next';
 import useWindowSize from '../../hooks/useWindowSize';
 import { Link } from 'react-router-dom';
-// import BlogPagination from './BlogPagination/BlogPagination';
+// navigate
+import BlogPagination from './BlogPagination/BlogPagination';
 // import DOMPurify from 'dompurify';
 
 const Blog = observer(() => {
@@ -23,17 +24,17 @@ const Blog = observer(() => {
     blog: {
       stateCategory,
       categories,
-      linksBlogs,
+      //   linksBlogs,
       //   function that get all categories
       getCategories,
       stateFilterBlog,
       //   function that get all news filtered by categories
       filterBlogs,
       getFilterBlogs,
-      totalPages,
+      //   totalPages,
     },
   } = store;
-  const [perPage, setPerPage] = useState(8);
+  const [perPage, setPerPage] = useState(2);
 
   //   const [chosenCategory, setChosenCategory] = useState([]);
   const [chosenCategory, setChosenCategory] = useState();
@@ -47,7 +48,7 @@ const Blog = observer(() => {
     switch (screen) {
       case 'desktop':
         // newPerPage = 3;
-        newPerPage = 8;
+        newPerPage = 2;
         break;
       case 'tablet':
         newPerPage = 6;
@@ -99,28 +100,34 @@ const Blog = observer(() => {
     }
   }, [chosenCategory]);
 
-  const handleLoadMore = () => {
-    setCurrentPage(prevPage => prevPage + 1);
-    setActiveLoadMore(true);
-  };
+  //   const handleLoadMore = () => {
+  //     setCurrentPage(prevPage => prevPage + 1);
+  //     setActiveLoadMore(true);
+  //   };
 
-  const handlePaginationClick = numPage => {
-    // setCurrentPage(numPage);
-    // setActiveLoadMore(true);
-    console.log('numPage', numPage);
+  //   const handlePaginationClick = numPage => {
+  //     console.log(' handlePaginationClick before = ', numPage);
+  //     console.log(' handlePaginationClick current before = ', currentPage);
+  //     // setCurrentPage(numPage);
+  //     // setActiveLoadMore(true);
+  //     // console.log('numPage', numPage);
 
-    setCurrentPage(numPage);
-    setActiveLoadMore(true);
-  };
-  const handlePaginationArrowClick = type => {
-    if (type === 'prev') {
-      setCurrentPage(prevPage => prevPage - 1);
-      setActiveLoadMore(true);
-    } else {
-      setCurrentPage(prevPage => prevPage + 1);
-      setActiveLoadMore(true);
-    }
-  };
+  //     setCurrentPage(numPage);
+  //     setActiveLoadMore(true);
+  //     console.log(' handlePaginationClick current after = ', currentPage);
+  //   };
+  //   const handlePaginationArrowClick = type => {
+  //     console.log(' handlePaginationArrowClick before  = ', currentPage);
+
+  //     if (type === 'prev') {
+  //       setCurrentPage(prevPage => prevPage - 1);
+  //       setActiveLoadMore(true);
+  //     } else {
+  //       setCurrentPage(prevPage => prevPage + 1);
+  //       setActiveLoadMore(true);
+  //     }
+  //     console.log(' handlePaginationArrowClick after  = ', currentPage);
+  //   };
 
   return (
     <StyledBlog>
@@ -213,15 +220,14 @@ const Blog = observer(() => {
                 )
               : null}
           </div>
-          {/* <BlogPagination
+          <BlogPagination
             perPage={perPage}
-            // setPerPage={setPerPage}
             setActiveLoadMore={setActiveLoadMore}
             currentPage={currentPage}
             setCurrentPage={setCurrentPage}
             chosenCategory={chosenCategory}
-          ></BlogPagination> */}
-          {screen === 'desktop'
+          ></BlogPagination>
+          {/* {screen === 'desktop'
             ? totalPages > 1 && (
                 <div className="blog__pagination">
                   {currentPage > 1 &&
@@ -232,7 +238,7 @@ const Blog = observer(() => {
                         state={{ from: '/blog/news' }}
                         to={{
                           pathname: `/blog/news/`,
-                          search: `?page=${currentPage}&per_page=${perPage} ${
+                          search: `?page=${currentPage}&per_page=${perPage}${
                             chosenCategory
                               ? `&categories[0]=${chosenCategory}`
                               : ''
@@ -267,17 +273,18 @@ const Blog = observer(() => {
                               state={{ from: '/blog/news' }}
                               to={{
                                 pathname: `/blog/news/`,
-                                search: `?page=${currentPage}&per_page=${perPage} ${
+                                search: `?page=${currentPage}&per_page=${perPage}${
                                   chosenCategory
                                     ? `&categories[0]=${chosenCategory}`
                                     : ''
                                 }`,
                               }}
                               onClick={() =>
-                                handlePaginationClick(Number(link.label))
+                                handlePaginationClick(() => Number(link.label))
                               }
                             >
                               <p className="pagination__item">{link.label}</p>
+                              <p>{currentPage}</p>
                             </Link>
                           )}
                       </React.Fragment>
@@ -288,7 +295,7 @@ const Blog = observer(() => {
                         state={{ from: '/blog/news' }}
                         to={{
                           pathname: `/blog/news/`,
-                          search: `?page=${currentPage}&per_page=${perPage} ${
+                          search: `?page=${currentPage}&per_page=${perPage}${
                             chosenCategory
                               ? `&categories[0]=${chosenCategory}`
                               : ''
@@ -315,7 +322,7 @@ const Blog = observer(() => {
                 <button className="blog__more-btn" onClick={handleLoadMore}>
                   Завантажити ще
                 </button>
-              )}
+              )} */}
         </div>
       </GlobalContainer>
 

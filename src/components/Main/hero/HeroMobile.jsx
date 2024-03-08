@@ -6,15 +6,16 @@ import { Autoplay } from 'swiper/modules';
 import { StyledHeroMobile } from './HeroMobile.styled';
 import 'swiper/css';
 
-import imgCat from '../../../img/hero/cat.png';
-import imgDog from '../../../img/hero/dog.jpg';
-import imgFish from '../../../img/hero/fish.jpg';
-import imgRodents from '../../../img/hero/rodents.jpg';
-import imgBird from '../../../img/hero/bird.jpg';
-import imgReptiles from '../../../img/hero/reptiles.jpg';
 import HeroPromotion from './HeroPromotion';
+import { observer } from 'mobx-react-lite';
+import { useStore } from '../../../store/AuthProvider';
 
-const HeroMobile = () => {
+const HeroMobile = observer(() => {
+  const store = useStore();
+  const {
+    hero: { offerByAnimal },
+  } = store;
+
   return (
     <StyledHeroMobile>
       <Swiper
@@ -26,55 +27,24 @@ const HeroMobile = () => {
         speed={1500}
         modules={[Autoplay]}
       >
-        <SwiperSlide>
-          <img className="promotion__img-bg" src={imgCat} alt="imgCat" />
-          <span></span>
-          <HeroPromotion
-            text={'Купуйте сухий корм для котів від ACANA  зі знижкою 20%'}
-          ></HeroPromotion>
-        </SwiperSlide>
-        <SwiperSlide>
-          <img className="promotion__img-bg" src={imgDog} alt="imgCat" />
-          <span></span>
-          <HeroPromotion
-            text={'Купуйте сухий корм для котів від ACANA  зі знижкою 20%'}
-          ></HeroPromotion>
-        </SwiperSlide>
-        <SwiperSlide>
-          <img className="promotion__img-bg" src={imgFish} alt="imgCat" />
-          <span></span>
-
-          <HeroPromotion
-            text={'Купуйте сухий корм для котів від ACANA  зі знижкою 20%'}
-          ></HeroPromotion>
-        </SwiperSlide>
-        <SwiperSlide>
-          <img className="promotion__img-bg" src={imgRodents} alt="imgCat" />
-          <span></span>
-
-          <HeroPromotion
-            text={'Купуйте сухий корм для котів від ACANA  зі знижкою 20%'}
-          ></HeroPromotion>
-        </SwiperSlide>
-        <SwiperSlide>
-          <img className="promotion__img-bg" src={imgBird} alt="imgCat" />
-          <span></span>
-
-          <HeroPromotion
-            text={'Купуйте сухий корм для котів від ACANA  зі знижкою 20%'}
-          ></HeroPromotion>
-        </SwiperSlide>
-        <SwiperSlide>
-          <img className="promotion__img-bg" src={imgReptiles} alt="imgCat" />
-          <span></span>
-
-          <HeroPromotion
-            text={'Купуйте сухий корм для котів від ACANA  зі знижкою 20%'}
-          ></HeroPromotion>
-        </SwiperSlide>
+        {offerByAnimal &&
+          offerByAnimal.map(offer => (
+            <SwiperSlide key={offer.id}>
+              <img
+                className="promotion__img-bg"
+                src={offer.image_url}
+                alt={offer.animal}
+              />
+              <span></span>
+              <HeroPromotion
+                type={offer.offer_type}
+                text={offer.offer_text}
+              ></HeroPromotion>
+            </SwiperSlide>
+          ))}
       </Swiper>
     </StyledHeroMobile>
   );
-};
+});
 
 export default HeroMobile;
