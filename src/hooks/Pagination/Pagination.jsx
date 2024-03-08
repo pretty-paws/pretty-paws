@@ -5,6 +5,8 @@ import sprite from '../../../src/img/svg-sprite/sprite.svg';
 // import classnames from 'classnames';
 import { usePagination } from './usePagination';
 import { StyledPagination } from './Pagination.styled';
+import { useEffect } from 'react';
+import { useState } from 'react';
 // import './pagination.css';
 const Pagination = props => {
   const {
@@ -27,15 +29,26 @@ const Pagination = props => {
     return null;
   }
 
+  const [pageNumber, setPageNumber] = useState();
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  }, [pageNumber]);
+
   const onNext = () => {
     if (currentPage < totalCount) {
       onPageChange(currentPage + 1);
+      setPageNumber(currentPage + 1);
     }
   };
 
   const onPrevious = () => {
     if (currentPage > 1) {
       onPageChange(currentPage - 1);
+      setPageNumber(currentPage - 1);
     }
   };
 
@@ -66,7 +79,10 @@ const Pagination = props => {
               : 'pagination-item'
           }
           // selected={pageNumber === currentPage}
-          onClick={() => onPageChange(pageNumber)}
+          onClick={() => {
+            onPageChange(pageNumber);
+            setPageNumber(pageNumber);
+          }}
         >
           {pageNumber}
         </li>

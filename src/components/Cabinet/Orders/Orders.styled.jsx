@@ -59,7 +59,7 @@ export const StyledOrders = styled.div`
     }
 
     &.white-bg {
-      padding: 40px 8px;
+      padding: 16px 8px 40px;
       border-radius: 8px;
       background: #fff;
     }
@@ -77,6 +77,7 @@ export const StyledOrders = styled.div`
     display: flex;
     flex: 1 1 auto;
     justify-content: space-between;
+    align-items: flex-start;
     border-bottom: 1px solid #d6d6d6;
   }
 
