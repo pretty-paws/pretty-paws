@@ -59,7 +59,12 @@ const Promotions = observer(() => {
       <NewProductsContainer>
         <h2 className="title">{t('Акції')}</h2>
         <div className="promotion-animals-bar">
-          <AnimalsBar type={'section'} setAnimal={setAnimal} animal={animal} />
+          <AnimalsBar
+            type={'section'}
+            setAnimal={setAnimal}
+            animal={animal}
+            component={'promotions'}
+          />
         </div>
         <div className="card-list">
           {state === 'done' ? (

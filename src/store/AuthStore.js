@@ -49,6 +49,20 @@ export class AuthStore {
     this.state = 'done';
   }
 
+  setSubscription(id) {
+    const isCategoryChosen = this.subscriptions.includes(id);
+    if (isCategoryChosen) {
+      const newChosenCategory = this.subscriptions.filter(item => item !== id);
+      this.subscriptions = newChosenCategory;
+    } else {
+      this.subscriptions = [...this.subscriptions, id];
+    }
+  }
+
+  setEmptySubscriptions() {
+    this.subscriptions = [];
+  }
+
   async signUp(userData) {
     this.state = 'pending';
     try {

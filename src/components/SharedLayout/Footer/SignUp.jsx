@@ -12,7 +12,7 @@ import { useForm } from 'react-hook-form';
 
 const SignUp = observer(() => {
   const { t } = useTranslation();
-  const [chosenCategory, setChosenCategory] = useState([]);
+  // const [chosenCategory, setChosenCategory] = useState([]);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [visible, setVisible] = useState(true);
 
@@ -29,7 +29,17 @@ const SignUp = observer(() => {
 
   const store = useStore();
   const {
-    auth: { email, authorised, state, setState, errorType, error, subscribe },
+    auth: {
+      email,
+      authorised,
+      state,
+      setState,
+      errorType,
+      error,
+      subscribe,
+      subscriptions,
+      setEmptySubscriptions,
+    },
   } = store;
 
   const {
@@ -43,33 +53,16 @@ const SignUp = observer(() => {
     },
   });
 
-  function getCategory(category) {
-    setIsSubmitted(false);
-    setState('done');
-    const isCategoryChosen = chosenCategory.includes(category);
-    if (isCategoryChosen) {
-      const newChosenCategory = [...chosenCategory];
-      const index = newChosenCategory.indexOf(category);
-      newChosenCategory.splice(index, 1);
-      setChosenCategory(newChosenCategory);
-    } else {
-      setChosenCategory(prevChosenCategory => [
-        ...prevChosenCategory,
-        category,
-      ]);
-    }
-  }
-
-  const HandleSubscribe = data => {
+  const handleSubscribe = data => {
     const formData = new FormData();
     formData.append('email', data.email);
-    chosenCategory.forEach(category => {
+    subscriptions.forEach(category => {
       formData.append(`${`animal_id[${category - 1}]`}`, category);
     });
     subscribe(formData);
     setIsSubmitted(true);
     setVisible(true);
-    setChosenCategory([]);
+    setEmptySubscriptions();
   };
 
   return (
@@ -78,8 +71,8 @@ const SignUp = observer(() => {
         <div className="sign-up__container">
           <p className="sign-up__title">{t('Підписатися на акції для')}</p>
           <AnimalsBar
-            getCategory={getCategory}
-            chosenCategory={chosenCategory}
+            type={'signUp'}
+            // chosenCategory={chosenCategory}
             isSubmitted={isSubmitted}
           />
           <div
@@ -119,7 +112,7 @@ const SignUp = observer(() => {
                   className="sign-up-icon"
                   width="24px"
                   height="24px"
-                  onClick={handleSubmit(HandleSubscribe)}
+                  onClick={handleSubmit(handleSubscribe)}
                   disabled={isValid}
                 >
                   <use href={sprite + '#subscribe'} />

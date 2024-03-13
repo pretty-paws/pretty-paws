@@ -13,17 +13,18 @@ const AnimalsBar = observer(
   ({ type, getCategory, chosenCategory, isSubmitted, setAnimal, animal }) => {
     const store = useStore();
     const {
-      catalog: {
-        animals,
-        // getFilteredNewProducts, getFilteredSaleProducts
-      },
+      catalog: { animals },
+      auth: { setSubscription, subscriptions },
     } = store;
 
     function includesCategory(category) {
-      if (isSubmitted) return false;
-      if (!chosenCategory) return;
-      const isCategoryChosen = chosenCategory.includes(category);
-      return isCategoryChosen;
+      if (!chosenCategory || isSubmitted) return false;
+      return chosenCategory.includes(category);
+    }
+
+    function includesSubscription(id) {
+      // if (isSubmitted) return false;
+      return subscriptions.includes(id);
     }
 
     return (
@@ -56,16 +57,23 @@ const AnimalsBar = observer(
           </StyledVerticalAnimalsBar>
         ) : (
           <StyledAnimalsBar type={type}>
-            {animals.map(({ category, title, icon_url, id }) => {
+            {animals.map(({ title, icon_url, id }) => {
               return (
-                <Link key={title}>
+                <Link key={id}>
                   <div
                     className={
-                      includesCategory(category) || id === animal
+                      type === 'signUp'
+                        ? includesSubscription(id)
+                          ? 'animals-bar-icon-box chosen'
+                          : 'animals-bar-icon-box'
+                        : id === animal
                         ? 'animals-bar-icon-box chosen'
                         : 'animals-bar-icon-box'
                     }
-                    onClick={() => setAnimal(id)}
+                    onClick={() => {
+                      type === 'section' && setAnimal(id);
+                      type === 'signUp' && setSubscription(id);
+                    }}
                   >
                     <div
                       className="animals-bar-icon"
