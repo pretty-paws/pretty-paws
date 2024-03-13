@@ -8,12 +8,6 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { observer } from 'mobx-react-lite';
 import { useStore } from '../../../store/AuthProvider';
-import { useEffect } from 'react';
-import { useState } from 'react';
-// import { useEffect } from 'react';
-// import { useState } from 'react';
-// import { useEffect } from 'react';
-// import { useState } from 'react';
 
 const AnimalsBar = observer(
   ({ type, getCategory, chosenCategory, isSubmitted, setAnimal, animal }) => {
@@ -22,23 +16,16 @@ const AnimalsBar = observer(
       catalog: { animals },
       auth: { setSubscription, subscriptions },
     } = store;
-    console.log('subscriptions', subscriptions);
 
     function includesCategory(category) {
       if (!chosenCategory || isSubmitted) return false;
       return chosenCategory.includes(category);
     }
 
-    const [subscription, setSubscriptions] = useState(subscriptions);
-
     function includesSubscription(id) {
-      if (isSubmitted) return false;
-      return subscription.includes(id);
+      // if (isSubmitted) return false;
+      return subscriptions.includes(id);
     }
-
-    useEffect(() => {
-      setSubscriptions(subscriptions);
-    }, [subscriptions]);
 
     return (
       <>
