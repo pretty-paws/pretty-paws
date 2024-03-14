@@ -24,6 +24,9 @@ const MobileCardProduct = observer(
     is_new,
     quantity,
     country,
+    animal,
+    brand,
+    category,
   }) => {
     const { t } = useTranslation();
     const store = useStore();
@@ -32,12 +35,41 @@ const MobileCardProduct = observer(
       cart: { addToCart, alreadyAdded, removeFromCart },
       favourite: { toggleFavourite },
       catalog: { animalSlug, categorySlug, subcategorySlug },
+      comparison: {
+        animalCategory,
+        setCategory,
+        compareList,
+        addToComparison,
+        alreadyAddedToCompare,
+        removeFromComparison,
+      },
     } = store;
 
     const [cartNotification, setCartNotification] = useState(false);
     const [favouriteNotification, setFavouriteNotification] = useState(false);
+    const [compareAdded, setCompareAdded] = useState(false);
+    const [compareMax, setCompareMax] = useState(false);
+    const [compareDiffCategory, setCompareDiffCategory] = useState(false);
+    const [compareDeleted, setCompareDeleted] = useState(false);
     const navigate = useNavigate();
     // const [actionPerformed, setActionPerformed] = useState(false);
+
+    const product = {
+      id,
+      title,
+      description,
+      short_description,
+      image_url,
+      price,
+      promotional_price,
+      is_promotional,
+      is_new,
+      quantity,
+      country,
+      brand,
+      category,
+      animal,
+    };
 
     function handleDescription(text) {
       return text.slice(0, 35) + '...';
@@ -55,19 +87,19 @@ const MobileCardProduct = observer(
         return;
       }
 
-      const product = {
-        id,
-        title,
-        description,
-        short_description,
-        image_url,
-        price,
-        promotional_price,
-        is_promotional,
-        quantity,
-        country,
-        amount: 1,
-      };
+      // const product = {
+      //   id,
+      //   title,
+      //   description,
+      //   short_description,
+      //   image_url,
+      //   price,
+      //   promotional_price,
+      //   is_promotional,
+      //   quantity,
+      //   country,
+      //   amount: 1,
+      // };
       addToCart(product);
       setCartNotification(true);
       // setActionPerformed(true);
@@ -108,6 +140,40 @@ const MobileCardProduct = observer(
         return quantity.slice(0, 5);
       }
     };
+
+    function addToFav(e) {
+      e.stopPropagation();
+      if (animalCategory === null) {
+        setCategory(animal.slug);
+        addToComparison(product);
+        setCompareAdded(true);
+      } else if (
+        animal.slug === animalCategory &&
+        compareList.length < 4 &&
+        !alreadyAddedToCompare(id)
+      ) {
+        addToComparison(product);
+        setCompareAdded(true);
+      } else if (animalCategory !== null && animal.slug !== animalCategory) {
+        setCompareDiffCategory(true);
+      } else if (
+        animal.slug === animalCategory &&
+        compareList.length >= 4 &&
+        !alreadyAddedToCompare(id)
+      ) {
+        setCompareMax(true);
+      } else if (
+        animal.slug === animalCategory &&
+        compareList.length >= 4 &&
+        alreadyAddedToCompare(id)
+      ) {
+        removeFromComparison(id);
+        setCompareDeleted(true);
+      } else if (alreadyAddedToCompare(id)) {
+        removeFromComparison(id);
+        setCompareDeleted(true);
+      }
+    }
     return (
       <StyledMobileCardProduct
         biggerMargin={promotional_price !== 0}
@@ -175,7 +241,18 @@ const MobileCardProduct = observer(
                 </svg>
               )}
             </div>
-            <svg width=" 24px" height=" 24px">
+            <svg
+              width=" 24px"
+              height=" 24px"
+              fill="currentColor"
+              stroke="none"
+              onClick={addToFav}
+              className={
+                alreadyAddedToCompare(id)
+                  ? ' product__compare-icon added'
+                  : 'product__compare-icon'
+              }
+            >
               <use href={sprite + '#scale'} />
             </svg>
           </div>
@@ -209,6 +286,58 @@ const MobileCardProduct = observer(
                 link="/favorite"
                 setNotification={setFavouriteNotification}
                 notification={favouriteNotification}
+              />,
+              document.body
+            )
+          : null}
+        {compareAdded
+          ? createPortal(
+              <Notification
+                text={t('Товар додано до порівняння')}
+                button={t('Переглянути товари')}
+                link="/comparison"
+                setNotification={setCompareAdded}
+                notification={compareAdded}
+              />,
+              document.body
+            )
+          : null}
+        {compareMax
+          ? createPortal(
+              <Notification
+                text={t(
+                  'Ви вже додали максимальну кількість товарів до порівняння (4)'
+                )}
+                button={t('Переглянути товари')}
+                link="/comparison"
+                setNotification={setCompareMax}
+                notification={compareMax}
+              />,
+              document.body
+            )
+          : null}
+        {compareDiffCategory
+          ? createPortal(
+              <Notification
+                text={t(
+                  'Можна порівнювати товари лише з однієї категорії тварин.'
+                )}
+                button={t('Переглянути товари')}
+                link="/comparison"
+                setNotification={setCompareDiffCategory}
+                notification={compareDiffCategory}
+              />,
+              document.body
+            )
+          : null}
+        {compareDeleted
+          ? createPortal(
+              <Notification
+                text={t('Товар видалено з порівняння')}
+                button={t('Переглянути товари')}
+                link="/comparison"
+                setNotification={setCompareDeleted}
+                notification={compareDeleted}
               />,
               document.body
             )

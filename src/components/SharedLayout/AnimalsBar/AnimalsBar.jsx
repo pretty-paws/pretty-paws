@@ -14,7 +14,7 @@ const AnimalsBar = observer(
     const store = useStore();
     const {
       catalog: { animals },
-      auth: { setSubscription, subscriptions },
+      auth: { setSubscriptionIDList, subscriptionsIDList },
     } = store;
 
     function includesCategory(category) {
@@ -22,10 +22,9 @@ const AnimalsBar = observer(
       return chosenCategory.includes(category);
     }
 
-    function includesSubscription(id) {
-      // if (isSubmitted) return false;
-      return subscriptions.includes(id);
-    }
+    const includesSubscription = id => {
+      return subscriptionsIDList.includes(id);
+    };
 
     return (
       <>
@@ -72,7 +71,7 @@ const AnimalsBar = observer(
                     }
                     onClick={() => {
                       type === 'section' && setAnimal(id);
-                      type === 'signUp' && setSubscription(id);
+                      type === 'signUp' && setSubscriptionIDList(id);
                     }}
                   >
                     <div

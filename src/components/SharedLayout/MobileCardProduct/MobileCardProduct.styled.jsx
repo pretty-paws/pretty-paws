@@ -105,6 +105,14 @@ export const StyledMobileCardProduct = styled.div`
   & .product__fav-icon {
     cursor: pointer;
   }
+  &.product__compare-icon {
+    cursor: pointer;
+  }
+
+  .product__compare-icon.added {
+    fill: #53c5bd;
+    stroke: #53c5bd;
+  }
 
   & .product__old-price {
     color: var(--font-color-darkgray);

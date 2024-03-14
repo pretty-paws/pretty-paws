@@ -24,6 +24,9 @@ const CardProduct = observer(
     is_new,
     quantity,
     country,
+    brand,
+    category,
+    animal,
   }) => {
     const { t } = useTranslation();
 
@@ -33,15 +36,44 @@ const CardProduct = observer(
       cart: { addToCart, alreadyAdded, removeFromCart },
       favourite: { toggleFavourite },
       catalog: { animalSlug, categorySlug, subcategorySlug },
+      comparison: {
+        animalCategory,
+        setCategory,
+        compareList,
+        addToComparison,
+        alreadyAddedToCompare,
+        removeFromComparison,
+      },
     } = store;
 
     const [cartNotification, setCartNotification] = useState(false);
     const [favouriteNotification, setFavouriteNotification] = useState(false);
+    const [compareAdded, setCompareAdded] = useState(false);
+    const [compareMax, setCompareMax] = useState(false);
+    const [compareDiffCategory, setCompareDiffCategory] = useState(false);
+    const [compareDeleted, setCompareDeleted] = useState(false);
+
+    // const [compareList, setCompareList] = useState([]);
+
     const navigate = useNavigate();
 
-    // function handleDescription(text) {
-    //   return text.slice(0, 50);
-    // }
+    const product = {
+      id,
+      title,
+      description,
+      short_description,
+      image_url,
+      price,
+      promotional_price,
+      is_promotional,
+      is_new,
+      quantity,
+      country,
+      brand,
+      category,
+      animal,
+      amount: 1,
+    };
 
     function checkFavourite(id) {
       if (!authorised) return false;
@@ -54,22 +86,42 @@ const CardProduct = observer(
         removeFromCart(id);
         return;
       }
-
-      const product = {
-        id,
-        title,
-        description,
-        short_description,
-        image_url,
-        price,
-        promotional_price,
-        is_promotional,
-        quantity,
-        country,
-        amount: 1,
-      };
       addToCart(product);
       setCartNotification(true);
+    }
+
+    function addToFav(e) {
+      e.stopPropagation();
+      if (animalCategory === null) {
+        setCategory(animal.slug);
+        addToComparison(product);
+        setCompareAdded(true);
+      } else if (
+        animal.slug === animalCategory &&
+        compareList.length < 4 &&
+        !alreadyAddedToCompare(id)
+      ) {
+        addToComparison(product);
+        setCompareAdded(true);
+      } else if (animalCategory !== null && animal.slug !== animalCategory) {
+        setCompareDiffCategory(true);
+      } else if (
+        animal.slug === animalCategory &&
+        compareList.length >= 4 &&
+        !alreadyAddedToCompare(id)
+      ) {
+        setCompareMax(true);
+      } else if (
+        animal.slug === animalCategory &&
+        compareList.length >= 4 &&
+        alreadyAddedToCompare(id)
+      ) {
+        removeFromComparison(id);
+        setCompareDeleted(true);
+      } else if (alreadyAddedToCompare(id)) {
+        removeFromComparison(id);
+        setCompareDeleted(true);
+      }
     }
 
     const [errorMessage, setErrorMessage] = useState(false);
@@ -164,7 +216,18 @@ const CardProduct = observer(
                 </svg>
               )}
             </div>
-            <svg width=" 24px" height=" 24px">
+            <svg
+              width=" 24px"
+              height=" 24px"
+              fill="currentColor"
+              stroke="none"
+              onClick={addToFav}
+              className={
+                alreadyAddedToCompare(id)
+                  ? ' product__compare-icon added'
+                  : 'product__compare-icon'
+              }
+            >
               <use href={sprite + '#scale'} />
             </svg>
           </div>
@@ -197,6 +260,59 @@ const CardProduct = observer(
                 link="/favorite"
                 setNotification={setFavouriteNotification}
                 notification={favouriteNotification}
+              />,
+              document.body
+            )
+          : null}
+
+        {compareAdded
+          ? createPortal(
+              <Notification
+                text={t('Товар додано до порівняння')}
+                button={t('Переглянути товари')}
+                link="/comparison"
+                setNotification={setCompareAdded}
+                notification={compareAdded}
+              />,
+              document.body
+            )
+          : null}
+        {compareMax
+          ? createPortal(
+              <Notification
+                text={t(
+                  'Ви вже додали максимальну кількість товарів до порівняння (4)'
+                )}
+                button={t('Переглянути товари')}
+                link="/comparison"
+                setNotification={setCompareMax}
+                notification={compareMax}
+              />,
+              document.body
+            )
+          : null}
+        {compareDiffCategory
+          ? createPortal(
+              <Notification
+                text={t(
+                  'Можна порівнювати товари лише з однієї категорії тварин.'
+                )}
+                button={t('Переглянути товари')}
+                link="/comparison"
+                setNotification={setCompareDiffCategory}
+                notification={compareDiffCategory}
+              />,
+              document.body
+            )
+          : null}
+        {compareDeleted
+          ? createPortal(
+              <Notification
+                text={t('Товар видалено з порівняння')}
+                button={t('Переглянути товари')}
+                link="/comparison"
+                setNotification={setCompareDeleted}
+                notification={compareDeleted}
               />,
               document.body
             )

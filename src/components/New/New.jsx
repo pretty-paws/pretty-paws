@@ -79,6 +79,8 @@ const New = observer(() => {
                 quantity,
                 country,
                 brand,
+                category,
+                animal,
               }) => {
                 return screen !== 'mobile' ? (
                   <CardProduct
@@ -96,6 +98,8 @@ const New = observer(() => {
                     quantity={quantity}
                     country={country}
                     brand={brand}
+                    category={category}
+                    animal={animal}
                   />
                 ) : (
                   <MobileCardProduct
@@ -103,16 +107,18 @@ const New = observer(() => {
                     id={id}
                     title={title}
                     short_description={short_description}
-                    // description={description}
+                    description={description}
                     image_url={image_url}
-                    // slug={slug}
+                    slug={slug}
                     price={price}
                     promotional_price={promotional_price}
                     is_promotional={is_promotional}
                     is_new={is_new}
                     quantity={quantity}
                     country={country}
-                    // brand={brand}
+                    brand={brand}
+                    category={category}
+                    animal={animal}
                   />
                 );
               }

@@ -30,6 +30,8 @@ const FilterResult = observer(() => {
               quantity,
               country,
               brand,
+              category,
+              animal,
             }) => {
               return screen === 'mobile' ? (
                 <MobileCardProduct
@@ -47,6 +49,8 @@ const FilterResult = observer(() => {
                   quantity={quantity}
                   country={country}
                   brand={brand}
+                  category={category}
+                  animal={animal}
                 />
               ) : (
                 <CardProduct
@@ -64,6 +68,8 @@ const FilterResult = observer(() => {
                   quantity={quantity}
                   country={country}
                   brand={brand}
+                  category={category}
+                  animal={animal}
                 />
               );
             }

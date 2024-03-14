@@ -10,7 +10,10 @@ import { observer } from 'mobx-react-lite';
 import useHorizontalScroll from '../../../hooks/useHorizontalScroll';
 import sprite from '../../../img/svg-sprite/sprite.svg';
 import useWindowSize from '../../../hooks/useWindowSize';
-import { Link, useLocation } from 'react-router-dom';
+import {
+  Link,
+  //  useLocation
+} from 'react-router-dom';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { UseSkeleton } from '../../../hooks/useSkeleton';
@@ -18,7 +21,7 @@ import { UseSkeleton } from '../../../hooks/useSkeleton';
 const Promotions = observer(({ query, title }) => {
   const [animal, setAnimal] = useState(1);
   const [loading, setLoading] = useState(false);
-  const location = useLocation();
+  // const location = useLocation();
   const { screen } = useWindowSize();
   const store = useStore();
   const {
@@ -66,11 +69,16 @@ const Promotions = observer(({ query, title }) => {
           <h2>{t(title)}</h2>
         </Title>
       </div>
-      {location.pathname === '/' && (
+      {/* {location.pathname === '/' && (
         <div className="promotion-animals-bar">
           <AnimalsBar type={'section'} setAnimal={setAnimal} animal={animal} />
         </div>
-      )}
+      )} */}
+      {/* {location.pathname === '/comparison' && ( */}
+      <div className="promotion-animals-bar">
+        <AnimalsBar type={'section'} setAnimal={setAnimal} animal={animal} />
+      </div>
+      {/* // )} */}
       <div>
         {screen === 'desktop' && (
           <>
@@ -111,6 +119,8 @@ const Promotions = observer(({ query, title }) => {
                 quantity,
                 country,
                 brand,
+                category,
+                animal,
               }) => {
                 return (
                   <CardProduct
@@ -128,6 +138,8 @@ const Promotions = observer(({ query, title }) => {
                     quantity={quantity}
                     country={country}
                     brand={brand}
+                    category={category}
+                    animal={animal}
                   />
                 );
               }

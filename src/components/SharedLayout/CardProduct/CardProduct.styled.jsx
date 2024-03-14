@@ -24,6 +24,7 @@ export const StyledCardProduct = styled.div`
     padding: 8px;
     border-radius: 8px;
     position: absolute;
+    z-index: 100;
     top: 48px;
     left: 8px;
     display: flex;
@@ -40,6 +41,7 @@ export const StyledCardProduct = styled.div`
     padding: 8px;
     border-radius: 8px;
     position: absolute;
+    z-index: 100;
     top: 5px;
     left: 8px;
     display: flex;
@@ -57,8 +59,7 @@ export const StyledCardProduct = styled.div`
   }
 
   & .product__img {
-    height: 160px;
-    /* height: fit-content; */
+    height: 150px;
     object-fit: contain;
   }
 
@@ -106,6 +107,14 @@ export const StyledCardProduct = styled.div`
     cursor: pointer;
   }
 
+  &.product__compare-icon {
+    cursor: pointer;
+  }
+
+  .product__compare-icon.added {
+    fill: #53c5bd;
+    stroke: #53c5bd;
+  }
   & .product__old-price {
     color: var(--font-color-darkgray);
     font-size: 16px;
