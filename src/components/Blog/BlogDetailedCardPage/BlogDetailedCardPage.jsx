@@ -23,7 +23,7 @@ const BlogDetailedCardPage = observer(() => {
   const store = useStore();
   const sectionName = 'Блог';
   const {
-    auth: { language },
+    auth: { language, authorised },
     blog: {
       blog,
       //   nameBlog,
@@ -34,6 +34,13 @@ const BlogDetailedCardPage = observer(() => {
       getFilterBlogs,
     },
   } = store;
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  }, [blog]);
 
   const [perPage, setPerPage] = useState(4);
   const [chosenCategory, setChosenCategory] = useState();
@@ -189,13 +196,24 @@ const BlogDetailedCardPage = observer(() => {
       </GlobalContainer>
 
       <HelpRegisterSection
-        animal="cat"
-        title={t('Допомогти тваринам')}
-        text={t('Задонать на корм для пухнастих улюблинців')}
-        button={t('Детальніше')}
+        animal="dog"
+        title={authorised ? t('Pretty Paws') : t('Стань своїм')}
+        text={
+          authorised
+            ? t(
+                'Забезпечте своїх улюбленців якісними товарами за доступними цінами. Бо вони заслуговують найкращого!'
+              )
+            : t(
+                'Зареєструйся на сайті і отримай знижку 5% на перше замовлення.  Для своїх у нас безліч переваг'
+              )
+        }
+        button={authorised ? t('До каталогу') : t('Зареєструйся')}
       />
       <GlobalContainer>
-        <Promotions />
+        <Promotions
+          query="is_promotional=1"
+          title={t('Пропозиції зі знижкою')}
+        />
       </GlobalContainer>
     </StyledBlogPage>
   );
