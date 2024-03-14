@@ -43,7 +43,6 @@ const BlogPagination = observer(
       // setCurrentPage(numPage);
       // setActiveLoadMore(true);
 
-
       setCurrentPage(numPage);
       setActiveLoadMore(true);
     };

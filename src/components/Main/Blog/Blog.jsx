@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import Title from '../../SharedLayout/Title/Title';
 import CardBlog from '../../SharedLayout/CardBlog/CardBlog';
 import { StyledBlog } from './Blog.styled';
-// import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 // import { BLOG_ROUTE } from '../../../utils/consts';
 
 import sprite from '../../../img/svg-sprite/sprite.svg';
@@ -132,9 +132,11 @@ const Blog = observer(() => {
         </Swiper>
 
         <div className="blog__button-container">
-          <button className="blog__button" type="button">
-            Усі статті
-          </button>
+          <Link to="/blog">
+            <button className="blog__button" type="button">
+              Усі статті
+            </button>
+          </Link>
         </div>
       </div>
     </StyledBlog>

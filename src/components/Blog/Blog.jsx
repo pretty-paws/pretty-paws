@@ -9,9 +9,10 @@ import HelpRegisterSection from '../Main/HelpRegisterSection/HelpRegisterSection
 import Promotions from '../Main/PromotionsWithDiscount/Promotions';
 import { useTranslation } from 'react-i18next';
 import useWindowSize from '../../hooks/useWindowSize';
-import { Link } from 'react-router-dom';
-// navigate
+import { Link, useParams } from 'react-router-dom';
+
 import BlogPagination from './BlogPagination/BlogPagination';
+import { UseSkeleton } from '../../hooks/useSkeleton';
 // import DOMPurify from 'dompurify';
 
 const Blog = observer(() => {
@@ -20,7 +21,7 @@ const Blog = observer(() => {
 
   const store = useStore();
   const {
-    auth: { language },
+    auth: { language, authorised },
     blog: {
       stateCategory,
       categories,
@@ -31,10 +32,12 @@ const Blog = observer(() => {
       //   function that get all news filtered by categories
       filterBlogs,
       getFilterBlogs,
-      //   totalPages,
+      totalPages,
     },
   } = store;
-  const [perPage, setPerPage] = useState(2);
+  const [perPage, setPerPage] = useState(8);
+
+  const [loading, setLoading] = useState(false);
 
   //   const [chosenCategory, setChosenCategory] = useState([]);
   const [chosenCategory, setChosenCategory] = useState();
@@ -43,92 +46,84 @@ const Blog = observer(() => {
 
   const [currentPage, setCurrentPage] = useState(1);
 
-  function changePerPage() {
-    let newPerPage;
-    switch (screen) {
-      case 'desktop':
-        // newPerPage = 3;
-        newPerPage = 2;
-        break;
-      case 'tablet':
-        newPerPage = 6;
-        break;
-      case 'mobile':
-        newPerPage = 4;
-        break;
-      default:
-        // newPerPage = 3; // значение по умолчанию
-        newPerPage = 8; // значение по умолчанию
-        break;
-    }
-    setPerPage(newPerPage);
-  }
+  const param = useParams();
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  }, [currentPage]);
 
   //   click to filter category
   function handleFilterClick(categoryId) {
     if (categoryId) {
       setChosenCategory(categoryId);
     }
-    changePerPage();
+    // changePerPage();
   }
 
   const emptyCategory = categories.find(
     category => category.id === chosenCategory
   );
 
+  useEffect(() => {
+    if (screen === 'mobile') {
+      setPerPage(8);
+    } else if (screen === 'tablet') {
+      setPerPage(6);
+    } else {
+      setPerPage(8);
+    }
+  }, [screen]);
+
   // use effect for get information about categories and filtered news
   useEffect(() => {
-    changePerPage();
+    // changePerPage();
     getCategories(language);
-    getFilterBlogs(language, chosenCategory, perPage, currentPage);
+    setLoading(true);
+    getFilterBlogs(language, chosenCategory, perPage, currentPage).then(() => {
+      setLoading(false);
+    });
   }, [i18n.language]);
 
   useEffect(() => {
     if (activeLoadMore) {
-      getFilterBlogs(language, chosenCategory, perPage, currentPage);
+      setLoading(true);
+      getFilterBlogs(language, chosenCategory, perPage, currentPage).then(
+        () => {
+          setLoading(false);
+        }
+      );
       setActiveLoadMore(false);
     }
   }, [activeLoadMore]);
 
   useEffect(() => {
+    console.log('Загрузилась сторінка ось категорія = ', chosenCategory);
+    console.log(param);
     if (chosenCategory != undefined) {
       setCurrentPage(1);
-      getFilterBlogs(language, chosenCategory, perPage, currentPage);
+      setLoading(true);
+      getFilterBlogs(language, chosenCategory, perPage, currentPage).then(
+        () => {
+          setLoading(false);
+        }
+      );
     } else {
       setCurrentPage(1);
-      getFilterBlogs(language, chosenCategory, perPage, currentPage);
+      setLoading(true);
+      getFilterBlogs(language, chosenCategory, perPage, currentPage).then(
+        () => {
+          setLoading(false);
+        }
+      );
     }
   }, [chosenCategory]);
 
-  //   const handleLoadMore = () => {
-  //     setCurrentPage(prevPage => prevPage + 1);
-  //     setActiveLoadMore(true);
-  //   };
-
-  //   const handlePaginationClick = numPage => {
-  //     console.log(' handlePaginationClick before = ', numPage);
-  //     console.log(' handlePaginationClick current before = ', currentPage);
-  //     // setCurrentPage(numPage);
-  //     // setActiveLoadMore(true);
-  //     // console.log('numPage', numPage);
-
-
-  //     setCurrentPage(numPage);
-  //     setActiveLoadMore(true);
-  //     console.log(' handlePaginationClick current after = ', currentPage);
-  //   };
-  //   const handlePaginationArrowClick = type => {
-  //     console.log(' handlePaginationArrowClick before  = ', currentPage);
-
-  //     if (type === 'prev') {
-  //       setCurrentPage(prevPage => prevPage - 1);
-  //       setActiveLoadMore(true);
-  //     } else {
-  //       setCurrentPage(prevPage => prevPage + 1);
-  //       setActiveLoadMore(true);
-  //     }
-  //     console.log(' handlePaginationArrowClick after  = ', currentPage);
-  //   };
+  const handleLoadMore = () => {
+    setCurrentPage(prevPage => prevPage + 1);
+    setActiveLoadMore(true);
+  };
 
   return (
     <StyledBlog>
@@ -136,11 +131,11 @@ const Blog = observer(() => {
         <div className="blog__block">
           <div className="blog__categories-block categories">
             <Link
-              state={{ from: '/blog/news' }}
-              to={{
-                pathname: `/blog/news/`,
-                search: `?page=${currentPage}&per_page=${perPage}`,
-              }}
+            //   state={{ from: '/blog/news' }}
+            //   to={{
+            //     pathname: `/blog/news/`,
+            //     search: `?page=${currentPage}&per_page=${perPage}`,
+            //   }}
             >
               <p
                 className={`categories__item ${
@@ -154,30 +149,33 @@ const Blog = observer(() => {
               </p>
             </Link>
 
-            {stateCategory === 'done'
-              ? categories.map(({ id, title }) => {
-                  return (
-                    <Link
-                      state={{ from: '/blog/news' }}
-                      to={{
-                        pathname: `/blog/news/`,
-                        search: `?page=${currentPage}&per_page=${perPage}&categories[0]=${id}`,
-                      }}
-                      key={id}
-                    >
-                      <p
-                        className={`categories__item ${
-                          // chosenCategory.includes(id) ? 'active' : ''
-                          chosenCategory === id ? 'active' : ''
-                        }`}
-                        onClick={() => handleFilterClick(id)}
+            {
+              stateCategory === 'done'
+                ? categories.map(({ id, title }) => {
+                    return (
+                      <Link
+                        // state={{ from: '/blog/news' }}
+                        // to={{
+                        //   pathname: `/blog/news/`,
+                        //   search: `?page=${currentPage}&per_page=${perPage}&categories[0]=${id}`,
+                        // }}
+                        key={id}
                       >
-                        {title}
-                      </p>
-                    </Link>
-                  );
-                })
-              : null}
+                        <p
+                          className={`categories__item ${
+                            // chosenCategory.includes(id) ? 'active' : ''
+                            chosenCategory === id ? 'active' : ''
+                          }`}
+                          onClick={() => handleFilterClick(id)}
+                        >
+                          {title}
+                        </p>
+                      </Link>
+                    );
+                  })
+                : null
+              //   <UseSkeleton screen={screen} cardsAmount={perPage} />
+            }
           </div>
           {filterBlogs.length === 0 ? (
             <div className="blog__card-none">
@@ -191,152 +189,75 @@ const Blog = observer(() => {
             </div>
           ) : null}
           <div className="blog__grid-cards">
-            {stateFilterBlog === 'done'
-              ? filterBlogs.map(
-                  ({
-                    id,
-                    title,
-                    short_description,
-                    // content,
-                    image_url,
-                    category,
-                    slug,
-                    reading_time_minutes,
-                    //   published_at,
-                  }) => {
-                    return (
-                      <CardBlog
-                        key={id}
-                        id={id}
-                        short_description={short_description}
-                        title={title}
-                        // content={content}
-                        image_url={image_url}
-                        category={category}
-                        slug={slug}
-                        reading_time_minutes={reading_time_minutes}
-                      />
-                    );
-                  }
-                )
-              : null}
-          </div>
-          <BlogPagination
-            perPage={perPage}
-            setActiveLoadMore={setActiveLoadMore}
-            currentPage={currentPage}
-            setCurrentPage={setCurrentPage}
-            chosenCategory={chosenCategory}
-          ></BlogPagination>
-          {/* {screen === 'desktop'
-            ? totalPages > 1 && (
-                <div className="blog__pagination">
-                  {currentPage > 1 &&
-                    linksBlogs.some(
-                      link => link.label === '&laquo; Previous'
-                    ) && (
-                      <Link
-                        state={{ from: '/blog/news' }}
-                        to={{
-                          pathname: `/blog/news/`,
-                          search: `?page=${currentPage}&per_page=${perPage}${
-                            chosenCategory
-                              ? `&categories[0]=${chosenCategory}`
-                              : ''
-                          }`,
-                        }}
-                      >
-                        <button
-                          className="pagination__btn"
-                          onClick={() => handlePaginationArrowClick('prev')}
-                        >
-                          <svg
-                            className="pagination__arrow-prev"
-                            width="22px"
-                            height="22px"
-                          >
-                            <use href={sprite + '#arrow-black'} />
-                          </svg>
-                        </button>
-                      </Link>
-                    )}
-
-                  {linksBlogs &&
-                    linksBlogs.map((link, index) => (
-                      <React.Fragment key={index}>
-                        {link.label !== '&laquo; Previous' &&
-                          link.label !== 'Next &raquo;' && (
-                            <Link
-                              key={index}
-                              className={`pagination__btn ${
-                                link.active ? 'active-pag' : ''
-                              }`}
-                              state={{ from: '/blog/news' }}
-                              to={{
-                                pathname: `/blog/news/`,
-                                search: `?page=${currentPage}&per_page=${perPage}${
-                                  chosenCategory
-                                    ? `&categories[0]=${chosenCategory}`
-                                    : ''
-                                }`,
-                              }}
-                              onClick={() =>
-                                handlePaginationClick(() => Number(link.label))
-                              }
-                            >
-                              <p className="pagination__item">{link.label}</p>
-                              <p>{currentPage}</p>
-                            </Link>
-                          )}
-                      </React.Fragment>
-                    ))}
-                  {currentPage < totalPages &&
-                    linksBlogs.some(link => link.label === 'Next &raquo;') && (
-                      <Link
-                        state={{ from: '/blog/news' }}
-                        to={{
-                          pathname: `/blog/news/`,
-                          search: `?page=${currentPage}&per_page=${perPage}${
-                            chosenCategory
-                              ? `&categories[0]=${chosenCategory}`
-                              : ''
-                          }`,
-                        }}
-                      >
-                        <button
-                          className="pagination__btn"
-                          onClick={() => handlePaginationArrowClick('next')}
-                        >
-                          <svg
-                            className="pagination__arrow-next"
-                            width="22px"
-                            height="22px"
-                          >
-                            <use href={sprite + '#arrow-black'} />
-                          </svg>
-                        </button>
-                      </Link>
-                    )}
-                </div>
+            {stateFilterBlog === 'done' ? (
+              filterBlogs.map(
+                ({
+                  id,
+                  title,
+                  short_description,
+                  // content,
+                  image_url,
+                  category,
+                  slug,
+                  reading_time_minutes,
+                  //   published_at,
+                }) => {
+                  return (
+                    <CardBlog
+                      key={id}
+                      id={id}
+                      short_description={short_description}
+                      title={title}
+                      // content={content}
+                      image_url={image_url}
+                      category={category}
+                      slug={slug}
+                      reading_time_minutes={reading_time_minutes}
+                    />
+                  );
+                }
               )
-            : currentPage < totalPages && (
-                <button className="blog__more-btn" onClick={handleLoadMore}>
-                  Завантажити ще
-                </button>
-              )} */}
+            ) : (
+              <UseSkeleton screen={screen} cardsAmount={perPage} />
+            )}
+          </div>
+          {!loading && screen === 'desktop' ? (
+            <BlogPagination
+              perPage={perPage}
+              setActiveLoadMore={setActiveLoadMore}
+              currentPage={currentPage}
+              setCurrentPage={setCurrentPage}
+              chosenCategory={chosenCategory}
+            ></BlogPagination>
+          ) : (
+            currentPage < totalPages && (
+              <button className="blog__more-btn" onClick={handleLoadMore}>
+                Завантажити ще
+              </button>
+            )
+          )}
         </div>
       </GlobalContainer>
 
       <HelpRegisterSection
         animal="dog"
-        title={t('Стань своїм')}
-        text={t(
-          'Зареєструйся на сайті і отримай знижку 5% на перше замовлення.  Для своїх у нас безліч переваг'
-        )}
-        button={t('Зареєструйся')}
+        title={authorised ? t('Pretty Paws') : t('Стань своїм')}
+        text={
+          authorised
+            ? t(
+                'Забезпечте своїх улюбленців якісними товарами за доступними цінами. Бо вони заслуговують найкращого!'
+              )
+            : t(
+                'Зареєструйся на сайті і отримай знижку 5% на перше замовлення.  Для своїх у нас безліч переваг'
+              )
+        }
+        button={authorised ? t('До каталогу') : t('Зареєструйся')}
       />
       <GlobalContainer>
-        <Promotions />
+        <Promotions
+          query="is_promotional=1"
+          title={t('Пропозиції зі знижкою')}
+        />
       </GlobalContainer>
       {/* <CardBlog /> */}
     </StyledBlog>
