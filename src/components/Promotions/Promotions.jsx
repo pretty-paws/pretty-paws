@@ -100,6 +100,7 @@ const Promotions = observer(() => {
                     quantity={quantity}
                     country={country}
                     brand={brand}
+                    animal={animal}
                   />
                 ) : (
                   <MobileCardProduct
@@ -107,16 +108,17 @@ const Promotions = observer(() => {
                     id={id}
                     title={title}
                     short_description={short_description}
-                    // description={description}
+                    description={description}
                     image_url={image_url}
-                    // slug={slug}
+                    slug={slug}
                     price={price}
                     promotional_price={promotional_price}
                     is_promotional={is_promotional}
                     is_new={is_new}
                     quantity={quantity}
                     country={country}
-                    // brand={brand}
+                    brand={brand}
+                    animal={animal}
                   />
                 );
               }

@@ -1,37 +1,28 @@
 import { observer } from 'mobx-react-lite';
-import React, { useState } from 'react';
+import React from 'react';
 import { useStore } from '../../store/AuthProvider';
 import { GlobalContainer } from '../../global/GlobalContainer';
 import sprite from '../../img/svg-sprite/sprite.svg';
 import { Link } from 'react-router-dom';
 import { StyledComparisonPage } from './Comparison.styled';
 import Promotions from '../Main/PromotionsWithDiscount/Promotions';
-import { createPortal } from 'react-dom';
-import Notification from '../SharedLayout/Notification/Notification';
-import { useTranslation } from 'react-i18next';
 
-const Comparison = observer(() => {
-  const { t } = useTranslation();
-
+export const Comparison = observer(() => {
   const store = useStore();
   const {
     comparison: { compareList, removeFromComparison },
     cart: { addToCart, alreadyAdded, removeFromCart },
   } = store;
 
-  const [cartNotification, setCartNotification] = useState(false);
-  const [cartNotificationDelete, setCartNotificationDelete] = useState(false);
-
   function handleClick(id, product) {
     console.log('id, product', id, product);
     // e.stopPropagation();
     if (alreadyAdded(id)) {
       removeFromCart(id);
-      setCartNotificationDelete(true);
       return;
     }
     addToCart(product);
-    setCartNotification(true);
+    // setCartNotification(true);
   }
   return (
     <GlobalContainer>
@@ -84,7 +75,6 @@ const Comparison = observer(() => {
                       is_promotional,
                       is_new,
                       animal,
-                      amount: 1,
                     };
                     return (
                       <ul key={id} className="compare__product-table">
@@ -104,7 +94,7 @@ const Comparison = observer(() => {
                               <use href={sprite + '#close'} />
                             </svg>
                           </div>
-                          <div className="compare__product__description">
+                          <div className="product__description">
                             {title} - {short_description}
                           </div>
                           <div className="product__price-cart">
@@ -120,23 +110,11 @@ const Comparison = observer(() => {
                             ) : (
                               <div className="product__price">{price}₴</div>
                             )}
-                            <div
-                              className={
-                                alreadyAdded(id)
-                                  ? 'product__cart-container '
-                                  : 'product__cart-container added'
-                              }
-                            >
+                            <div className="product__cart-container">
                               <svg
                                 width="24px"
                                 height="24px"
-                                fill="currentColor"
-                                stroke="none"
-                                className={
-                                  alreadyAdded(id)
-                                    ? 'compare__cart-icon added '
-                                    : 'compare__cart-icon '
-                                }
+                                className="compare__cart-icon"
                                 onClick={() => handleClick(id, product)}
                               >
                                 <use href={sprite + '#basket'} />
@@ -154,10 +132,6 @@ const Comparison = observer(() => {
                 )}
               </div>
             </div>
-            <Promotions
-              query={'is_promotional=1'}
-              title={'Вашому вихованцеві може сподобатися'}
-            />
           </>
         ) : (
           <>
@@ -190,32 +164,6 @@ const Comparison = observer(() => {
           </>
         )}
       </StyledComparisonPage>
-      {cartNotification
-        ? createPortal(
-            <Notification
-              text={t('Товар додано до кошикa')}
-              button={t('Оформити замовлення')}
-              link="/cart"
-              setNotification={setCartNotification}
-              notification={cartNotification}
-            />,
-            document.body
-          )
-        : null}
-      {cartNotificationDelete
-        ? createPortal(
-            <Notification
-              text={t('Товар видалено з кошикa')}
-              button={t('Оформити замовлення')}
-              link="/cart"
-              setNotification={setCartNotificationDelete}
-              notification={cartNotificationDelete}
-            />,
-            document.body
-          )
-        : null}
     </GlobalContainer>
   );
 });
-
-export default Comparison;

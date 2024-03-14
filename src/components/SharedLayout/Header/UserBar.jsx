@@ -28,11 +28,8 @@ const UserBar = observer(({ setActive }) => {
   const store = useStore();
   const {
     auth: { authorised, user, state, language, setLanguage },
-    cart: {
-      productAmount,
-
-      // getProductByID, cartProducts
-    },
+    cart: { productAmount },
+    comparison: { comparisonAmount },
   } = store;
 
   return (
@@ -67,7 +64,7 @@ const UserBar = observer(({ setActive }) => {
               <svg className="user-bar__icon">
                 <use href={sprite + '#scale'} />
               </svg>
-              <span className="user-bar__basket-badge">0</span>
+              <span className="user-bar__basket-badge">{comparisonAmount}</span>
               {screen !== 'desktop' && (
                 <span className="menu__item">{t('Порівняння')}</span>
               )}

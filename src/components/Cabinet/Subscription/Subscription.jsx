@@ -30,7 +30,7 @@ const Subscription = observer(() => {
               <div className="subscription__category">
                 <div className={'animals-bar-icon-box'}>
                   <svg className="animals-bar-icon" width="24px" height="24px">
-                    <use href={animalsSvg[id - 1].link} />
+                    {/* <use href={animalsSvg[id - 1].link} /> */}
                   </svg>
                 </div>
                 <p className="subscription__text">

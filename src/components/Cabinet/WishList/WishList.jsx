@@ -64,6 +64,8 @@ const WishList = observer(() => {
                 quantity,
                 country,
                 brand,
+                category,
+                animal,
               }) => {
                 return (
                   <CardProduct
@@ -79,6 +81,8 @@ const WishList = observer(() => {
                     quantity={quantity}
                     country={country}
                     brand={brand}
+                    category={category}
+                    animal={animal}
                   />
                 );
               }
