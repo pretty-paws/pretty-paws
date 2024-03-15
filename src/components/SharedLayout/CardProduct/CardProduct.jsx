@@ -174,8 +174,8 @@ const CardProduct = observer(
             <img
               src={country.icon_url}
               alt={country}
-              width=" 14px"
-              height=" 14px"
+              width="14px"
+              height="14px"
             />
             {country.title}
           </span>

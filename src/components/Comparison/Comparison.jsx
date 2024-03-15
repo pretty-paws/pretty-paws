@@ -24,7 +24,6 @@ const Comparison = observer(() => {
 
   function handleClick(id, product) {
     console.log('id, product', id, product);
-    // e.stopPropagation();
     if (alreadyAdded(id)) {
       removeFromCart(id);
       setCartNotificationDelete(true);
@@ -111,14 +110,14 @@ const Comparison = observer(() => {
                             {promotional_price !== 0 ? (
                               <div>
                                 <div className="product__old-price">
-                                  {price}₴
+                                  {price}.00₴
                                 </div>
                                 <div className="product__price">
-                                  {promotional_price}₴
+                                  {promotional_price}.00₴
                                 </div>
                               </div>
                             ) : (
-                              <div className="product__price">{price}₴</div>
+                              <div className="product__price">{price}.00₴</div>
                             )}
                             <div
                               className={

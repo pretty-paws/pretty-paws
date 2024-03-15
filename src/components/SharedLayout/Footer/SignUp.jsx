@@ -9,6 +9,7 @@ import { useTranslation } from 'react-i18next';
 import { emailRegExp } from '../../../validation/regexp';
 import { emailMessage } from '../../../validation/messages';
 import { useForm } from 'react-hook-form';
+// import AnimalsBarSubscriptions from '../AnimalsBar/AnimalsBarSubscriptions';
 
 const SignUp = observer(() => {
   const { t } = useTranslation();
@@ -39,6 +40,11 @@ const SignUp = observer(() => {
       subscribe,
       subscriptions,
       setEmptySubscriptions,
+    },
+    subscription: {
+      setSubscriptionIDList,
+      // subscriptionsIDList,
+      includesSubscription,
     },
   } = store;
 
@@ -74,7 +80,10 @@ const SignUp = observer(() => {
             type={'signUp'}
             // chosenCategory={chosenCategory}
             isSubmitted={isSubmitted}
+            setSubscriptionIDList={setSubscriptionIDList}
+            includesSubscription={includesSubscription}
           />
+          {/* <AnimalsBarSubscriptions /> */}
           <div
             className={
               authorised === true

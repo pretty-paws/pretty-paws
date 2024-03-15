@@ -21,6 +21,7 @@ export const StyledCardProduct = styled.div`
   }
 
   & .product__sale {
+    height: 24px;
     padding: 8px;
     border-radius: 8px;
     position: absolute;
@@ -28,7 +29,7 @@ export const StyledCardProduct = styled.div`
     top: 48px;
     left: 8px;
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     justify-content: center;
     background-color: var(--accent-color-orange);
 
@@ -38,6 +39,7 @@ export const StyledCardProduct = styled.div`
   }
 
   & .product__new {
+    height: 24px;
     padding: 8px;
     border-radius: 8px;
     position: absolute;
@@ -45,7 +47,7 @@ export const StyledCardProduct = styled.div`
     top: 5px;
     left: 8px;
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     justify-content: center;
     background-color: #70db5e;
     font-size: 12px;
@@ -78,8 +80,10 @@ export const StyledCardProduct = styled.div`
   }
 
   & .product__country {
+    height: 24px;
     padding: 3px 7px;
     display: flex;
+    align-items: center;
     gap: 4px;
     border-radius: 8px;
     border: 1px solid var(--accent-color-beige);
