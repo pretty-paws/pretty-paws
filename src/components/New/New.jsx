@@ -35,6 +35,7 @@ const New = observer(() => {
     getFilteredNewProducts(animal, 'ua', 'new=1').then(() => {
       setLoading(false);
     });
+    setCurrentPage(1);
   }, [animal]);
 
   useEffect(() => {
