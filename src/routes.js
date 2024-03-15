@@ -50,6 +50,11 @@ export const routes = [
     path: FAVORITE_ROUTE,
     Component: Favorite,
   },
+  {
+    name: 'Порівняння',
+    path: COMPARISON_ROUTE,
+    Component: Comparison,
+  },
 
   // {
   //   name: 'Кабінет',
@@ -77,11 +82,6 @@ export const publicRoutes = [
     name: 'Новинки',
     path: NEW_ROUTE,
     Component: New,
-  },
-  {
-    name: 'Порівняння',
-    path: COMPARISON_ROUTE,
-    Component: Comparison,
   },
   {
     name: 'Доставка та оплата',

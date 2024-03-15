@@ -6,58 +6,119 @@ export const StyledComparisonPage = styled.div`
   line-height: 24px;
 
   .compare__title {
-    margin: 24px 0 24px;
+    margin: 16px 0 16px;
     font-size: 24px;
-    font-weight: 700;
+    font-weight: 500;
     line-height: 32px;
+
+    @media screen and (min-width: 834px) {
+      margin: 24px 0 24px;
+      font-size: 24px;
+      font-weight: 700;
+      line-height: 32px;
+    }
   }
 
   .compare__container {
     display: grid;
-    grid-template-columns: 170px auto;
-    grid-gap: 24px;
-    margin-bottom: 160px;
+    grid-template-columns: 128px auto;
+    grid-gap: 8px;
+    margin-bottom: 100px;
+    @media screen and (min-width: 834px) {
+      grid-gap: 16px;
+      grid-template-columns: 177px auto;
+      margin-bottom: 70px;
+    }
+    @media screen and (min-width: 1440px) {
+      grid-gap: 24px;
+      margin-bottom: 160px;
+    }
   }
 
   .compare__table-title {
     display: flex;
     flex-direction: column;
     gap: 16px;
+    @media screen and (min-width: 834px) {
+      gap: 24px;
+    }
   }
 
   .compare__table-title li:first-child {
-    height: 235px;
+    height: 180px;
+    @media screen and (min-width: 834px) {
+      height: 215px;
+    }
+    @media screen and (min-width: 1440px) {
+      height: 235px;
+    }
   }
 
   .compare__table-title-cell {
     display: block;
-    padding: 12px 16px;
-    width: 170px;
+    padding: 12px 8px;
+    width: 128px;
     background-color: #e7a973;
-
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 20px;
-  }
-
-  .compare__table-products-container {
-    display: grid;
-    grid-template-columns: 165px 165px 165px 165px;
-    grid-gap: 90px;
 
     font-size: 14px;
     font-weight: 400;
     line-height: 18px;
+
+    @media screen and (min-width: 834px) {
+      padding: 12px 16px;
+      width: 177px;
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 20px;
+    }
+    @media screen and (min-width: 1440px) {
+    }
+  }
+
+  .compare__table-products-container {
+    display: grid;
+    grid-template-columns: 140px 140px 140px 140px;
+    grid-gap: 16px;
+
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 16px;
+
+    @media screen and (min-width: 834px) {
+      grid-template-columns: 176px 176px 176px 176px;
+      grid-gap: 16px;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 18px;
+    }
+
+    @media screen and (min-width: 1440px) {
+      grid-template-columns: 165px 165px 165px 165px;
+      grid-gap: 90px;
+    }
+
+    @media screen and (max-width: 1440px) {
+      overflow-x: scroll;
+    }
   }
 
   .compare__product-table {
     display: flex;
     flex-direction: column;
     gap: 16px;
+    @media screen and (min-width: 834px) {
+      gap: 24px;
+    }
   }
 
   .compare__product-table li:first-child {
-    height: 235px;
+    height: 180px;
+    @media screen and (min-width: 834px) {
+      height: 215px;
+    }
+    @media screen and (min-width: 1440px) {
+      height: 235px;
+    }
   }
 
   .compare__product-table li:not(:first-child) {
@@ -67,9 +128,13 @@ export const StyledComparisonPage = styled.div`
 
   .product__img-container {
     width: 100%;
-    height: 111px;
+    height: 80px;
     background-color: white;
     position: relative;
+
+    @media screen and (min-width: 834px) {
+      height: 111px;
+    }
   }
 
   .compare__close-icon {
@@ -81,12 +146,15 @@ export const StyledComparisonPage = styled.div`
   }
 
   .product__img {
-    height: 111px;
+    height: 80px;
     object-fit: contain;
+    @media screen and (min-width: 834px) {
+      height: 111px;
+    }
   }
 
   .compare__product__description {
-    margin-bottom: 15px;
+    margin-bottom: 8px;
     max-height: calc(3 * 18px);
     line-height: 18px;
     overflow: hidden;
@@ -94,6 +162,9 @@ export const StyledComparisonPage = styled.div`
     display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
+    @media screen and (min-width: 834px) {
+      margin-bottom: 15px;
+    }
   }
 
   & .product__old-price {
@@ -107,6 +178,7 @@ export const StyledComparisonPage = styled.div`
   }
 
   .product__price-cart {
+    padding: 0 4px;
     display: flex;
     align-items: center;
     justify-content: space-between;

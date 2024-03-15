@@ -13,6 +13,7 @@ import { NovaPoshta } from './NovaPoshta';
 
 import { HeroStore } from './HeroStore';
 import { ComparisonStore } from './ComparisonStore';
+import { SubscriptionStore } from './SubscriptionStore';
 
 export class RootStore {
   auth = new AuthStore();
@@ -25,6 +26,7 @@ export class RootStore {
   novaPoshta = new NovaPoshta();
   hero = new HeroStore();
   comparison = new ComparisonStore();
+  subscription = new SubscriptionStore();
 
   constructor() {
     makeAutoObservable(this, {}, { autoBind: true });

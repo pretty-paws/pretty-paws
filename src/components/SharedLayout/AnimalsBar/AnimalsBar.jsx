@@ -6,25 +6,34 @@ import {
 import { animalsSvg } from '../../../utils/animalBarSvgLinks';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { observer } from 'mobx-react-lite';
 import { useStore } from '../../../store/AuthProvider';
+import { observer } from 'mobx-react-lite';
 
 const AnimalsBar = observer(
-  ({ type, getCategory, chosenCategory, isSubmitted, setAnimal, animal }) => {
+  ({
+    type,
+    getCategory,
+    chosenCategory,
+    isSubmitted,
+    setAnimal,
+    animal,
+    setSubscriptionIDList,
+    includesSubscription,
+  }) => {
     const store = useStore();
     const {
       catalog: { animals },
-      auth: { setSubscriptionIDList, subscriptionsIDList },
+      // subscription: {
+      //   setSubscriptionIDList,
+      //   // subscriptionsIDList,
+      //   includesSubscription,
+      // },
     } = store;
 
     function includesCategory(category) {
       if (!chosenCategory || isSubmitted) return false;
       return chosenCategory.includes(category);
     }
-
-    const includesSubscription = id => {
-      return subscriptionsIDList.includes(id);
-    };
 
     return (
       <>
@@ -91,7 +100,6 @@ const AnimalsBar = observer(
     );
   }
 );
-
 export default AnimalsBar;
 
 AnimalsBar.propTypes = {
@@ -99,4 +107,6 @@ AnimalsBar.propTypes = {
   getCategory: PropTypes.func,
   chosenCategory: PropTypes.array,
   isSubmitted: PropTypes.bool,
+  setAnimal: PropTypes.func,
+  animal: PropTypes.number,
 };

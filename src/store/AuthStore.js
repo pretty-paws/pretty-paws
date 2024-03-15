@@ -17,7 +17,7 @@ export class AuthStore {
   token = 0;
   user = [];
   subscriptions = [];
-  subscriptionsIDList = [];
+  // subscriptionsIDList = [];
   userName = localStorage.getItem('userName') || '';
   email = localStorage.getItem('email') || '';
   authorised = JSON.parse(localStorage.getItem('authorised')) || false;
@@ -58,22 +58,6 @@ export class AuthStore {
     } else {
       this.subscriptions = [...this.subscriptions, id];
     }
-  }
-
-  setSubscriptionIDList(id) {
-    const isCategoryChosen = this.subscriptionsIDList.includes(id);
-    if (isCategoryChosen) {
-      this.subscriptionsIDList = this.subscriptionsIDList.filter(
-        item => item !== id
-      );
-    } else {
-      this.subscriptionsIDList = [...this.subscriptionsIDList, id];
-    }
-  }
-
-  includesSubscription(id) {
-    console.log(this.subscriptionsIDList);
-    return this.subscriptionsIDList.includes(id);
   }
 
   setEmptySubscriptions() {
