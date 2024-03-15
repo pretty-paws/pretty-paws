@@ -20,13 +20,13 @@ import {
   DELIVERY_ROUTE,
   REGISTER_ROUTE,
   FAVORITE_ROUTE,
-  COMPARISON_ROUTE,
+  // COMPARISON_ROUTE,
   // CART_ROUTE,
   LOGIN_ROUTE,
   // CABINET,
 } from './utils/consts';
 import Favorite from './components/Favorite/Favorite';
-import Comparison from './components/Comparison/Comparison';
+// import Comparison from './components/Comparison/Comparison';
 // import Cart from './components/Cart/Cart';
 // import Cabinet from './components/Cabinet/Cabinet';
 
@@ -50,11 +50,11 @@ export const routes = [
     path: FAVORITE_ROUTE,
     Component: Favorite,
   },
-  {
-    name: 'Порівняння',
-    path: COMPARISON_ROUTE,
-    Component: Comparison,
-  },
+  // {
+  //   name: 'Порівняння',
+  //   path: COMPARISON_ROUTE,
+  //   Component: Comparison,
+  // },
 
   // {
   //   name: 'Кабінет',

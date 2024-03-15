@@ -21,6 +21,7 @@ import MakeOrder from './MakeOrder/MakeOrder';
 import Order from './Cabinet/Order/Order';
 import BlogDetailedCardPage from './Blog/BlogDetailedCardPage/BlogDetailedCardPage';
 import Blog from './Blog/Blog';
+import Comparison from './Comparison/Comparison';
 
 const AppRouter = observer(() => {
   return (
@@ -38,6 +39,7 @@ const AppRouter = observer(() => {
           />
         ))}
         <Route path="cart" element={<Cart />} exact />
+        <Route path="comparison" element={<Comparison />} exact />
         <Route
           path="cabinet"
           element={<PrivateRoute redirectTo="/" component={<Cabinet />} />}
