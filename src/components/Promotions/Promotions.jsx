@@ -34,6 +34,7 @@ const Promotions = observer(() => {
     getFilteredSaleProducts(animal, 'ua', 'is_promotional=1').then(() => {
       setLoading(false);
     });
+    setCurrentPage(1);
   }, [animal]);
 
   useEffect(() => {
