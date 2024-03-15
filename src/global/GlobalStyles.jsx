@@ -19,8 +19,28 @@ ${normalize}
   --font-color-white: #FFF;
 
   --transition: 250ms cubic-bezier(0.4, 0, 0.2, 1)
+
+  @media screen and (-webkit-min-device-pixel-ratio:0) {
+  @supports (-webkit-touch-callout: none) {
+    --accent-color-blue: #53C5BD;
+  --accent-color-darkblue: #005A9A;
+  --accent-color-beige: #E7A973;
+  --accent-color-orange: #F64B15;
+
+  --hover-blue: #17D6C8;
+  --background-color: #EFEFEF;
+
+  --font-color-black: #0E2423;
+  --font-color-gray: #9e9e9e;
+  --font-color-darkgray: #6C6C6C;
+  --font-color-white: #FFF;
+
+  --transition: 250ms cubic-bezier(0.4, 0, 0.2, 1)
+  }
+}
   
 }
+
 
 *, *::before, *::after {
   box-sizing: border-box;

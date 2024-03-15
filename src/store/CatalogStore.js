@@ -36,7 +36,7 @@ export class CatalogStore {
   productId = '';
 
   filteredProducts = [];
-  resetedFilter = false;
+  resetedFilter = false || localStorage.getItem('resetFilter');
 
   constructor() {
     makeAutoObservable(this, {}, { autoBind: true });
@@ -77,6 +77,18 @@ export class CatalogStore {
     // localStorage.setItem('productId', id);
   }
 
+  resetFilter() {
+    this.filteredProducts = [];
+    this.resetedFilter = true;
+    localStorage.setItem('resetFilter', true);
+  }
+
+  setFilter() {
+    this.filteredProducts = [];
+    this.resetedFilter = false;
+    localStorage.setItem('resetFilter', false);
+  }
+
   getSubcategory(id) {
     let slug;
     if (id === undefined) {
@@ -95,16 +107,6 @@ export class CatalogStore {
       localStorage.setItem('subcategorySlug', slug);
       return slug;
     }
-  }
-
-  resetFilter() {
-    this.filteredProducts = [];
-    this.resetedFilter = true;
-  }
-
-  setFilter() {
-    this.filteredProducts = [];
-    this.resetedFilter = false;
   }
 
   sortProducts(value) {

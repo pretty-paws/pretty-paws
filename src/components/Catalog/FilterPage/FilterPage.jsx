@@ -24,10 +24,12 @@ const FilterPage = observer(() => {
       getSubcategory,
       subcategoryID,
       getFilteredProducts,
+      resetedFilter,
     },
   } = store;
 
   useEffect(() => {
+    // if (resetedFilter) return;
     let slug;
     categorySlug
       ? (slug = categorySlug)
@@ -49,8 +51,14 @@ const FilterPage = observer(() => {
 
   useEffect(() => {
     const slug = getSubcategory(subcategoryID) || 'tinned-feed-and-pouches';
-    getFilteredProducts(categoryID || 2, language, `&subcategories[0]=${slug}`);
+    !resetedFilter &&
+      getFilteredProducts(
+        categoryID || 2,
+        language,
+        `&subcategories[0]=${slug}`
+      );
   }, [subcategoryID]);
+
   // console.log(screen);
   return (
     <>
