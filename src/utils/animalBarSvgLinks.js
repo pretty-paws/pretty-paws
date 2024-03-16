@@ -9,9 +9,9 @@ import sprite from '../img/svg-sprite/sprite.svg';
 //   `${sprite}#lizard`,
 // ];
 
-export const animalsSvg = [
-  { id: 0, link: `${sprite}#dog`, category: 1, message: 'Акції для собак' },
-  { id: 1, link: `${sprite}#cat`, category: 2, message: 'Акції для котів' },
+export const animalsNames = [
+  { id: 0, link: `${sprite}#dog`, category: 1, message: 'Акції для котів' },
+  { id: 1, link: `${sprite}#cat`, category: 2, message: 'Акції для собак' },
   {
     id: 2,
     link: `${sprite}#mouse`,

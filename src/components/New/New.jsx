@@ -82,6 +82,7 @@ const New = observer(() => {
                 brand,
                 category,
                 animal,
+                subcategory,
               }) => {
                 return screen !== 'mobile' ? (
                   <CardProduct
@@ -101,6 +102,7 @@ const New = observer(() => {
                     brand={brand}
                     category={category}
                     animal={animal}
+                    subcategory={subcategory}
                   />
                 ) : (
                   <MobileCardProduct
@@ -120,6 +122,7 @@ const New = observer(() => {
                     brand={brand}
                     category={category}
                     animal={animal}
+                    subcategory={subcategory}
                   />
                 );
               }

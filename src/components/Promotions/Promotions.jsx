@@ -84,6 +84,7 @@ const Promotions = observer(() => {
                 quantity,
                 country,
                 brand,
+                subcategory,
               }) => {
                 return screen !== 'mobile' ? (
                   <CardProduct
@@ -102,6 +103,7 @@ const Promotions = observer(() => {
                     country={country}
                     brand={brand}
                     animal={animal}
+                    subcategory={subcategory}
                   />
                 ) : (
                   <MobileCardProduct
@@ -120,6 +122,7 @@ const Promotions = observer(() => {
                     country={country}
                     brand={brand}
                     animal={animal}
+                    subcategory={subcategory}
                   />
                 );
               }

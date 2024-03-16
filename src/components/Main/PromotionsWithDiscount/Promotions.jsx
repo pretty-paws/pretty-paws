@@ -69,16 +69,9 @@ const Promotions = observer(({ query, title }) => {
           <h2>{t(title)}</h2>
         </Title>
       </div>
-      {/* {location.pathname === '/' && (
-        <div className="promotion-animals-bar">
-          <AnimalsBar type={'section'} setAnimal={setAnimal} animal={animal} />
-        </div>
-      )} */}
-      {/* {location.pathname === '/comparison' && ( */}
       <div className="promotion-animals-bar">
         <AnimalsBar type={'section'} setAnimal={setAnimal} animal={animal} />
       </div>
-      {/* // )} */}
       <div>
         {screen === 'desktop' && (
           <>
@@ -121,6 +114,7 @@ const Promotions = observer(({ query, title }) => {
                 brand,
                 category,
                 animal,
+                subcategory,
               }) => {
                 return (
                   <CardProduct
@@ -140,6 +134,7 @@ const Promotions = observer(({ query, title }) => {
                     brand={brand}
                     category={category}
                     animal={animal}
+                    subcategory={subcategory}
                   />
                 );
               }

@@ -3,7 +3,7 @@ import {
   StyledAnimalsBar,
   StyledVerticalAnimalsBar,
 } from './AnimalsBar.styled'; // Импортируйте оба стиля
-import { animalsSvg } from '../../../utils/animalBarSvgLinks';
+import { animalsNames } from '../../../utils/animalBarSvgLinks';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { useStore } from '../../../store/AuthProvider';
@@ -14,6 +14,7 @@ const AnimalsBar = observer(
     type,
     getCategory,
     chosenCategory,
+    // setChosenCategory,
     isSubmitted,
     setAnimal,
     animal,
@@ -23,11 +24,11 @@ const AnimalsBar = observer(
     const store = useStore();
     const {
       catalog: { animals },
-      // subscription: {
-      //   setSubscriptionIDList,
-      //   // subscriptionsIDList,
-      //   includesSubscription,
-      // },
+      subscription: {
+        setSubscription,
+        //   // subscriptionsIDList,
+        //   includesSubscription,
+      },
     } = store;
 
     function includesCategory(category) {
@@ -40,7 +41,7 @@ const AnimalsBar = observer(
         {/* Используйте StyledAnimalsBar или StyledVerticalAnimalsBar в зависимости от типа */}
         {type === 'vertical' ? (
           <StyledVerticalAnimalsBar>
-            {animalsSvg.map(({ link, category }) => {
+            {animalsNames.map(({ link, category }) => {
               return (
                 <Link key={link}>
                   <div
@@ -80,7 +81,8 @@ const AnimalsBar = observer(
                     }
                     onClick={() => {
                       type === 'section' && setAnimal(id);
-                      type === 'signUp' && setSubscriptionIDList(id);
+                      type === 'signUp' &&
+                        (setSubscriptionIDList(id), setSubscription(id));
                     }}
                   >
                     <div

@@ -19,11 +19,9 @@ const CategoriesBox = observer(
         .get('subcategories')
         ?.split(',')
         .filter(Boolean);
-      // console.log('chosenSubcategories', chosenSubcategories);
       const initialCheckedState = subcategories.map((_, index) =>
         chosenSubcategories?.includes(subcategories[index][1].slug)
       );
-      // console.log('initialCheckedState', initialCheckedState);
       setIsChecked(initialCheckedState);
     }, []);
 
@@ -43,6 +41,7 @@ const CategoriesBox = observer(
     const handleSubcategoryChoice = item => {
       const currentSearchParams = new URLSearchParams(searchParams);
       const subcategories = currentSearchParams.get(`subcategories`);
+      console.log('subcategories', subcategories);
       if (subcategories === null) handleQuery(item);
       let subcategoriesArray;
       if (subcategories !== null) {

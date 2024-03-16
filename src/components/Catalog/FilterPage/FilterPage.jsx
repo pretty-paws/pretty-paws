@@ -24,12 +24,14 @@ const FilterPage = observer(() => {
       getSubcategory,
       subcategoryID,
       getFilteredProducts,
+      setSearchQuery,
+      searchQuery,
       resetedFilter,
+      // unResetFilter,
     },
   } = store;
 
   useEffect(() => {
-    // if (resetedFilter) return;
     let slug;
     categorySlug
       ? (slug = categorySlug)
@@ -50,16 +52,23 @@ const FilterPage = observer(() => {
   }, [openedFilter]);
 
   useEffect(() => {
-    const slug = getSubcategory(subcategoryID) || 'tinned-feed-and-pouches';
-    !resetedFilter &&
+    // unResetFilter();
+    const slug = getSubcategory(subcategoryID) || searchQuery;
+    resetedFilter === false &&
       getFilteredProducts(
         categoryID || 2,
         language,
-        `&subcategories[0]=${slug}`
+        `&subcategories[0]=${slug}` || searchQuery
       );
+    !searchQuery &&
+      resetedFilter === false &&
+      setSearchQuery(`&subcategories[0]=${slug}`);
   }, [subcategoryID]);
 
-  // console.log(screen);
+  // useEffect(() => {
+  //   unResetFilter();
+  // }, []);
+
   return (
     <>
       <StyledFilterPage>

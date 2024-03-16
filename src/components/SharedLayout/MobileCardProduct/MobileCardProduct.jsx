@@ -27,6 +27,7 @@ const MobileCardProduct = observer(
     animal,
     brand,
     category,
+    subcategory,
   }) => {
     const { t } = useTranslation();
     const store = useStore();
@@ -69,6 +70,7 @@ const MobileCardProduct = observer(
       brand,
       category,
       animal,
+      subcategory,
     };
 
     function handleDescription(text) {

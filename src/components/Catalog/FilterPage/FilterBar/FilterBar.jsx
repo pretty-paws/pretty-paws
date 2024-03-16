@@ -11,7 +11,6 @@ import Countries from './Countries/Countries';
 import { useSearchParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import useWindowSize from '../../../../hooks/useWindowSize';
-// import { useRef } from 'react';
 
 const FilterBar = observer(({ setOpenedFilter, active }) => {
   const { screen } = useWindowSize();
@@ -26,6 +25,10 @@ const FilterBar = observer(({ setOpenedFilter, active }) => {
       getFilteredProducts,
       resetFilter,
       setFilter,
+      // filteredProducts,
+      setSearchQuery,
+      searchQuery,
+      resetedFilter,
     },
   } = store;
 
@@ -55,6 +58,12 @@ const FilterBar = observer(({ setOpenedFilter, active }) => {
     (countriesQuery ?? '') +
     (isNewChosen ?? '') +
     (isSaleChosen ?? '');
+
+  useEffect(() => {
+    searchQuery !== '' &&
+      resetedFilter !== false &&
+      getFilteredProducts(id, language, searchQuery);
+  }, []);
 
   useEffect(() => {
     const newItem = searchParams.get('new');
@@ -137,18 +146,10 @@ const FilterBar = observer(({ setOpenedFilter, active }) => {
   function handleApplyClick() {
     setFilter();
     getFilteredProducts(id, language, query);
+    setSearchQuery(query);
+    console.log('query after filter click', query);
     screen !== 'desktop' && setOpenedFilter(false);
   }
-
-  // const isInitialRender = useRef(true);
-
-  // useEffect(() => {
-  //   if (!isInitialRender.current) {
-  //     getFilteredProducts(id, language, query);
-  //   } else {
-  //     isInitialRender.current = false;
-  //   }
-  // }, [language, id, query]);
 
   function handleResetClick() {
     resetFilter();
@@ -160,6 +161,12 @@ const FilterBar = observer(({ setOpenedFilter, active }) => {
     searchParams.delete('brands');
     searchParams.delete('countries');
     setSearchParams(searchParams);
+    setSearchQuery('');
+    setShowFilterBox(prev => ({
+      ...prev,
+      brands: false,
+      countries: false,
+    }));
   }
 
   return (
@@ -226,14 +233,26 @@ const FilterBar = observer(({ setOpenedFilter, active }) => {
               <button
                 className="filter__button-apply"
                 type="button"
-                onClick={() => handleApplyClick()}
+                onClick={() => {
+                  handleApplyClick();
+                  window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth',
+                  });
+                }}
               >
                 Застосувати фільтри
               </button>
               <button
                 className="filter__button-clear"
                 type="button"
-                onClick={() => handleResetClick()}
+                onClick={() => {
+                  handleResetClick();
+                  window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth',
+                  });
+                }}
               >
                 Очистити фільтри
               </button>
