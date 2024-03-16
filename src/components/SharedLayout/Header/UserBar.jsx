@@ -40,12 +40,24 @@ const UserBar = observer(({ setActive }) => {
   return (
     <>
       <StyledUserBar onClick={() => screen === 'mobile' && setActive(false)}>
-        <ToolTip text={t('Улюблені товари')}>
+        <ToolTip
+          text={t('Необхідно авторизуватись')}
+          authorised={authorised}
+          screen={screen}
+        >
           <NavLink
-            to="/cabinet/wish_list"
-            className={({ isActive }) => (isActive ? 'active-link' : '')}
+            to={authorised ? '/cabinet/wish_list' : null}
+            className={({ isActive }) =>
+              isActive && authorised ? 'active-link' : 'unauthorised'
+            }
           >
-            <div className="user-bar__container">
+            <div
+              className={
+                authorised
+                  ? 'user-bar__container'
+                  : 'user-bar__container unauthorised'
+              }
+            >
               <svg className="user-bar__icon">
                 <use href={sprite + '#favorite'} />
               </svg>
@@ -60,22 +72,22 @@ const UserBar = observer(({ setActive }) => {
             </div>
           </NavLink>
         </ToolTip>
-        <ToolTip text={t('Порівняти')}>
-          <NavLink
-            to="/comparison"
-            className={({ isActive }) => (isActive ? 'active-link' : '')}
-          >
-            <div className="user-bar__container">
-              <svg className="user-bar__icon">
-                <use href={sprite + '#scale'} />
-              </svg>
-              <span className="user-bar__basket-badge">{comparisonAmount}</span>
-              {screen !== 'desktop' && (
-                <span className="menu__item">{t('Порівняння')}</span>
-              )}
-            </div>
-          </NavLink>
-        </ToolTip>
+        {/* <ToolTip text={t('Порівняти')}> */}
+        <NavLink
+          to="/comparison"
+          className={({ isActive }) => (isActive ? 'active-link' : '')}
+        >
+          <div className="user-bar__container">
+            <svg className="user-bar__icon">
+              <use href={sprite + '#scale'} />
+            </svg>
+            <span className="user-bar__basket-badge">{comparisonAmount}</span>
+            {screen !== 'desktop' && (
+              <span className="menu__item">{t('Порівняння')}</span>
+            )}
+          </div>
+        </NavLink>
+        {/* </ToolTip> */}
         <NavLink
           to="/cart"
           className={({ isActive }) => (isActive ? 'active-link' : '')}
@@ -98,7 +110,7 @@ const UserBar = observer(({ setActive }) => {
           </div>
         </NavLink>
         {screen === 'desktop' && (
-          <ToolTip text={t('Змінити мову')}>
+          <>
             {language === 'en' && (
               <div onClick={() => handleLanguageChange('ua')}>
                 <svg
@@ -122,7 +134,7 @@ const UserBar = observer(({ setActive }) => {
                 </svg>
               </div>
             )}
-          </ToolTip>
+          </>
         )}
       </StyledUserBar>
       {cartModalOpen === true && screen === 'desktop'
