@@ -211,11 +211,11 @@ const CardProduct = observer(
             {errorMessage && (
               <div className="product__error-message">
                 <p>
-                  {t('Будь-ласка,')}
+                  {t('Будь-ласка, ')}
                   <Link to="/register" onClick={e => e.stopPropagation()}>
-                    <span>{t('зареєструйтесь')}</span>
+                    <span>{t('зареєструйтесь ')}</span>
                   </Link>
-                  {t('на сайті, щоб додавати товари до обраних')}
+                  {t(', щоб додавати товари до обраних')}
                 </p>
               </div>
             )}
