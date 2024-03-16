@@ -19,13 +19,9 @@ import { useEffect } from 'react';
 import { UseSkeleton } from '../../../hooks/useSkeleton';
 
 const Promotions = observer(({ query, title }) => {
-  const [animal, setAnimal] = useState(1);
-  const [loading, setLoading] = useState(false);
-  // const location = useLocation();
   const { screen } = useWindowSize();
   const store = useStore();
   const {
-    // cart: { state },
     catalog: {
       state,
       getFilteredNewProducts,
@@ -34,6 +30,9 @@ const Promotions = observer(({ query, title }) => {
       newProducts,
     },
   } = store;
+
+  const [animal, setAnimal] = useState(1);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (query === 'new=1') {

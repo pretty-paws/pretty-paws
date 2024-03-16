@@ -23,7 +23,7 @@ const AnimalsBar = observer(
   }) => {
     const store = useStore();
     const {
-      catalog: { animals },
+      catalog: { animals, setCategoryID },
       subscription: {
         setSubscription,
         //   // subscriptionsIDList,
@@ -80,7 +80,7 @@ const AnimalsBar = observer(
                         : 'animals-bar-icon-box'
                     }
                     onClick={() => {
-                      type === 'section' && setAnimal(id);
+                      type === 'section' && (setAnimal(id), setCategoryID(id));
                       type === 'signUp' &&
                         (setSubscriptionIDList(id), setSubscription(id));
                     }}
