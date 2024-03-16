@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ToolTip from '../../../hooks/useTooltip';
 import useWindowSize from '../../../hooks/useWindowSize';
 import sprite from '../../../img/svg-sprite/sprite.svg';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { StyledUserBar } from './UserBar.styled';
 import { observer } from 'mobx-react-lite';
@@ -16,6 +16,7 @@ const UserBar = observer(({ setActive }) => {
   //   localStorage.getItem('language') || 'ua'
   // );
   const { screen } = useWindowSize();
+  const location = useLocation();
 
   const { i18n, t } = useTranslation();
 
@@ -31,6 +32,10 @@ const UserBar = observer(({ setActive }) => {
     cart: { productAmount },
     comparison: { comparisonAmount },
   } = store;
+
+  useEffect(() => {
+    location.pathname === '/cart' && setCartModalOpen(false);
+  }, [location.pathname]);
 
   return (
     <>
@@ -77,7 +82,11 @@ const UserBar = observer(({ setActive }) => {
         >
           <div
             className="user-bar__container"
-            onMouseEnter={() => screen === 'desktop' && setCartModalOpen(true)}
+            onMouseEnter={() =>
+              screen === 'desktop' &&
+              location.pathname !== '/cart' &&
+              setCartModalOpen(true)
+            }
           >
             <svg className="user-bar__icon">
               <use href={sprite + '#basket'} />
