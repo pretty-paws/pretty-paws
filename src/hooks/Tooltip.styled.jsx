@@ -5,8 +5,19 @@ export const StyledTooltip = styled.div`
 
   & .tooltip {
     position: absolute;
-    top: 35px;
-    left: 50%;
+    z-index: 10000000000000;
+    top: ${props =>
+      props.screen === 'desktop'
+        ? '35px'
+        : props.screen === 'tablet'
+        ? '7px'
+        : '4px'};
+    left: ${props =>
+      props.screen === 'desktop'
+        ? '50%'
+        : props.screen === 'tablet'
+        ? '60%'
+        : '55%'};
     -webkit-transform: translateX(-50%);
     transform: translateX(-50%);
     padding: 4px 12px;

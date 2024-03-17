@@ -1,21 +1,27 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import sprite from '../../../img/svg-sprite/sprite.svg';
 import { StyledNavigation } from './Navigation.styled';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import { publicRoutes } from '../../../routes';
 import { useTranslation } from 'react-i18next';
 import CategoryMenu from '../CategoryMenu/CategoryMenu';
 import { CATALOG_ROUTE } from '../../../utils/consts';
 const Navigation = () => {
   const { t } = useTranslation();
+  const location = useLocation();
+  console.log('', location.pathname);
 
   const [isMenuVisible, setIsMenuVisible] = useState(false);
   const handleMouseEnter = () => {
-    setIsMenuVisible(true);
+    !location.pathname.startsWith('/catalog/animal/') && setIsMenuVisible(true);
   };
   const handleMouseLeave = () => {
     setIsMenuVisible(false);
   };
+
+  useEffect(() => {
+    location.pathname.startsWith('/catalog/animal/') && setIsMenuVisible(false);
+  }, [location.pathname]);
 
   return (
     <StyledNavigation>
@@ -59,15 +65,13 @@ const Navigation = () => {
               <li key={path}>
                 <NavLink
                   onMouseEnter={() => {
-                    if (path === CATALOG_ROUTE) {
+                    if (
+                      path === CATALOG_ROUTE &&
+                      !location.pathname.startsWith('/catalog/animal/')
+                    ) {
                       setIsMenuVisible(true);
                     }
                   }}
-                  //   onMouseLeave={() => {
-                  //     if (path === CATALOG_ROUTE) {
-                  //       setIsMenuVisible(false);
-                  //     }
-                  //   }}
                   to={path}
                   className={({ isActive }) => (isActive ? 'active-link' : '')}
                 >

@@ -15,7 +15,6 @@ export class CartStore {
   }
 
   addToCart(item) {
-    console.log('item', item);
     let alreadyExists = false;
     this.cart.forEach(product => {
       if (this.cart.length === 0) alreadyExists = false;

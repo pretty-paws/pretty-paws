@@ -9,26 +9,22 @@ import { useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
 import { NewProductsContainer } from './New.styled';
 import Pagination from '../../hooks/Pagination/Pagination';
-// import Skeleton from 'react-loading-skeleton';
-// import 'react-loading-skeleton/dist/skeleton.css';
 import useWindowSize from '../../hooks/useWindowSize';
 import MobileCardProduct from '../SharedLayout/MobileCardProduct/MobileCardProduct';
 import { UseSkeleton } from '../../hooks/useSkeleton';
 
-// let PageSize = 8;
-
 const New = observer(() => {
   const { t } = useTranslation();
-  const [animal, setAnimal] = useState(1);
-  const [loading, setLoading] = useState(false);
-  const [cardsAmount, setCardsAmount] = useState(8);
   const { screen } = useWindowSize();
 
   const store = useStore();
   const {
-    catalog: { state, newProducts, getFilteredNewProducts },
+    catalog: { state, newProducts, getFilteredNewProducts, categoryID },
   } = store;
-  // console.log('newProducts', newProducts.length);
+
+  const [animal, setAnimal] = useState(categoryID || 1);
+  const [loading, setLoading] = useState(false);
+  const [cardsAmount, setCardsAmount] = useState(8);
 
   useEffect(() => {
     setLoading(true);
@@ -82,6 +78,7 @@ const New = observer(() => {
                 brand,
                 category,
                 animal,
+                subcategory,
               }) => {
                 return screen !== 'mobile' ? (
                   <CardProduct
@@ -101,6 +98,7 @@ const New = observer(() => {
                     brand={brand}
                     category={category}
                     animal={animal}
+                    subcategory={subcategory}
                   />
                 ) : (
                   <MobileCardProduct
@@ -120,6 +118,7 @@ const New = observer(() => {
                     brand={brand}
                     category={category}
                     animal={animal}
+                    subcategory={subcategory}
                   />
                 );
               }

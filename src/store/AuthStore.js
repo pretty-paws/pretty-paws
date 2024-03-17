@@ -6,20 +6,18 @@ import {
   refreshUser,
   registerUser,
   registerVerify,
-  subscribe,
-  unsubscribe,
   updatePass,
   updateUser,
 } from '../services/authAPI';
+// import { SubscriptionStore } from './SubscriptionStore';
 
 export class AuthStore {
   confirmation_code = 0;
   token = 0;
   user = [];
-  subscriptions = [];
-  // subscriptionsIDList = [];
   userName = localStorage.getItem('userName') || '';
   email = localStorage.getItem('email') || '';
+  userSubscriptions = [];
   authorised = JSON.parse(localStorage.getItem('authorised')) || false;
   language = localStorage.getItem('language') || 'ua';
   state = 'pending';
@@ -48,20 +46,6 @@ export class AuthStore {
 
   setState() {
     this.state = 'done';
-  }
-
-  setSubscription(id) {
-    const isCategoryChosen = this.subscriptions.includes(id);
-    if (isCategoryChosen) {
-      const newChosenCategory = this.subscriptions.filter(item => item !== id);
-      this.subscriptions = newChosenCategory;
-    } else {
-      this.subscriptions = [...this.subscriptions, id];
-    }
-  }
-
-  setEmptySubscriptions() {
-    this.subscriptions = [];
   }
 
   async signUp(userData) {
@@ -153,9 +137,10 @@ export class AuthStore {
     this.state = 'pending';
     try {
       const res = await refreshUser();
+      // console.log('res', res);
       runInAction(() => {
         this.user = res.data.data.user;
-        this.subscriptions = res.data.data.user.subscriptions;
+        this.userSubscriptions = res.data.data.user.subscriptions;
         this.state = 'done';
         localStorage.setItem(
           'fav',
@@ -197,57 +182,6 @@ export class AuthStore {
         this.state = 'error';
         localStorage.setItem('authorised', false);
         localStorage.removeItem('token');
-      });
-    }
-  }
-
-  async subscribe(data) {
-    this.state = 'pending';
-    try {
-      await subscribe(data);
-      // console.log(res.data);
-
-      runInAction(() => {
-        this.state = 'done';
-        this.authorised === true && this.refresh();
-      });
-    } catch (error) {
-      runInAction(() => {
-        this.state = 'error';
-        const errorData = error.response.data.error;
-
-        if (errorData === undefined) return;
-
-        if ('email' in errorData) {
-          this.errorType = 'email';
-          this.error = errorData.email[0];
-        }
-        if ('category_animal_id' in errorData) {
-          this.errorType = 'category_animal_id';
-          this.error = errorData.category_animal_id[0];
-        }
-
-        if ('category_animal_id' in errorData && 'email' in errorData) {
-          this.errorType = 'both';
-          this.error = 'Оберіть категорію і введіть Вашу пошту';
-        }
-      });
-    }
-  }
-
-  async unSubscribe(data) {
-    this.state = 'pending';
-    try {
-      // console.log(data);
-      await unsubscribe(data);
-
-      runInAction(() => {
-        this.state = 'done';
-        this.authorised === true && this.refresh();
-      });
-    } catch (error) {
-      runInAction(() => {
-        this.state = 'error';
       });
     }
   }

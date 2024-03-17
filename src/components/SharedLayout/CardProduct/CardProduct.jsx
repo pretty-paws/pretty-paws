@@ -27,6 +27,7 @@ const CardProduct = observer(
     brand,
     category,
     animal,
+    subcategory,
   }) => {
     const { t } = useTranslation();
 
@@ -35,7 +36,15 @@ const CardProduct = observer(
       auth: { refresh, user, authorised },
       cart: { addToCart, alreadyAdded, removeFromCart },
       favourite: { toggleFavourite },
-      catalog: { animalSlug, categorySlug, subcategorySlug },
+      catalog: {
+        setAnimalSlug,
+        setCategorySlug,
+        setAnimalName,
+        setCategoryName,
+        //   // animalSlug,
+        //   // categorySlug,
+        //   // subcategorySlug,
+      },
       comparison: {
         animalCategory,
         setCategory,
@@ -73,6 +82,7 @@ const CardProduct = observer(
       category,
       animal,
       amount: 1,
+      subcategory,
     };
 
     function checkFavourite(id) {
@@ -155,9 +165,13 @@ const CardProduct = observer(
       <StyledCardProduct
         biggerMargin={promotional_price !== 0}
         onClick={() => {
+          setAnimalSlug(animal?.slug);
+          setCategorySlug(category?.slug);
+          setAnimalName(animal?.title);
+          setCategoryName(category?.title);
           // setProductId(id);
           navigate(
-            `/catalog/animal/${animalSlug}/category/${categorySlug}/${subcategorySlug}/${id}`
+            `/catalog/animal/${animal?.slug}/category/${category?.slug}/${subcategory?.slug}/${id}`
           );
         }}
       >
@@ -197,11 +211,11 @@ const CardProduct = observer(
             {errorMessage && (
               <div className="product__error-message">
                 <p>
-                  {t('Будь-ласка,')}
+                  {t('Будь-ласка, ')}
                   <Link to="/register" onClick={e => e.stopPropagation()}>
-                    <span>{t('зареєструйтесь')}</span>
+                    <span>{t('зареєструйтесь ')}</span>
                   </Link>
-                  {t('на сайті, щоб додавати товари до обраних')}
+                  {t(', щоб додавати товари до обраних')}
                 </p>
               </div>
             )}

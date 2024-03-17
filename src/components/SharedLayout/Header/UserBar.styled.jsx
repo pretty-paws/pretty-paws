@@ -68,6 +68,25 @@ export const StyledUserBar = styled.div`
       }
     }
 
+    &.unauthorised:hover::after {
+      content: '';
+      z-index: -2;
+      position: absolute;
+      left: -8px;
+      width: 40px;
+      height: 40px;
+      border-radius: 100px;
+      background: lightgray;
+
+      @media screen and (min-width: 834px) {
+        left: -5px;
+      }
+
+      @media screen and (min-width: 1440px) {
+        left: -8px;
+      }
+    }
+
     &:hover .user-bar__icon {
       fill: black;
       /* stroke: black; */

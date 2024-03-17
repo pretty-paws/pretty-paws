@@ -13,7 +13,6 @@ import { useForm } from 'react-hook-form';
 
 const SignUp = observer(() => {
   const { t } = useTranslation();
-  // const [chosenCategory, setChosenCategory] = useState([]);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [visible, setVisible] = useState(true);
 
@@ -22,6 +21,7 @@ const SignUp = observer(() => {
     if (isSubmitted === true) {
       timeout = setTimeout(() => {
         setVisible(false);
+        setIsSubmitted(false);
       }, 5000);
     }
 
@@ -30,21 +30,17 @@ const SignUp = observer(() => {
 
   const store = useStore();
   const {
-    auth: {
-      email,
-      authorised,
+    auth: { email, authorised, setState, refresh },
+    subscription: {
       state,
-      setState,
-      errorType,
-      error,
       subscribe,
+      setSubscriptionIDList,
       subscriptions,
       setEmptySubscriptions,
-    },
-    subscription: {
-      setSubscriptionIDList,
       // subscriptionsIDList,
       includesSubscription,
+      errorType,
+      error,
     },
   } = store;
 
@@ -60,12 +56,13 @@ const SignUp = observer(() => {
   });
 
   const handleSubscribe = data => {
+    // console.log('data', data, subscriptions);
     const formData = new FormData();
     formData.append('email', data.email);
     subscriptions.forEach(category => {
       formData.append(`${`animal_id[${category - 1}]`}`, category);
     });
-    subscribe(formData);
+    subscribe(formData).then(() => authorised && refresh());
     setIsSubmitted(true);
     setVisible(true);
     setEmptySubscriptions();
@@ -79,6 +76,7 @@ const SignUp = observer(() => {
           <AnimalsBar
             type={'signUp'}
             // chosenCategory={chosenCategory}
+            // setChosenCategory={setChosenCategory}
             isSubmitted={isSubmitted}
             setSubscriptionIDList={setSubscriptionIDList}
             includesSubscription={includesSubscription}
@@ -136,19 +134,16 @@ const SignUp = observer(() => {
                     {t(`${error}`)}
                   </p>
                 ) : null}
-                {state === 'error' && errorType === 'email' ? (
+                {state === 'error' && errorType === 'email' && visible ? (
                   <div className="sign-up__error">{t(`${error}`)}</div>
                 ) : null}
-                {state === 'error' && errorType === 'category_animal_id' ? (
+                {state === 'error' && errorType === 'animal_id' && visible ? (
                   <div className="sign-up__error">{t(`${error}`)}</div>
                 ) : null}
-                {state === 'error' && errorType === 'both' ? (
+                {state === 'error' && errorType === 'both' && visible ? (
                   <div className="sign-up__error">{t(`${error}`)}</div>
                 ) : null}
-                {isSubmitted &&
-                state !== 'error' &&
-                !errors.email &&
-                visible ? (
+                {state === 'done' && isSubmitted && !errors.email && visible ? (
                   <div className=" sign-up__error success">
                     {t(`${'Ви успішно підписались'}`)}
                   </div>

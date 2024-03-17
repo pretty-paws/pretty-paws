@@ -6,7 +6,6 @@ import { observer } from 'mobx-react-lite';
 import CardProduct from '../../SharedLayout/CardProduct/CardProduct';
 import useHorizontalScroll from '../../../hooks/useHorizontalScroll';
 import sprite from '../../../img/svg-sprite/sprite.svg';
-// import { GlobalContainer } from '../../../global/GlobalContainer';
 import useWindowSize from '../../../hooks/useWindowSize';
 
 const WishList = observer(() => {
@@ -66,6 +65,8 @@ const WishList = observer(() => {
                 brand,
                 category,
                 animal,
+                subcategory,
+                short_description,
               }) => {
                 return (
                   <CardProduct
@@ -83,6 +84,8 @@ const WishList = observer(() => {
                     brand={brand}
                     category={category}
                     animal={animal}
+                    subcategory={subcategory}
+                    short_description={short_description}
                   />
                 );
               }

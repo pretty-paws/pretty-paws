@@ -17,18 +17,16 @@ import { NewProductsContainer } from '../New/New.styled';
 
 const Promotions = observer(() => {
   const { t } = useTranslation();
-  const [animal, setAnimal] = useState(1);
-  const [loading, setLoading] = useState(false);
-  const [cardsAmount, setCardsAmount] = useState(8);
-
   const { screen } = useWindowSize();
 
   const store = useStore();
   const {
-    catalog: { state, saleProducts, getFilteredSaleProducts },
+    catalog: { state, saleProducts, getFilteredSaleProducts, categoryID },
   } = store;
-  // console.log('newProducts', saleProducts.length);
 
+  const [animal, setAnimal] = useState(categoryID || 1);
+  const [loading, setLoading] = useState(false);
+  const [cardsAmount, setCardsAmount] = useState(8);
   useEffect(() => {
     setLoading(true);
     getFilteredSaleProducts(animal, 'ua', 'is_promotional=1').then(() => {
@@ -84,6 +82,7 @@ const Promotions = observer(() => {
                 quantity,
                 country,
                 brand,
+                subcategory,
               }) => {
                 return screen !== 'mobile' ? (
                   <CardProduct
@@ -102,6 +101,7 @@ const Promotions = observer(() => {
                     country={country}
                     brand={brand}
                     animal={animal}
+                    subcategory={subcategory}
                   />
                 ) : (
                   <MobileCardProduct
@@ -120,6 +120,7 @@ const Promotions = observer(() => {
                     country={country}
                     brand={brand}
                     animal={animal}
+                    subcategory={subcategory}
                   />
                 );
               }

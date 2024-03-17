@@ -35,11 +35,18 @@ export class CatalogStore {
   subcategorySlug = localStorage.getItem('subcategorySlug') || '';
   productId = '';
 
+  searchQuery = localStorage.getItem('searchQuery') || '';
+
   filteredProducts = [];
   resetedFilter = false || localStorage.getItem('resetFilter');
 
   constructor() {
     makeAutoObservable(this, {}, { autoBind: true });
+  }
+
+  setSearchQuery(query) {
+    this.searchQuery = query;
+    localStorage.setItem('searchQuery', query);
   }
 
   setAnimalName(name) {
@@ -81,6 +88,11 @@ export class CatalogStore {
     this.filteredProducts = [];
     this.resetedFilter = true;
     localStorage.setItem('resetFilter', true);
+  }
+
+  unResetFilter() {
+    this.resetedFilter = false;
+    localStorage.setItem('resetFilter', false);
   }
 
   setFilter() {

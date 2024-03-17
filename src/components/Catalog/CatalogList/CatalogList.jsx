@@ -15,6 +15,8 @@ const CatalogList = observer(() => {
       setCategorySlug,
       setCategoryID,
       setSubcategoryID,
+      setSearchQuery,
+      unResetFilter,
     },
   } = store;
 
@@ -29,6 +31,8 @@ const CatalogList = observer(() => {
   const categories = Object.values(chosenAnimal.categories);
 
   function handleSubcategoryClick(category, subcategory) {
+    unResetFilter();
+    setSearchQuery('');
     setCategoryName(category.title);
     setCategorySlug(category.slug);
     setCategoryID(category.id);
