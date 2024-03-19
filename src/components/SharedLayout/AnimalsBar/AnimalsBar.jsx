@@ -23,7 +23,13 @@ const AnimalsBar = observer(
   }) => {
     const store = useStore();
     const {
-      catalog: { animals, setCategoryID },
+      catalog: {
+        animals,
+        // setCategoryID,
+        setAnimalName,
+        setAnimalSlug,
+        setAnimalID,
+      },
       subscription: {
         setSubscription,
         //   // subscriptionsIDList,
@@ -66,7 +72,7 @@ const AnimalsBar = observer(
           </StyledVerticalAnimalsBar>
         ) : (
           <StyledAnimalsBar type={type}>
-            {animals.map(({ title, icon_url, id }) => {
+            {animals.map(({ title, icon_url, id, slug }) => {
               return (
                 <Link key={id}>
                   <div
@@ -80,7 +86,12 @@ const AnimalsBar = observer(
                         : 'animals-bar-icon-box'
                     }
                     onClick={() => {
-                      type === 'section' && (setAnimal(id), setCategoryID(id));
+                      type === 'section' &&
+                        (setAnimal(id),
+                        // setCategoryID(id),
+                        setAnimalName(title),
+                        setAnimalSlug(slug),
+                        setAnimalID(id));
                       type === 'signUp' &&
                         (setSubscriptionIDList(id), setSubscription(id));
                     }}

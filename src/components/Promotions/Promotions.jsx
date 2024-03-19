@@ -21,10 +21,10 @@ const Promotions = observer(() => {
 
   const store = useStore();
   const {
-    catalog: { state, saleProducts, getFilteredSaleProducts, categoryID },
+    catalog: { state, saleProducts, getFilteredSaleProducts, animalID },
   } = store;
 
-  const [animal, setAnimal] = useState(categoryID || 1);
+  const [animal, setAnimal] = useState(Number(animalID) || 1);
   const [loading, setLoading] = useState(false);
   const [cardsAmount, setCardsAmount] = useState(8);
   useEffect(() => {
@@ -83,6 +83,7 @@ const Promotions = observer(() => {
                 country,
                 brand,
                 subcategory,
+                category,
               }) => {
                 return screen !== 'mobile' ? (
                   <CardProduct
@@ -102,6 +103,7 @@ const Promotions = observer(() => {
                     brand={brand}
                     animal={animal}
                     subcategory={subcategory}
+                    category={category}
                   />
                 ) : (
                   <MobileCardProduct
@@ -121,6 +123,7 @@ const Promotions = observer(() => {
                     brand={brand}
                     animal={animal}
                     subcategory={subcategory}
+                    category={category}
                   />
                 );
               }

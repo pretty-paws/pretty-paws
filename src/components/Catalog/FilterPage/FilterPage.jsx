@@ -27,7 +27,6 @@ const FilterPage = observer(() => {
       setSearchQuery,
       searchQuery,
       resetedFilter,
-      // unResetFilter,
     },
   } = store;
 
@@ -64,10 +63,6 @@ const FilterPage = observer(() => {
       resetedFilter === false &&
       setSearchQuery(`&subcategories[0]=${slug}`);
   }, [subcategoryID]);
-
-  // useEffect(() => {
-  //   unResetFilter();
-  // }, []);
 
   return (
     <>

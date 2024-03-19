@@ -10,14 +10,14 @@ export const StyledTooltip = styled.div`
       props.screen === 'desktop'
         ? '35px'
         : props.screen === 'tablet'
-        ? '7px'
-        : '4px'};
+        ? '0'
+        : '0'};
     left: ${props =>
       props.screen === 'desktop'
         ? '50%'
         : props.screen === 'tablet'
-        ? '60%'
-        : '55%'};
+        ? '70%'
+        : '70%'};
     -webkit-transform: translateX(-50%);
     transform: translateX(-50%);
     padding: 4px 12px;

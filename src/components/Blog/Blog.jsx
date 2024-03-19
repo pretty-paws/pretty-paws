@@ -112,7 +112,6 @@ const Blog = observer(() => {
   //     // setActiveLoadMore(true);
   //     // console.log('numPage', numPage);
 
-
   //     setCurrentPage(numPage);
   //     setActiveLoadMore(true);
   //     console.log(' handlePaginationClick current after = ', currentPage);
@@ -336,7 +335,10 @@ const Blog = observer(() => {
         button={t('Зареєструйся')}
       />
       <GlobalContainer>
-        <Promotions />
+        <Promotions
+          query="is_promotional=1"
+          title={t('Пропозиції зі знижкою')}
+        />
       </GlobalContainer>
       {/* <CardBlog /> */}
     </StyledBlog>

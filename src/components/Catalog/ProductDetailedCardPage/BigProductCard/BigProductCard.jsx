@@ -3,13 +3,14 @@ import { StyledBigProductCard } from './BigProductCard.styled';
 import { observer } from 'mobx-react-lite';
 import { useStore } from '../../../../store/AuthProvider';
 import sprite from '../../../../img/svg-sprite/sprite.svg';
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import Notification from '../../../SharedLayout/Notification/Notification';
 import useWindowSize from '../../../../hooks/useWindowSize';
+import ToolTip from '../../../../hooks/useTooltip';
 
 const BigProductCard = observer(() => {
   const { t } = useTranslation();
@@ -23,11 +24,24 @@ const BigProductCard = observer(() => {
     cart: { addToCart, alreadyAdded, removeFromCart },
     favourite: { toggleFavourite },
     catalog: { productById, state },
+    comparison: {
+      animalCategory,
+      setCategory,
+      compareList,
+      addToComparison,
+      alreadyAddedToCompare,
+      removeFromComparison,
+    },
   } = store;
 
   const [cartNotification, setCartNotification] = useState(false);
   const [favouriteNotification, setFavouriteNotification] = useState(false);
   const [openDescription, setOpenDescription] = useState(false);
+
+  const [compareAdded, setCompareAdded] = useState(false);
+  const [compareMax, setCompareMax] = useState(false);
+  const [compareDiffCategory, setCompareDiffCategory] = useState(false);
+  const [compareDeleted, setCompareDeleted] = useState(false);
 
   function checkFavourite(id) {
     if (!authorised) return false;
@@ -63,6 +77,44 @@ const BigProductCard = observer(() => {
         .finally(
           !checkFavourite(productById.id) && setFavouriteNotification(true)
         );
+    }
+  }
+
+  function addToCompare(e) {
+    console.log('e', e);
+    e.stopPropagation();
+    if (animalCategory === null) {
+      setCategory(productById.animal.slug);
+      addToComparison(productById);
+      setCompareAdded(true);
+    } else if (
+      productById.animal.slug === animalCategory &&
+      compareList.length < 4 &&
+      !alreadyAddedToCompare(productById.id)
+    ) {
+      addToComparison(productById);
+      setCompareAdded(true);
+    } else if (
+      animalCategory !== null &&
+      productById.animal.slug !== animalCategory
+    ) {
+      setCompareDiffCategory(true);
+    } else if (
+      productById.animal.slug === animalCategory &&
+      compareList.length >= 4 &&
+      !alreadyAddedToCompare(productById.id)
+    ) {
+      setCompareMax(true);
+    } else if (
+      productById.animal.slug === animalCategory &&
+      compareList.length >= 4 &&
+      alreadyAddedToCompare(productById.id)
+    ) {
+      removeFromComparison(productById.id);
+      setCompareDeleted(true);
+    } else if (alreadyAddedToCompare(productById.id)) {
+      removeFromComparison(productById.id);
+      setCompareDeleted(true);
     }
   }
 
@@ -179,7 +231,7 @@ const BigProductCard = observer(() => {
                   </div>
                   <div>
                     <div className="product__fav-compare">
-                      {errorMessage && (
+                      {/* {errorMessage && (
                         <div className="product__error-message">
                           <p>
                             {t('Будь-ласка,')}
@@ -192,22 +244,39 @@ const BigProductCard = observer(() => {
                             {t('на сайті, щоб додавати товари до обраних')}
                           </p>
                         </div>
-                      )}
-                      <div
-                        onClick={handleAddFavourite}
-                        className="product__fav-icon"
+                      )} */}
+                      <ToolTip
+                        text={t('Необхідно авторизуватись')}
+                        authorised={authorised}
+                        screen={screen}
                       >
-                        {checkFavourite(productById.id) ? (
-                          <svg width=" 26px" height=" 26px">
-                            <use href={sprite + '#favorite_selected'} />
-                          </svg>
-                        ) : (
-                          <svg width=" 24px" height=" 24px">
-                            <use href={sprite + '#favorite'} />
-                          </svg>
-                        )}
-                      </div>
-                      <svg width=" 24px" height=" 24px">
+                        <div
+                          onClick={handleAddFavourite}
+                          className="product__fav-icon"
+                        >
+                          {checkFavourite(productById.id) ? (
+                            <svg width=" 26px" height=" 26px">
+                              <use href={sprite + '#favorite_selected'} />
+                            </svg>
+                          ) : (
+                            <svg width=" 24px" height=" 24px">
+                              <use href={sprite + '#favorite'} />
+                            </svg>
+                          )}
+                        </div>
+                      </ToolTip>
+                      <svg
+                        width=" 24px"
+                        height=" 24px"
+                        fill="currentColor"
+                        stroke="none"
+                        onClick={addToCompare}
+                        className={
+                          alreadyAddedToCompare(productById.id)
+                            ? ' product__compare-icon added'
+                            : 'product__compare-icon'
+                        }
+                      >
                         <use href={sprite + '#scale'} />
                       </svg>
                     </div>
@@ -247,6 +316,58 @@ const BigProductCard = observer(() => {
                       link="/favorite"
                       setNotification={setFavouriteNotification}
                       notification={favouriteNotification}
+                    />,
+                    document.body
+                  )
+                : null}
+              {compareAdded
+                ? createPortal(
+                    <Notification
+                      text={t('Товар додано до порівняння')}
+                      button={t('Переглянути товари')}
+                      link="/comparison"
+                      setNotification={setCompareAdded}
+                      notification={compareAdded}
+                    />,
+                    document.body
+                  )
+                : null}
+              {compareMax
+                ? createPortal(
+                    <Notification
+                      text={t(
+                        'Ви вже додали максимальну кількість товарів до порівняння (4)'
+                      )}
+                      button={t('Переглянути товари')}
+                      link="/comparison"
+                      setNotification={setCompareMax}
+                      notification={compareMax}
+                    />,
+                    document.body
+                  )
+                : null}
+              {compareDiffCategory
+                ? createPortal(
+                    <Notification
+                      text={t(
+                        'Можна порівнювати товари лише з однієї категорії тварин.'
+                      )}
+                      button={t('Переглянути товари')}
+                      link="/comparison"
+                      setNotification={setCompareDiffCategory}
+                      notification={compareDiffCategory}
+                    />,
+                    document.body
+                  )
+                : null}
+              {compareDeleted
+                ? createPortal(
+                    <Notification
+                      text={t('Товар видалено з порівняння')}
+                      button={t('Переглянути товари')}
+                      link="/comparison"
+                      setNotification={setCompareDeleted}
+                      notification={compareDeleted}
                     />,
                     document.body
                   )

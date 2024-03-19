@@ -9,7 +9,6 @@ import { CATALOG_ROUTE } from '../../../utils/consts';
 const Navigation = () => {
   const { t } = useTranslation();
   const location = useLocation();
-  console.log('', location.pathname);
 
   const [isMenuVisible, setIsMenuVisible] = useState(false);
   const handleMouseEnter = () => {

@@ -44,7 +44,16 @@ const Notification = ({
           to={{ pathname: link, state: back }}
           onClick={e => e.stopPropagation()}
         >
-          <button type="button" className="notification__button">
+          <button
+            type="button"
+            className="notification__button"
+            onClick={() =>
+              window.scrollTo({
+                top: 0,
+                behavior: 'smooth',
+              })
+            }
+          >
             {button}
           </button>
         </Link>

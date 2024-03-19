@@ -25,10 +25,9 @@ const FilterBar = observer(({ setOpenedFilter, active }) => {
       getFilteredProducts,
       resetFilter,
       setFilter,
-      // filteredProducts,
       setSearchQuery,
-      searchQuery,
-      resetedFilter,
+      // searchQuery,
+      // resetedFilter,
     },
   } = store;
 
@@ -59,11 +58,11 @@ const FilterBar = observer(({ setOpenedFilter, active }) => {
     (isNewChosen ?? '') +
     (isSaleChosen ?? '');
 
-  useEffect(() => {
-    searchQuery !== '' &&
-      resetedFilter !== false &&
-      getFilteredProducts(id, language, searchQuery);
-  }, []);
+  // useEffect(() => {
+  //   searchQuery !== '' &&
+  //     resetedFilter !== false &&
+  //     getFilteredProducts(id, language, searchQuery);
+  // }, []);
 
   useEffect(() => {
     const newItem = searchParams.get('new');
@@ -167,6 +166,7 @@ const FilterBar = observer(({ setOpenedFilter, active }) => {
       brands: false,
       countries: false,
     }));
+    screen !== 'desktop' && setOpenedFilter(false);
   }
 
   return (

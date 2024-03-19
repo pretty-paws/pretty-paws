@@ -166,7 +166,7 @@ const Help = () => {
           </Link>
         </div>
       </StyledHelp>
-      <Promotions />
+      <Promotions query="is_promotional=1" title={t('Пропозиції зі знижкою')} />
     </GlobalContainer>
   );
 };

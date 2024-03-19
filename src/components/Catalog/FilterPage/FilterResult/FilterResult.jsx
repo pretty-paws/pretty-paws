@@ -12,19 +12,28 @@ const FilterResult = observer(() => {
   const { screen } = useWindowSize();
   const store = useStore();
   const {
+    auth: { language },
     catalog: {
       filteredProducts,
       state,
       resetedFilter,
       saleProducts,
       getFilteredSaleProducts,
+      searchQuery,
+      getFilteredProducts,
+      categoryID,
     },
   } = store;
-  // console.log(filteredProducts);
 
   useEffect(() => {
-    getFilteredSaleProducts(1, 'ua', 'is_promotional=1');
+    resetedFilter && getFilteredSaleProducts(1, 'ua', 'is_promotional=1');
   }, [resetedFilter]);
+
+  useEffect(() => {
+    searchQuery !== '' &&
+      resetedFilter !== false &&
+      getFilteredProducts(categoryID, language, searchQuery);
+  }, [searchQuery, language]);
 
   return (
     <StyledFilterResults>
@@ -91,7 +100,7 @@ const FilterResult = observer(() => {
             );
           }
         )
-      ) : resetedFilter && filteredProducts.length === 0 ? (
+      ) : resetedFilter && state === 'done' && filteredProducts.length === 0 ? (
         <div className="filter-reset">
           <p className="filter-result__no-products">
             Фільтри скинуто. Для відображення товарів необхідно зробити вибір.
