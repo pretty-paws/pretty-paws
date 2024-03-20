@@ -4,14 +4,14 @@ import sprite from '../../../../img/svg-sprite/sprite.svg';
 import { useStore } from '../../../../store/AuthProvider';
 import { observer } from 'mobx-react-lite';
 import { StyledBreadcrumbs } from './Breadcrumbs.styled';
+import { useTranslation } from 'react-i18next';
 
 const Breadcrumbs = observer(({ page }) => {
+  const { t } = useTranslation();
   const store = useStore();
   const {
     catalog: { animalName, categoryName, animalSlug, productById },
   } = store;
-
-  console.log('animalName', animalName);
 
   return (
     <StyledBreadcrumbs>
@@ -20,7 +20,7 @@ const Breadcrumbs = observer(({ page }) => {
           to={`/catalog/animal/${animalSlug}`}
           className={({ isActive }) => (isActive ? 'active' : '')}
         >
-          <span className="filter__breadcrumbs__page">Каталог</span>
+          <span className="filter__breadcrumbs__page">{t('Каталог')}</span>
         </NavLink>
         <div className="arrow-container">
           <svg className="filter-arrow" width="24px" height="24px">
@@ -28,12 +28,7 @@ const Breadcrumbs = observer(({ page }) => {
           </svg>
         </div>
         <Link to={`/catalog/animal/${animalSlug}`}>
-          <span className="filter__breadcrumbs__animal">
-            {
-              animalName
-              // ? animalName : localStorage.getItem('animalName')
-            }
-          </span>
+          <span className="filter__breadcrumbs__animal">{t(animalName)}</span>
         </Link>
         <div className="arrow-container">
           <svg className="filter-arrow" width="24px" height="24px">
@@ -45,7 +40,9 @@ const Breadcrumbs = observer(({ page }) => {
           className={page === 'filter' ? 'active' : 'filter__breadcrumbs'}
         >
           <span>
-            {categoryName ? categoryName : localStorage.getItem('categoryName')}
+            {categoryName
+              ? t(categoryName)
+              : t(localStorage.getItem('categoryName'))}
           </span>
         </Link>
         {productById !== undefined && page === 'product' ? (

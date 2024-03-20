@@ -2,9 +2,12 @@ import React, { useEffect, useState } from 'react';
 import sprite from '../../../../../img/svg-sprite/sprite.svg';
 import { observer } from 'mobx-react-lite';
 import { useStore } from '../../../../../store/AuthProvider';
+import { useTranslation } from 'react-i18next';
 
 const CategoriesBox = observer(
   ({ setShowFilterBox, showFilterBox, searchParams, setSearchParams }) => {
+    const { t } = useTranslation();
+
     const store = useStore();
     const {
       catalog: { resetedFilter, filters },
@@ -94,7 +97,7 @@ const CategoriesBox = observer(
             }))
           }
         >
-          <p>Категорії</p>
+          <p>{t('Категорії')}</p>
           <svg
             className={
               showFilterBox.categoriesBox

@@ -9,8 +9,11 @@ import SortBar from './SortBar/SortBar';
 import useWindowSize from '../../../hooks/useWindowSize';
 import sprite from '../../../img/svg-sprite/sprite.svg';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 const FilterPage = observer(() => {
+  const { t } = useTranslation();
+
   const { screen } = useWindowSize();
   const store = useStore();
   const [openedFilter, setOpenedFilter] = useState(false);
@@ -27,6 +30,7 @@ const FilterPage = observer(() => {
       setSearchQuery,
       searchQuery,
       resetedFilter,
+      categoryName,
     },
   } = store;
 
@@ -72,22 +76,26 @@ const FilterPage = observer(() => {
             <Breadcrumbs page="filter" />
             {screen !== 'desktop' && (
               <>
-                <div className="filter__mobile-btn-box">
-                  <button
-                    className="filter__mobile-btn"
-                    onClick={() => setOpenedFilter(true)}
-                  >
-                    <svg width="24px" height="24px">
-                      <use href={sprite + '#filter'} />
-                    </svg>
-                    Фільтри
-                  </button>
-                  <SortBar />
+                <div className="filter__mobile-box">
+                  <h2 className="sort-bar__heading">{categoryName}</h2>
+                  <div className="filter__mobile-btn-box">
+                    <button
+                      className="filter__mobile-btn"
+                      onClick={() => setOpenedFilter(true)}
+                    >
+                      <svg width="24px" height="24px">
+                        <use href={sprite + '#filter'} />
+                      </svg>
+                      {t('Фільтри')}
+                    </button>
+
+                    <SortBar />
+                  </div>
                 </div>
                 <FilterResult />
                 <div className="filter__load-more-btn-box">
                   <button className="filter__load-more-btn" type="button">
-                    Завантажити ще
+                    {t('Завантажити ще')}
                   </button>
                 </div>
                 {openedFilter ? (
@@ -114,8 +122,18 @@ const FilterPage = observer(() => {
             {screen === 'desktop' && (
               <div className="filter__block">
                 <FilterBar />
+
                 <div>
-                  <SortBar />
+                  {!resetedFilter ? (
+                    <div className="filter__title__sorting">
+                      <h2 className="sort-bar__heading">{categoryName}</h2>
+                      <SortBar />
+                    </div>
+                  ) : (
+                    <div className="filter__title__sorting">
+                      <h2 className="sort-bar__heading">{categoryName}</h2>
+                    </div>
+                  )}
                   <FilterResult />
                 </div>
               </div>

@@ -5,9 +5,11 @@ import { observer } from 'mobx-react-lite';
 import { StyledDeliveryBack, StyledDeliveryform } from './Delivery.styled';
 import Select from 'react-select';
 import { deliveryMessage } from '../../../validation/messages';
+import { useTranslation } from 'react-i18next';
 
 const Delivery = observer(
   ({
+    // language,
     setOpenedSection,
     openedSection,
     districts,
@@ -23,10 +25,14 @@ const Delivery = observer(
     // handleDelivery,
     // handleSubmit,
   }) => {
+    const { t } = useTranslation();
+
     const [district, setDistrict] = useState(null);
     const [city, getCity] = useState(null);
     const [delivery, setDelivery] = useState('warehouse');
-    const [deliveryWay, setDeliveryWay] = useState('У відділення Нової пошти');
+    const [deliveryWay, setDeliveryWay] = useState(
+      t('У відділення Нової пошти')
+    );
 
     const [districtDefault, setDistrictDefault] = useState('null');
     const [cityDefault, setCityDefault] = useState(null);
@@ -89,7 +95,7 @@ const Delivery = observer(
             openedSection.delivery ? 'delivery-title edit' : 'delivery-title'
           }
         >
-          <p>2. Доставка</p>
+          <p>2. {t('Доставка')}</p>
           <svg
             width="24px"
             height="24px"
@@ -112,7 +118,7 @@ const Delivery = observer(
                   value: district.ref,
                   label: district.name,
                 }))}
-                placeholder="Виберіть область"
+                placeholder={t('Виберіть область')}
                 styles={getSelectStyles(errors.district)}
                 defaultValue={districtDefault}
                 onChange={selectedOption => {
@@ -126,7 +132,7 @@ const Delivery = observer(
               />
               {errors.district && (
                 <span className="delivery-error">
-                  {deliveryMessage.district}
+                  {t(deliveryMessage.district)}
                 </span>
               )}
             </span>
@@ -135,7 +141,7 @@ const Delivery = observer(
                 {...register('city', { required: true })}
                 styles={getSelectStyles(errors.city)}
                 isSearchable
-                placeholder="Виберіть місто"
+                placeholder={t('Виберіть місто')}
                 options={cities.map(city => ({
                   value: city.ref,
                   label: city.name,
@@ -151,11 +157,13 @@ const Delivery = observer(
                 }}
               />
               {errors.city && (
-                <span className="delivery-error">{deliveryMessage.city}</span>
+                <span className="delivery-error">
+                  {t(deliveryMessage.city)}
+                </span>
               )}
             </span>
             <div className="delivery__radio-btns">
-              <p> Виберіть спосіб доставляння:</p>
+              <p> {t('Виберіть спосіб доставляння:')}</p>
               <div className="radio-btn-box">
                 <input
                   type="radio"
@@ -173,7 +181,7 @@ const Delivery = observer(
                   }}
                 />
                 <label className="radio_label" htmlFor="toPostOffice">
-                  У відділення Нової пошти
+                  {t('У відділення Нової пошти')}
                 </label>
               </div>
               <div className="radio-btn-box">
@@ -193,7 +201,7 @@ const Delivery = observer(
                   }}
                 />
                 <label className="radio_label" htmlFor="toPostBox">
-                  До поштомата Нової пошти
+                  {t('До поштомата Нової пошти')}
                 </label>
               </div>
               <div className="radio-btn-box">
@@ -204,16 +212,16 @@ const Delivery = observer(
                     required: true,
                   })}
                   value="address"
-                  checked={deliveryWay === 'За адресою кур`єром Нової пошти'}
+                  checked={deliveryWay === t('За адресою кур`єром Нової пошти')}
                   onClick={e => {
                     handleChange('deliveryWay', e.currentTarget.value);
                     setDelivery(e.currentTarget.value);
-                    setDeliveryWay('За адресою кур`єром Нової пошти');
+                    setDeliveryWay(t('За адресою кур`єром Нової пошти'));
                     // handleDelivery('e.currentTarget.value');
                   }}
                 />
                 <label className="radio_label" htmlFor="toAddress">
-                  За адресою кур`єром Нової пошти
+                  {t('За адресою кур`єром Нової пошти')}
                 </label>
               </div>
             </div>
@@ -222,13 +230,13 @@ const Delivery = observer(
               <>
                 <div className="label-input-block">
                   <label className="delivery__street" htmlFor="street">
-                    Вулиця
+                    {t('Вулиця')}
                   </label>
                   <input
                     className="delivery__street-input"
                     id="street"
                     type="text"
-                    placeholder="Вулиця"
+                    placeholder={t('Вулиця')}
                     {...register('street', {
                       onChange: e => {
                         handleChange('street', e.target.value);
@@ -243,13 +251,13 @@ const Delivery = observer(
                 <div className="delivery__house-flat-block">
                   <div className="label-input-block">
                     <label className="delivery__house" htmlFor="house">
-                      Номер будинку
+                      {t('Номер будинку')}
                     </label>
                     <input
                       className="delivery__house-input"
                       id="house"
                       type="number"
-                      placeholder="Номер будинку"
+                      placeholder={t('Номер будинку')}
                       {...register('house', {
                         onChange: e => {
                           // console.log('e', e);
@@ -262,13 +270,13 @@ const Delivery = observer(
                   </div>
                   <div className="label-input-block">
                     <label className="delivery__flat" htmlFor="flat">
-                      Номер квартири
+                      {t('Номер квартири')}
                     </label>
                     <input
                       className="delivery__flat-input"
                       id="flat"
                       type="number"
-                      placeholder="Номер квартири"
+                      placeholder={t('Номер квартири')}
                       {...register('apartment', {
                         onChange: e => {
                           // console.log('e', e);
@@ -296,7 +304,7 @@ const Delivery = observer(
                   {...register('warehouse', { required: true })}
                   styles={getSelectStyles(errors.warehouse)}
                   isSearchable
-                  placeholder="Виберіть відділення"
+                  placeholder={t('Виберіть відділення')}
                   options={warehouses.map(warehouse => ({
                     value: warehouse.Ref,
                     label: warehouse.Description,
@@ -312,7 +320,7 @@ const Delivery = observer(
                 />
                 {errors.warehouse && (
                   <span className="delivery-error">
-                    {deliveryMessage.warehouse}
+                    {t(deliveryMessage.warehouse)}
                   </span>
                 )}
               </span>
@@ -323,7 +331,7 @@ const Delivery = observer(
                   {...register('postomat', { required: true })}
                   styles={getSelectStyles(errors.postomat)}
                   isSearchable
-                  placeholder="Виберіть поштомат"
+                  placeholder={t('Виберіть поштомат')}
                   options={postomats.map(postomat => ({
                     value: postomat.Ref,
                     label: postomat.Description,
@@ -339,7 +347,7 @@ const Delivery = observer(
                 />
                 {errors.postomat && (
                   <span className="delivery-error">
-                    {deliveryMessage.postomat}
+                    {t(deliveryMessage.postomat)}
                   </span>
                 )}
               </span>
@@ -348,29 +356,31 @@ const Delivery = observer(
         ) : (
           <>
             <div className="delivery-done">
-              <div>{deliveryWay}</div>
+              <div>{t(deliveryWay)}</div>
               <div>
                 {delivery === 'address' &&
-                  `Україна, ${
-                    'область ' + (districtDefault?.label || ' не обрано')
-                  }, ${'місто ' + (cityDefault?.label ?? ' не обрано')}, ${
-                    'вулиця ' + (deliveryStreet || 'вулицю не обрано')
-                  }, ${'будинок № ' + (deliveryHouse || ' не обрано')} , ${
-                    'квартира № ' + (deliveryAppartment || ' не обрано')
+                  `${t('Україна')}, ${
+                    t('область ') + (districtDefault?.label || t('не обрано'))
+                  }, ${t('місто ') + (cityDefault?.label ?? t('не обрано'))}, ${
+                    t('вулиця ') + (deliveryStreet || t('вулицю не обрано'))
+                  }, ${t('будинок № ') + (deliveryHouse || t('не обрано'))} , ${
+                    t('квартира № ') + (deliveryAppartment || t('не обрано'))
                   }`}
 
                 {delivery === 'warehouse' &&
-                  `Україна, ${
-                    districtDefault?.label + ' область' ?? ' область не обрано'
-                  }, ${'місто ' + (cityDefault?.label ?? ' не обрано ')},${
-                    warehouseDefault?.label ?? 'відділення не обрано '
+                  `${t('Україна')}, ${
+                    districtDefault?.label + ' ' + t('область') ??
+                    t('область не обрано')
+                  }, ${t('місто ') + (cityDefault?.label ?? t('не обрано'))},${
+                    warehouseDefault?.label ?? t('відділення не обрано')
                   }`}
 
                 {delivery === 'postomat' &&
-                  `Україна, ${
-                    districtDefault?.label + ' область' ?? ' область не обрано'
-                  }, ${'місто ' + (cityDefault?.label ?? ' не обрано ')},${
-                    postomatDefault?.label ?? 'поштомат не обрано '
+                  `${t('Україна')}, ${
+                    districtDefault?.label + ' ' + t('область') ??
+                    t('область не обрано')
+                  }, ${t('місто ') + (cityDefault?.label ?? t('не обрано'))},${
+                    postomatDefault?.label ?? t('поштомат не обрано')
                   }`}
               </div>
             </div>

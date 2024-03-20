@@ -25,7 +25,7 @@ export const StyledAlreadyRegisteredBox = styled.div`
 
   & .already-registered-button {
     position: relative;
-    margin-bottom: 40px;
+    /* margin-bottom: 40px; */
     width: 100%;
     padding: 16px 32px;
     height: 52px;
@@ -43,7 +43,7 @@ export const StyledAlreadyRegisteredBox = styled.div`
     }
   }
 
-  & .already-registered-button::after {
+  /* & .already-registered-button::after {
     position: absolute;
     bottom: -32px;
     left: 0;
@@ -51,7 +51,7 @@ export const StyledAlreadyRegisteredBox = styled.div`
     width: 100%;
     height: 1px;
     background-color: var(--font-color-darkgray);
-  }
+  } */
 
   & .already-registered-text {
     margin-top: 62px;
@@ -61,18 +61,20 @@ export const StyledAlreadyRegisteredBox = styled.div`
   }
 
   & .already-registered-agree {
-    margin-top: 50px;
+    margin-top: 32px;
     color: #111;
-    font-size: 11px;
+    font-size: 16px;
     font-weight: 400;
     line-height: 1.77;
 
     @media screen and (min-width: 1440px) {
-      font-size: 12px;
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 20px;
     }
   }
 
   & .already-registered-agreement {
-    text-decoration-line: underline;
+    color: #005a9a;
   }
 `;

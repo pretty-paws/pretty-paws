@@ -2,9 +2,11 @@ import React, { useEffect, useState } from 'react';
 import sprite from '../../../../../img/svg-sprite/sprite.svg';
 import { observer } from 'mobx-react-lite';
 import { useStore } from '../../../../../store/AuthProvider';
+import { useTranslation } from 'react-i18next';
 
 const Brand = observer(
   ({ setShowFilterBox, showFilterBox, searchParams, setSearchParams }) => {
+    const { t } = useTranslation();
     const store = useStore();
     const {
       catalog: { resetedFilter, filters },
@@ -92,7 +94,7 @@ const Brand = observer(
             }))
           }
         >
-          <p>Бренд</p>
+          <p>{t('Бренд')}</p>
           <svg
             className={
               showFilterBox.brands

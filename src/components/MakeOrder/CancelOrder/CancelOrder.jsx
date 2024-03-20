@@ -3,8 +3,11 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { StyledCancelOrder } from './CancelOrder.styled';
+import { useTranslation } from 'react-i18next';
 
 const CancelOrder = observer(({ cancelOrder, setCancelOrder }) => {
+  const { t } = useTranslation();
+
   if (cancelOrder) {
     document.body.classList.add('menu-opened');
   } else {
@@ -16,10 +19,10 @@ const CancelOrder = observer(({ cancelOrder, setCancelOrder }) => {
       <div className="backdrop" />
       <div className="popup">
         <h3 className="confirmation-popup_title">
-          Закрити оформлення замовлення
+          {t('Закрити оформлення замовлення')}
         </h3>
         <p className="confirmation-popup_text">
-          Ви впевнені, що хочете закрити оформлення замовлення?
+          {t('Ви впевнені, що хочете закрити оформлення замовлення?')}
         </p>
         <button
           type="button"
@@ -29,7 +32,7 @@ const CancelOrder = observer(({ cancelOrder, setCancelOrder }) => {
             navigate('/cart');
           }}
         >
-          Закрити
+          {t('Закрити')}
         </button>
         <button
           type="button"
@@ -38,7 +41,7 @@ const CancelOrder = observer(({ cancelOrder, setCancelOrder }) => {
             setCancelOrder(false);
           }}
         >
-          Назад до оформлення
+          {t('Назад до оформлення')}
         </button>
       </div>
     </StyledCancelOrder>

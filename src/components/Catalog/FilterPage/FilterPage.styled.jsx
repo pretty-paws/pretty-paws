@@ -4,6 +4,32 @@ export const StyledFilterPage = styled.div`
   padding: 19px 0 96px;
   position: relative;
 
+  .sort-bar__heading {
+    margin-top: 22px;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 20px;
+
+    @media screen and (min-width: 834px) {
+      font-size: 24px;
+      font-weight: 500;
+      line-height: 32px;
+    }
+
+    @media screen and (min-width: 1440px) {
+      margin-top: 10px;
+      position: static;
+      font-size: 24px;
+      font-weight: 500;
+      line-height: 32px;
+    }
+  }
+
+  .filter__title__sorting {
+    display: flex;
+    justify-content: space-between;
+  }
+
   .filter-page__breadcrumbs {
   }
 
@@ -21,17 +47,25 @@ export const StyledFilterPage = styled.div`
     margin-top: 24px;
     display: grid;
     grid-template-columns: 267px 1fr;
-    column-gap: 24px;
+    column-gap: 16px;
     @media screen and (min-width: 834px) {
+      margin-top: 16px;
+    }
+  }
+
+  .filter__mobile-box {
+    padding-top: 20px;
+    @media screen and (min-width: 834px) {
+      /* padding-top: 65px; */
     }
   }
 
   .filter__mobile-btn-box {
-    padding-top: 55px;
+    padding-top: 20px;
     display: flex;
     justify-content: space-between;
     @media screen and (min-width: 834px) {
-      padding-top: 65px;
+      padding-top: 24px;
     }
   }
 

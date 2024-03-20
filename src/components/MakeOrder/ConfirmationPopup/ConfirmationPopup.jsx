@@ -3,9 +3,12 @@ import React from 'react';
 import { StyledConfirmationPopup } from './ConfirmationPopup.styled';
 import sprite from '../../../img/svg-sprite/sprite.svg';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 const ConfirmationPopup = observer(
   ({ setConfirmationPopup, confirmationPopup }) => {
+    const { t } = useTranslation();
+
     if (confirmationPopup) {
       document.body.classList.add('menu-opened');
     } else {
@@ -21,11 +24,11 @@ const ConfirmationPopup = observer(
             <use href={sprite + '#success'} />
           </svg>
           <h3 className="confirmation-popup_title">
-            Ваше замовлення успішно оформлено
+            {t('Ваше замовлення успішно оформлено')}
           </h3>
           <p className="confirmation-popup_text">
-            Номер вашого замовлення <b> № 52305</b>. Ви можете слідкувати за
-            його статусом в особистому кабінеті
+            {t('Номер вашого замовлення')} <b> № 52305</b>.{' '}
+            {'Ви можете слідкувати за його статусом в особистому кабінеті'}
           </p>
           <button
             type="button"
@@ -35,7 +38,7 @@ const ConfirmationPopup = observer(
               navigate('/catalog/animal/cats/category/food-for-cats');
             }}
           >
-            Повернутися до каталогу
+            {t('Повернутися до каталогу')}
           </button>
           <button
             type="button"
@@ -45,7 +48,7 @@ const ConfirmationPopup = observer(
               navigate('/cabinet/orders');
             }}
           >
-            Мій кабінет
+            {t('Мій кабінет')}
           </button>
         </div>
       </StyledConfirmationPopup>

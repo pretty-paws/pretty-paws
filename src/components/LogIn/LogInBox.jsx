@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import { StyledLoginBox } from './LogInBox.styled';
 
-import LoginWithPhone from './LoginWithPhone';
+// import LoginWithPhone from './LoginWithPhone';
 import { SocialNetsAuth } from './SocialNetsAuth';
 import { useStore } from '../../store/AuthProvider';
 import { observer } from 'mobx-react-lite';
@@ -77,9 +77,9 @@ const LogInBox = observer(() => {
           {t('та отримай 5% знижки на всі покупки')}
         </p>
       )}
-      <p className="login-text">{t('Увійти за номером телефону')}</p>
-      <LoginWithPhone />
-      <p className="login-text">{t('Або увійти за ел. адресою')}</p>
+      {/* <p className="login-text">{t('Увійти за номером телефону')}</p> */}
+      {/* <LoginWithPhone /> */}
+      {/* <p className="login-text">{t('Або увійти за ел. адресою')}</p> */}
       <form onSubmit={handleSubmit(onSubmit)}>
         <Email
           errors={errors}
@@ -106,7 +106,7 @@ const LogInBox = observer(() => {
           authorised={authorised}
         />
       </form>
-      <SocialNetsAuth title="Або увійти через" />
+      <SocialNetsAuth title="або" />
     </StyledLoginBox>
   );
 });

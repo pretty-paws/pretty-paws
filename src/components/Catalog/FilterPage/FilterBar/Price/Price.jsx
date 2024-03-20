@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import sprite from '../../../../../img/svg-sprite/sprite.svg';
 import { observer } from 'mobx-react-lite';
+import { useTranslation } from 'react-i18next';
 
 const Price = observer(
   ({
@@ -10,6 +11,8 @@ const Price = observer(
     setSearchParams,
     searchParams,
   }) => {
+    const { t } = useTranslation();
+
     const [isMinChosen, setIsMinChosen] = useState(``);
     const [isMaxChosen, setIsMaxChosen] = useState(``);
 
@@ -52,7 +55,7 @@ const Price = observer(
             }))
           }
         >
-          <p>Ціна</p>
+          <p>{t('Ціна')}</p>
           <svg
             className={
               showFilterBox.price

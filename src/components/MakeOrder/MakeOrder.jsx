@@ -16,12 +16,13 @@ import Agreement from './Agreement/Agreement';
 import OrderDetails from './OrderDetails/OrderDetails';
 import ConfirmationPopup from './ConfirmationPopup/ConfirmationPopup';
 import CancelOrder from './CancelOrder/CancelOrder';
+import { useTranslation } from 'react-i18next';
 
 const MakeOrder = observer(() => {
-  // const { t } = useTranslation();
+  const { t } = useTranslation();
   const store = useStore();
   const {
-    auth: { user, updateProfile, state },
+    auth: { user, updateProfile, state, language },
     cart: { cart, total, createOrder, emptyCart },
     novaPoshta: {
       getDistricts,
@@ -60,7 +61,7 @@ const MakeOrder = observer(() => {
       district: '',
       city: '',
       deliveryWay:
-        'У відділення Нової пошти' || localStorage.getItem('deliveryWay'),
+        t('У відділення Нової пошти') || localStorage.getItem('deliveryWay'),
       street: '',
       house: '',
       apartment: '',
@@ -152,10 +153,10 @@ const MakeOrder = observer(() => {
           <svg width="24px" height="24px">
             <use href={sprite + '#arrow-blue'} />
           </svg>
-          <p>До кошика</p>
+          <p>{t('До кошика')}</p>
         </div>
         {/* </Link> */}
-        <h2 className="make-order__title">Оформлення замовлення</h2>
+        <h2 className="make-order__title">{t('Оформлення замовлення')}</h2>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="make-order__layout">
             <div>
@@ -183,6 +184,7 @@ const MakeOrder = observer(() => {
                 warehouses={warehouses}
                 postomats={postomats}
                 getPostomats={getPostomats}
+                language={language}
                 // handleDelivery={setDelivery}
               />
               <Payment

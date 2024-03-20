@@ -68,7 +68,7 @@ const PersonalData = observer(
         {openedSection.personalData ? (
           <div className="make-order__personal-data-edit">
             <div className="make-order__personal-data-title edit">
-              <p>1. Особисті дані</p>
+              <p>1. {t('Особисті дані')}</p>
               <svg
                 width="24px"
                 height="24px"
@@ -265,7 +265,7 @@ const PersonalData = observer(
         ) : (
           <div className="make-order__personal-data">
             <div className="make-order__personal-data-title">
-              <p>1. Особисті дані</p>
+              <p>1. {t('Особисті дані')}</p>
               <svg
                 width="24px"
                 height="24px"
@@ -281,14 +281,14 @@ const PersonalData = observer(
             </div>
             <ul className="make-order__personal-data__list">
               <li>
-                <p>Ім’я та прізвище:</p>
+                <p>{t('Ім’я та прізвище')}:</p>
                 <p>
                   {/* {console.log(userData.surname)} */}
                   {userData.name} {userData.surname}
                 </p>
               </li>
               <li>
-                <p>Телефон:</p>
+                <p>{t('Телефон')}:</p>
                 <p>{formatPhoneNumber(userData.phone)}</p>
               </li>
               <li>

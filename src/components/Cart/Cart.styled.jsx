@@ -418,7 +418,7 @@ export const StyledModalBox = styled.div`
 
     @media screen and (min-width: 1440px) {
       flex: none;
-      width: 235px;
+      width: 100%;
       height: 52px;
     }
   }

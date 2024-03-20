@@ -14,7 +14,6 @@ const AnimalsBar = observer(
     type,
     getCategory,
     chosenCategory,
-    // setChosenCategory,
     isSubmitted,
     setAnimal,
     animal,
@@ -23,18 +22,8 @@ const AnimalsBar = observer(
   }) => {
     const store = useStore();
     const {
-      catalog: {
-        animals,
-        // setCategoryID,
-        setAnimalName,
-        setAnimalSlug,
-        setAnimalID,
-      },
-      subscription: {
-        setSubscription,
-        //   // subscriptionsIDList,
-        //   includesSubscription,
-      },
+      catalog: { animals, setAnimalName, setAnimalSlug, setAnimalID },
+      subscription: { setSubscription },
     } = store;
 
     function includesCategory(category) {

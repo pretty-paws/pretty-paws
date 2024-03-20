@@ -97,6 +97,7 @@ export const StyledRegisterBox = styled.div`
       margin: 0;
     }
     &[type='number'] {
+      appearance: textfield;
       -moz-appearance: textfield;
     }
 
@@ -143,7 +144,7 @@ export const StyledRegisterBox = styled.div`
 
   & .button-checkbox-container {
     margin-top: 24px;
-    margin-bottom: 52px;
+    /* margin-bottom: 52px; */
     display: flex;
     flex-direction: column;
     gap: 41px;
@@ -185,7 +186,7 @@ export const StyledRegisterBox = styled.div`
     }
   }
 
-  & .register-button::after {
+  /* & .register-button::after {
     position: absolute;
     bottom: -30px;
     left: 0;
@@ -193,7 +194,7 @@ export const StyledRegisterBox = styled.div`
     width: 100%;
     height: 1px;
     background-color: var(--font-color-darkgray);
-  }
+  } */
 
   & .register-checkbox {
     width: 16px;
@@ -208,7 +209,7 @@ export const StyledRegisterBox = styled.div`
   }
 
   & .register-personal-data {
-    text-decoration-line: underline;
+    /* text-decoration-line: underline; */
     cursor: pointer;
   }
 `;

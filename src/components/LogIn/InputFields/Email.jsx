@@ -24,7 +24,7 @@ const Email = ({
 
   return (
     <label className="login-label">
-      {t('Електронна пошта')}
+      {t('Ваша електронна адреса')}
       <input
         onFocus={() => {
           setState();
@@ -45,7 +45,7 @@ const Email = ({
             : 'login-input '
         }
         type="email"
-        placeholder={t('Електронна адреса')}
+        placeholder={t('Електронна адреса ')}
         {...register('email', {
           pattern: {
             value: emailRegExp,

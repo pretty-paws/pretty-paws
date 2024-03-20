@@ -2,9 +2,12 @@ import { observer } from 'mobx-react-lite';
 import React from 'react';
 import sprite from '../../../img/svg-sprite/sprite.svg';
 import { StyledPayment } from './Payment.styled';
+import { useTranslation } from 'react-i18next';
 
 const Payment = observer(
   ({ setOpenedSection, openedSection, register, handleChange }) => {
+    const { t } = useTranslation();
+
     return (
       <StyledPayment>
         <div
@@ -12,7 +15,7 @@ const Payment = observer(
             openedSection.payment ? 'payment-title edit' : 'payment-title'
           }
         >
-          <p>3. Оплата</p>
+          <p>3. {t('Оплата')}</p>
           <svg
             width="24px"
             height="24px"
@@ -42,7 +45,7 @@ const Payment = observer(
                 }}
               />
               <label className="radio_label" htmlFor="online">
-                Карткою онлайн на сайті
+                {t('Карткою онлайн на сайті')}
               </label>
             </div>
             <div className="radio-btn-box">
@@ -59,7 +62,7 @@ const Payment = observer(
                 }}
               />
               <label className="radio_label" htmlFor="onReceiving">
-                При отриманні
+                {t('При отриманні')}
               </label>
             </div>
             <div className="radio-btn-box">
@@ -76,7 +79,7 @@ const Payment = observer(
                 }}
               />
               <label className="radio_label" htmlFor="onAccount">
-                На рахунок для юридичних осіб
+                {t('На рахунок для юридичних осіб')}
               </label>
             </div>
           </div>

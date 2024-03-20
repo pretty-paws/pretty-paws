@@ -7,6 +7,7 @@ import { useRef, useState } from 'react';
 import useWindowSize from '../../../../hooks/useWindowSize';
 import { useTranslation } from 'react-i18next';
 import { useOutsideClickDetect } from '../../../../hooks/useOutsideClickDetect';
+import { Link } from 'react-router-dom';
 
 const CartModal = observer(({ setCartModalOpen }) => {
   const { t } = useTranslation();
@@ -21,16 +22,6 @@ const CartModal = observer(({ setCartModalOpen }) => {
 
   const selectRef = useRef(null);
   useOutsideClickDetect(selectRef, setCartModalOpen);
-
-  // function editedDescription(text) {
-  //   if (!text) return;
-  //   let editedText;
-  //   if (text.length <= 50) return text;
-  //   if (text.length > 50) {
-  //     editedText = text.slice(0, 50);
-  //   }
-  //   return editedText + '...';
-  // }
 
   function checkFavourite(id) {
     return user.favorites?.some(product => product.id === id);
@@ -175,9 +166,11 @@ const CartModal = observer(({ setCartModalOpen }) => {
         ) : (
           <>
             <h2 className="cart-modal__title">{t('Кошик порожній')}</h2>
-            <button className="cart-modal__button" type="button">
-              {t('Знайти товар')}
-            </button>
+            <Link to="/catalog">
+              <button className="cart-modal__button" type="button">
+                {t('Знайти товар')}
+              </button>
+            </Link>
           </>
         )}
       </StyledModalBox>

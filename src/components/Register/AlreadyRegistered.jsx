@@ -16,7 +16,7 @@ const AlreadyRegistered = () => {
           {t('Увійти')}
         </button>
       </Link>
-      <SocialNetsAuth title={t('Або увійти через')} />
+      <SocialNetsAuth title={t('або')} />
 
       <p className="already-registered-agree">
         {t('Продовжуючи, ви погоджуєтесь з')}

@@ -110,7 +110,7 @@ const RegisterBox = observer(() => {
         <Checkbox errors={errors} register={register} isValid={isValid} />
       </form>
 
-      <SocialNetsAuth title={t('Або реєстрація через')} />
+      <SocialNetsAuth title={t('або')} />
     </StyledRegisterBox>
   );
 });

@@ -22,31 +22,33 @@ const Promotions = observer(({ query, title }) => {
   const { screen } = useWindowSize();
   const store = useStore();
   const {
+    auth: { language },
     catalog: {
       state,
       getFilteredNewProducts,
       getFilteredSaleProducts,
       saleProducts,
       newProducts,
+      animalID,
     },
   } = store;
 
-  const [animal, setAnimal] = useState(1);
+  const [animal, setAnimal] = useState(animalID || 1);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (query === 'new=1') {
       setLoading(true);
-      getFilteredNewProducts(animal, 'ua', query).then(() => {
+      getFilteredNewProducts(animal, language, query).then(() => {
         setLoading(false);
       });
     } else if (query === 'is_promotional=1') {
       setLoading(true);
-      getFilteredSaleProducts(animal, 'ua', query).then(() => {
+      getFilteredSaleProducts(animal, language, query).then(() => {
         setLoading(false);
       });
     }
-  }, [animal, query]);
+  }, [animal, query, language]);
 
   const getProducts = query => {
     if (query === 'is_promotional=1') {
@@ -159,7 +161,7 @@ const Promotions = observer(({ query, title }) => {
                 })
               }
             >
-              Усі пропозиції
+              {t('Усі пропозиції')}
             </button>
           </Link>
         </div>

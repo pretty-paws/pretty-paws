@@ -6,6 +6,7 @@ import { observer } from 'mobx-react-lite';
 import useWindowSize from '../../../../hooks/useWindowSize';
 import sprite from '../../../../img/svg-sprite/sprite.svg';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 const options = [
   { value: 'expensive', label: 'Від дорогих до дешевих' },
@@ -13,10 +14,12 @@ const options = [
 ];
 
 const SortBar = observer(() => {
+  const { t } = useTranslation();
+
   const { screen } = useWindowSize();
   const store = useStore();
   const {
-    catalog: { categoryName, sortProducts },
+    catalog: { sortProducts },
   } = store;
 
   const [mobileValue, setMobileValue] = useState('expensive');
@@ -33,11 +36,10 @@ const SortBar = observer(() => {
 
   return (
     <StyledSortingBar>
-      <h2 className="sort-bar__heading">{categoryName}</h2>
       <div className="sort-bar__sort-block">
         {screen !== 'mobile' && (
           <>
-            {screen === 'desktop' && <p>Сортувати за:</p>}
+            {screen === 'desktop' && <p>{t('Сортувати за:')}</p>}
             <CustomSelect options={options} onChange={handleSelectChange} />
           </>
         )}
@@ -49,7 +51,7 @@ const SortBar = observer(() => {
             <svg width="24px" height="24px">
               <use href={sprite + '#sort'} />
             </svg>
-            <p>Ціна</p>
+            <p>{t('Ціна')}</p>
           </div>
         )}
       </div>
