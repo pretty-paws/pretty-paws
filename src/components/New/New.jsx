@@ -19,10 +19,10 @@ const New = observer(() => {
 
   const store = useStore();
   const {
-    catalog: { state, newProducts, getFilteredNewProducts, categoryID },
+    catalog: { state, newProducts, getFilteredNewProducts, animalID },
   } = store;
 
-  const [animal, setAnimal] = useState(categoryID || 1);
+  const [animal, setAnimal] = useState(Number(animalID) || 1);
   const [loading, setLoading] = useState(false);
   const [cardsAmount, setCardsAmount] = useState(8);
 

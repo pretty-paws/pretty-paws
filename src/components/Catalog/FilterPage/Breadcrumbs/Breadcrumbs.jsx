@@ -4,20 +4,17 @@ import sprite from '../../../../img/svg-sprite/sprite.svg';
 import { useStore } from '../../../../store/AuthProvider';
 import { observer } from 'mobx-react-lite';
 import { StyledBreadcrumbs } from './Breadcrumbs.styled';
-// import useWindowSize from '../../../../hooks/useWindowSize';
-// import CategoryMenu from '../../../SharedLayout/CategoryMenu/CategoryMenu';
-// import BurgerMenu from '../../../SharedLayout/BurgerMenu/BurgerMenu';
 
 const Breadcrumbs = observer(({ page }) => {
-  // const { screen } = useWindowSize();
   const store = useStore();
   const {
     catalog: { animalName, categoryName, animalSlug, productById },
   } = store;
 
+  console.log('animalName', animalName);
+
   return (
     <StyledBreadcrumbs>
-      {/* {screen === 'desktop' ? ( */}
       <>
         <NavLink
           to={`/catalog/animal/${animalSlug}`}
@@ -25,17 +22,24 @@ const Breadcrumbs = observer(({ page }) => {
         >
           <span className="filter__breadcrumbs__page">Каталог</span>
         </NavLink>
-        <svg className="filter-arrow" width="24px" height="24px">
-          <use href={sprite + '#arrow-gray'} />
-        </svg>
+        <div className="arrow-container">
+          <svg className="filter-arrow" width="24px" height="24px">
+            <use href={sprite + '#arrow-gray'} />
+          </svg>
+        </div>
         <Link to={`/catalog/animal/${animalSlug}`}>
           <span className="filter__breadcrumbs__animal">
-            {animalName ? animalName : localStorage.getItem('animalName')}
+            {
+              animalName
+              // ? animalName : localStorage.getItem('animalName')
+            }
           </span>
         </Link>
-        <svg className="filter-arrow" width="24px" height="24px">
-          <use href={sprite + '#arrow-gray'} />
-        </svg>
+        <div className="arrow-container">
+          <svg className="filter-arrow" width="24px" height="24px">
+            <use href={sprite + '#arrow-gray'} />
+          </svg>
+        </div>
         <Link
           to={`/catalog/animal/${animalSlug}`}
           className={page === 'filter' ? 'active' : 'filter__breadcrumbs'}
@@ -46,9 +50,11 @@ const Breadcrumbs = observer(({ page }) => {
         </Link>
         {productById !== undefined && page === 'product' ? (
           <>
-            <svg className="filter-arrow" width="24px" height="24px">
-              <use href={sprite + '#arrow-gray'} />
-            </svg>
+            <div className="arrow-container">
+              <svg className="filter-arrow" width="24px" height="24px">
+                <use href={sprite + '#arrow-gray'} />
+              </svg>
+            </div>
             <Link
               to={{
                 pathname: `/catalog/animal/${animalSlug}/category/${productById.category?.slug}/`,
@@ -59,9 +65,11 @@ const Breadcrumbs = observer(({ page }) => {
                 {productById.subcategory?.title}
               </span>
             </Link>
-            <svg className="filter-arrow" width="24px" height="24px">
-              <use href={sprite + '#arrow-gray'} />
-            </svg>
+            <div className="arrow-container">
+              <svg className="filter-arrow" width="24px" height="24px">
+                <use href={sprite + '#arrow-gray'} />
+              </svg>
+            </div>
             <NavLink className={({ isActive }) => (isActive ? 'active' : '')}>
               <span className="filter__breadcrumbs__product-name">
                 {productById?.title}

@@ -9,8 +9,13 @@ export const StyledBreadcrumbs = styled.div`
   font-size: 14px;
   font-weight: 400;
   line-height: 18px;
-  overflow-x: scroll;
-  width: fit-content;
+  overflow-x: auto;
+  max-width: 100%;
+
+  .arrow-container {
+    display: flex;
+    align-items: center;
+  }
 
   &::-webkit-scrollbar {
     width: 0.1em;

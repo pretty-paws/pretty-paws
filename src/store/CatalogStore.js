@@ -28,6 +28,7 @@ export class CatalogStore {
   filters = {};
   animalName = localStorage.getItem('animalName') || '';
   animalSlug = localStorage.getItem('animalSlug') || '';
+  animalID = localStorage.getItem('animalID') || '';
   categoryName = localStorage.getItem('categoryName') || '';
   categoryID = localStorage.getItem('categoryID') || '';
   categorySlug = localStorage.getItem('categorySlug') || '';
@@ -59,6 +60,11 @@ export class CatalogStore {
     localStorage.setItem('animalSlug', slug);
   }
 
+  setAnimalID(id) {
+    this.animalID = id;
+    localStorage.setItem('animalID', id);
+  }
+
   setCategoryName(name) {
     this.categoryName = name;
     localStorage.setItem('categoryName', name);
@@ -72,6 +78,11 @@ export class CatalogStore {
   setCategorySlug(slug) {
     this.categorySlug = slug;
     localStorage.setItem('categorySlug', slug);
+  }
+
+  setSubcategorySlug(slug) {
+    this.subcategorySlug = slug;
+    localStorage.setItem('subcategorySlug', slug);
   }
 
   setSubcategoryID(id) {

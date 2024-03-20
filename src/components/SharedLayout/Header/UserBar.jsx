@@ -39,19 +39,22 @@ const UserBar = observer(({ setActive }) => {
 
   return (
     <>
-      <StyledUserBar onClick={() => screen === 'mobile' && setActive(false)}>
+      <StyledUserBar>
         <ToolTip
           text={t('Необхідно авторизуватись')}
           authorised={authorised}
           screen={screen}
         >
           <NavLink
-            to={authorised ? '/cabinet/wish_list' : null}
+            to={authorised && '/cabinet/wish_list'}
             className={({ isActive }) =>
               isActive && authorised ? 'active-link' : 'unauthorised'
             }
           >
             <div
+              onClick={() => {
+                if (authorised && screen !== 'desktop') setActive(false);
+              }}
               className={
                 authorised
                   ? 'user-bar__container'
@@ -77,7 +80,10 @@ const UserBar = observer(({ setActive }) => {
           to="/comparison"
           className={({ isActive }) => (isActive ? 'active-link' : '')}
         >
-          <div className="user-bar__container">
+          <div
+            className="user-bar__container"
+            onClick={() => screen !== 'desktop' && setActive(false)}
+          >
             <svg className="user-bar__icon">
               <use href={sprite + '#scale'} />
             </svg>
@@ -99,6 +105,7 @@ const UserBar = observer(({ setActive }) => {
               location.pathname !== '/cart' &&
               setCartModalOpen(true)
             }
+            onClick={() => screen !== 'desktop' && setActive(false)}
           >
             <svg className="user-bar__icon">
               <use href={sprite + '#basket'} />

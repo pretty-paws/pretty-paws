@@ -38,7 +38,16 @@ export const StyledFilterResults = styled.div`
   .filter__sale-products {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     gap: 24px;
+
+    @media screen and (min-width: 834px) {
+      gap: 15px;
+    }
+
+    @media screen and (min-width: 1440px) {
+      gap: 24px;
+    }
   }
 
   .filter__button-container {

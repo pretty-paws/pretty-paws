@@ -165,7 +165,7 @@ export const StyledBigProductCard = styled.div`
 
   .product__fav-compare {
     position: absolute;
-    top: 54%;
+    top: 62%;
     right: 0;
     display: flex;
     gap: 32px;
@@ -296,5 +296,14 @@ export const StyledBigProductCard = styled.div`
     gap: 4px;
     align-items: center;
     cursor: pointer;
+  }
+
+  &.product__compare-icon {
+    cursor: pointer;
+  }
+
+  .product__compare-icon.added {
+    fill: #53c5bd;
+    stroke: #53c5bd;
   }
 `;

@@ -41,9 +41,12 @@ const CardProduct = observer(
         setCategorySlug,
         setAnimalName,
         setCategoryName,
-        //   // animalSlug,
-        //   // categorySlug,
-        //   // subcategorySlug,
+        setSubcategorySlug,
+        setSubcategoryID,
+        setCategoryID,
+        setSearchQuery,
+        unResetFilter,
+        setAnimalID,
       },
       comparison: {
         animalCategory,
@@ -100,7 +103,7 @@ const CardProduct = observer(
       setCartNotification(true);
     }
 
-    function addToFav(e) {
+    function addToCompare(e) {
       e.stopPropagation();
       if (animalCategory === null) {
         setCategory(animal.slug);
@@ -165,14 +168,24 @@ const CardProduct = observer(
       <StyledCardProduct
         biggerMargin={promotional_price !== 0}
         onClick={() => {
-          setAnimalSlug(animal?.slug);
-          setCategorySlug(category?.slug);
-          setAnimalName(animal?.title);
+          setAnimalSlug(animal.slug);
+          setAnimalID(animal.id);
+          setAnimalName(animal.title);
           setCategoryName(category?.title);
-          // setProductId(id);
+          setCategorySlug(category.slug);
+          setCategoryID(category.id);
+          setSubcategorySlug(subcategory.slug);
+          setSubcategoryID(subcategory?.id);
+          unResetFilter();
+
+          setSearchQuery(`&subcategories[0]=${subcategory.slug}`);
           navigate(
-            `/catalog/animal/${animal?.slug}/category/${category?.slug}/${subcategory?.slug}/${id}`
+            `/catalog/animal/${animal.slug}/category/${category.slug}/${subcategory.slug}/${id}`
           );
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth',
+          });
         }}
       >
         {is_promotional === 1 && (
@@ -235,7 +248,7 @@ const CardProduct = observer(
               height=" 24px"
               fill="currentColor"
               stroke="none"
-              onClick={addToFav}
+              onClick={addToCompare}
               className={
                 alreadyAddedToCompare(id)
                   ? ' product__compare-icon added'

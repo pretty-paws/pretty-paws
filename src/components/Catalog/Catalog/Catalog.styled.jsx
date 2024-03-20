@@ -20,6 +20,8 @@ export const StyledCatalog = styled.div`
       grid-template-rows: 1fr 1fr;
       justify-content: center;
       column-gap: 20px;
+      overflow-y: scroll;
+      height: fit-content;
     }
 
     @media screen and (min-width: 834px) {

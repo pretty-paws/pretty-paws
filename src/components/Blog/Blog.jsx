@@ -120,6 +120,36 @@ const Blog = observer(() => {
     }
   }, [chosenCategory]);
 
+
+  //   const handleLoadMore = () => {
+  //     setCurrentPage(prevPage => prevPage + 1);
+  //     setActiveLoadMore(true);
+  //   };
+
+  //   const handlePaginationClick = numPage => {
+  //     console.log(' handlePaginationClick before = ', numPage);
+  //     console.log(' handlePaginationClick current before = ', currentPage);
+  //     // setCurrentPage(numPage);
+  //     // setActiveLoadMore(true);
+  //     // console.log('numPage', numPage);
+
+  //     setCurrentPage(numPage);
+  //     setActiveLoadMore(true);
+  //     console.log(' handlePaginationClick current after = ', currentPage);
+  //   };
+  //   const handlePaginationArrowClick = type => {
+  //     console.log(' handlePaginationArrowClick before  = ', currentPage);
+
+  //     if (type === 'prev') {
+  //       setCurrentPage(prevPage => prevPage - 1);
+  //       setActiveLoadMore(true);
+  //     } else {
+  //       setCurrentPage(prevPage => prevPage + 1);
+  //       setActiveLoadMore(true);
+  //     }
+  //     console.log(' handlePaginationArrowClick after  = ', currentPage);
+  //   };
+
   const handleLoadMore = () => {
     setCurrentPage(prevPage => prevPage + 1);
     setActiveLoadMore(true);

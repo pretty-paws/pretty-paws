@@ -204,27 +204,18 @@ export const StyledFilterBar = styled.div`
     position: relative;
     display: flex;
     justify-content: space-between;
-
-    /* border-bottom: 1px solid #d6d6d6; */
   }
 
   .filter__min-max::after {
     position: absolute;
-    top: 60px;
-    left: 150px;
     content: '';
     width: 35px;
     height: 1px;
     background-color: var(--font-color-darkgray);
 
-    @media screen and (min-width: 834px) {
-      left: 132px;
-    }
-
-    @media screen and (min-width: 1440px) {
-      top: 60px;
-      left: 114px;
-    }
+    top: 65%;
+    left: 50%;
+    transform: translate(-50%, 50%);
   }
 
   .filter__min-label,

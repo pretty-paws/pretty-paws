@@ -129,7 +129,10 @@ const SignUp = observer(() => {
                     {t(`${errors.email.message}`)}
                   </p>
                 )}
-                {state === 'error' && errorType === 'email' && !errors.email ? (
+                {state === 'error' &&
+                errorType === 'email' &&
+                !errors.email &&
+                visible ? (
                   <p role="alert" className="sign-up__error">
                     {t(`${error}`)}
                   </p>
