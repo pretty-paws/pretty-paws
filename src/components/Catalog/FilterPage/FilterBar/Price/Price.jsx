@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import sprite from '../../../../../img/svg-sprite/sprite.svg';
 import { observer } from 'mobx-react-lite';
+import { useTranslation } from 'react-i18next';
 
 const Price = observer(
   ({
@@ -10,8 +11,14 @@ const Price = observer(
     setSearchParams,
     searchParams,
   }) => {
-    const [isMinChosen, setIsMinChosen] = useState(``);
-    const [isMaxChosen, setIsMaxChosen] = useState(``);
+    const { t } = useTranslation();
+
+    const [isMinChosen, setIsMinChosen] = useState(
+      searchParams.get('price_min') || filters.prices[0].toString()
+    );
+    const [isMaxChosen, setIsMaxChosen] = useState(
+      searchParams.get('price_max') || filters.prices[1].toString()
+    );
 
     useEffect(() => {
       const minPrice =
@@ -21,19 +28,38 @@ const Price = observer(
 
       setIsMinChosen(minPrice);
       setIsMaxChosen(maxPrice);
-    }, [searchParams, filters.prices]);
+    }, [searchParams, filters]);
 
-    const handleMinPrice = value => {
-      setIsMinChosen(value);
+    // const handleMinPrice = value => {
+    //   setIsMinChosen(value);
+    //   const currentSearchParams = new URLSearchParams(searchParams);
+    //   currentSearchParams.set('price_min', value);
+    //   setSearchParams(currentSearchParams);
+    // };
+
+    const handleMinPrice = e => {
+      console.log('e.currentTarget.value', e.currentTarget.value);
+      const sum = e.currentTarget.value;
+      const newValue = sum === '' ? '' : Number(sum);
+      setIsMinChosen(newValue);
       const currentSearchParams = new URLSearchParams(searchParams);
-      currentSearchParams.set('price_min', value);
+      currentSearchParams.set('price_min', newValue);
       setSearchParams(currentSearchParams);
     };
 
-    const handleMaxPrice = value => {
-      setIsMaxChosen(value);
+    // const handleMaxPrice = value => {
+    //   setIsMaxChosen(value);
+    //   const currentSearchParams = new URLSearchParams(searchParams);
+    //   currentSearchParams.set('price_max', value);
+    //   setSearchParams(currentSearchParams);
+    // };
+
+    const handleMaxPrice = e => {
+      const sum = e.currentTarget.value;
+      const newValue = sum === '' ? '' : Number(sum);
+      setIsMaxChosen(newValue);
       const currentSearchParams = new URLSearchParams(searchParams);
-      currentSearchParams.set('price_max', value);
+      currentSearchParams.set('price_max', newValue);
       setSearchParams(currentSearchParams);
     };
 
@@ -52,7 +78,7 @@ const Price = observer(
             }))
           }
         >
-          <p>Ціна</p>
+          <p>{t('Ціна')}</p>
           <svg
             className={
               showFilterBox.price
@@ -71,20 +97,20 @@ const Price = observer(
               <label className="filter__min-label">Min</label>
               <input
                 name="min"
-                onChange={e => handleMinPrice(e.currentTarget.value)}
+                onChange={e => handleMinPrice(e)}
                 className="filter__min-input"
                 type="number"
-                value={isMinChosen}
+                defaultValue={isMinChosen}
               />
             </div>
             <div>
               <label className="filter__max-label">Max</label>
               <input
                 name="max"
-                onChange={e => handleMaxPrice(e.currentTarget.value)}
+                onChange={e => handleMaxPrice(e)}
                 className="filter__max-input"
                 type="number"
-                value={isMaxChosen}
+                defaultValue={isMaxChosen}
               />
             </div>
           </div>

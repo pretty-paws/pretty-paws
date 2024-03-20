@@ -37,17 +37,23 @@ const Comparison = observer(() => {
       <StyledComparisonPage>
         {compareList.length !== 0 ? (
           <>
-            <h3 className="compare__title">Порівняння товарів</h3>
+            <h3 className="compare__title">{t('Порівняння товарів')}</h3>
             <div className="compare__container">
               <div>
                 <ul className="compare__table-title">
                   <li>
-                    <span className="compare__table-title-cell">Товар</span>
+                    <span className="compare__table-title-cell">
+                      {t('Товар')}
+                    </span>
                   </li>
-                  <li className="compare__table-title-cell">Бренд</li>
-                  <li className="compare__table-title-cell">Країна виробник</li>
-                  <li className="compare__table-title-cell">Вид</li>
-                  <li className="compare__table-title-cell">Вага/розмір</li>
+                  <li className="compare__table-title-cell">{t('Бренд')}</li>
+                  <li className="compare__table-title-cell">
+                    {t('Країна виробник')}
+                  </li>
+                  <li className="compare__table-title-cell">{t('Вид')}</li>
+                  <li className="compare__table-title-cell">
+                    {t('Вага/розмір')}
+                  </li>
                 </ul>
               </div>
               <div className="compare__table-products-container">
@@ -160,11 +166,14 @@ const Comparison = observer(() => {
           </>
         ) : (
           <>
-            <h3 className="empty__title">Ваш список порівняння ще пустий</h3>
+            <h3 className="empty__title">
+              {t('Ваш список порівняння ще пустий')}
+            </h3>
             <div className="empty__description_icon">
               <p>
-                На картках товарів, які сподобалися, натисніть на іконку
-                порівняння
+                {t(
+                  'На картках товарів, які сподобалися, натисніть на іконку порівняння'
+                )}
               </p>
               <div className="description_and_icon">
                 <span className="scale-icon">
@@ -175,16 +184,16 @@ const Comparison = observer(() => {
               </div>
             </div>
             <p className="empty__description">
-              Порівнюйте та обирайте краще з <b>PrettyPaws</b>
+              {t('Порівнюйте та обирайте краще з')} <b>PrettyPaws</b>
             </p>
             <Link to="/catalog">
               <button type="button" className="empty__button">
-                До каталогу
+                {t('До каталогу')}
               </button>
             </Link>
             <Promotions
               query={'is_promotional=1'}
-              title={'Вашому вихованцеві може сподобатися'}
+              title={t('Вашому вихованцеві може сподобатися')}
             />
           </>
         )}

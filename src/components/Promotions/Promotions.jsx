@@ -13,14 +13,13 @@ import Pagination from '../../hooks/Pagination/Pagination';
 import { UseSkeleton } from '../../hooks/useSkeleton';
 import { NewProductsContainer } from '../New/New.styled';
 
-// let PageSize = 8;
-
 const Promotions = observer(() => {
   const { t } = useTranslation();
   const { screen } = useWindowSize();
 
   const store = useStore();
   const {
+    auth: { language },
     catalog: { state, saleProducts, getFilteredSaleProducts, animalID },
   } = store;
 
@@ -29,11 +28,11 @@ const Promotions = observer(() => {
   const [cardsAmount, setCardsAmount] = useState(8);
   useEffect(() => {
     setLoading(true);
-    getFilteredSaleProducts(animal, 'ua', 'is_promotional=1').then(() => {
+    getFilteredSaleProducts(animal, language, 'is_promotional=1').then(() => {
       setLoading(false);
     });
     setCurrentPage(1);
-  }, [animal]);
+  }, [animal, language]);
 
   useEffect(() => {
     if (screen === 'mobile') {

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import sprite from '../../../../../img/svg-sprite/sprite.svg';
 import { observer } from 'mobx-react-lite';
 import { useStore } from '../../../../../store/AuthProvider';
+import { useTranslation } from 'react-i18next';
 
 const Countries = observer(
   ({
@@ -13,6 +14,8 @@ const Countries = observer(
     searchParams,
     setSearchParams,
   }) => {
+    const { t } = useTranslation();
+
     const store = useStore();
     const {
       catalog: { resetedFilter, filters },
@@ -101,7 +104,7 @@ const Countries = observer(
             }))
           }
         >
-          <p>Країна</p>
+          <p>{t('Країна')}</p>
           <svg
             className={
               showFilterBox.countries

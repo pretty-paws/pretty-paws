@@ -4,7 +4,7 @@ export class ComparisonStore {
   state = '';
   compareList = JSON.parse(localStorage.getItem('compareList')) || [];
   comparisonAmount = Number(localStorage.getItem('comparisonAmount')) || 0;
-  animalCategory = null;
+  animalCategory = localStorage.getItem('animalCategory') || null;
 
   constructor() {
     makeAutoObservable(this, {}, { autoBind: true });
@@ -12,6 +12,7 @@ export class ComparisonStore {
 
   setCategory(slug) {
     this.animalCategory = slug;
+    localStorage.setItem('animalCategory', slug);
   }
 
   alreadyAddedToCompare(id) {
@@ -33,6 +34,8 @@ export class ComparisonStore {
       localStorage.setItem('compareList', JSON.stringify(this.compareList));
       this.comparisonAmount -= 1;
       localStorage.setItem('comparisonAmount', this.comparisonAmount);
+      console.log('this.comparisonAmount', this.comparisonAmount);
+      if (this.comparisonAmount === 0) this.setCategory(null);
     }
   }
 }

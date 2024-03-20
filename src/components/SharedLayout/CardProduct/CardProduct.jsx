@@ -107,6 +107,7 @@ const CardProduct = observer(
       e.stopPropagation();
       if (animalCategory === null) {
         setCategory(animal.slug);
+        setAnimalID(animal.id);
         addToComparison(product);
         setCompareAdded(true);
       } else if (

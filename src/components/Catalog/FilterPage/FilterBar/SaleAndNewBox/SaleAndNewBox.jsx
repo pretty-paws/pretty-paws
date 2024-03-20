@@ -2,8 +2,11 @@ import { observer } from 'mobx-react-lite';
 import React from 'react';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 
 const SaleAndNewBox = observer(({ setSearchParams, searchParams }) => {
+  const { t } = useTranslation();
+
   const [isNewChosen, setIsNewChosen] = useState(false);
   const [isSaleChosen, setIsSaleChosen] = useState(false);
 
@@ -29,7 +32,7 @@ const SaleAndNewBox = observer(({ setSearchParams, searchParams }) => {
   return (
     <div className="filter__sale-new-box">
       <div className="filter__sale-box">
-        <p>Акційні товари</p>
+        <p>{t('Акційні товари')}</p>
         <label className="switch">
           <input
             checked={isSaleChosen}
@@ -44,7 +47,7 @@ const SaleAndNewBox = observer(({ setSearchParams, searchParams }) => {
         </label>
       </div>
       <div className="filter__sale-box">
-        <p>Новинки</p>
+        <p>{t('Новинки')}</p>
         <label className="switch">
           <input
             checked={isNewChosen}

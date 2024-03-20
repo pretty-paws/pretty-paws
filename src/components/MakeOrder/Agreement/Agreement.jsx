@@ -3,8 +3,11 @@ import React from 'react';
 import { useState } from 'react';
 import { StyledAgreement } from './Agreement.styled';
 import sprite from '../../../img/svg-sprite/sprite.svg';
+import { useTranslation } from 'react-i18next';
 
 const Agreement = observer(({ handleChange, register }) => {
+  const { t } = useTranslation();
+
   const [checked, setChecked] = useState(true);
   return (
     <StyledAgreement className="checkbox-wrapper">
@@ -27,7 +30,7 @@ const Agreement = observer(({ handleChange, register }) => {
           </svg>
         ) : null}
         <span className="agreement__text">
-          Не телефонуйте мені для підтвердження замовлення
+          {t('Не телефонуйте мені для підтвердження замовлення')}
         </span>
       </label>
     </StyledAgreement>

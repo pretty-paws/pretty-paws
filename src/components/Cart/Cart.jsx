@@ -18,7 +18,7 @@ const Cart = observer(() => {
   const {
     auth: { authorised },
     cart: { cart, total, increaseAmount, decreaseAmount, removeFromCart },
-    catalog: { animalSlug, categorySlug, subcategorySlug },
+    catalog: { animalSlug, categorySlug, subcategorySlug, unResetFilter },
   } = store;
 
   useEffect(() => {
@@ -94,7 +94,7 @@ const Cart = observer(() => {
                     <svg width="22px" height="22px">
                       <use href={sprite + '#arrow-black'} />
                     </svg>
-                    <p>Продовжити покупки</p>
+                    <p>{t('Продовжити покупки')}</p>
                   </div>
                 </Link>
               )}
@@ -202,7 +202,7 @@ const Cart = observer(() => {
                     >
                       <use href={sprite + '#discount'} />
                     </svg>
-                    <p>Знижка 5% на перше замовлення</p>
+                    <p>{t('Знижка 5% на перше замовлення')}</p>
                   </div>
                   <div>
                     <svg
@@ -212,7 +212,9 @@ const Cart = observer(() => {
                     >
                       <use href={sprite + '#delivery'} />
                     </svg>
-                    <p>Безкоштовне доставлення до поштомата від 200 грн</p>
+                    <p>
+                      {t('Безкоштовне доставлення до поштомата від 200 грн')}
+                    </p>
                   </div>
                   <div>
                     <svg
@@ -223,8 +225,9 @@ const Cart = observer(() => {
                       <use href={sprite + '#payment'} />
                     </svg>
                     <p>
-                      Безпечна та швидка оплата карткою. Безготівковий
-                      розрахунок для юридичних осіб
+                      {t(
+                        'Безпечна та швидка оплата карткою. Безготівковий розрахунок для юридичних осіб'
+                      )}
                     </p>
                   </div>
                 </div>
@@ -243,7 +246,7 @@ const Cart = observer(() => {
                     <p>{t('За тарифами перевізника')}</p>
                   </div>
                   <div className="cart-modal__total">
-                    <p>{t('Сума замовлення')}:</p>
+                    <p>{t('Сума замовлення:')}</p>
                     <p>
                       <b className="cart__total-price">{total}.00₴</b>
                     </p>
@@ -276,6 +279,9 @@ const Cart = observer(() => {
                     <button
                       className="cart-modal__button-continue"
                       type="button"
+                      onClick={() => {
+                        unResetFilter();
+                      }}
                     >
                       {t('Продовжити покупки')}
                     </button>
@@ -289,10 +295,11 @@ const Cart = observer(() => {
             <div className="cart__empty-info">
               <h2 className="cart-modal__title">{t('Кошик')}</h2>
               <div className="cart__empty-text">
-                <p>Ваш кошик ще порожній.</p>
+                <p>{t('Ваш кошик ще порожній.')}</p>
                 <p>
-                  Перейдіть в каталог та знайдіть необхідний товар для вашого
-                  улюбленця.
+                  {t(
+                    'Перейдіть в каталог та знайдіть необхідний товар для вашого улюбленця.'
+                  )}
                 </p>
               </div>
 
@@ -311,7 +318,7 @@ const Cart = observer(() => {
                 >
                   <use href={sprite + '#discount'} />
                 </svg>
-                <p>Знижка 5% на перше замовлення</p>
+                <p>{t('Знижка 5% на перше замовлення')}</p>
               </div>
               <div>
                 <svg
@@ -321,7 +328,7 @@ const Cart = observer(() => {
                 >
                   <use href={sprite + '#delivery'} />
                 </svg>
-                <p>Безкоштовне доставлення до поштомата від 200 грн</p>
+                <p>{t('Безкоштовне доставлення до поштомата від 200 грн')}</p>
               </div>
               <div>
                 <svg
@@ -332,8 +339,9 @@ const Cart = observer(() => {
                   <use href={sprite + '#payment'} />
                 </svg>
                 <p>
-                  Безпечна та швидка оплата карткою. Безготівковий розрахунок
-                  для юридичних осіб
+                  {t(
+                    'Безпечна та швидка оплата карткою. Безготівковий розрахунок для юридичних осіб'
+                  )}
                 </p>
               </div>
             </div>
@@ -343,10 +351,11 @@ const Cart = observer(() => {
             <div className="cart__empty-info">
               <h2 className="cart-modal__title">{t('Кошик')}</h2>
               <div className="cart__empty-text">
-                <p>Ваш кошик ще порожній.</p>
+                <p>{t('Ваш кошик ще порожній.')}</p>
                 <p>
-                  Перейдіть в каталог та знайдіть необхідний товар для вашого
-                  улюбленця.
+                  {t(
+                    'Перейдіть в каталог та знайдіть необхідний товар для вашого улюбленця.'
+                  )}
                 </p>
               </div>
 
@@ -365,7 +374,7 @@ const Cart = observer(() => {
                 >
                   <use href={sprite + '#discount'} />
                 </svg>
-                <p>Знижка 5% на перше замовлення</p>
+                <p>{t('Знижка 5% на перше замовлення')}</p>
               </div>
               <div>
                 <svg
@@ -375,7 +384,7 @@ const Cart = observer(() => {
                 >
                   <use href={sprite + '#delivery'} />
                 </svg>
-                <p>Безкоштовне доставлення до поштомата від 200 грн</p>
+                <p>{t('Безкоштовне доставлення до поштомата від 200 грн')}</p>
               </div>
               <div>
                 <svg
@@ -386,8 +395,9 @@ const Cart = observer(() => {
                   <use href={sprite + '#payment'} />
                 </svg>
                 <p>
-                  Безпечна та швидка оплата карткою. Безготівковий розрахунок
-                  для юридичних осіб
+                  {t(
+                    'Безпечна та швидка оплата карткою. Безготівковий розрахунок для юридичних осіб'
+                  )}
                 </p>
               </div>
             </div>

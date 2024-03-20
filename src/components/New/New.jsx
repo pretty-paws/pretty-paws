@@ -19,6 +19,7 @@ const New = observer(() => {
 
   const store = useStore();
   const {
+    auth: { language },
     catalog: { state, newProducts, getFilteredNewProducts, animalID },
   } = store;
 
@@ -28,11 +29,11 @@ const New = observer(() => {
 
   useEffect(() => {
     setLoading(true);
-    getFilteredNewProducts(animal, 'ua', 'new=1').then(() => {
+    getFilteredNewProducts(animal, language, 'new=1').then(() => {
       setLoading(false);
     });
     setCurrentPage(1);
-  }, [animal]);
+  }, [animal, language]);
 
   useEffect(() => {
     if (screen === 'mobile') {

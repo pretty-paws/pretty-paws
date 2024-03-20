@@ -35,7 +35,7 @@ export const StyledSelect = styled.div`
     justify-content: left;
     align-items: center;
     position: absolute;
-    z-index: 100;
+    z-index: 10000;
     height: 40px;
     width: 267px;
     border-radius: 8px 8px 8px 8px;

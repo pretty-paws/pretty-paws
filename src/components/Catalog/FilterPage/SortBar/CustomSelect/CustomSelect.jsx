@@ -3,9 +3,14 @@ import { useRef, useState } from 'react';
 import { StyledSelect } from './CustomSelect.styled';
 import sprite from '../../../../../img/svg-sprite/sprite.svg';
 import { useOutsideClickDetect } from '../../../../../hooks/useOutsideClickDetect';
+import { useTranslation } from 'react-i18next';
 
 const CustomSelect = observer(({ options, onChange }) => {
-  const [selectedValue, setSelectedValue] = useState('Від дешевих до дорогих');
+  const { t } = useTranslation();
+
+  const [selectedValue, setSelectedValue] = useState(
+    t('Від дешевих до дорогих')
+  );
   const [openedOptions, setOpenedOptions] = useState(false);
   const selectRef = useRef(null);
   useOutsideClickDetect(selectRef, setOpenedOptions);
@@ -41,7 +46,7 @@ const CustomSelect = observer(({ options, onChange }) => {
                 handleSelectChange(option);
               }}
             >
-              {option.label}
+              {t(option.label)}
             </div>
           ))
         : null}

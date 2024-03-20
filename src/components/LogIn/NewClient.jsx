@@ -17,7 +17,7 @@ const NewClient = () => {
           {t('Зареєструватися')}
         </button>
       </Link>
-      <SocialNetsAuth title="Або реєстрація через" />
+      <SocialNetsAuth title="або" />
       <p className="new-client__agree">
         {t('Продовжуючи, ви погоджуєтесь з')}
         <span className="new-client__agreement">

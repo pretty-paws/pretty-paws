@@ -7,8 +7,11 @@ import useWindowSize from '../../../../hooks/useWindowSize';
 import MobileCardProduct from '../../../SharedLayout/MobileCardProduct/MobileCardProduct';
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 const FilterResult = observer(() => {
+  const { t } = useTranslation();
+
   const { screen } = useWindowSize();
   const store = useStore();
   const {
@@ -26,7 +29,7 @@ const FilterResult = observer(() => {
   } = store;
 
   useEffect(() => {
-    resetedFilter && getFilteredSaleProducts(1, 'ua', 'is_promotional=1');
+    resetedFilter && getFilteredSaleProducts(1, language, 'is_promotional=1');
   }, [resetedFilter]);
 
   useEffect(() => {
@@ -103,9 +106,13 @@ const FilterResult = observer(() => {
       ) : resetedFilter && state === 'done' && filteredProducts.length === 0 ? (
         <div className="filter-reset">
           <p className="filter-result__no-products">
-            Фільтри скинуто. Для відображення товарів необхідно зробити вибір.
+            {t(
+              'Фільтри скинуто. Для відображення товарів необхідно зробити вибір.'
+            )}
           </p>
-          <h3 className="filter-result__no-products-title">Акційні товари</h3>
+          <h3 className="filter-result__no-products-title">
+            {t('Акційні товари')}
+          </h3>
           <div className="filter__sale-products">
             {saleProducts
               .slice(0, 3)
@@ -164,7 +171,7 @@ const FilterResult = observer(() => {
                   })
                 }
               >
-                Усі товари
+                {t('Усі товари')}
               </button>
             </Link>
           </div>
@@ -174,12 +181,12 @@ const FilterResult = observer(() => {
           <>
             <div className="filter-reset">
               <p className="filter-result__no-products">
-                На жаль, в обраній категорії поки що немає товарів, але ми
-                працюємо над розширенням асортименту та незабаром додамо нові
-                позиції.
+                {t(
+                  'На жаль, в обраній категорії поки що немає товарів, але ми працюємо над розширенням асортименту та незабаром додамо нові позиції.'
+                )}
               </p>
               <h3 className="filter-result__no-products-title">
-                Акційні товари
+                {t('Акційні товари')}
               </h3>
               <div className="filter__sale-products">
                 {saleProducts
@@ -239,7 +246,7 @@ const FilterResult = observer(() => {
                       })
                     }
                   >
-                    Усі товари
+                    {t('Усі товари')}
                   </button>
                 </Link>
               </div>

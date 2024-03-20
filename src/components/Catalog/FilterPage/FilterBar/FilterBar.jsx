@@ -11,8 +11,10 @@ import Countries from './Countries/Countries';
 import { useSearchParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import useWindowSize from '../../../../hooks/useWindowSize';
+import { useTranslation } from 'react-i18next';
 
 const FilterBar = observer(({ setOpenedFilter, active }) => {
+  const { t } = useTranslation();
   const { screen } = useWindowSize();
   const [searchParams, setSearchParams] = useSearchParams({});
 
@@ -187,7 +189,7 @@ const FilterBar = observer(({ setOpenedFilter, active }) => {
                   <use href={sprite + '#close'} />
                 </svg>
               )}
-              <p>Фільтри</p>
+              <p>{t('Фільтри')}</p>
             </div>
           )}
           <div className="filter-bar__all-filters">
@@ -227,7 +229,7 @@ const FilterBar = observer(({ setOpenedFilter, active }) => {
               <svg className="filter-plus" width="28px" height="28px">
                 <use href={sprite + '#plus'} />
               </svg>
-              <p>Показати більше</p>
+              <p>{t('Показати більше')}</p>
             </div>
             <div className="filter__button-container">
               <button
@@ -241,7 +243,7 @@ const FilterBar = observer(({ setOpenedFilter, active }) => {
                   });
                 }}
               >
-                Застосувати фільтри
+                {t('Застосувати фільтри')}
               </button>
               <button
                 className="filter__button-clear"
@@ -254,7 +256,7 @@ const FilterBar = observer(({ setOpenedFilter, active }) => {
                   });
                 }}
               >
-                Очистити фільтри
+                {t('Очистити фільтри')}
               </button>
             </div>
           </div>

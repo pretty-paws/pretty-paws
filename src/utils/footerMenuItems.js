@@ -1,7 +1,7 @@
 export const info = [
   {
     name: 'Повернення і обмін',
-    path: '/',
+    path: '/delivery',
   },
 
   {
@@ -22,7 +22,7 @@ export const info = [
 export const clients = [
   {
     name: 'Каталог товарів',
-    path: '/catalogue',
+    path: '/catalog',
   },
   {
     name: 'Доставка та оплата',

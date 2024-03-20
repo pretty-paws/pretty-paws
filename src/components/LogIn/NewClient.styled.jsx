@@ -34,7 +34,7 @@ export const StyledNewClient = styled.div`
     position: relative;
     width: 100%;
     height: 52px;
-    margin-bottom: 42px;
+    /* margin-bottom: 8px; */
     padding: 16px 32px;
     border-radius: 100px;
     border: 1px solid var(--accent-color-blue);
@@ -49,24 +49,14 @@ export const StyledNewClient = styled.div`
     }
   }
 
-  & .new-client__button::after {
-    position: absolute;
-    bottom: -32px;
-    left: 0;
-    content: '';
-    width: 100%;
-    height: 1px;
-    background-color: var(--font-color-darkgray);
-  }
-
   & .new-client__agree {
-    margin: 50px 0 0;
-    font-size: 12px;
+    margin: 32px 0 0;
+    font-size: 16px;
     font-weight: 400;
-    line-height: 16px;
+    line-height: 20px;
   }
 
   & .new-client__agreement {
-    text-decoration-line: underline;
+    color: #005a9a;
   }
 `;

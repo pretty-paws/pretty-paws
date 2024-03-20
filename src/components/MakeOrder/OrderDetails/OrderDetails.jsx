@@ -5,14 +5,17 @@ import { useState } from 'react';
 import { StyledOrderDetails } from './OrderDetails.styled';
 import { Link } from 'react-router-dom';
 import { deliveryMessage } from '../../../validation/messages';
+import { useTranslation } from 'react-i18next';
 
 const OrderDetails = observer(
   ({ cart, total, register, handleChange, errors }) => {
+    const { t } = useTranslation();
+
     const [checked, setChecked] = useState(false);
     return (
       <StyledOrderDetails>
         <div className="order-details_heading">
-          <h3 className="order-details_header">Твоє замовлення</h3>
+          <h3 className="order-details_header">{t('Твоє замовлення')}</h3>
 
           <Link to="/cart">
             <svg width="24px" height="24px" className="order-details_edit">
@@ -61,23 +64,25 @@ const OrderDetails = observer(
         <div>
           <ul className="order-details__sum-list">
             <li>
-              <p>Сума замовлення:</p>
+              <p>{t('Сума замовлення:')}</p>
               <p>{total} грн</p>
             </li>
             <li>
-              <p>Доставка:</p>
+              <p>{t('Доставка:')}</p>
               <p>0 грн</p>
             </li>
             <li>
-              <p>Знижка:</p>
+              <p>{t('Знижка:')}</p>
               <p> -0 %</p>
             </li>
             <li>
               <p>
-                <b>Сума до сплати:</b>
+                <b>{t('Сума до сплати:')}</b>
               </p>
               <p>
-                <b>{total} грн</b>
+                <b>
+                  {total} {t('грн')}
+                </b>
               </p>
             </li>
           </ul>
@@ -102,21 +107,20 @@ const OrderDetails = observer(
               </svg>
             ) : null}
             <span className="agreement__text">
-              Оформляючи замовлення, я приймаю
+              {t('Оформляючи замовлення, я приймаю')}
               <span>
-                {' '}
-                умови договору публічної оферти, повернення і безпеки{' '}
+                {t('умови договору публічної оферти, повернення і безпеки')}
               </span>
             </span>
             {errors.acceptConditions && (
               <span className="delivery-error">
-                {deliveryMessage.acceptConditions}
+                {t(deliveryMessage.acceptConditions)}
               </span>
             )}
           </label>
         </div>
         <button className="order-details__button" type="submit">
-          Підтвердити замовлення
+          {t('Підтвердити замовлення')}
         </button>
       </StyledOrderDetails>
     );
