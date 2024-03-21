@@ -1,4 +1,4 @@
-import { React, useRef } from 'react';
+import { React } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import Title from '../../SharedLayout/Title/Title';
@@ -7,9 +7,6 @@ import { StyledBlog } from './Blog.styled';
 import { Link } from 'react-router-dom';
 // import { BLOG_ROUTE } from '../../../utils/consts';
 
-import sprite from '../../../img/svg-sprite/sprite.svg';
-
-import useWindowSize from '../../../hooks/useWindowSize';
 // MOBX
 import { observer } from 'mobx-react-lite';
 import { useStore } from '../../../store/AuthProvider';
@@ -23,15 +20,11 @@ import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 
 const Blog = observer(() => {
-  const { screen } = useWindowSize();
   const store = useStore();
   const {
     blog: { state, blogs },
   } = store;
   const { t } = useTranslation();
-
-  const navigationNextRef = useRef(null);
-  const navigationPrevRef = useRef(null);
 
   return (
     <StyledBlog>
@@ -41,25 +34,6 @@ const Blog = observer(() => {
         </Title>
       </div>
       <div>
-        {screen === 'desktop' && (
-          <>
-            <div
-              ref={navigationPrevRef}
-              className="left-arrow"
-              //   onClick={() => Swiper.navigation.update()}
-            >
-              <svg width=" 24px" height=" 24px">
-                <use href={sprite + '#arrow-down'} />
-              </svg>
-            </div>
-            <div ref={navigationNextRef} className="right-arrow">
-              <svg width=" 24px" height=" 24px">
-                <use href={sprite + '#arrow-down'} />
-              </svg>
-            </div>
-          </>
-        )}
-
         <Swiper
           modules={[Pagination, Navigation]}
           className="mySwiper"
@@ -71,32 +45,29 @@ const Blog = observer(() => {
           }}
           navigation={{
             enabled: true,
-            prevEl: navigationPrevRef.current,
-            nextEl: navigationNextRef.current,
           }}
-          onBeforeInit={swiper => {
-            swiper.params.navigation.prevEl = navigationPrevRef.current;
-            swiper.params.navigation.nextEl = navigationNextRef.current;
-            swiper.navigation.init();
-            swiper.navigation.update();
-          }}
-          //   onInit={swiper => {
-          //     swiper.params.navigation.prevEl = navigationPrevRef.current;
-          //     swiper.params.navigation.nextEl = navigationNextRef.current;
-          //     swiper.navigation.init();
-          //     console.log(swiper);
-          //     swiper.navigation.update();
-          //   }}
           breakpoints={{
+            320: {
+              navigation: {
+                enabled: false,
+              },
+            },
             834: {
               slidesPerView: 3,
               spaceBetween: 15,
+              navigation: {
+                enabled: false,
+              },
             },
             1440: {
               slidesPerView: 4,
               spaceBetween: 20,
+              navigation: {
+                enabled: true,
+              },
             },
           }}
+          //   aria-hidden
         >
           {state === 'done'
             ? blogs.map(

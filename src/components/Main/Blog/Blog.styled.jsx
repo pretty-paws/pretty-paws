@@ -66,48 +66,24 @@ export const StyledBlog = styled.div`
       gap: 24px;
     }
   }
-  .left-arrow {
-    cursor: pointer;
-    position: absolute;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  .swiper-button-next,
+  .swiper-button-prev {
     width: 40px;
     height: 40px;
-    top: 35%;
-    left: -20px;
-    z-index: 100;
-    border-radius: 100px;
-    background: #fff;
-    box-shadow: 0px 0px 6px 0px rgba(14, 36, 35, 0.1);
-    svg {
-      transform: rotate(90deg);
-    }
-  }
+    color: #000;
 
-  .right-arrow {
-    cursor: pointer;
-    position: absolute;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 40px;
-    height: 40px;
-    top: 35%;
-    right: -20px;
-    z-index: 100;
-    border-radius: 100px;
-    background: #fff;
-    box-shadow: 0px 0px 6px 0px rgba(14, 36, 35, 0.1);
-    svg {
-      transform: rotate(-90deg);
+    &::after {
+      width: 40px;
+      height: 40px;
+      border-radius: 100px;
+      background-color: #fff;
+      box-shadow: 0px 0px 6px 0px rgba(14, 36, 35, 0.1);
+      font-size: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
   }
-  /* 
-  & .promotions__button-container {
-    display: flex;
-    justify-content: center;
-  } */
 
   & .blog__button-container {
     margin-top: 40px;

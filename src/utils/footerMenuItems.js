@@ -6,16 +6,16 @@ export const info = [
 
   {
     name: 'Політика конфіденційності',
-    path: '/',
+    path: '/delivery',
   },
   {
     name: 'Політика безпеки',
-    path: '/',
+    path: '/delivery',
   },
 
   {
     name: 'Умови використання',
-    path: '/',
+    path: '/delivery',
   },
 ];
 
