@@ -25,6 +25,7 @@ export class CatalogStore {
   saleProducts = [];
   newProducts = [];
   productById = {};
+  favouriteProducts = [];
   filters = {};
   animalName = localStorage.getItem('animalName') || '';
   animalSlug = localStorage.getItem('animalSlug') || '';

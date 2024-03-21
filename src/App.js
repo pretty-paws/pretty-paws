@@ -29,6 +29,7 @@ const App = observer(() => {
           getBlogs(language),
           getProducts(language),
           getOfferByAnimal(language),
+          // syncFavourites(favouritesArray),
         ]);
       } catch (error) {
         console.error('Error fetching data:', error);

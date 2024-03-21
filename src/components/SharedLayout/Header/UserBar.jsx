@@ -20,18 +20,19 @@ const UserBar = observer(({ setActive }) => {
 
   const { i18n, t } = useTranslation();
 
+  const store = useStore();
+  const {
+    auth: { authorised, state, language, setLanguage, favouritesArray },
+    cart: { productAmount },
+    comparison: { comparisonAmount },
+    // favourite: { favourite },
+  } = store;
+
   const handleLanguageChange = lang => {
     // localStorage.setItem('language', lang);
     setLanguage(lang);
     i18n.changeLanguage(lang);
   };
-
-  const store = useStore();
-  const {
-    auth: { authorised, user, state, language, setLanguage },
-    cart: { productAmount },
-    comparison: { comparisonAmount },
-  } = store;
 
   useEffect(() => {
     location.pathname === '/cart' && setCartModalOpen(false);
@@ -66,7 +67,7 @@ const UserBar = observer(({ setActive }) => {
               </svg>
               {state === 'done' && authorised && (
                 <span className="user-bar__basket-badge">
-                  {user.favorites.length}
+                  {favouritesArray.length}
                 </span>
               )}
               {screen !== 'desktop' && (

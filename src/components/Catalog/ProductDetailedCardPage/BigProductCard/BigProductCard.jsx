@@ -209,14 +209,14 @@ const BigProductCard = observer(() => {
                       <svg width="24px" height="24px">
                         <use href={sprite + '#green-check'} />
                       </svg>
-                      В наявності
+                      {t('В наявності')}
                     </p>
                     <p className="product__details">
                       <svg className="" width="24px" height="24px">
                         <use href={sprite + '#delivery'} />
                       </svg>
                       <span>
-                        <b>Доставляння</b> по Україні Новою Поштою
+                        <b>{t('Доставляння')}</b> {t('по Україні Новою Поштою')}
                       </span>
                     </p>
                     <p className="product__details">
@@ -224,8 +224,10 @@ const BigProductCard = observer(() => {
                         <use href={sprite + '#payment'} />
                       </svg>
                       <span>
-                        <b>Оплата</b> карткою, перерахунком на банківські
-                        реквізити (для юросіб) або готівкою при отриманні
+                        <b>{t('Оплата')}</b>{' '}
+                        {t(
+                          'карткою, перерахунком на банківські реквізити (для юросіб) або готівкою при отриманні'
+                        )}
                       </span>
                     </p>
                   </div>
@@ -376,7 +378,7 @@ const BigProductCard = observer(() => {
           </div>
           <div className="product_card-description">
             <h4 className="product_card-description-title">
-              Опис та характеристика товару
+              {t('Опис та характеристика товару')}
             </h4>
             {screen !== 'desktop' && (
               <>
@@ -413,7 +415,7 @@ const BigProductCard = observer(() => {
                       className="big-card__show-more"
                       onClick={() => setOpenDescription(!openDescription)}
                     >
-                      <p>Показати менше</p>
+                      <p>{t('Показати менше')}</p>
                       <svg
                         className="product_card-description-arrow-desktop rotate"
                         width=" 24px"
@@ -427,7 +429,7 @@ const BigProductCard = observer(() => {
                       className="big-card__show-more"
                       onClick={() => setOpenDescription(!openDescription)}
                     >
-                      <p>Показати більше</p>
+                      <p>{t('Показати більше')}</p>
                       <svg
                         className="product_card-description-arrow-desktop"
                         width=" 24px"

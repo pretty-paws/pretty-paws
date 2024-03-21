@@ -28,8 +28,6 @@ const FilterBar = observer(({ setOpenedFilter, active }) => {
       resetFilter,
       setFilter,
       setSearchQuery,
-      // searchQuery,
-      // resetedFilter,
     },
   } = store;
 
@@ -59,12 +57,6 @@ const FilterBar = observer(({ setOpenedFilter, active }) => {
     (countriesQuery ?? '') +
     (isNewChosen ?? '') +
     (isSaleChosen ?? '');
-
-  // useEffect(() => {
-  //   searchQuery !== '' &&
-  //     resetedFilter !== false &&
-  //     getFilteredProducts(id, language, searchQuery);
-  // }, []);
 
   useEffect(() => {
     const newItem = searchParams.get('new');

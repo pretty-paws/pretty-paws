@@ -25,7 +25,7 @@ const Promotions = observer(() => {
 
   const [animal, setAnimal] = useState(Number(animalID) || 1);
   const [loading, setLoading] = useState(false);
-  const [cardsAmount, setCardsAmount] = useState(8);
+  const [cardsAmount, setCardsAmount] = useState(Number(8));
   useEffect(() => {
     setLoading(true);
     getFilteredSaleProducts(animal, language, 'is_promotional=1').then(() => {
