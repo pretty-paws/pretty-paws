@@ -119,8 +119,6 @@ const Blog = observer(() => {
       );
     }
   }, [chosenCategory]);
-
-
   //   const handleLoadMore = () => {
   //     setCurrentPage(prevPage => prevPage + 1);
   //     setActiveLoadMore(true);

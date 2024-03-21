@@ -33,7 +33,7 @@ const CardProduct = observer(
 
     const store = useStore();
     const {
-      auth: { refresh, user, authorised },
+      auth: { authorised, favouritesArray, refresh },
       cart: { addToCart, alreadyAdded, removeFromCart },
       favourite: { toggleFavourite },
       catalog: {
@@ -90,7 +90,7 @@ const CardProduct = observer(
 
     function checkFavourite(id) {
       if (!authorised) return false;
-      return user.favorites?.some(product => product.id === id);
+      return favouritesArray.some(itemId => itemId === id);
     }
 
     function handleClick(e) {
@@ -140,13 +140,13 @@ const CardProduct = observer(
 
     const [errorMessage, setErrorMessage] = useState(false);
 
-    function handleAddFavourite(e) {
+    function handleAddFavourite(e, product) {
       e.stopPropagation();
       if (!authorised) {
         setErrorMessage(true);
         return;
       } else {
-        toggleFavourite(id)
+        toggleFavourite(product.id)
           .then(() => {
             refresh();
           })
@@ -233,7 +233,10 @@ const CardProduct = observer(
                 </p>
               </div>
             )}
-            <div onClick={handleAddFavourite} className="product__fav-icon">
+            <div
+              onClick={e => handleAddFavourite(e, product)}
+              className="product__fav-icon"
+            >
               {checkFavourite(id) ? (
                 <svg width=" 26px" height=" 26px">
                   <use href={sprite + '#favorite_selected'} />
@@ -285,7 +288,7 @@ const CardProduct = observer(
               <Notification
                 text={t('Товар додано до списку бажань')}
                 button={t('Переглянути товари')}
-                link="/favorite"
+                link="/cabinet/wish_list"
                 setNotification={setFavouriteNotification}
                 notification={favouriteNotification}
               />,
