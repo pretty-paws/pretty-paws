@@ -43,6 +43,12 @@ const FilterPage = observer(() => {
   }, [language, categorySlug]);
 
   useEffect(() => {
+    searchQuery !== '' &&
+      resetedFilter !== false &&
+      getFilteredProducts(categoryID, language, searchQuery);
+  }, [language]);
+
+  useEffect(() => {
     if (openedFilter) {
       document.body.style.overflow = 'hidden';
     } else {
@@ -55,7 +61,6 @@ const FilterPage = observer(() => {
   }, [openedFilter]);
 
   useEffect(() => {
-    // unResetFilter();
     const slug = getSubcategory(subcategoryID) || searchQuery;
     resetedFilter === false &&
       getFilteredProducts(

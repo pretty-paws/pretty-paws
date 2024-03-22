@@ -1,8 +1,10 @@
-import { makeAutoObservable } from 'mobx';
+import { makeAutoObservable, runInAction } from 'mobx';
+import { fetchProductByID } from '../services/productsAPI';
 
 export class ComparisonStore {
   state = '';
   compareList = JSON.parse(localStorage.getItem('compareList')) || [];
+  compareIDList = JSON.parse(localStorage.getItem('compareIDList')) || [];
   comparisonAmount = Number(localStorage.getItem('comparisonAmount')) || 0;
   animalCategory = localStorage.getItem('animalCategory') || null;
 
@@ -12,6 +14,11 @@ export class ComparisonStore {
 
   setCategory(slug) {
     this.animalCategory = slug;
+    this.compareIDList = [];
+    this.compareList = [];
+
+    localStorage.setItem('compareIDList', JSON.stringify(this.compareIDList));
+    localStorage.setItem('compareList', JSON.stringify(this.compareList));
     localStorage.setItem('animalCategory', slug);
   }
 
@@ -34,8 +41,42 @@ export class ComparisonStore {
       localStorage.setItem('compareList', JSON.stringify(this.compareList));
       this.comparisonAmount -= 1;
       localStorage.setItem('comparisonAmount', this.comparisonAmount);
-      console.log('this.comparisonAmount', this.comparisonAmount);
-      if (this.comparisonAmount === 0) this.setCategory(null);
+      if (this.comparisonAmount === 0) {
+        this.setCategory(null);
+      }
+    }
+  }
+
+  addToIDList(id) {
+    this.compareIDList.push(id);
+    localStorage.setItem('compareIDList', JSON.stringify(this.compareIDList));
+  }
+
+  removeFromIdList(id) {
+    const index = this.compareIDList.findIndex(productId => productId === id);
+    if (index !== -1) {
+      this.compareIDList.splice(index, 1);
+      localStorage.setItem('compareIDList', JSON.stringify(this.compareIDList));
+    }
+    if (this.comparisonAmount === 0) {
+      this.setCategory(null);
+    }
+  }
+
+  async getComparisonProductByID(id, lang) {
+    this.state = 'pending';
+    this.compareList = [];
+    try {
+      const { data } = await fetchProductByID(id, lang);
+      runInAction(() => {
+        this.compareList.push(data);
+        localStorage.setItem('compareList', JSON.stringify(this.compareList));
+        this.state = 'done';
+      });
+    } catch (error) {
+      runInAction(() => {
+        this.state = 'error';
+      });
     }
   }
 }

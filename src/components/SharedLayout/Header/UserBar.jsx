@@ -120,7 +120,11 @@ const UserBar = observer(({ setActive }) => {
         {screen === 'desktop' && (
           <>
             {language === 'en' && (
-              <div onClick={() => handleLanguageChange('ua')}>
+              <div
+                onClick={() => {
+                  handleLanguageChange('ua');
+                }}
+              >
                 <svg
                   className="user-bar-language-uk-icon"
                   width="24px"
@@ -132,7 +136,11 @@ const UserBar = observer(({ setActive }) => {
             )}
 
             {language === 'ua' && (
-              <div onClick={() => handleLanguageChange('en')}>
+              <div
+                onClick={() => {
+                  handleLanguageChange('en');
+                }}
+              >
                 <svg
                   className="user-bar-language-uk-icon"
                   width="24px"

@@ -9,6 +9,7 @@ import { useEffect } from 'react';
 import useWindowSize from '../../hooks/useWindowSize';
 import Promotions from '../Main/PromotionsWithDiscount/Promotions';
 import { GlobalContainer } from '../../global/GlobalContainer';
+import { UseSkeleton } from '../../hooks/useSkeleton';
 
 const Cart = observer(() => {
   const { screen } = useWindowSize();
@@ -16,8 +17,18 @@ const Cart = observer(() => {
   const [isSticky, setIsSticky] = useState(false);
   const store = useStore();
   const {
-    auth: { authorised },
-    cart: { cart, total, increaseAmount, decreaseAmount, removeFromCart },
+    auth: { authorised, language },
+    cart: {
+      state,
+      cart,
+      total,
+      increaseAmount,
+      decreaseAmount,
+      removeFromCart,
+      cartArray,
+      getAmount,
+      getCartProductByID,
+    },
     catalog: { animalSlug, categorySlug, subcategorySlug, unResetFilter },
   } = store;
 
@@ -59,6 +70,10 @@ const Cart = observer(() => {
     };
   }, []);
 
+  useEffect(() => {
+    cartArray.map(id => getCartProductByID(id, language));
+  }, [language]);
+
   function editedDescription(text) {
     if (!text) return;
     let editedText;
@@ -68,14 +83,6 @@ const Cart = observer(() => {
     }
     return editedText + '...';
   }
-
-  // function checkFavourite(id) {
-  //   return user.favorites?.some(product => product.id === id);
-  // }
-
-  // const handleAddToFavourite = id => {
-  //   authorised ? toggleFavourite(id).then(() => refresh()) : null;
-  // };
 
   return (
     <>
@@ -100,94 +107,105 @@ const Cart = observer(() => {
               )}
               <h2 className="cart-modal__title">{t('Кошик')}</h2>
               <div className="cart-modal__products-block">
-                {cart.map(
-                  ({
-                    // description,
-                    short_description,
-                    id,
-                    image_url,
-                    amount,
-                    price,
-                    promotional_price,
-                    title,
-                  }) => {
-                    return (
-                      <div key={id} className="cart-modal__product-card">
-                        <div className="cart-modal__image-container">
-                          <img
-                            className="cart-modal__product-img"
-                            src={image_url}
-                            alt={title}
-                          />
-                        </div>
-                        <div className="cart-modal__description">
-                          <p>
-                            {title} - {editedDescription(short_description)}
-                          </p>
+                {state === 'done' ? (
+                  cart.map(
+                    ({
+                      short_description,
+                      id,
+                      image_url,
+                      amount,
+                      price,
+                      promotional_price,
+                      title,
+                    }) => {
+                      return (
+                        <div key={id} className="cart-modal__product-card">
+                          <div className="cart-modal__image-container">
+                            <img
+                              className="cart-modal__product-img"
+                              src={image_url}
+                              alt={title}
+                            />
+                          </div>
+                          <div className="cart-modal__description">
+                            <p>
+                              {title} - {editedDescription(short_description)}
+                            </p>
 
-                          {promotional_price !== 0 ? (
-                            <div className="cart-modal__price-box">
-                              <div className="product__price">
-                                {promotional_price}.00₴
+                            {promotional_price !== 0 ? (
+                              <div className="cart-modal__price-box">
+                                <div className="product__price">
+                                  {promotional_price}.00₴
+                                </div>
+                                <div className="product__old-price">
+                                  {price}.00₴
+                                </div>
                               </div>
-                              <div className="product__old-price">
+                            ) : (
+                              <div className="product__one-price">
                                 {price}.00₴
                               </div>
-                            </div>
-                          ) : (
-                            <div className="product__one-price">
-                              {price}.00₴
-                            </div>
-                          )}
+                            )}
 
-                          <div className="cart-modal__amount-box">
-                            <span
-                              onClick={() =>
-                                amount > 1 ? decreaseAmount(id) : null
-                              }
-                            >
-                              <svg width="24px" height="24px">
-                                <use href={sprite + '#minus'} />
-                              </svg>
-                            </span>
-                            <span> {amount} </span>
-                            <span
-                              onClick={() => {
-                                increaseAmount(id);
-                              }}
-                            >
-                              <svg width="24px" height="24px">
-                                <use href={sprite + '#plus'} />
-                              </svg>
+                            <div className="cart-modal__amount-box">
+                              <span
+                                onClick={() =>
+                                  amount > 1 ? decreaseAmount(id) : null
+                                }
+                              >
+                                <svg width="24px" height="24px">
+                                  <use href={sprite + '#minus'} />
+                                </svg>
+                              </span>
+                              {/* <span> {amount} </span> */}
+                              <span>{getAmount(id)}</span>
+
+                              <span
+                                onClick={() => {
+                                  increaseAmount(id);
+                                }}
+                              >
+                                <svg width="24px" height="24px">
+                                  <use href={sprite + '#plus'} />
+                                </svg>
+                              </span>
+                            </div>
+                          </div>
+                          <div className="cart__amount-price">
+                            <span>
+                              {promotional_price === 0
+                                ? price * amount
+                                : promotional_price * amount}
+                              ₴
                             </span>
                           </div>
-                        </div>
-                        <div className="cart__amount-price">
-                          <span>
-                            {promotional_price === 0
-                              ? price * amount
-                              : promotional_price * amount}
-                            ₴
-                          </span>
-                        </div>
 
-                        <div
-                          className="cart__remove-btn"
-                          onClick={() => {
-                            removeFromCart(id);
-                          }}
-                        >
-                          <svg
-                            className="cart-modal__more-btn"
-                            width="24px"
-                            height="24px"
+                          <div
+                            className="cart__remove-btn"
+                            onClick={() => {
+                              removeFromCart(id);
+                            }}
                           >
-                            <use href={sprite + '#delete'} />
-                          </svg>
+                            <svg
+                              className="cart-modal__more-btn"
+                              width="24px"
+                              height="24px"
+                            >
+                              <use href={sprite + '#delete'} />
+                            </svg>
+                          </div>
                         </div>
-                      </div>
-                    );
-                  }
+                      );
+                    }
+                  )
+                ) : (
+                  <div className="skeleton__cart">
+                    <UseSkeleton
+                      screen={screen}
+                      cardsAmount={cartArray.length || 3}
+                      page="cart"
+                    />
+                  </div>
                 )}
               </div>
             </div>

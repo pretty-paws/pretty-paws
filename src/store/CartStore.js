@@ -1,17 +1,24 @@
 import { makeAutoObservable, runInAction } from 'mobx';
-import { fetchProducts } from '../services/productsAPI';
+import { fetchProductByID, fetchProducts } from '../services/productsAPI';
 
 export class CartStore {
   state = '';
   products = [];
   favProd = {};
   cart = JSON.parse(localStorage.getItem('cart')) || [];
+  cartArray = JSON.parse(localStorage.getItem('cartArray')) || [];
+  cartArrayData = JSON.parse(localStorage.getItem('cartIDArray')) || [];
+  cartIDArray = new Map(this.cartArrayData.map(item => [item[0], item[1]]));
   total = Number(localStorage.getItem('total')) || 0;
   productAmount = Number(localStorage.getItem('productAmount')) || 0;
   orders = JSON.parse(localStorage.getItem('orders')) || [];
 
   constructor() {
     makeAutoObservable(this, {}, { autoBind: true });
+  }
+
+  getAmount(id) {
+    return this.cartIDArray.get(id) || 0;
   }
 
   addToCart(item) {
@@ -25,11 +32,17 @@ export class CartStore {
     });
     if (!alreadyExists) {
       this.cart.push(item);
+      this.cartArray.push(item.id);
+      this.cartIDArray.set(item.id, 1);
+
       this.productAmount += 1;
       item.promotional_price !== 0
         ? (this.total += item.promotional_price)
         : (this.total += item.price);
       localStorage.setItem('cart', JSON.stringify(this.cart));
+      localStorage.setItem('cartArray', JSON.stringify(this.cartArray));
+      localStorage.setItem('cartIDArray', JSON.stringify(this.cartIDArray));
+
       localStorage.setItem('total', this.total);
       localStorage.setItem('productAmount', this.productAmount);
     }
@@ -49,10 +62,19 @@ export class CartStore {
       }
     });
     this.cart.splice(productIndex, 1);
-    this.total -= price * amount;
+    amount = this.cartIDArray.get(id) || 0;
     this.productAmount -= amount;
+    this.total -= price * amount;
+
+    const index = this.cartArray.findIndex(item => item === id);
+    if (index !== -1) this.cartArray.splice(index, 1);
+
+    this.cartIDArray.delete(id);
 
     localStorage.setItem('cart', JSON.stringify(this.cart));
+    localStorage.setItem('cartArray', JSON.stringify(this.cartArray));
+    localStorage.setItem('cartIDArray', JSON.stringify(this.cartIDArray));
+
     localStorage.setItem('total', this.total);
     localStorage.setItem('productAmount', this.productAmount);
   }
@@ -70,7 +92,12 @@ export class CartStore {
           ? (this.total += product.promotional_price)
           : (this.total += product.price);
 
+        const currentAmount = this.cartIDArray.get(id) || 0;
+        this.cartIDArray.set(id, currentAmount + 1);
+
         localStorage.setItem('cart', JSON.stringify(this.cart));
+        localStorage.setItem('cartIDArray', JSON.stringify(this.cartIDArray));
+
         localStorage.setItem('productAmount', this.productAmount);
         localStorage.setItem('total', this.total);
       }
@@ -84,7 +111,12 @@ export class CartStore {
         product.promotional_price !== 0
           ? (this.total -= product.promotional_price)
           : (this.total -= product.price);
+
+        const currentAmount = this.cartIDArray.get(id) || 0;
+        this.cartIDArray.set(id, currentAmount - 1);
+
         localStorage.setItem('cart', JSON.stringify(this.cart));
+        localStorage.setItem('cartIDArray', JSON.stringify(this.cartIDArray));
         localStorage.setItem('productAmount', this.productAmount);
         localStorage.setItem('total', this.total);
       }
@@ -108,7 +140,10 @@ export class CartStore {
     this.cart = [];
     this.total = 0;
     this.productAmount = 0;
+    this.cartArray = [];
     localStorage.removeItem('cart');
+    localStorage.removeItem('cartArray');
+
     localStorage.removeItem('total');
     localStorage.removeItem('productAmount');
   }
@@ -128,19 +163,21 @@ export class CartStore {
     }
   }
 
-  // async getProductByID(id) {
-  //   this.state = 'pending';
-  //   try {
-  //     const { data } = await fetchProductByID(id);
-  //     return data;
-  //     // runInAction(() => {
-  //     //   // this.cartProducts = [...this.cartProducts, data];
-  //     //   this.state = 'done';
-  //     // });
-  //   } catch (error) {
-  //     runInAction(() => {
-  //       this.state = 'error';
-  //     });
-  //   }
-  // }
+  async getCartProductByID(id, lang) {
+    this.state = 'pending';
+    this.cart = [];
+    try {
+      const { data } = await fetchProductByID(id, lang);
+      const product = { ...data, amount: 1 };
+      runInAction(() => {
+        this.cart.push(product);
+        localStorage.setItem('cart', JSON.stringify(this.cart));
+        this.state = 'done';
+      });
+    } catch (error) {
+      runInAction(() => {
+        this.state = 'error';
+      });
+    }
+  }
 }

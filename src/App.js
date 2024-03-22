@@ -3,10 +3,10 @@ import React, { useEffect } from 'react';
 import AppRouter from './components/AppRouter';
 import { useStore } from './store/AuthProvider';
 import { useLoader } from './store/LoaderProvider';
-import { useTranslation } from 'react-i18next';
+// import { useTranslation } from 'react-i18next';
 import Loader from '../src/components/SharedLayout/Loader/Loader';
 const App = observer(() => {
-  const { i18n } = useTranslation();
+  // const { i18n } = useTranslation();
   const store = useStore();
   const { isLoading, showLoader, hideLoader } = useLoader();
   const {
@@ -29,7 +29,6 @@ const App = observer(() => {
           getBlogs(language),
           getProducts(language),
           getOfferByAnimal(language),
-          // syncFavourites(favouritesArray),
         ]);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -39,7 +38,7 @@ const App = observer(() => {
     };
 
     fetchData();
-  }, [authorised, i18n.language]);
+  }, [authorised]);
 
   return <>{isLoading ? <Loader /> : <AppRouter />}</>;
 });

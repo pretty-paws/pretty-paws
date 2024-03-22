@@ -1,5 +1,5 @@
 import { observer } from 'mobx-react-lite';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useStore } from '../../store/AuthProvider';
 import { GlobalContainer } from '../../global/GlobalContainer';
 import sprite from '../../img/svg-sprite/sprite.svg';
@@ -9,21 +9,38 @@ import Promotions from '../Main/PromotionsWithDiscount/Promotions';
 import { createPortal } from 'react-dom';
 import Notification from '../SharedLayout/Notification/Notification';
 import { useTranslation } from 'react-i18next';
+import { UseSkeleton } from '../../hooks/useSkeleton';
+import useWindowSize from '../../hooks/useWindowSize';
+// import SmallLoader from '../SharedLayout/SmallLoader/SmallLoader';
 
 const Comparison = observer(() => {
   const { t } = useTranslation();
+  const { screen } = useWindowSize();
 
   const store = useStore();
   const {
-    comparison: { compareList, removeFromComparison },
+    auth: { language },
+    comparison: {
+      state,
+      compareList,
+      removeFromComparison,
+      removeFromIdList,
+      compareIDList,
+      getComparisonProductByID,
+    },
     cart: { addToCart, alreadyAdded, removeFromCart },
   } = store;
 
   const [cartNotification, setCartNotification] = useState(false);
   const [cartNotificationDelete, setCartNotificationDelete] = useState(false);
 
+  useEffect(() => {
+    compareIDList.map(item => {
+      getComparisonProductByID(item, language);
+    });
+  }, [language, compareIDList]);
+
   function handleClick(id, product) {
-    console.log('id, product', id, product);
     if (alreadyAdded(id)) {
       removeFromCart(id);
       setCartNotificationDelete(true);
@@ -35,7 +52,7 @@ const Comparison = observer(() => {
   return (
     <GlobalContainer>
       <StyledComparisonPage>
-        {compareList.length !== 0 ? (
+        {compareList.length !== 0 && state === 'done' ? (
           <>
             <h3 className="compare__title">{t('Порівняння товарів')}</h3>
             <div className="compare__container">
@@ -104,7 +121,9 @@ const Comparison = observer(() => {
                               width=" 26px"
                               height=" 26px"
                               className="compare__close-icon"
-                              onClick={() => removeFromComparison(id)}
+                              onClick={() => {
+                                removeFromComparison(id), removeFromIdList(id);
+                              }}
                             >
                               <use href={sprite + '#close'} />
                             </svg>
@@ -159,10 +178,17 @@ const Comparison = observer(() => {
                 )}
               </div>
             </div>
-            <Promotions
-              query={'is_promotional=1'}
-              title={'Вашому вихованцеві може сподобатися'}
-            />
+          </>
+        ) : state === 'pending' ? (
+          <>
+            <h3 className="compare__title">{t('Порівняння товарів')}</h3>
+            <div className="comparison__skeleton">
+              <UseSkeleton
+                screen={screen}
+                cardsAmount={compareIDList.length + 1}
+                page={'comparison'}
+              />
+            </div>
           </>
         ) : (
           <>
@@ -191,12 +217,13 @@ const Comparison = observer(() => {
                 {t('До каталогу')}
               </button>
             </Link>
-            <Promotions
-              query={'is_promotional=1'}
-              title={t('Вашому вихованцеві може сподобатися')}
-            />
           </>
         )}
+
+        <Promotions
+          query={'is_promotional=1'}
+          title={t('Вашому вихованцеві може сподобатися')}
+        />
       </StyledComparisonPage>
       {cartNotification
         ? createPortal(

@@ -1,6 +1,11 @@
 import styled from 'styled-components';
 
 export const StyledModalBox = styled.div`
+  .skeleton__cart {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
   @media screen and (min-width: 834px) {
     padding: 0;
     margin-top: 16px;

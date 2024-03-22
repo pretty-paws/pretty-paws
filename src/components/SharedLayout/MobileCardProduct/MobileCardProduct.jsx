@@ -32,7 +32,7 @@ const MobileCardProduct = observer(
     const { t } = useTranslation();
     const store = useStore();
     const {
-      auth: { refresh, user, authorised },
+      auth: { refresh, authorised, favorites },
       cart: { addToCart, alreadyAdded, removeFromCart },
       favourite: { toggleFavourite },
       catalog: { animalSlug, categorySlug, subcategorySlug },
@@ -79,7 +79,7 @@ const MobileCardProduct = observer(
 
     function checkFavourite(id) {
       if (!authorised) return false;
-      return user.favorites?.some(product => product.id === id);
+      return favorites.some(product => product.id === id);
     }
 
     function handleClick(e) {

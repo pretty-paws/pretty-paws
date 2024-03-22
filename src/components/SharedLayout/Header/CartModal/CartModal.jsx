@@ -3,7 +3,7 @@ import { StyledBackdrop, StyledModalBox } from './CartModal.styled';
 import sprite from '../../../../img/svg-sprite/sprite.svg';
 import { useStore } from '../../../../store/AuthProvider';
 import { observer } from 'mobx-react-lite';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import useWindowSize from '../../../../hooks/useWindowSize';
 import { useTranslation } from 'react-i18next';
 import { useOutsideClickDetect } from '../../../../hooks/useOutsideClickDetect';
@@ -15,10 +15,22 @@ const CartModal = observer(({ setCartModalOpen }) => {
   const [smallModal, setSmallModal] = useState({});
   const store = useStore();
   const {
-    auth: { refresh, user, authorised },
-    cart: { cart, total, increaseAmount, decreaseAmount, removeFromCart },
+    auth: { refresh, user, authorised, language },
+    cart: {
+      cart,
+      total,
+      increaseAmount,
+      decreaseAmount,
+      removeFromCart,
+      cartArray,
+      getCartProductByID,
+    },
     favourite: { toggleFavourite },
   } = store;
+
+  useEffect(() => {
+    cartArray.map(id => getCartProductByID(id, language));
+  }, [language]);
 
   const selectRef = useRef(null);
   useOutsideClickDetect(selectRef, setCartModalOpen);

@@ -11,6 +11,12 @@ export const StyledOrderDetails = styled.div`
     padding: 24px;
   }
 
+  .order-details__skeleton {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
   .order-details_heading {
     display: flex;
     justify-content: space-between;
