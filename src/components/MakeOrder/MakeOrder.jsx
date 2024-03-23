@@ -8,7 +8,6 @@ import { observer } from 'mobx-react-lite';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { createPortal } from 'react-dom';
-// import { useTranslation } from 'react-i18next';
 import Delivery from './Delivery/Delivery';
 import PersonalData from './PersonalData/PersonalData';
 import Payment from './Payment/Payment';
@@ -82,11 +81,7 @@ const MakeOrder = observer(() => {
         payment: !prev.payment,
       }));
 
-    if (
-      name === 'postomat' ||
-      name === 'warehouse'
-      // (name === 'apartment' && !errors.apartment)
-    )
+    if (name === 'postomat' || name === 'warehouse')
       setOpenedSection(prev => ({
         ...prev,
         delivery: !prev.delivery,
@@ -141,10 +136,6 @@ const MakeOrder = observer(() => {
     console.log(new Date().toISOString());
   };
 
-  // useEffect(() => {
-  //   console.log('district', district.errors);
-  // }, [district]);
-
   return state === 'done' ? (
     <GlobalContainer>
       <StyledMakeOrder>
@@ -197,8 +188,8 @@ const MakeOrder = observer(() => {
             </div>
 
             <OrderDetails
-              cart={cart}
-              total={total}
+              // cart={cart}
+              // total={total}
               register={register}
               handleChange={handleChange}
               errors={errors}

@@ -15,6 +15,7 @@ export class AuthStore {
   confirmation_code = 0;
   token = 0;
   user = [];
+  favorites = [] || JSON.parse(localStorage.getItem('favorites'));
   favouritesArray = [];
   userName = localStorage.getItem('userName') || '';
   email = localStorage.getItem('email') || '';
@@ -139,20 +140,17 @@ export class AuthStore {
     this.favouritesArray = [];
     try {
       const res = await refreshUser();
-      // console.log('res', res);
       runInAction(() => {
         this.user = res.data.data.user;
         this.userSubscriptions = res.data.data.user.subscriptions;
-        this.state = 'done';
+        this.favorites = res.data.data.user.favorites;
+        localStorage.setItem('favorites', JSON.stringify(this.favorites));
+
         this.favouritesArray = res.data.data.user.favorites.map(
           product => product.id
         );
-        // console.log('favouritesArray', this.favouritesArray);
-        // localStorage.setItem(
-        //   'fav',
-        //   JSON.stringify(res.data.data.user.favorites)
-        // );
         localStorage.setItem('favArray', JSON.stringify(this.favouritesArray));
+        this.state = 'done';
       });
     } catch (error) {
       runInAction(() => {
@@ -203,8 +201,6 @@ export class AuthStore {
     } catch (error) {
       runInAction(() => {
         this.state = 'error';
-        // const errorData = error.response.data.error;
-        // console.log(errorData);
       });
     }
   }
@@ -213,7 +209,6 @@ export class AuthStore {
     this.state = 'pending';
     try {
       await updatePass(data);
-      // console.log(res);
       runInAction(() => {
         this.state = 'done';
       });

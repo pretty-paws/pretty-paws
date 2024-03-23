@@ -30,13 +30,15 @@ const FilterResult = observer(() => {
 
   useEffect(() => {
     resetedFilter && getFilteredSaleProducts(1, language, 'is_promotional=1');
-  }, [resetedFilter]);
+  }, [resetedFilter, language]);
 
   useEffect(() => {
     searchQuery !== '' &&
       resetedFilter !== false &&
       getFilteredProducts(categoryID, language, searchQuery);
-  }, [searchQuery, language]);
+  }, [searchQuery]);
+
+  // console.log(searchQuery, resetedFilter, categoryID);
 
   return (
     <StyledFilterResults>

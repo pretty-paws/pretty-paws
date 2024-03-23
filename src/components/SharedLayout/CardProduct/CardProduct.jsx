@@ -13,7 +13,6 @@ import { useTranslation } from 'react-i18next';
 const CardProduct = observer(
   ({
     id,
-    // slug,
     title,
     description,
     short_description,
@@ -33,14 +32,14 @@ const CardProduct = observer(
 
     const store = useStore();
     const {
-      auth: { authorised, favouritesArray, refresh },
+      auth: { authorised, refresh, favorites },
       cart: { addToCart, alreadyAdded, removeFromCart },
       favourite: { toggleFavourite },
       catalog: {
         setAnimalSlug,
         setCategorySlug,
         setAnimalName,
-        setCategoryName,
+        // setCategoryName,
         setSubcategorySlug,
         setSubcategoryID,
         setCategoryID,
@@ -55,6 +54,8 @@ const CardProduct = observer(
         addToComparison,
         alreadyAddedToCompare,
         removeFromComparison,
+        addToIDList,
+        removeFromIdList,
       },
     } = store;
 
@@ -64,8 +65,6 @@ const CardProduct = observer(
     const [compareMax, setCompareMax] = useState(false);
     const [compareDiffCategory, setCompareDiffCategory] = useState(false);
     const [compareDeleted, setCompareDeleted] = useState(false);
-
-    // const [compareList, setCompareList] = useState([]);
 
     const navigate = useNavigate();
 
@@ -90,7 +89,7 @@ const CardProduct = observer(
 
     function checkFavourite(id) {
       if (!authorised) return false;
-      return favouritesArray.some(itemId => itemId === id);
+      return favorites.some(product => product.id === id);
     }
 
     function handleClick(e) {
@@ -109,6 +108,7 @@ const CardProduct = observer(
         setCategory(animal.slug);
         setAnimalID(animal.id);
         addToComparison(product);
+        addToIDList(product.id);
         setCompareAdded(true);
       } else if (
         animal.slug === animalCategory &&
@@ -116,6 +116,7 @@ const CardProduct = observer(
         !alreadyAddedToCompare(id)
       ) {
         addToComparison(product);
+        addToIDList(product.id);
         setCompareAdded(true);
       } else if (animalCategory !== null && animal.slug !== animalCategory) {
         setCompareDiffCategory(true);
@@ -131,22 +132,24 @@ const CardProduct = observer(
         alreadyAddedToCompare(id)
       ) {
         removeFromComparison(id);
+        removeFromIdList(id);
         setCompareDeleted(true);
       } else if (alreadyAddedToCompare(id)) {
         removeFromComparison(id);
+        removeFromIdList(id);
         setCompareDeleted(true);
       }
     }
 
     const [errorMessage, setErrorMessage] = useState(false);
 
-    function handleAddFavourite(e, product) {
+    function handleAddFavourite(e) {
       e.stopPropagation();
       if (!authorised) {
         setErrorMessage(true);
         return;
       } else {
-        toggleFavourite(product.id)
+        toggleFavourite(id)
           .then(() => {
             refresh();
           })
@@ -172,7 +175,7 @@ const CardProduct = observer(
           setAnimalSlug(animal.slug);
           setAnimalID(animal.id);
           setAnimalName(animal.title);
-          setCategoryName(category?.title);
+          // setCategoryName(category?.title);
           setCategorySlug(category.slug);
           setCategoryID(category.id);
           setSubcategorySlug(subcategory.slug);
@@ -233,10 +236,7 @@ const CardProduct = observer(
                 </p>
               </div>
             )}
-            <div
-              onClick={e => handleAddFavourite(e, product)}
-              className="product__fav-icon"
-            >
+            <div onClick={handleAddFavourite} className="product__fav-icon">
               {checkFavourite(id) ? (
                 <svg width=" 26px" height=" 26px">
                   <use href={sprite + '#favorite_selected'} />

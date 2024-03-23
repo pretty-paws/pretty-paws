@@ -190,7 +190,12 @@ const BurgerMenu = observer(({ active, setActive }) => {
             <div onClick={e => e.stopPropagation()}>
               <div className="burger__head">
                 {language === 'en' && (
-                  <div onClick={() => handleLanguageChange('ua')}>
+                  <div
+                    onClick={() => {
+                      handleLanguageChange('ua');
+                      setActive(false);
+                    }}
+                  >
                     <svg
                       className="burger-language-icon"
                       width="24px"
@@ -202,7 +207,12 @@ const BurgerMenu = observer(({ active, setActive }) => {
                 )}
 
                 {language === 'ua' && (
-                  <div onClick={() => handleLanguageChange('en')}>
+                  <div
+                    onClick={() => {
+                      handleLanguageChange('en');
+                      setActive(false);
+                    }}
+                  >
                     <svg
                       className="burger-language-icon"
                       width="24px"

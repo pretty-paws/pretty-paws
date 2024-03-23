@@ -77,7 +77,7 @@
   "Знижка:": "Sale",
   "Сума до сплати:": "Total",
   "грн": "UAH",
-  "Оформляючи замовлення, я приймаю": "When placing an order, I accept",
+  "Оформляючи замовлення, я приймаю": "When placing an order, I accept ",
   "умови договору публічної оферти, повернення і безпеки": "terms of the public offer, return and security agreement",
   "Підтвердити замовлення": "Confirm the order",
   "Ваше замовлення успішно оформлено": "Your order has been successfully processed",
@@ -93,8 +93,14 @@
   "Необхідно вибрати відділення": "It is necessary to choose a warehouse",
   "Необхідно вибрати поштомат": "You must select a postomat",
   "Необхідно погодитись з умовами": "You must agree to the terms",
-
   "Новинка": "New",
+
+  "шт": "itms",
+  "": "",
+  "": "",
+  "": "",
+  "": "",
+  "": "",
 
   "В наявності": "In stock",
   "Доставляння": "Delivery",

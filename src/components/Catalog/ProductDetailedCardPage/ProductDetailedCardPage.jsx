@@ -26,15 +26,7 @@ const ProductDetailedCard = observer(() => {
   } = store;
 
   useEffect(() => {
-    getProductByID(id, language).then(() => {
-      // state === 'done' &&
-      //   (setAnimalSlug(productById.animal?.slug),
-      //   setAnimalName(productById.animal?.title),
-      //   setCategorySlug(productById.category?.slug),
-      //   setSubcategorySlug(productById.subcategory?.slug),
-      //   setCategoryName(productById.category?.title),
-      //   setSearchQuery(`&subcategories[0]=${productById.subcategory?.slug}`));
-    });
+    getProductByID(id, language);
   }, [language]);
 
   return (

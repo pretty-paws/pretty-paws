@@ -2,6 +2,13 @@ import styled from 'styled-components';
 
 export const StyledWishList = styled.div`
   position: relative;
+
+  .wishlist__skeleton {
+    display: flex;
+    gap: 24px;
+    margin: 0 16px 16px;
+  }
+
   @media screen and (min-width: 834px) {
     border-radius: 8px;
     background: ${props => (props.noWhiteBG !== null ? '' : '#fff')};

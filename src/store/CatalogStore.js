@@ -195,7 +195,6 @@ export class CatalogStore {
       runInAction(() => {
         this.filteredSubcategories = data;
         localStorage.setItem('filteredSubcategories', JSON.stringify(data));
-        // console.log(this.subcategories);
         this.state = 'done';
       });
     } catch (error) {
@@ -209,9 +208,10 @@ export class CatalogStore {
     this.filterState = 'pending';
     try {
       const { data } = await fetchFilters(category, language);
-      // console.log(data.data);
       runInAction(() => {
         this.filters = data.data;
+        this.categoryName = data.data.category;
+        localStorage.setItem('categoryName', this.categoryName);
         this.filterState = 'done';
       });
     } catch (error) {
@@ -222,11 +222,9 @@ export class CatalogStore {
   }
 
   async getFilteredProducts(category, language, query) {
-    // console.log(category, language, query);
     this.state = 'pending';
     try {
       const { data } = await fetchFilteredProducts(category, language, query);
-      // console.log(data.data);
       runInAction(() => {
         this.filteredProducts = data.data;
         this.state = 'done';
@@ -293,6 +291,7 @@ export class CatalogStore {
       const { data } = await fetchProductByID(id, lang);
       runInAction(() => {
         this.productById = data;
+        this.categoryName = data.category.title;
         this.state = 'done';
       });
     } catch (error) {

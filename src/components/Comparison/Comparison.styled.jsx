@@ -5,6 +5,18 @@ export const StyledComparisonPage = styled.div`
   font-weight: 400;
   line-height: 24px;
 
+  .comparison__skeleton {
+    display: flex;
+    gap: 24px;
+    margin-bottom: 160px;
+    @media screen and (min-width: 834px) {
+      gap: 70px;
+    }
+    @media screen and (min-width: 1440px) {
+      gap: 80px;
+    }
+  }
+
   .compare__title {
     margin: 16px 0 16px;
     font-size: 24px;

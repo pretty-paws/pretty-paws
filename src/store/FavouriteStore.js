@@ -4,16 +4,10 @@ import { fetchProductByID, toggleFav } from '../services/productsAPI';
 export class FavouriteStore {
   favState = 'done';
   favourite = [];
-  // favouriteArray = [] || JSON.parse(localStorage.getItem('favArray'));
 
   constructor() {
     makeAutoObservable(this, {}, { autoBind: true });
   }
-
-  // syncFavourites(array) {
-  //   this.favouriteArray = array;
-  //   localStorage.setItem('favouriteArray', JSON.stringify(this.favouriteArray));
-  // }
 
   resetFavouriteProducts() {
     this.favourite = [];
