@@ -6,13 +6,14 @@ export class ComparisonStore {
   compareList = JSON.parse(localStorage.getItem('compareList')) || [];
   compareIDList = JSON.parse(localStorage.getItem('compareIDList')) || [];
   comparisonAmount = Number(localStorage.getItem('comparisonAmount')) || 0;
-  animalCategory = JSON.parse(localStorage.getItem('animalCategory')) || null;
+  animalCategory = localStorage.getItem('animalCategory') || null;
 
   constructor() {
     makeAutoObservable(this, {}, { autoBind: true });
   }
 
   setCategory(slug) {
+    console.log('slug', slug);
     this.animalCategory = slug;
     this.compareIDList = [];
     this.compareList = [];
@@ -42,7 +43,13 @@ export class ComparisonStore {
       this.comparisonAmount -= 1;
       localStorage.setItem('comparisonAmount', this.comparisonAmount);
       if (this.comparisonAmount === 0) {
-        this.setCategory(null);
+        this.animalCategory = null;
+        this.compareIDList = [];
+        this.compareList = [];
+
+        localStorage.setItem('compareIDList', JSON.stringify([]));
+        localStorage.setItem('compareList', JSON.stringify([]));
+        localStorage.setItem('animalCategory', null);
       }
     }
   }
