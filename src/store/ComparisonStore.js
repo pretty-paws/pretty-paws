@@ -6,7 +6,7 @@ export class ComparisonStore {
   compareList = JSON.parse(localStorage.getItem('compareList')) || [];
   compareIDList = JSON.parse(localStorage.getItem('compareIDList')) || [];
   comparisonAmount = Number(localStorage.getItem('comparisonAmount')) || 0;
-  animalCategory = localStorage.getItem('animalCategory') || null;
+  animalCategory = JSON.parse(localStorage.getItem('animalCategory')) || null;
 
   constructor() {
     makeAutoObservable(this, {}, { autoBind: true });
