@@ -83,6 +83,7 @@ const Promotions = observer(() => {
                 brand,
                 subcategory,
                 category,
+                animal,
               }) => {
                 return screen !== 'mobile' ? (
                   <CardProduct

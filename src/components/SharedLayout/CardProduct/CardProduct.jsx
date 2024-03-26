@@ -39,7 +39,6 @@ const CardProduct = observer(
         setAnimalSlug,
         setCategorySlug,
         setAnimalName,
-        // setCategoryName,
         setSubcategorySlug,
         setSubcategoryID,
         setCategoryID,
@@ -102,7 +101,7 @@ const CardProduct = observer(
       setCartNotification(true);
     }
 
-    function addToCompare(e) {
+    function addToCompare(e, animal) {
       e.stopPropagation();
       if (animalCategory === null) {
         setCategory(animal.slug);
@@ -252,7 +251,7 @@ const CardProduct = observer(
               height=" 24px"
               fill="currentColor"
               stroke="none"
-              onClick={addToCompare}
+              onClick={e => addToCompare(e, animal)}
               className={
                 alreadyAddedToCompare(id)
                   ? ' product__compare-icon added'

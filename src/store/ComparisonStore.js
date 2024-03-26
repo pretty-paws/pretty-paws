@@ -13,7 +13,6 @@ export class ComparisonStore {
   }
 
   setCategory(slug) {
-    console.log('slug', slug);
     this.animalCategory = slug;
     this.compareIDList = [];
     this.compareList = [];
