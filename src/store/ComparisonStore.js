@@ -59,7 +59,13 @@ export class ComparisonStore {
       localStorage.setItem('compareIDList', JSON.stringify(this.compareIDList));
     }
     if (this.comparisonAmount === 0) {
-      this.setCategory(null);
+      this.animalCategory = null;
+      this.compareIDList = [];
+      this.compareList = [];
+
+      localStorage.setItem('compareIDList', JSON.stringify([]));
+      localStorage.setItem('compareList', JSON.stringify([]));
+      localStorage.setItem('animalCategory', null);
     }
   }
 

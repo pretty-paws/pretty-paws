@@ -150,7 +150,7 @@ const Cart = observer(() => {
                             <div className="cart-modal__amount-box">
                               <span
                                 onClick={() =>
-                                  amount > 1 ? decreaseAmount(id) : null
+                                  getAmount(id) > 1 ? decreaseAmount(id) : null
                                 }
                               >
                                 <svg width="24px" height="24px">
