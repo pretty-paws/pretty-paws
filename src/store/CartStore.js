@@ -113,6 +113,7 @@ export class CartStore {
           : (this.total -= product.price);
 
         const currentAmount = this.cartIDArray.get(id) || 0;
+        console.log('currentAmount', currentAmount);
         this.cartIDArray.set(id, currentAmount - 1);
 
         localStorage.setItem('cart', JSON.stringify(this.cart));

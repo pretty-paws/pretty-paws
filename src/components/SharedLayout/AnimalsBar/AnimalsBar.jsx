@@ -77,7 +77,6 @@ const AnimalsBar = observer(
                     onClick={() => {
                       type === 'section' &&
                         (setAnimal(id),
-                        // setCategoryID(id),
                         setAnimalName(title),
                         setAnimalSlug(slug),
                         setAnimalID(id));

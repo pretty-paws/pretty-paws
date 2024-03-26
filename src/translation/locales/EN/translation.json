@@ -96,10 +96,10 @@
   "Новинка": "New",
 
   "шт": "itms",
-  "": "",
-  "": "",
-  "": "",
-  "": "",
+  "Товар додано до порівняння": "The product has been added to the comparison",
+  "Ви вже додали максимальну кількість товарів до порівняння (4)": "You have already added the maximum number of products to compare (4)",
+  "Можна порівнювати товари лише з однієї категорії тварин.": "You can compare products from only one animal category.",
+  "Товар видалено з порівняння": "The product has been removed from comparison",
   "": "",
 
   "В наявності": "In stock",
