@@ -71,7 +71,7 @@ const FilterPage = observer(() => {
     !searchQuery &&
       resetedFilter === false &&
       setSearchQuery(`&subcategories[0]=${slug}`);
-  }, [subcategoryID]);
+  }, [subcategoryID, language]);
 
   return (
     <>

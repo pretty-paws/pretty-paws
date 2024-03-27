@@ -100,7 +100,13 @@
   "Ви вже додали максимальну кількість товарів до порівняння (4)": "You have already added the maximum number of products to compare (4)",
   "Можна порівнювати товари лише з однієї категорії тварин.": "You can compare products from only one animal category.",
   "Товар видалено з порівняння": "The product has been removed from comparison",
-  "": "",
+
+  "№ замовлення": "Order",
+  "Замовлення в обробці": "Order is being processed",
+  "Замовлення №": "Order",
+  "від": "from ",
+  "Сумма: ": "Total: ",
+  "Знижка: ": "Discount: ",
 
   "В наявності": "In stock",
   "Доставляння": "Delivery",

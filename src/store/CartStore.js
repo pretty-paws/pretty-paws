@@ -12,6 +12,7 @@ export class CartStore {
   total = Number(localStorage.getItem('total')) || 0;
   productAmount = Number(localStorage.getItem('productAmount')) || 0;
   orders = JSON.parse(localStorage.getItem('orders')) || [];
+  ordersArray = JSON.parse(localStorage.getItem('ordersArray')) || [];
 
   constructor() {
     makeAutoObservable(this, {}, { autoBind: true });
@@ -142,8 +143,12 @@ export class CartStore {
     this.total = 0;
     this.productAmount = 0;
     this.cartArray = [];
+    this.cartIDArray = [];
+    this.cartArrayData = [];
     localStorage.removeItem('cart');
     localStorage.removeItem('cartArray');
+    localStorage.removeItem('cartArrayData');
+    localStorage.removeItem('cartIDArray');
 
     localStorage.removeItem('total');
     localStorage.removeItem('productAmount');
@@ -173,6 +178,29 @@ export class CartStore {
       runInAction(() => {
         this.cart.push(product);
         localStorage.setItem('cart', JSON.stringify(this.cart));
+        this.state = 'done';
+      });
+    } catch (error) {
+      runInAction(() => {
+        this.state = 'error';
+      });
+    }
+  }
+
+  async getOrderProductByID(id, lang, orderIndex) {
+    this.state = 'pending';
+    this.ordersArray = [];
+
+    try {
+      const { data } = await fetchProductByID(id, lang);
+      const { title, short_description } = data;
+      const details = this.orders[orderIndex];
+      const product = details.cart.find(item => item.id === id);
+      const productToUpdate = { ...product, title, short_description };
+
+      runInAction(() => {
+        this.ordersArray.push(productToUpdate);
+        localStorage.setItem('ordersArray', JSON.stringify(this.ordersArray));
         this.state = 'done';
       });
     } catch (error) {

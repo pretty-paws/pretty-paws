@@ -22,7 +22,7 @@ const MakeOrder = observer(() => {
   const store = useStore();
   const {
     auth: { user, updateProfile, state, language },
-    cart: { cart, total, createOrder, emptyCart },
+    cart: { cart, total, createOrder, emptyCart, cartIDArray },
     novaPoshta: {
       getDistricts,
       getCities,
@@ -129,6 +129,7 @@ const MakeOrder = observer(() => {
       acceptConditions,
       creationDate: new Date().toISOString(),
       cart,
+      cartIDArray,
       total,
     };
     createOrder(order);
