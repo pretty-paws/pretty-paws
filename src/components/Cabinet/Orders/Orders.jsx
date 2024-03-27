@@ -16,8 +16,6 @@ const Orders = observer(() => {
     cart: { orders },
   } = store;
 
-  // console.log('orders', orders);
-
   return (
     <StyledOrders>
       <CabinetTitle header={'Мої замовлення'} />
@@ -28,17 +26,19 @@ const Orders = observer(() => {
             <Link to={`${orderIndex}`} key={orderIndex}>
               <div className="orders__table">
                 <h4 className="orders__table_number">
-                  № замовлення {orderIndex + 1}
+                  {t('№ замовлення')} {orderIndex + 1}
                 </h4>
                 <div className="orders__table_sum-date">
-                  <p>{total}.00 грн</p>
+                  <p>
+                    {total}.00 {t('грн')}
+                  </p>
                   <p>{parseDate(creationDate)}</p>
                 </div>
                 <div className="orders__table_status">
                   <svg width="24px" height="24px">
                     <use href={sprite + '#process'} />
                   </svg>
-                  <p>Замовлення в обробці</p>
+                  <p>{t('Замовлення в обробці')}</p>
                 </div>
               </div>
             </Link>
