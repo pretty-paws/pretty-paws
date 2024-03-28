@@ -15,8 +15,7 @@ export class HeroStore {
       const data = await fetchOfferByAnimal(language);
       runInAction(() => {
         this.offerByAnimal = data;
-        // console.log(data);
-        // console.log(this.offerByAnimal);
+
         this.state = 'done';
       });
     } catch (error) {

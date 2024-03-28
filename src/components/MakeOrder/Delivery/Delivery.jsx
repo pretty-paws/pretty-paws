@@ -260,7 +260,6 @@ const Delivery = observer(
                       placeholder={t('Номер будинку')}
                       {...register('house', {
                         onChange: e => {
-                          // console.log('e', e);
                           handleChange('house', e.target.value);
                           setDeliveryHouse(e.target.value);
                         },
@@ -279,7 +278,6 @@ const Delivery = observer(
                       placeholder={t('Номер квартири')}
                       {...register('apartment', {
                         onChange: e => {
-                          // console.log('e', e);
                           handleChange('apartment', e.target.value);
                           setDeliveryAppartment(e.target.value);
                         },

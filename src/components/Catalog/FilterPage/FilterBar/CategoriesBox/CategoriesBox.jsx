@@ -44,7 +44,6 @@ const CategoriesBox = observer(
     const handleSubcategoryChoice = item => {
       const currentSearchParams = new URLSearchParams(searchParams);
       const subcategories = currentSearchParams.get(`subcategories`);
-      console.log('subcategories', subcategories);
       if (subcategories === null) handleQuery(item);
       let subcategoriesArray;
       if (subcategories !== null) {

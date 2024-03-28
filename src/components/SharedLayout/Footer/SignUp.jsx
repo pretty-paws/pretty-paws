@@ -56,7 +56,6 @@ const SignUp = observer(() => {
   });
 
   const handleSubscribe = data => {
-    // console.log('data', data, subscriptions);
     const formData = new FormData();
     formData.append('email', data.email);
     subscriptions.forEach(category => {
@@ -75,13 +74,10 @@ const SignUp = observer(() => {
           <p className="sign-up__title">{t('Підписатися на акції для')}</p>
           <AnimalsBar
             type={'signUp'}
-            // chosenCategory={chosenCategory}
-            // setChosenCategory={setChosenCategory}
             isSubmitted={isSubmitted}
             setSubscriptionIDList={setSubscriptionIDList}
             includesSubscription={includesSubscription}
           />
-          {/* <AnimalsBarSubscriptions /> */}
           <div
             className={
               authorised === true

@@ -19,8 +19,6 @@ const Subscription = observer(() => {
     subscription: { unSubscribe },
   } = store;
 
-  console.log(userSubscriptions);
-
   return (
     <StyledSubscription>
       <CabinetTitle header={'Мої підписки'} />

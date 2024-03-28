@@ -283,7 +283,6 @@ const PersonalData = observer(
               <li>
                 <p>{t('Ім’я та прізвище')}:</p>
                 <p>
-                  {/* {console.log(userData.surname)} */}
                   {userData.name} {userData.surname}
                 </p>
               </li>

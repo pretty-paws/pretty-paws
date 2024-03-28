@@ -33,7 +33,6 @@ export class NovaPoshta {
         }));
         this.districts = districts;
         this.warehouses = [];
-        // console.log('districts', districts);
         this.NPstate = 'done';
       });
     } catch (error) {
@@ -44,14 +43,12 @@ export class NovaPoshta {
   }
 
   async getCities({ areaRef }) {
-    // console.log('areaRef', areaRef);
     this.NPstate = 'pending';
     try {
       let allCities = [];
 
       const firstPage = await fetchCities(areaRef);
       const totalPages = Math.ceil(firstPage.info.totalCount / 150);
-      // allCities = [...firstPage.data];
 
       if (totalPages > 1) {
         const restOfPages = await Promise.all(
@@ -69,7 +66,6 @@ export class NovaPoshta {
           name: city.Description,
         }));
         this.cities = cities;
-        // console.log('cities', cities);
         this.NPstate = 'done';
       });
     } catch (error) {
@@ -83,7 +79,6 @@ export class NovaPoshta {
     this.NPstate = 'pending';
     try {
       const { data } = await fetchWarehouses(cityName);
-      // console.log('data', data);
       runInAction(() => {
         this.warehouses = data;
         this.NPstate = 'done';
@@ -99,7 +94,6 @@ export class NovaPoshta {
     this.NPstate = 'pending';
     try {
       const { data } = await fetchPostomats(cityName);
-      // console.log('data', data);
       runInAction(() => {
         this.postomats = data;
         this.NPstate = 'done';

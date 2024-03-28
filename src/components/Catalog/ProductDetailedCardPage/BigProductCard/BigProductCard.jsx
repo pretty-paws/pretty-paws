@@ -10,13 +10,12 @@ import { useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import Notification from '../../../SharedLayout/Notification/Notification';
 import useWindowSize from '../../../../hooks/useWindowSize';
-import ToolTip from '../../../../hooks/useTooltip';
+import ToolTip from '../../../../hooks/Tooltip/useTooltip';
 
 const BigProductCard = observer(() => {
   const { t } = useTranslation();
   const { screen } = useWindowSize();
   const location = useLocation();
-  // console.log(location.pathname);
 
   const store = useStore();
   const {
@@ -65,7 +64,6 @@ const BigProductCard = observer(() => {
   const [errorMessage, setErrorMessage] = useState(false);
 
   function handleAddFavourite() {
-    // e.stopPropagation();
     if (!authorised) {
       setErrorMessage(true);
       return;
@@ -81,7 +79,6 @@ const BigProductCard = observer(() => {
   }
 
   function addToCompare(e) {
-    console.log('e', e);
     e.stopPropagation();
     if (animalCategory === null) {
       setCategory(productById.animal.slug);
@@ -204,6 +201,11 @@ const BigProductCard = observer(() => {
                   ) : (
                     <div className="product__price">{productById.price}₴</div>
                   )}
+                  {screen !== 'mobile' && (
+                    <div className="product__quantity">
+                      {productById.quantity}
+                    </div>
+                  )}
                   <div className="product__details-box">
                     <p className="product__details">
                       <svg width="24px" height="24px">
@@ -231,70 +233,105 @@ const BigProductCard = observer(() => {
                       </span>
                     </p>
                   </div>
-                  <div>
-                    <div className="product__fav-compare">
-                      {/* {errorMessage && (
-                        <div className="product__error-message">
-                          <p>
-                            {t('Будь-ласка,')}
-                            <Link
-                              to="/register"
-                              onClick={e => e.stopPropagation()}
-                            >
-                              <span>{t('зареєструйтесь')}</span>
-                            </Link>
-                            {t('на сайті, щоб додавати товари до обраних')}
-                          </p>
+
+                  {screen === 'mobile' && (
+                    <>
+                      <div className="product__fav-compare">
+                        <div className="product__quantity">
+                          {productById.quantity}
                         </div>
-                      )} */}
-                      <ToolTip
-                        text={t('Необхідно авторизуватись')}
-                        authorised={authorised}
-                        screen={screen}
-                      >
-                        <div
-                          onClick={handleAddFavourite}
-                          className="product__fav-icon"
+                        <ToolTip
+                          text={t('Необхідно авторизуватись')}
+                          authorised={authorised}
+                          screen={screen}
+                          page={'bigProduct'}
                         >
-                          {checkFavourite(productById.id) ? (
-                            <svg width=" 26px" height=" 26px">
-                              <use href={sprite + '#favorite_selected'} />
-                            </svg>
-                          ) : (
-                            <svg width=" 24px" height=" 24px">
-                              <use href={sprite + '#favorite'} />
-                            </svg>
-                          )}
-                        </div>
-                      </ToolTip>
-                      <svg
-                        width=" 24px"
-                        height=" 24px"
-                        fill="currentColor"
-                        stroke="none"
-                        onClick={addToCompare}
-                        className={
-                          alreadyAddedToCompare(productById.id)
-                            ? ' product__compare-icon added'
-                            : 'product__compare-icon'
-                        }
-                      >
-                        <use href={sprite + '#scale'} />
-                      </svg>
-                    </div>
+                          <div
+                            onClick={handleAddFavourite}
+                            className="product__fav-icon"
+                          >
+                            {checkFavourite(productById.id) ? (
+                              <svg width=" 26px" height=" 26px">
+                                <use href={sprite + '#favorite_selected'} />
+                              </svg>
+                            ) : (
+                              <svg width=" 24px" height=" 24px">
+                                <use href={sprite + '#favorite'} />
+                              </svg>
+                            )}
+                          </div>
+                        </ToolTip>
+                        <svg
+                          width=" 24px"
+                          height=" 24px"
+                          fill="currentColor"
+                          stroke="none"
+                          onClick={addToCompare}
+                          className={
+                            alreadyAddedToCompare(productById.id)
+                              ? ' product__compare-icon added'
+                              : 'product__compare-icon'
+                          }
+                        >
+                          <use href={sprite + '#scale'} />
+                        </svg>
+                      </div>
+                    </>
+                  )}
+                  <div className="fav-compare-button-box">
+                    {screen !== 'mobile' && (
+                      <div className="product__fav-compare">
+                        <ToolTip
+                          text={t('Необхідно авторизуватись')}
+                          authorised={authorised}
+                          screen={screen}
+                          page={'bigProduct'}
+                        >
+                          <div
+                            onClick={handleAddFavourite}
+                            className="product__fav-icon"
+                          >
+                            {checkFavourite(productById.id) ? (
+                              <svg width=" 26px" height=" 26px">
+                                <use href={sprite + '#favorite_selected'} />
+                              </svg>
+                            ) : (
+                              <svg width=" 24px" height=" 24px">
+                                <use href={sprite + '#favorite'} />
+                              </svg>
+                            )}
+                          </div>
+                        </ToolTip>
+                        <svg
+                          width=" 24px"
+                          height=" 24px"
+                          fill="currentColor"
+                          stroke="none"
+                          onClick={addToCompare}
+                          className={
+                            alreadyAddedToCompare(productById.id)
+                              ? ' product__compare-icon added'
+                              : 'product__compare-icon'
+                          }
+                        >
+                          <use href={sprite + '#scale'} />
+                        </svg>
+                      </div>
+                    )}
+
+                    <button
+                      className={
+                        alreadyAdded(productById.id)
+                          ? 'product__button added'
+                          : 'product__button'
+                      }
+                      onClick={handleClick}
+                    >
+                      {alreadyAdded(productById.id)
+                        ? t('Додано')
+                        : t('До кошика')}
+                    </button>
                   </div>
-                  <button
-                    className={
-                      alreadyAdded(productById.id)
-                        ? 'product__button added'
-                        : 'product__button'
-                    }
-                    onClick={handleClick}
-                  >
-                    {alreadyAdded(productById.id)
-                      ? t('Додано')
-                      : t('До кошика')}
-                  </button>
                 </div>
               </div>
               {cartNotification

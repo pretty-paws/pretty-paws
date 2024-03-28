@@ -99,7 +99,7 @@ const Blog = observer(() => {
   }, [activeLoadMore]);
 
   useEffect(() => {
-    console.log('Загрузилась сторінка ось категорія = ', chosenCategory);
+    // console.log('Загрузилась сторінка ось категорія = ', chosenCategory);
     console.log(param);
     if (chosenCategory != undefined) {
       setCurrentPage(1);

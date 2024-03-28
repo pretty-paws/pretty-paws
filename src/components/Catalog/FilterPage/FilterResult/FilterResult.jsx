@@ -38,8 +38,6 @@ const FilterResult = observer(() => {
       getFilteredProducts(categoryID, language, searchQuery);
   }, [searchQuery]);
 
-  // console.log(searchQuery, resetedFilter, categoryID);
-
   return (
     <StyledFilterResults>
       {state === 'done' && filteredProducts.length !== 0 ? (

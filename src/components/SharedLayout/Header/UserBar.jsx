@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import ToolTip from '../../../hooks/useTooltip';
+import ToolTip from '../../../hooks/Tooltip/useTooltip';
 import useWindowSize from '../../../hooks/useWindowSize';
 import sprite from '../../../img/svg-sprite/sprite.svg';
 import { NavLink, useLocation } from 'react-router-dom';
@@ -12,9 +12,7 @@ import { useStore } from '../../../store/AuthProvider';
 
 const UserBar = observer(({ setActive }) => {
   const [cartModalOpen, setCartModalOpen] = useState(false);
-  // const [language, setLanguage] = useState(
-  //   localStorage.getItem('language') || 'ua'
-  // );
+
   const { screen } = useWindowSize();
   const location = useLocation();
 
@@ -25,11 +23,9 @@ const UserBar = observer(({ setActive }) => {
     auth: { authorised, state, language, setLanguage, favouritesArray },
     cart: { productAmount },
     comparison: { comparisonAmount },
-    // favourite: { favourite },
   } = store;
 
   const handleLanguageChange = lang => {
-    // localStorage.setItem('language', lang);
     setLanguage(lang);
     i18n.changeLanguage(lang);
   };
@@ -76,7 +72,6 @@ const UserBar = observer(({ setActive }) => {
             </div>
           </NavLink>
         </ToolTip>
-        {/* <ToolTip text={t('Порівняти')}> */}
         <NavLink
           to="/comparison"
           className={({ isActive }) => (isActive ? 'active-link' : '')}
@@ -94,7 +89,6 @@ const UserBar = observer(({ setActive }) => {
             )}
           </div>
         </NavLink>
-        {/* </ToolTip> */}
         <NavLink
           to="/cart"
           className={({ isActive }) => (isActive ? 'active-link' : '')}

@@ -96,7 +96,6 @@ const Hero = observer(() => {
     paginationItems.forEach((item, index) => {
       if (item === clickedElement) {
         swiper.slideTo(index);
-        // console.log('index of slide  = ', index);
       }
     });
   };

@@ -140,7 +140,6 @@ const FilterBar = observer(({ setOpenedFilter, active }) => {
     setFilter();
     getFilteredProducts(id, language, query);
     setSearchQuery(query);
-    console.log('query after filter click', query);
     screen !== 'desktop' && setOpenedFilter(false);
   }
 

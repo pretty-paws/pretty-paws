@@ -13,7 +13,6 @@ const BrandsSection = () => {
     if (screen !== 'desktop') return brands.slice(0, brands.length - 4);
     return brands;
   };
-  //   console.log(slicedBrands(brands));
   return (
     <BrandsContainer>
       <Title>
