@@ -21,9 +21,6 @@ const LoginWithPhone = () => {
       phone_number: '',
     },
   });
-  // const [phoneFocused, setPhoneFocused] = useState(false);
-
-  // const phone_number = watch('phone_number', '');
 
   const onSubmit = data => {
     console.log(data);

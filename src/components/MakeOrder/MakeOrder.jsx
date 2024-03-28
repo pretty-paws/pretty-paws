@@ -73,7 +73,6 @@ const MakeOrder = observer(() => {
     values,
   });
   const handleChange = (name, value) => {
-    console.log('name', name);
     setValue(name, value);
     if (name === 'payment')
       setOpenedSection(prev => ({
@@ -134,7 +133,6 @@ const MakeOrder = observer(() => {
     };
     createOrder(order);
     emptyCart();
-    console.log(new Date().toISOString());
   };
 
   return state === 'done' ? (

@@ -128,13 +128,12 @@ export const StyledBigProductCard = styled.div`
   }
 
   .product-card__price-box {
-    margin-top: 16px;
     @media screen and (min-width: 834px) {
       display: flex;
       flex-direction: row-reverse;
       justify-content: left;
       align-items: center;
-      gap: 24px;
+      gap: 8px;
     }
 
     @media screen and (min-width: 1440px) {
@@ -162,6 +161,50 @@ export const StyledBigProductCard = styled.div`
       font-size: 24px;
     }
   }
+  .fav-compare-button-box {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: left;
+    gap: 24px;
+
+    @media screen and (min-width: 834px) {
+      margin: 40px 0 14px;
+    }
+
+    @media screen and (min-width: 1440px) {
+      margin: 40px 0 30px;
+    }
+  }
+
+  .product__quantity {
+    position: absolute;
+    right: 140px;
+
+    border-radius: 8px;
+    background-color: #e7a973;
+    height: 24px;
+    padding: 8px;
+    width: fit-content;
+
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 16px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    @media screen and (min-width: 834px) {
+      top: 0;
+      left: 345px;
+    }
+
+    @media screen and (min-width: 1440px) {
+      top: 24px;
+      left: 170px;
+    }
+  }
 
   .product__fav-compare {
     position: absolute;
@@ -171,11 +214,9 @@ export const StyledBigProductCard = styled.div`
     gap: 32px;
 
     @media screen and (min-width: 834px) {
-      top: 85%;
-      right: 180px;
+      position: static;
     }
     @media screen and (min-width: 1440px) {
-      right: 320px;
     }
   }
 
@@ -221,12 +262,11 @@ export const StyledBigProductCard = styled.div`
     transition: background-color var(--transition);
 
     @media screen and (min-width: 834px) {
-      margin-top: 40px;
+      margin-top: 0;
       width: 235px;
     }
 
     @media screen and (min-width: 1440px) {
-      margin-top: 46px;
     }
 
     &:hover {

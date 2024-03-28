@@ -29,5 +29,15 @@ export const StyledTooltip = styled.div`
     text-align: center;
     white-space: pre-line;
     pointer-events: none;
+
+    &.big-product {
+      top: ${props => (props.screen === 'desktop' ? '35px' : '-40px')};
+      left: ${props =>
+        props.screen === 'desktop'
+          ? '50%'
+          : props.screen === 'tablet'
+          ? '100%'
+          : '70%'};
+    }
   }
 `;

@@ -49,15 +49,12 @@ export class SubscriptionStore {
     this.state = 'pending';
     try {
       await subscribe(data);
-      // console.log(res.data);
 
       runInAction(() => {
         this.state = 'done';
-        // this.authStore.authorised === true && this.authStore.refresh();
       });
     } catch (error) {
       runInAction(() => {
-        console.log('error', error);
         this.state = 'error';
         const errorData = error.response.data.error;
 
@@ -83,12 +80,9 @@ export class SubscriptionStore {
   async unSubscribe(data) {
     this.state = 'pending';
     try {
-      // console.log(data);
       await unsubscribe(data);
-
       runInAction(() => {
         this.state = 'done';
-        // this.authStore.authorised === true && this.authStore.refresh();
       });
     } catch (error) {
       runInAction(() => {

@@ -216,8 +216,6 @@ export class AuthStore {
       runInAction(() => {
         this.state = 'error';
         this.errorType = 'password-change';
-        // const errorData = error.response.data.error;
-        // console.log(errorData);
       });
     }
   }

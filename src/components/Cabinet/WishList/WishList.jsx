@@ -30,8 +30,6 @@ const WishList = observer(() => {
   } = store;
   const areFavourites = favouritesArray || null;
 
-  console.log('favstate', favState, favourite);
-
   useEffect(() => {
     if (favouritesArray.length === 0) resetFavouriteProducts();
     favouritesArray.map(id => {

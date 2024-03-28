@@ -95,7 +95,6 @@ const Promotions = observer(({ query, title }) => {
             </div>
           </>
         )}
-        {/* {console.log(products)} */}
         <div className="promotions__card-container" ref={elementRef}>
           {state === 'done' ? (
             getProducts(query)?.map(

@@ -5,7 +5,6 @@ import {
 } from './AnimalsBar.styled'; // Импортируйте оба стиля
 import { animalsNames } from '../../../utils/animalBarSvgLinks';
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import { useStore } from '../../../store/AuthProvider';
 import { observer } from 'mobx-react-lite';
 
@@ -102,12 +101,3 @@ const AnimalsBar = observer(
   }
 );
 export default AnimalsBar;
-
-AnimalsBar.propTypes = {
-  type: PropTypes.string,
-  getCategory: PropTypes.func,
-  chosenCategory: PropTypes.array,
-  isSubmitted: PropTypes.bool,
-  setAnimal: PropTypes.func,
-  animal: PropTypes.number,
-};

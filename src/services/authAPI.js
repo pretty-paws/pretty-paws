@@ -9,7 +9,6 @@ export const registerUser = async data => {
 
 export const registerVerify = async code => {
   const result = await axios.post(`/auth/sign-up/verify`, code);
-  // console.log(result);
   return result;
 };
 
@@ -41,13 +40,11 @@ export const getAnimals = async () => {
     localStorage.getItem('token') || ''
   }`;
   const result = await axios.get('/category-animals/');
-  // console.log(result);
   return result;
 };
 
 export const subscribe = async data => {
   const result = await axios.post(`/subscriptions/create`, data);
-  // console.log(result);
   return result;
 };
 
@@ -64,7 +61,6 @@ export const updateUser = async data => {
     localStorage.getItem('token') || ''
   }`;
   const result = await axios.post(`/profile/update`, data);
-  // console.log(result);
   return result;
 };
 
@@ -73,6 +69,5 @@ export const updatePass = async data => {
     localStorage.getItem('token') || ''
   }`;
   const result = await axios.post(`/profile/update-password`, data);
-  // console.log(result);
   return result;
 };

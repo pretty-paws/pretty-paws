@@ -38,7 +38,6 @@ const Price = observer(
     // };
 
     const handleMinPrice = e => {
-      console.log('e.currentTarget.value', e.currentTarget.value);
       const sum = e.currentTarget.value;
       const newValue = sum === '' ? '' : Number(sum);
       setIsMinChosen(newValue);

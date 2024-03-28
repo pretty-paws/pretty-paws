@@ -20,7 +20,6 @@ const Delivery = () => {
     returnWays: false,
     returnPayment: false,
   });
-  // console.log(section);
 
   const onClickToggle = section => {
     setSection(prevState => ({

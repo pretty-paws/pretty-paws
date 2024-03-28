@@ -20,8 +20,6 @@ const OrderDetails = observer(({ register, handleChange, errors }) => {
     cart: { cart, total, cartArray, getAmount, getCartProductByID, state },
   } = store;
 
-  console.log('language', language);
-
   useEffect(() => {
     cartArray.map(id => getCartProductByID(id, language));
   }, [language]);
