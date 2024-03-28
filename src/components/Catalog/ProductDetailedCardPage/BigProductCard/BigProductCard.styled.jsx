@@ -179,6 +179,7 @@ export const StyledBigProductCard = styled.div`
 
   .product__quantity {
     position: absolute;
+    /* top: -35px; */
     right: 140px;
 
     border-radius: 8px;
@@ -208,7 +209,7 @@ export const StyledBigProductCard = styled.div`
 
   .product__fav-compare {
     position: absolute;
-    top: 62%;
+    top: 55%;
     right: 0;
     display: flex;
     gap: 32px;

@@ -157,7 +157,7 @@ export const StyledComparisonPage = styled.div`
     fill: #6c6c6c;
   }
 
-  .product__img {
+  .compare__product__img {
     height: 80px;
     object-fit: contain;
     @media screen and (min-width: 834px) {

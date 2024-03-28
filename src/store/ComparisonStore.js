@@ -17,8 +17,8 @@ export class ComparisonStore {
     this.compareIDList = [];
     this.compareList = [];
 
-    localStorage.setItem('compareIDList', JSON.stringify(this.compareIDList));
-    localStorage.setItem('compareList', JSON.stringify(this.compareList));
+    localStorage.removeItem('compareIDList');
+    localStorage.removeItem('compareList');
     localStorage.setItem('animalCategory', slug);
   }
 
@@ -32,6 +32,8 @@ export class ComparisonStore {
     localStorage.setItem('compareList', JSON.stringify(this.compareList));
     this.comparisonAmount += 1;
     localStorage.setItem('comparisonAmount', this.comparisonAmount);
+    this.compareIDList.push(product.id);
+    localStorage.setItem('compareIDList', JSON.stringify(this.compareIDList));
   }
 
   removeFromComparison(id) {
@@ -41,39 +43,37 @@ export class ComparisonStore {
       localStorage.setItem('compareList', JSON.stringify(this.compareList));
       this.comparisonAmount -= 1;
       localStorage.setItem('comparisonAmount', this.comparisonAmount);
+
+      const indexID = this.compareIDList.findIndex(
+        productID => productID === id
+      );
+      if (indexID !== -1) {
+        this.compareIDList.splice(index, 1);
+        localStorage.setItem(
+          'compareIDList',
+          JSON.stringify(this.compareIDList)
+        );
+      }
       if (this.comparisonAmount === 0) {
         this.animalCategory = null;
         this.compareIDList = [];
         this.compareList = [];
 
-        localStorage.setItem('compareIDList', JSON.stringify([]));
-        localStorage.setItem('compareList', JSON.stringify([]));
-        localStorage.setItem('animalCategory', null);
+        localStorage.removeItem('compareIDList');
+        localStorage.removeItem('compareList');
+        localStorage.removeItem('animalCategory');
       }
     }
   }
 
-  addToIDList(id) {
-    this.compareIDList.push(id);
-    localStorage.setItem('compareIDList', JSON.stringify(this.compareIDList));
-  }
+  // addToIDList(id) {
+  //   this.compareIDList.push(id);
+  //   localStorage.setItem('compareIDList', JSON.stringify(this.compareIDList));
+  // }
 
-  removeFromIdList(id) {
-    const index = this.compareIDList.findIndex(productId => productId === id);
-    if (index !== -1) {
-      this.compareIDList.splice(index, 1);
-      localStorage.setItem('compareIDList', JSON.stringify(this.compareIDList));
-    }
-    if (this.comparisonAmount === 0) {
-      this.animalCategory = null;
-      this.compareIDList = [];
-      this.compareList = [];
+  // removeFromIdList(id) {
 
-      localStorage.setItem('compareIDList', JSON.stringify([]));
-      localStorage.setItem('compareList', JSON.stringify([]));
-      localStorage.setItem('animalCategory', null);
-    }
-  }
+  // }
 
   async getComparisonProductByID(id, lang) {
     this.state = 'pending';

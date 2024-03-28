@@ -24,7 +24,7 @@ const Comparison = observer(() => {
       state,
       compareList,
       removeFromComparison,
-      removeFromIdList,
+      // removeFromIdList,
       compareIDList,
       getComparisonProductByID,
     },
@@ -113,7 +113,7 @@ const Comparison = observer(() => {
                         <li>
                           <div className="product__img-container">
                             <img
-                              className="product__img"
+                              className="compare__product__img"
                               src={image_url}
                               alt={title}
                             />
@@ -122,7 +122,8 @@ const Comparison = observer(() => {
                               height=" 26px"
                               className="compare__close-icon"
                               onClick={() => {
-                                removeFromComparison(id), removeFromIdList(id);
+                                removeFromComparison(id);
+                                // , removeFromIdList(id);
                               }}
                             >
                               <use href={sprite + '#close'} />

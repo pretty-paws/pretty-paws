@@ -53,8 +53,8 @@ const CardProduct = observer(
         addToComparison,
         alreadyAddedToCompare,
         removeFromComparison,
-        addToIDList,
-        removeFromIdList,
+        // addToIDList,
+        // removeFromIdList,
       },
     } = store;
 
@@ -107,7 +107,7 @@ const CardProduct = observer(
         setCategory(animal.slug);
         setAnimalID(animal.id);
         addToComparison(product);
-        addToIDList(product.id);
+        // addToIDList(product.id);
         setCompareAdded(true);
       } else if (
         animal.slug === animalCategory &&
@@ -115,7 +115,7 @@ const CardProduct = observer(
         !alreadyAddedToCompare(id)
       ) {
         addToComparison(product);
-        addToIDList(product.id);
+        // addToIDList(product.id);
         setCompareAdded(true);
       } else if (animalCategory !== null && animal.slug !== animalCategory) {
         setCompareDiffCategory(true);
@@ -131,11 +131,11 @@ const CardProduct = observer(
         alreadyAddedToCompare(id)
       ) {
         removeFromComparison(id);
-        removeFromIdList(id);
+        // removeFromIdList(id);
         setCompareDeleted(true);
       } else if (alreadyAddedToCompare(id)) {
         removeFromComparison(id);
-        removeFromIdList(id);
+        // removeFromIdList(id);
         setCompareDeleted(true);
       }
     }
