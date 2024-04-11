@@ -228,7 +228,7 @@ const MobileCardProduct = observer(
                   <Link to="/register">
                     <span>{t('зареєструйтесь')}</span>
                   </Link>
-                  {t('на сайті, щоб додавати товари до обраних')}
+                  {t(', щоб додавати товари до обраних')}
                 </p>
               </div>
             )}

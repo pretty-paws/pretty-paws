@@ -229,7 +229,7 @@ const CardProduct = observer(
                 <p>
                   {t('Будь-ласка, ')}
                   <Link to="/register" onClick={e => e.stopPropagation()}>
-                    <span>{t('зареєструйтесь ')}</span>
+                    <span>{t('зареєструйтесь')}</span>
                   </Link>
                   {t(', щоб додавати товари до обраних')}
                 </p>

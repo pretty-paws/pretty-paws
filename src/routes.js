@@ -1,4 +1,3 @@
-// import Main from './components/Main/Main';
 import New from './components/New/New';
 import Blog from './components/Blog/Blog';
 import Help from './components/Help/Help';
@@ -14,23 +13,15 @@ import {
   BLOG_ROUTE,
   NEW_ROUTE,
   PROMOTIONS_ROUTE,
-  // SHOP_ROUTE,
   CATALOG_ROUTE,
   CONTACT_ROUTE,
   DELIVERY_ROUTE,
   REGISTER_ROUTE,
   FAVORITE_ROUTE,
-  // COMPARISON_ROUTE,
-  // CART_ROUTE,
   LOGIN_ROUTE,
-  // CABINET,
 } from './utils/consts';
 import Favorite from './components/Favorite/Favorite';
-// import Comparison from './components/Comparison/Comparison';
-// import Cart from './components/Cart/Cart';
-// import Cabinet from './components/Cabinet/Cabinet';
 
-// Описує  усі маршрути(роути) нашого додатку
 export const authRoutes = [
   {
     name: 'Реєстрація',
@@ -50,24 +41,8 @@ export const routes = [
     path: FAVORITE_ROUTE,
     Component: Favorite,
   },
-  // {
-  //   name: 'Порівняння',
-  //   path: COMPARISON_ROUTE,
-  //   Component: Comparison,
-  // },
-
-  // {
-  //   name: 'Кабінет',
-  //   path: CABINET,
-  //   Component: Cabinet,
-  // },
 ];
 export const publicRoutes = [
-  // Він нам наче не потрібний =>
-  // {
-  //   path: SHOP_ROUTE,
-  //   Component: Main,
-  // },
   {
     name: 'Каталог товарів',
     path: CATALOG_ROUTE,
